@@ -6,6 +6,6 @@ module com.example.myanimelist {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
 
-    opens com.example.myanimelist to javafx.fxml;
     exports com.example.myanimelist;
+    exports com.example.myanimelist.controllers;
 }

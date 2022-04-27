@@ -5,10 +5,10 @@ import javafx.scene.control.Label
 
 class HelloController {
     @FXML
-    private lateinit var welcomeText: Label
+    lateinit var welcomeText: Label
 
     @FXML
-    private fun onHelloButtonClick() {
+    fun onHelloButtonClick() {
         welcomeText.text = "Welcome to JavaFX Application!"
     }
 }
