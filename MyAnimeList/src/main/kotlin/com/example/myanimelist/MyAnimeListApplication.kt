@@ -1,9 +1,9 @@
 package com.example.myanimelist
 
+import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.managers.SceneManager
 import javafx.application.Application
-import javafx.fxml.FXMLLoader
-import javafx.scene.Scene
+import javafx.application.Application.launch
 import javafx.stage.Stage
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -11,23 +11,21 @@ import java.util.*
 
 class MyAnimeListApplication : Application() {
     override fun start(stage: Stage) {
-        val fxmlLoader = FXMLLoader(MyAnimeListApplication::class.java.getResource("views/splash-view.fxml"))
-        val scene = Scene(fxmlLoader.load(), 320.0, 240.0)
-        stage.title = "Hello!"
-        stage.scene = scene
-        stage.show()
-    }
+        val sceneManager = SceneManager
+        sceneManager.setInstance(MyAnimeListApplication::class.java)
+        sceneManager.initSplash(stage)
 
+
+    }
 
 }
 
 fun main() {
-    val db = DataBaseManager.getInstance()
-    val  sceneManager = SceneManager.getInstance()
-        Application.launch(MyAnimeListApplication::class.java)
-        checkDataBase(db);
-
+    val dataBaseManager = DataBaseManager.getInstance()
+        checkDataBase(dataBaseManager)
+        launch(MyAnimeListApplication::class.java)
 }
+
 
 fun checkDataBase(db: DataBaseManager) {
     println("Comprobamos la conexión al Servidor BD")
