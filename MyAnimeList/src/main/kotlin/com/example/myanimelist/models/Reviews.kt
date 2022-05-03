@@ -1,10 +1,12 @@
 package com.example.myanimelist.models
 
+import java.util.*
+
 data class Reviews (
 
-    val id: Int,
-    val anime: Anime,
-    val user: User,
+    val id: UUID = UUID.randomUUID(),
+    val idAnime: Int,
+    val idUser: UUID,
     var score: Int,
 
     )
