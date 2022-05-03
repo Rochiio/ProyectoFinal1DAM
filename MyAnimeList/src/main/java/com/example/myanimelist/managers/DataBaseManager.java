@@ -245,8 +245,6 @@ public class DataBaseManager {
     /**
      * Carga los datos desde un fichero externo
      *
-     * @param sqlFile
-     * @throws FileNotFoundException
      */
     public void initData(@NonNull String sqlFile, boolean logWriter) throws FileNotFoundException {
         ScriptRunner sr = new ScriptRunner(connection);
@@ -258,7 +256,6 @@ public class DataBaseManager {
     /**
      * Inicia una transacción
      *
-     * @throws SQLException
      */
     public void beginTransaction() throws SQLException {
         connection.setAutoCommit(false);
@@ -267,7 +264,6 @@ public class DataBaseManager {
     /**
      * Confirma una transacción
      *
-     * @throws SQLException
      */
     public void commit() throws SQLException {
         connection.commit();
@@ -277,7 +273,6 @@ public class DataBaseManager {
     /**
      * Cancela una transacción
      *
-     * @throws SQLException
      */
     public void rollback() throws SQLException {
         connection.rollback();
