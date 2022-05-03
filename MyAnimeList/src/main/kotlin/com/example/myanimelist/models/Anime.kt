@@ -12,6 +12,8 @@ data class Anime (
     var episodes: Int,
     var status: Status,
     var date: Date,
+    var rating: String,
+    var duration: String,
     var genres: List<Genre>,
 
     var img: URL? = null,
