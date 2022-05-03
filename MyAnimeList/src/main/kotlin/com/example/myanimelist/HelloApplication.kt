@@ -1,6 +1,6 @@
 package com.example.myanimelist
 
-import com.example.myanimelist.management.DataBaseManager
+import com.example.myanimelist.managers.DataBaseManager
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
