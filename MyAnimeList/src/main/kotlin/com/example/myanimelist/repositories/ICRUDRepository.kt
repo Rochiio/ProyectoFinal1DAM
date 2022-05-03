@@ -9,7 +9,7 @@ interface ICRUDRepository<T ,K> {
 
     fun findbyId(id: T): K
 
-    fun findAll(): Collection<K>
+    fun findAll(): List<K>
 
     fun update(item: K): K
 
