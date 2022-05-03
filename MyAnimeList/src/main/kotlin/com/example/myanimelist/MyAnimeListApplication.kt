@@ -1,6 +1,6 @@
 package com.example.myanimelist
 
-import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelist.managers.SceneManager
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
@@ -9,9 +9,9 @@ import java.sql.ResultSet
 import java.sql.SQLException
 import java.util.*
 
-class HelloApplication : Application() {
+class MyAnimeListApplication : Application() {
     override fun start(stage: Stage) {
-        val fxmlLoader = FXMLLoader(HelloApplication::class.java.getResource("views/hello-view.fxml"))
+        val fxmlLoader = FXMLLoader(MyAnimeListApplication::class.java.getResource("views/splash-view.fxml"))
         val scene = Scene(fxmlLoader.load(), 320.0, 240.0)
         stage.title = "Hello!"
         stage.scene = scene
@@ -23,8 +23,8 @@ class HelloApplication : Application() {
 
 fun main() {
     val db = DataBaseManager.getInstance()
-
-        Application.launch(HelloApplication::class.java)
+    val  sceneManager = SceneManager.getInstance()
+        Application.launch(MyAnimeListApplication::class.java)
         checkDataBase(db);
 
 }

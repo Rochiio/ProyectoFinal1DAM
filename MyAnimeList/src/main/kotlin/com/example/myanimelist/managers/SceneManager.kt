@@ -1,0 +1,86 @@
+package com.example.myanimelist.managers
+
+import com.example.myanimelist.MyAnimeListApplication
+import javafx.application.Platform
+import javafx.fxml.FXMLLoader
+import javafx.scene.Node
+import javafx.scene.Parent
+import javafx.scene.Scene
+import javafx.stage.Stage
+import javafx.stage.StageStyle
+import java.io.IOException
+import java.util.*
+
+class SceneManager {
+    var instance: SceneManager? = null
+    var appClass: Class<*>? = null
+    private var mainStage: Stage? = null
+
+
+    private fun SceneManager(appClass: Class<*>): SceneManager? {
+        this.appClass = appClass
+        println("SceneManager created")
+        return this.instance
+    }
+
+
+     fun getInstance(appClass: Class<*>): SceneManager? {
+        if (instance == null) {
+            instance = SceneManager(appClass)
+        }
+        return instance
+    }
+
+
+    fun get(): SceneManager? {
+        return instance
+    }
+
+
+    @Throws(IOException::class, InterruptedException::class)
+    fun initSplash(stage: Stage) {
+        Platform.setImplicitExit(false)
+        println("Iniciando Splash")
+        val fxmlLoader: FXMLLoader = FXMLLoader(MyAnimeListApplication::class.java.getResource("views/splash-view.fxml"))
+        val scene = Scene(fxmlLoader.load(), 600.0, 400.0)
+        stage.title = "Programa"
+        stage.isResizable = false
+        stage.scene = scene
+        stage.initStyle(StageStyle.TRANSPARENT)
+        stage.show()
+    }
+
+
+    @Throws(IOException::class)
+    fun init() {
+        println("Iniciando Main")
+        Platform.setImplicitExit(true)
+        val fxmlLoader = FXMLLoader(Objects.requireNonNull(appClass!!.getResource("views/main-view.fxml")))
+        val scene = Scene(fxmlLoader.load(), 600.0, 450.0)
+        val stage = Stage()
+        stage.isResizable = true
+        stage.title = "tittle"
+        stage.initStyle(StageStyle.DECORATED)
+        println("Scene loaded")
+        stage.scene = scene
+        mainStage = stage
+        stage.show()
+    }
+
+
+    @Throws(IOException::class)
+    fun changeScene(node: Node, view: String?) {
+        println("Loading scene ")
+        val stage = node.scene.window as Stage
+        //oldStage.hide(); // Oculto la anterior
+        val root = FXMLLoader.load<Parent>(
+            Objects.requireNonNull(
+                appClass!!.getResource(view)
+            )
+        )
+        val newScene = Scene(root, 600.0, 450.0)
+        println("Scene loaded")
+        stage.scene = newScene
+        stage.show()
+    }
+}
