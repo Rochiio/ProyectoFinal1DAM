@@ -5,7 +5,7 @@ import java.util.*
 data class Reviews (
 
     val id: UUID = UUID.randomUUID(),
-    val idAnime: Int,
+    val idAnime: UUID,
     val idUser: UUID,
     var score: Int,
 

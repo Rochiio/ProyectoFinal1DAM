@@ -2,10 +2,11 @@ package com.example.myanimelist.models
 
 import java.net.URL
 import java.sql.Date
+import java.util.*
 
 data class Anime (
 
-    val id: Int,
+    val id: UUID = UUID.randomUUID(),
     var title: String,
     var titleEnglish: String,
     var types: Type,
