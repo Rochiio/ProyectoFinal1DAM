@@ -7,7 +7,6 @@ import java.util.*
 abstract class AbstractUser (
     val id: UUID = UUID.randomUUID(),
     var name: String,
-    var img: URL?,
     val createDate: Date,
     var password : String,
 )
