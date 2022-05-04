@@ -1,6 +1,5 @@
 package com.example.myanimelist.models
 
-import java.net.URL
 import java.sql.Date
 import java.util.*
 
@@ -14,9 +13,8 @@ data class Anime (
     var status: Status,
     var date: Date,
     var rating: String,
-    var duration: String,
     var genres: List<Genre>,
 
-    var img: URL? = null,
+    var img: String? = null,
 
     )
