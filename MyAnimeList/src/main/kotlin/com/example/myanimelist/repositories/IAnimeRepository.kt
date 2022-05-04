@@ -5,6 +5,6 @@ import java.util.*
 
 interface IAnimeRepository : ICRUDRepository<UUID, Anime?>{
 
-    fun findByName(name: String): Anime?
+    fun findByTitle(title: String): Anime?
 
 }
