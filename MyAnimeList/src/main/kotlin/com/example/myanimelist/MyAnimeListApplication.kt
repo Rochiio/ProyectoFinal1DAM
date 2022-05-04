@@ -15,7 +15,6 @@ class MyAnimeListApplication : Application() {
         sceneManager.setInstance(MyAnimeListApplication::class.java)
         sceneManager.initSplash(stage)
 
-
     }
 
 }
