@@ -9,4 +9,6 @@ data class Reviews (
     val idUser: UUID,
     var score: Int,
 
+    var comment: String = ""
+
     )
