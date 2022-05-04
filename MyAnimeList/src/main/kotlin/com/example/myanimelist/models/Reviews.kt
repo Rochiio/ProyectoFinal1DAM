@@ -8,6 +8,7 @@ data class Reviews (
     val idAnime: UUID,
     val idUser: UUID,
     var score: Int,
+    var review: String
 
     var comment: String = ""
 
