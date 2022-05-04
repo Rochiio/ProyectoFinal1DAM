@@ -15,6 +15,6 @@ interface ICRUDRepository<T, K> {
 
     fun add(item: K): K?
 
-    fun delete(): K?
+    fun delete(id: T)
 
 }
