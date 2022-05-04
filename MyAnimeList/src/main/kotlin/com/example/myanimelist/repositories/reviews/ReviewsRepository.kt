@@ -19,7 +19,7 @@ class ReviewsRepository(var db: DataBaseManager): IRepositoryReview{
     override fun showReviewsAnime(animeId: String): List<Reviews> {
         val sql = "SELECT * FROM reviews WHERE idAnime=?"
             db.open()
-                val res = db.select(sql,animeId).orElseThrow{SQLException("Error al insertar review")}
+                val res = db.select(sql,animeId).orElseThrow{SQLException("Error al seleccionar reviews del anime")}
                 val list: ArrayList<Reviews> = ArrayList()
 
                     while (res.next()){
