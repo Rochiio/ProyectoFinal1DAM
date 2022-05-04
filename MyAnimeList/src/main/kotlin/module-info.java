@@ -1,4 +1,7 @@
 module com.example.myanimelist {
+    opens com.example.myanimelist to javafx.fxml;
+    opens com.example.myanimelist.controllers to javafx.fxml;
+
     requires javafx.controls;
     requires javafx.fxml;
     requires kotlin.stdlib;

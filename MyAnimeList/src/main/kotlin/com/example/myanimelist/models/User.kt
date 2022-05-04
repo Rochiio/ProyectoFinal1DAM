@@ -6,11 +6,11 @@ import java.util.*
 
 data class User(
 
-    val id: UUID = UUID.randomUUID(),
-    var name: String,
+    override val id: UUID = UUID.randomUUID(),
+    override var name: String,
+    override val createDate: Date,
+    override var password : String,
     var img: URL?,
-    val createDate: Date,
-    var password : String,
     var myList: List<Anime>,
 
-    )
+    ): AbstractUser(id, name, createDate, password)
