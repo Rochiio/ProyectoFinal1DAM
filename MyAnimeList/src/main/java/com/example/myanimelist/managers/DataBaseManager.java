@@ -121,7 +121,9 @@ public class DataBaseManager {
     public void close() throws SQLException {
         if (preparedStatement != null)
             preparedStatement.close();
-        connection.close();
+
+        if (!connection.isClosed())
+            connection.close();
     }
 
     /**
