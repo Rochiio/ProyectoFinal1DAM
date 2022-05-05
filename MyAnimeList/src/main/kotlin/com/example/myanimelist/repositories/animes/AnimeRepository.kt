@@ -19,6 +19,7 @@ object AnimeRepository : IAnimeRepository {
 
             if (result.next()) return null
 
+
             val anime = Anime.AnimeBuilder(
                 id = UUID.fromString(result.getString("id")),
                 title = result.getString("title"),
