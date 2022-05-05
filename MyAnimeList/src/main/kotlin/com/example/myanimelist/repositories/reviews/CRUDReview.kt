@@ -15,6 +15,11 @@ interface CRUDReview<T,ID> {
      */
     fun showReviewsAnime(animeId: ID):List<T>
 
-    //TODO mirar como añadir aqui tmb el add puntuación
+    /**
+     * Añadir puntuacion al repositorio.
+     * @param review review a añadir
+     * @return la puntuacion añadida
+     */
+    fun addScore(review :T):T
 
 }

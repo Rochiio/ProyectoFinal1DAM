@@ -36,4 +36,11 @@ object DataDB {
         db.delete(animeQuery)
         db.close()
     }
+
+    fun deleteAllReviews(){
+        val reviewQuery = "DELETE FROM reviews"
+        db.open()
+        db.delete(reviewQuery)
+        db.close()
+    }
 }
