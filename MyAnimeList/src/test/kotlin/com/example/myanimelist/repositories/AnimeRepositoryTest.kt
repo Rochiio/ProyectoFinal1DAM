@@ -1,11 +1,10 @@
-package com.example.myanimelist.repositories
+package com.example.myanimelist.repositories.animes
 
 import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Genre
 import com.example.myanimelist.models.Status
 import com.example.myanimelist.models.Type
-import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.utilities.DataDB
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -20,7 +19,7 @@ internal class AnimeRepositoryTest {
 
     private val repo = AnimeRepository
 
-    private val animeGiven = Anime(id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
+    private val animeGiven = Anime.AnimeBuilder(id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
         title = "example",
         titleEnglish = "example_english",
         status = Status.CURRENTLY_AIRING,
@@ -30,7 +29,7 @@ internal class AnimeRepositoryTest {
         episodes = 24,
         rating = "PG 12",
         types = Type.TV
-    )
+    ).build()
     @BeforeEach
     internal fun setUp() {
         DataDB.deleteAll()
