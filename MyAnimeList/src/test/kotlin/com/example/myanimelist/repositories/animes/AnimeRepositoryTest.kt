@@ -1,11 +1,10 @@
-package com.example.myanimelist.repositories
+package com.example.myanimelist.repositories.animes
 
 import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Genre
 import com.example.myanimelist.models.Status
 import com.example.myanimelist.models.Type
-import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.utilities.DataDB
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertTrue
