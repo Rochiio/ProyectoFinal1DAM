@@ -20,6 +20,17 @@ internal class UsersRepositoryTest {
     }
 
     @Test
+    fun findByName() {
+        val id = UUID.randomUUID()
+        usersRepository.add(
+            User(id, "Jose", Date(Date().time), "123", "img", mutableListOf())
+        )
+        val users = usersRepository.findByName("Jos")
+
+        assert(users.map { it.id }.contains(id))
+    }
+
+    @Test
     fun findAll() {
         val ids = listOf<UUID>(UUID.randomUUID(), UUID.randomUUID())
         usersRepository.add(

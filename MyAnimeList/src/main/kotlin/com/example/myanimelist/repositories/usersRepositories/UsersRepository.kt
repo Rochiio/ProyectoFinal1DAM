@@ -10,6 +10,36 @@ class UsersRepository : IUsersRepository {
     //TODO Throw custom exceptions
 
     private val databaseManager: DataBaseManager = DataBaseManager.getInstance()
+    override fun findByName(name: String): List<User> {
+        val list = mutableListOf<User>()
+        try {
+            databaseManager.open()
+
+            val set = databaseManager.select("SELECT * FROM Usuarios WHERE nombre LIKE ?", "%$name%").get()
+
+            while (set.next()) {
+                val id = UUID.fromString(set.getString("id"))
+                list.add(
+                    User(
+                        id,
+                        set.getString("nombre"),
+                        set.getDate("date_alta"),
+                        set.getString("password"),
+                        set.getString("imageUrl"),
+                        getAnimeLists(id)
+                    )
+                )
+            }
+
+        }
+        catch (ex: Exception) {
+            error(ex)
+        }
+        finally {
+            databaseManager.close()
+        }
+        return list
+    }
 
     override fun findbyId(id: UUID): User? {
         try {
@@ -121,7 +151,6 @@ class UsersRepository : IUsersRepository {
         finally {
             databaseManager.close()
         }
-        //Could throw during insert
         @Suppress("UNREACHABLE_CODE")
         return null
     }
