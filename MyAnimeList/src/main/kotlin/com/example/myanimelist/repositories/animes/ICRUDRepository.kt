@@ -1,4 +1,4 @@
-package com.example.myanimelist.repositories
+package com.example.myanimelist.repositories.animes
 
 
 /**

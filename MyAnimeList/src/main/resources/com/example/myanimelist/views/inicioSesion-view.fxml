@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="577.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="577.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.InicioController">
    <children>
-      <ImageView fitHeight="151.0" fitWidth="316.0" layoutX="169.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="151.0" fitWidth="316.0" layoutX="169.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="199.0" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="139.5555419921875" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../Documents/ProyectoFinal1DAM/MyAnimeList/src/main/resources/com/example/myanimelist/images/splash/splash1.png" />
+            <Image url="@../images/splash/splash1.png" />
          </image>
       </ImageView>
-      <VBox layoutX="165.0" layoutY="168.0">
+      <VBox layoutX="165.0" layoutY="159.0" AnchorPane.bottomAnchor="111.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="159.0">
          <children>
             <TextField prefHeight="25.0" prefWidth="273.0" promptText="Username">
                <VBox.margin>
@@ -30,7 +30,14 @@
             </TextField>
          </children>
       </VBox>
-      <Button layoutX="260.0" layoutY="265.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Loggin" AnchorPane.bottomAnchor="59.666666666666686" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="231.66666666666669" AnchorPane.topAnchor="265.0" />
-      <Hyperlink alignment="CENTER" contentDisplay="CENTER" layoutX="222.0" layoutY="312.0" prefHeight="24.0" prefWidth="163.0" text="Register" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="222.0" AnchorPane.rightAnchor="192.0" AnchorPane.topAnchor="312.0" />
+      <VBox alignment="CENTER" layoutX="40.0" layoutY="256.0" prefHeight="68.0" prefWidth="401.0" spacing="10.0" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="256.0">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Loggin" textAlignment="CENTER" />
+            <Hyperlink alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="116.0" styleClass="linkBasic" text="Register" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
    </children>
 </AnchorPane>
