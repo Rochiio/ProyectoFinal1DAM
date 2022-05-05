@@ -41,7 +41,7 @@ object AnimeRepository : IAnimeRepository {
         val animes = ArrayList<Anime>()
         while (result.next()) {
             animes.add(
-                Anime.AnimeBuilder(
+                Anime(
                     id = UUID.fromString(result.getString("id")),
                     title = result.getString("title"),
                     titleEnglish = result.getString("title_english"),
@@ -52,7 +52,7 @@ object AnimeRepository : IAnimeRepository {
                     rating = result.getString("rating"),
                     genres = result.getString("genre").split(",").map { Genre.valueOf(it) },
                     img = result.getString("imageUrl")
-                ).build()
+                )
             )
         }
         db.close()
@@ -80,8 +80,7 @@ object AnimeRepository : IAnimeRepository {
     override fun add(item: Anime): Anime {
         val query = "INSERT INTO animes VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
         db.open()
-        db.insert(query, item.id, item.title, item.titleEnglish, item.status, item.genres, item.date, item.img, item.episodes, item.rating, item.types )
-            .orElseThrow{SQLException("Error inserting the values")}
+        db.insert(query, item.id, item.title, item.titleEnglish, item.status, item.genres.joinToString(separator = ", "), item.date, item.img, item.episodes, item.rating, item.types )
         db.close()
         return item
     }

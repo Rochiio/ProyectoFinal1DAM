@@ -62,7 +62,7 @@ internal class AnimeRepositoryTest {
         assertAll(
             { assertTrue(animeListTest.isNotEmpty()) },
             { Assertions.assertEquals(animeListTest.size, 1) },
-            { assertTrue(animeListTest.contains(animeGiven)) },
+            { assertTrue(animeListTest.map{it.id}.contains(animeGiven.id)) },
         )
     }
 
