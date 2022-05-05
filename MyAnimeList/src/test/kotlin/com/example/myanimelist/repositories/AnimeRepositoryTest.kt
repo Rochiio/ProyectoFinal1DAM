@@ -20,7 +20,7 @@ internal class AnimeRepositoryTest {
 
     private val repo = AnimeRepository
 
-    private val animeGiven = Anime.AnimeBuilder(id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
+    private val animeGiven = Anime(id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
         title = "example",
         titleEnglish = "example_english",
         status = Status.CURRENTLY_AIRING,
@@ -30,7 +30,7 @@ internal class AnimeRepositoryTest {
         episodes = 24,
         rating = "PG 12",
         types = Type.TV
-    ).build()
+    )
     @BeforeEach
     internal fun setUp() {
         DataDB.deleteAll()

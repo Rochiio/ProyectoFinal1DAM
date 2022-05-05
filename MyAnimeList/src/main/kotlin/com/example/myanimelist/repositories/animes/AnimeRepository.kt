@@ -17,8 +17,7 @@ object AnimeRepository : IAnimeRepository {
             db.open()
             val result = db.select(query, id.toString()).get()
 
-            if (result.next()) return null
-
+            if (!result.next()) return null
 
             val anime = Anime.AnimeBuilder(
                 id = UUID.fromString(result.getString("id")),
