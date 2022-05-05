@@ -8,11 +8,11 @@ import kotlin.collections.ArrayList
 
 object AnimeRepository : IAnimeRepository {
 
-    val db = DataBaseManager.getInstance()
+    val db : DataBaseManager = DataBaseManager.getInstance()
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"
         db.open()
-        val result = db.select(query, id).get()
+        val result = db.select(query, id).orElseThrow{SQLException("")}
         if (result.first()) {
             val anime = Anime.AnimeBuilder(
                 id = UUID.fromString(result.getString("id")),
@@ -35,7 +35,7 @@ object AnimeRepository : IAnimeRepository {
     override fun findAll(): List<Anime> {
         val query = "SELECT * FROM animes"
         db.open()
-        val result = db.select(query).get()
+        val result = db.select(query).orElseThrow{SQLException("")}
         val animes = ArrayList<Anime>()
         while (result.next()) {
             animes.add(Anime.AnimeBuilder(
@@ -73,7 +73,7 @@ object AnimeRepository : IAnimeRepository {
         return item
     }
 
-    override fun add(item: Anime): Anime? {
+    override fun add(item: Anime): Anime {
         val query = "INSERT INTO animes VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
         db.open()
         db.insert(query, item.id, item.title, item.titleEnglish, item.status, item.genres, item.date, item.img, item.episodes, item.rating, item.types )
@@ -92,7 +92,7 @@ object AnimeRepository : IAnimeRepository {
     override fun findByTitle(title: String): Anime? {
         val query = "SELECT * FROM animes WHERE name = ?"
         db.open()
-        val result = db.select(query, title).get()
+        val result = db.select(query, title).orElseThrow{SQLException("")}
         if (result.first()) {
             val anime = Anime.AnimeBuilder(
                 id = UUID.fromString(result.getString("id")),

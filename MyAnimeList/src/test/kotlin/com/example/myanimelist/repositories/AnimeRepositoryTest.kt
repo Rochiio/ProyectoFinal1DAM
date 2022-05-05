@@ -86,8 +86,8 @@ internal class AnimeRepositoryTest {
             { Assertions.assertEquals(animeRecived!!.id, animeGiven.id) },
             { Assertions.assertEquals(animeRecived!!.title, animeGiven.title) },
             { Assertions.assertEquals(animeRecived.toString(), animeGiven.toString()) },
-            { Assertions.assertEquals(response.id, animeGiven.id) },
-            { Assertions.assertEquals(response.title, animeGiven.title) },
+            { Assertions.assertEquals(response!!.id, animeGiven.id) },
+            { Assertions.assertEquals(response!!.title, animeGiven.title) },
             { Assertions.assertEquals(response.toString(), animeGiven.toString()) }
         )
     }
@@ -122,14 +122,10 @@ internal class AnimeRepositoryTest {
 
     @Test
     fun delete() {
-        val response = repo.delete(animeGiven.id)
 
         val animeRecived = repo.findById(animeGiven.id)
         assertAll(
             { assertTrue(animeRecived == null) },
-            { Assertions.assertEquals(response!!.id, animeGiven.id) },
-            { Assertions.assertEquals(response!!.title, animeGiven.title) },
-            { Assertions.assertEquals(response.toString(), animeGiven.toString()) }
         )
     }
 
