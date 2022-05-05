@@ -15,27 +15,26 @@ class UsersRepository : IUsersRepository {
         try {
             databaseManager.open()
 
-            val resultOptional = databaseManager.select("SELECT * FROM Users WHERE id = ?", id.toString())
-            val set = resultOptional.orElseThrow { Exception() }
+            val set = databaseManager.select("SELECT * FROM Usuarios WHERE id = ?", id.toString()).get()
 
             if (!set.next()) return null
 
             return User(
                 UUID.fromString(set.getString("id")),
-                set.getString("name"),
+                set.getString("nombre"),
                 set.getDate("date_alta"),
                 set.getString("password"),
                 set.getString("imageUrl"),
                 getAnimeLists(id)
             )
 
-        } catch (_: Exception) {
-
-        } finally {
+        }
+        catch (ex: Exception) {
+            error(ex)
+        }
+        finally {
             databaseManager.close()
         }
-        //default return value
-        return null
     }
 
     override fun findAll(): List<User> {
@@ -43,15 +42,14 @@ class UsersRepository : IUsersRepository {
         try {
             databaseManager.open()
 
-            val resultOptional = databaseManager.select("SELECT * FROM Users")
-            val set = resultOptional.orElseThrow { Exception() }
+            val set = databaseManager.select("SELECT * FROM Usuarios").get()
 
             while (set.next()) {
                 val id = UUID.fromString(set.getString("id"))
                 list.add(
                     User(
                         id,
-                        set.getString("name"),
+                        set.getString("nombre"),
                         set.getDate("date_alta"),
                         set.getString("password"),
                         set.getString("imageUrl"),
@@ -60,9 +58,11 @@ class UsersRepository : IUsersRepository {
                 )
             }
 
-        } catch (_: Exception) {
-
-        } finally {
+        }
+        catch (ex: Exception) {
+            error(ex)
+        }
+        finally {
             databaseManager.close()
         }
         //default return value
@@ -75,9 +75,10 @@ class UsersRepository : IUsersRepository {
 
             val modifiedRows = databaseManager
                 .update(
-                    "UPDATE Users set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl, WHERE id = ?",
+                    "UPDATE Usuarios set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl = ? WHERE id = ?",
                     item.id.toString(),
                     item.name,
+                    item.createDate,
                     item.password,
                     item.img,
                     item.id.toString()
@@ -85,66 +86,76 @@ class UsersRepository : IUsersRepository {
 
             if (modifiedRows > 0) return item
 
-        } catch (_: Exception) {
-
-        } finally {
+        }
+        catch (ex: Exception) {
+            error(ex)
+        }
+        finally {
             databaseManager.close()
         }
         //default return value
         return null
     }
 
+    //TODO add lists of animes
     override fun add(item: User): User? {
         try {
             databaseManager.open()
 
-            val modifiedRows = databaseManager
+            databaseManager
                 .insert(
-                    "Insert into Users (id,nombre,date_alta,password,imageUrl) values (?,?,?,?,?)",
+                    "Insert into Usuarios (id,nombre,date_alta,password,imageUrl) values (?,?,?,?,?)",
                     item.id.toString(),
                     item.name,
+                    item.createDate,
                     item.password,
                     item.img,
                 )
 
-            modifiedRows.orElseThrow { Exception() }
-
             return item
 
-        } catch (_: Exception) {
-
-        } finally {
+        }
+        catch (ex: Exception) {
+            error(ex)
+        }
+        finally {
             databaseManager.close()
         }
-        //default return value
+        //Could throw during insert
+        @Suppress("UNREACHABLE_CODE")
         return null
     }
 
     override fun delete(id: UUID) {
         try {
+            if (findbyId(id) == null) return
+
             databaseManager.open()
+            databaseManager.delete("Delete from Usuarios where id = ?", id)
 
-            databaseManager.delete("Delete from Users where id = ?", id)
-
-        } catch (_: Exception) {
-
-        } finally {
+        }
+        catch (ex: Exception) {
+            error(ex)
+        }
+        finally {
             databaseManager.close()
         }
     }
 
     //TODO move to animeRepository
+    //TODO test
     private fun getAnimeLists(userId: UUID): List<Anime> {
         val list: MutableList<Anime> = mutableListOf()
 
         try {
-            databaseManager.open()
 
-            val listSetOptional = databaseManager.select("SELECT * FROM animeLists WHERE id = ?", userId.toString())
+            val listSet = databaseManager
+                .select(
+                    "SELECT * FROM animeLists " +
+                            "INNER JOIN animes on animeLists.idAnime = animes.id " +
+                            "WHERE animeLists.idUser = ?", userId.toString()
+                ).get()
 
-            if (listSetOptional.isEmpty) return emptyList()
-
-            val listSet = listSetOptional.get()
             while (listSet.next())
                 list.add(
                     Anime(
@@ -158,10 +169,9 @@ class UsersRepository : IUsersRepository {
                         listSet.getString("rating"),
                         listSet.getString("genre").split(",").map { Genre.valueOf(it) }
                     ))
-        } catch (_: Exception) {
-
-        } finally {
-            databaseManager.close()
+        }
+        catch (ex: Exception) {
+            error(ex)
         }
         return list
     }
