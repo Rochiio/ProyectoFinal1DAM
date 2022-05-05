@@ -27,7 +27,7 @@ data class Anime (
         val types: Type = Type.MUSIC,
         val episodes: Int = 0,
         val status: Status = Status.NOT_YET_AIRED,
-        val date: Date = Date.valueOf(LocalDateTime.now().toString()),
+        val date: Date = Date.valueOf("2022-05-05T09:24:26.863093677"),
         val rating: String = "",
         val genres: List<Genre> = listOf(),
         val img: String? = ""

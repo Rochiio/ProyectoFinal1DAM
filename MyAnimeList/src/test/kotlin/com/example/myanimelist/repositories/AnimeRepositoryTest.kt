@@ -18,14 +18,14 @@ import java.util.*
 
 internal class AnimeRepositoryTest {
 
-    val repo = AnimeRepository
+    private val repo = AnimeRepository
 
-    val animeGiven = Anime.AnimeBuilder(id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
+    private val animeGiven = Anime.AnimeBuilder(id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
         title = "example",
         titleEnglish = "example_english",
         status = Status.CURRENTLY_AIRING,
         genres = listOf( Genre.FANTASY),
-        date = Date.valueOf("1950-01-01"),
+        date = Date(Date().time),
         img = "/example/example.png",
         episodes = 24,
         rating = "PG 12",
@@ -86,8 +86,8 @@ internal class AnimeRepositoryTest {
             { Assertions.assertEquals(animeRecived!!.id, animeGiven.id) },
             { Assertions.assertEquals(animeRecived!!.title, animeGiven.title) },
             { Assertions.assertEquals(animeRecived.toString(), animeGiven.toString()) },
-            { Assertions.assertEquals(response!!.id, animeGiven.id) },
-            { Assertions.assertEquals(response!!.title, animeGiven.title) },
+            { Assertions.assertEquals(response.id, animeGiven.id) },
+            { Assertions.assertEquals(response.title, animeGiven.title) },
             { Assertions.assertEquals(response.toString(), animeGiven.toString()) }
         )
     }
@@ -99,7 +99,7 @@ internal class AnimeRepositoryTest {
             titleEnglish= "new title",
             status = Status.NOT_YET_AIRED,
             genres = listOf(Genre.ACTION),
-            date = Date.valueOf("1950-01-02"),
+            date = Date(Date().time),
             img = "new directory",
             episodes = 64,
             rating = "new rating",
@@ -123,6 +123,7 @@ internal class AnimeRepositoryTest {
     @Test
     fun delete() {
 
+        repo.delete(animeGiven.id)
         val animeRecived = repo.findById(animeGiven.id)
         assertAll(
             { assertTrue(animeRecived == null) },

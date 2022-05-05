@@ -4,8 +4,9 @@ import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Genre
 import com.example.myanimelist.models.Status
 import com.example.myanimelist.models.Type
+import java.sql.Date
+import java.util.*
 import java.sql.SQLException
-import java.time.LocalDateTime
 
 object DataDB {
 
@@ -20,7 +21,7 @@ object DataDB {
             "example_english",
             Status.CURRENTLY_AIRING,
             Genre.FANTASY,
-            LocalDateTime.now(),
+            Date(Date().time),
             "/example/example.png",
             "24",
             "PG 12",
