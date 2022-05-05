@@ -54,6 +54,7 @@ internal class AnimeRepositoryTest {
         assertAll(
             { assertTrue(animetest == null) }
         )
+
     }
 
     @Test
