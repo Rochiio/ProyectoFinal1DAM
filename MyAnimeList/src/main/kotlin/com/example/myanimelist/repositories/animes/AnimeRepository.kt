@@ -32,7 +32,7 @@ object AnimeRepository : IAnimeRepository {
         return null
     }
 
-    override fun findAll(): List<Anime?> {
+    override fun findAll(): List<Anime> {
         val query = "SELECT * FROM animes"
         db.open()
         val result = db.select(query).get()
@@ -55,7 +55,7 @@ object AnimeRepository : IAnimeRepository {
         return animes
     }
 
-    override fun update(item: Anime?): Anime {
+    override fun update(item: Anime): Anime? {
         val query = "UPDATE animes SET " +
                 "title = ?," +
                 "title_english = ?," +
@@ -68,27 +68,25 @@ object AnimeRepository : IAnimeRepository {
                 "type = ?" +
                 "WHERE id = ?"
         db.open()
-        db.update(query, item!!.title, item.titleEnglish, item.status, item.genres, item.date, item.img, item.episodes, item.rating, item.types, item.id )
+        db.update(query, item.title, item.titleEnglish, item.status, item.genres, item.date, item.img, item.episodes, item.rating, item.types, item.id )
         db.close()
         return item
     }
 
-    override fun add(item: Anime?): Anime {
+    override fun add(item: Anime): Anime? {
         val query = "INSERT INTO animes VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
         db.open()
-        db.insert(query, item!!.id, item.title, item.titleEnglish, item.status, item.genres, item.date, item.img, item.episodes, item.rating, item.types )
+        db.insert(query, item.id, item.title, item.titleEnglish, item.status, item.genres, item.date, item.img, item.episodes, item.rating, item.types )
             .orElseThrow{SQLException("Error inserting the values")}
         db.close()
         return item
     }
 
-    override fun delete(id: UUID): Anime? {
+    override fun delete(id: UUID) {
         val query = "DELETE FROM anime WHERE id = ?"
-        val anime = findById(id)
         db.open()
         db.delete(query, id)
         db.close()
-        return anime
     }
 
     override fun findByTitle(title: String): Anime? {

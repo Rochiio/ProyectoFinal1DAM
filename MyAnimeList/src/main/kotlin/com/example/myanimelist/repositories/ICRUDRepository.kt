@@ -7,14 +7,14 @@ package com.example.myanimelist.repositories
  */
 interface ICRUDRepository<T ,K> {
 
-    fun findById(id: T): K
+    fun findById(id: T): K?
 
-    fun findAll(): List<K>
+    fun findAll(): Iterable<K>
 
-    fun update(item: K): K
+    fun update(item: K): K?
 
-    fun add(item: K): K
+    fun add(item: K): K?
 
-    fun delete(id: T): K
+    fun delete(id: T)
 
 }
