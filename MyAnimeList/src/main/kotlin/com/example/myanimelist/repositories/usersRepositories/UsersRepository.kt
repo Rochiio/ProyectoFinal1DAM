@@ -6,7 +6,7 @@ import com.example.myanimelist.models.*
 import java.util.*
 
 
-class UsersRepository : IUsersRepository {
+object UsersRepository : IUsersRepository {
     //TODO fill catch blocks with logger
     //TODO Throw custom exceptions
 

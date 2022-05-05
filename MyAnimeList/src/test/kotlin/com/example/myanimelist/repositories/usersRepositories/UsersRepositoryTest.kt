@@ -6,7 +6,7 @@ import java.sql.Date
 import java.util.*
 
 internal class UsersRepositoryTest {
-    private val usersRepository = UsersRepository()
+    private val usersRepository = UsersRepository
 
     @Test
     fun findById() {
