@@ -94,7 +94,7 @@ internal class AnimeRepositoryTest {
 
     @Test
     fun add() {
-        val newAnime = Anime.AnimeBuilder(
+        val newAnime = Anime(
             title = "new title",
             titleEnglish= "new title",
             status = Status.NOT_YET_AIRED,
@@ -104,7 +104,7 @@ internal class AnimeRepositoryTest {
             episodes = 64,
             rating = "new rating",
             types = Type.OVA,
-        ).build()
+        )
 
         val response = repo.add(newAnime)
 

@@ -24,7 +24,7 @@ object AnimeRepository : IAnimeRepository {
                 status = Status.valueOf(result.getString("status")),
                 date = result.getDate("releaseDate"),
                 rating = result.getString("rating"),
-                genres = result.getString("genre").split(", ").map { Genre.valueOf(it) },
+                genres = result.getString("genre").split(", ").map { Genre.valueOf(it) }.toList(),
                 img = result.getString("imageUrl")
             ).build()
             db.close()
