@@ -14,37 +14,37 @@ internal class UsersRepositoryTest {
     @Test
     fun findById() {
         val id = UUID.randomUUID()
-        usersRepository.add(
+        val insertedUser = usersRepository.add(
             getTestingUser(id)
         )
         val user = usersRepository.findbyId(id)
 
-        assert(user?.id == id)
+        assert(user == insertedUser)
     }
 
     @Test
     fun findByName() {
         val id = UUID.randomUUID()
-        usersRepository.add(
+        val user = usersRepository.add(
             getTestingUser(id)
         )
         val users = usersRepository.findByName("Pep")
 
-        assert(users.map { it.id }.contains(id))
+        assert(users.contains(user))
     }
 
     @Test
     fun findAll() {
         val ids = listOf<UUID>(UUID.randomUUID(), UUID.randomUUID())
-        usersRepository.add(
+        val user1 = usersRepository.add(
             getTestingUser(ids[0])
         )
-        usersRepository.add(
+        val user2 = usersRepository.add(
             getTestingUser(ids[1])
         )
         val users = usersRepository.findAll()
 
-        assert(users.map { it.id }.containsAll(ids))
+        assert(users.containsAll(listOf(user1, user2)))
     }
 
     @Test
@@ -65,13 +65,13 @@ internal class UsersRepositoryTest {
     @Test
     fun add() {
         val id = UUID.randomUUID()
-        usersRepository.add(
+        val userCreated = usersRepository.add(
             getTestingUser(id)
         )
 
         val user = usersRepository.findbyId(id)
 
-        assert(user?.id == id)
+        assert(user == userCreated)
     }
 
     @Test
