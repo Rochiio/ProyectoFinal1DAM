@@ -17,9 +17,10 @@ import java.util.*
 internal class AnimeRepositoryTest {
 
     private val repo = AnimeRepository
-
+  
     private val animeGiven = Anime(
         id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
+
         title = "example",
         titleEnglish = "example_english",
         status = Status.CURRENTLY_AIRING.value,
@@ -28,6 +29,7 @@ internal class AnimeRepositoryTest {
         img = "/example/example.png",
         episodes = 24,
         rating = "PG 12",
+
         types = Type.TV.value
     )
 
