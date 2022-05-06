@@ -1,4 +1,4 @@
-package com.example.myanimelist.repositories
+package com.example.myanimelist.repositories.admins
 
 import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Admin
@@ -11,7 +11,7 @@ class AdminRepository(val db: DataBaseManager) : IAdminRepository {
      * @param id UUID
      * @return Admin? El admin que se busca o null si no existe
      */
-    override fun findbyId(id: UUID): Admin? {
+    override fun findById(id: UUID): Admin? {
         val query = "select * from usuarios where id = ?"
         val result = db.select(query, id).get()
         if (result.first()) {
@@ -89,7 +89,7 @@ class AdminRepository(val db: DataBaseManager) : IAdminRepository {
      * @throws SQLException En el caso de que ya existiese un admin con el mismo UUID o no se pueda acceder a la base de datos
      *
      */
-    override fun add(item: Admin?): Admin {
+    override fun add(item: Admin?): Admin? {
         val query = "INSERT into Usuarios" +
                 "values ?,?,?,?, 'NONE', ?,?"
         db.open()
@@ -112,12 +112,10 @@ class AdminRepository(val db: DataBaseManager) : IAdminRepository {
      * @return Admin? Deveulve el admin que ha sido eliminado
      * @throws SQLException en caso de que no exista un admin con el UUID dado o la base de datos no esté accesible
      */
-    override fun delete(id: UUID): Admin? {
+    override fun delete(id: UUID){
         val query = "delete from usuarios where id = ?"
         db.open()
-        val result = findbyId(id)
         db.delete(query, id)
         db.close()
-        return result
     }
 }
