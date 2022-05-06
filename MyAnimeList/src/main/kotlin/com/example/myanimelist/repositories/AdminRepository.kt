@@ -1,12 +1,18 @@
 package com.example.myanimelist.repositories
 
 import com.example.myanimelist.managers.DataBaseManager
-import com.example.myanimelist.models.*
+import com.example.myanimelist.models.Admin
+import java.sql.SQLException
 import java.util.*
 
 class AdminRepository(val db: DataBaseManager) : IAdminRepository {
+    /**
+     * Busca en el repositorio un usuari de tipo admin usando su uuid
+     * @param id UUID
+     * @return Admin? El admin que se busca o null si no existe
+     */
     override fun findbyId(id: UUID): Admin? {
-        var query = "select * from usuarios where id = ?"
+        val query = "select * from usuarios where id = ?"
         val result = db.select(query, id).get()
         if (result.first()) {
             val admin = Admin(
@@ -23,37 +29,95 @@ class AdminRepository(val db: DataBaseManager) : IAdminRepository {
         return null
     }
 
-    override fun findAll(): List<Admin> {
-        var query = "select * from usuarios"
-        val result = db.select(query, id)
-        while(result.next()){
-
-        }
-        if (result.first()) {
-            val admin = Admin(
-                UUID.fromString(result.getString("id")),
-                result.getString("nombre"),
-                result.getString("email"),
-                result.getString("password"),
-                result.getDate("date_alta"),
-                result.getDate("date_nacimiento")
+    /**
+     * Recuepra de la base de datos una lisa con todos los admins
+     * @return List<Admin?> Lista con todos los usuarios de tipo admin
+     */
+    override fun findAll(): List<Admin?> {
+        val query = "select * from usuarios"
+        val admins = ArrayList<Admin>()
+        db.open()
+        val result = db.select(query).get()
+        while (result.next()) {
+            admins.add(
+                Admin(
+                    UUID.fromString(result.getString("id")),
+                    result.getString("nombre"),
+                    result.getString("email"),
+                    result.getString("password"),
+                    result.getDate("date_alta"),
+                    result.getDate("date_nacimiento")
+                )
             )
-            db.close()
-            return admin
         }
-        return null
+        db.close()
+        return admins
     }
 
+    /**
+     * Actualiza los datos de un admin
+     * @param item Admin? Un admin con los datos que se quieren cambiar
+     * @return Admin? Null si no se consigue. El nuevo admin si tiene exito
+     */
     override fun update(item: Admin?): Admin? {
-        TODO("Not yet implemented")
+        val query = "UPDATE usuarios SET" +
+                "nombre = ?," +
+                "date_alta = ?," +
+                "password = ?," +
+                "imageurl = 'NONE'," +
+                "email = ?," +
+                "date_nacimiento =?" +
+                "where id = ?"
+        db.open()
+        val result = db.update(
+            query, item!!.name,
+            item.createDate,
+            item.password,
+            item.email,
+            item.birthDate,
+            item.id
+        )
+        db.close()
+        return if (result == 0) null
+        else item
     }
 
-    override fun add(item: Admin?): Admin? {
-        TODO("Not yet implemented")
+    /**
+     * Añade un nuevo admin a la base de datos de usuarios
+     * @param item Admin? El admin que se quiere añadir
+     * @return Admin? El admin añadido o null si no se añadido ninguno
+     * @throws SQLException En el caso de que ya existiese un admin con el mismo UUID o no se pueda acceder a la base de datos
+     *
+     */
+    override fun add(item: Admin?): Admin {
+        val query = "INSERT into Usuarios" +
+                "values ?,?,?,?, 'NONE', ?,?"
+        db.open()
+        db.insert(
+            query,
+            item!!.id.toString(),
+            item.name,
+            item.createDate,
+            item.password,
+            item.email,
+            item.birthDate
+        ).orElseThrow { SQLException("Error al añadir el admin a la tabla de usuarios") }
+        db.close()
+        return item
     }
 
-
-    override fun delete(id: UUID): Admin {
-        TODO("Not yet implemented")
+    /**
+     * Elimina un admin de la base de datos usando su UUID
+     * @param id UUID El uuid del admin que queremos eliminar
+     * @return Admin? Deveulve el admin que ha sido eliminado
+     * @throws SQLException en caso de que no exista un admin con el UUID dado o la base de datos no esté accesible
+     */
+    override fun delete(id: UUID): Admin? {
+        val query = "delete from usuarios where id = ?"
+        db.open()
+        val result = findbyId(id)
+        db.delete(query, id)
+        db.close()
+        return result
     }
 }
