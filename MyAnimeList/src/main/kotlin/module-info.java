@@ -11,6 +11,7 @@ module com.example.myanimelist {
     requires java.sql;
     requires org.mybatis;
     requires lombok;
+    requires java.base;
 
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;
