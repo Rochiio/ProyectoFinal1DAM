@@ -24,7 +24,24 @@ class AdminRepository(val db: DataBaseManager) : IAdminRepository {
     }
 
     override fun findAll(): List<Admin> {
-        TODO("Not yet implemented")
+        var query = "select * from usuarios"
+        val result = db.select(query, id)
+        while(result.next()){
+
+        }
+        if (result.first()) {
+            val admin = Admin(
+                UUID.fromString(result.getString("id")),
+                result.getString("nombre"),
+                result.getString("email"),
+                result.getString("password"),
+                result.getDate("date_alta"),
+                result.getDate("date_nacimiento")
+            )
+            db.close()
+            return admin
+        }
+        return null
     }
 
     override fun update(item: Admin?): Admin? {
