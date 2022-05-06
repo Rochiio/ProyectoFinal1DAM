@@ -109,7 +109,8 @@ public class DataBaseManager {
         // System.out.println(url);
         // Obtenemos la conexión
         // connection = DriverManager.getConnection(url, user, password);
-        connection = DriverManager.getConnection(url);
+        if (connection == null || connection.isClosed())
+            connection = DriverManager.getConnection(url);
     }
 
     /**
@@ -120,7 +121,9 @@ public class DataBaseManager {
     public void close() throws SQLException {
         if (preparedStatement != null)
             preparedStatement.close();
-        connection.close();
+
+        if (!connection.isClosed())
+            connection.close();
     }
 
     /**
@@ -244,7 +247,6 @@ public class DataBaseManager {
 
     /**
      * Carga los datos desde un fichero externo
-     *
      */
     public void initData(@NonNull String sqlFile, boolean logWriter) throws FileNotFoundException {
         ScriptRunner sr = new ScriptRunner(connection);
@@ -255,7 +257,6 @@ public class DataBaseManager {
 
     /**
      * Inicia una transacción
-     *
      */
     public void beginTransaction() throws SQLException {
         connection.setAutoCommit(false);
@@ -263,7 +264,6 @@ public class DataBaseManager {
 
     /**
      * Confirma una transacción
-     *
      */
     public void commit() throws SQLException {
         connection.commit();
@@ -272,7 +272,6 @@ public class DataBaseManager {
 
     /**
      * Cancela una transacción
-     *
      */
     public void rollback() throws SQLException {
         connection.rollback();

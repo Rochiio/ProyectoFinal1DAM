@@ -17,32 +17,4 @@ data class Anime(
 
     var img: String? = null,
 
-    ) {
-    data class AnimeBuilder(
-        val id: UUID = UUID.randomUUID(),
-        val title: String = "",
-        val titleEnglish: String = "",
-        val types: String = Type.MUSIC.value,
-        val episodes: Int = 0,
-        val status: String = Status.NOT_YET_AIRED.value,
-        val date: Date = Date.valueOf("2022-05-05T09:24:26.863093677"),
-        val rating: String = "",
-        val genres: List<String> = listOf(),
-        val img: String? = ""
-    ) {
-        fun build(): Anime {
-            return Anime(
-                id = id,
-                title = title,
-                titleEnglish = titleEnglish,
-                types = types,
-                episodes = episodes,
-                status = status,
-                date = date,
-                rating = rating,
-                genres = genres,
-                img = img
-            )
-        }
-    }
-}
+    )
