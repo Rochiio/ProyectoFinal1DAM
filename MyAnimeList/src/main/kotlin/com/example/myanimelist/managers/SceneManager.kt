@@ -43,15 +43,15 @@ object SceneManager {
 
     @Throws(IOException::class)
     fun initMain() {
-        println("Iniciando Main")
+        println("Iniciando login")
         Platform.setImplicitExit(true)
-        val fxmlLoader = FXMLLoader(Objects.requireNonNull(appClass.getResource("views/main-view.fxml")))
-        val scene = Scene(fxmlLoader.load(), 550.0, 300.0)
+        val fxmlLoader = FXMLLoader(Objects.requireNonNull(appClass.getResource("views/inicioSesion-view.fxml")))
+        val scene = Scene(fxmlLoader.load(), 600.0, 400.0)
         val stage = Stage()
-        stage.isResizable = true
-        stage.title = "tittle"
+        stage.isResizable = false
+        stage.title = "Login"
         stage.initStyle(StageStyle.DECORATED)
-        println("Scene loaded")
+        println("Inicio listo")
         stage.scene = scene
         mainStage = stage
         stage.show()
