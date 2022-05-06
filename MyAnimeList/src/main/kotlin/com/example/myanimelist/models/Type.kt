@@ -1,6 +1,6 @@
 package com.example.myanimelist.models
 
-enum class Type(value: String = "Unknown") {
+enum class Type(val value: String = "Unknown") {
     TV("TV"),
     MOVIE("Movie"),
     MUSIC("Music"),
