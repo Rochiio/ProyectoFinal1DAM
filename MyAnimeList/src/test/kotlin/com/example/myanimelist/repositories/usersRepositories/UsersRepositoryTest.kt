@@ -8,11 +8,14 @@ import java.util.*
 internal class UsersRepositoryTest {
     private val usersRepository = UsersRepository
 
+    private fun getTestingUser(id: UUID) =
+        User(id, "Pepe", "asdasd@gmail.com", "123", Date(Date().time), Date(Date().time), "img", mutableListOf())
+
     @Test
     fun findById() {
         val id = UUID.randomUUID()
         usersRepository.add(
-            User(id, "Pepe", Date(Date().time), "123", "img", mutableListOf())
+            getTestingUser(id)
         )
         val user = usersRepository.findbyId(id)
 
@@ -23,9 +26,9 @@ internal class UsersRepositoryTest {
     fun findByName() {
         val id = UUID.randomUUID()
         usersRepository.add(
-            User(id, "Jose", Date(Date().time), "123", "img", mutableListOf())
+            getTestingUser(id)
         )
-        val users = usersRepository.findByName("Jos")
+        val users = usersRepository.findByName("Pep")
 
         assert(users.map { it.id }.contains(id))
     }
@@ -34,10 +37,10 @@ internal class UsersRepositoryTest {
     fun findAll() {
         val ids = listOf<UUID>(UUID.randomUUID(), UUID.randomUUID())
         usersRepository.add(
-            User(ids[0], "Pepe", Date(Date().time), "123", "img", mutableListOf())
+            getTestingUser(ids[0])
         )
         usersRepository.add(
-            User(ids[1], "Pepe2", Date(Date().time), "123", "img", mutableListOf())
+            getTestingUser(ids[1])
         )
         val users = usersRepository.findAll()
 
@@ -48,10 +51,10 @@ internal class UsersRepositoryTest {
     fun update() {
         val id = UUID.randomUUID()
         usersRepository.add(
-            User(id, "Pepe", Date(Date().time), "123", "img", mutableListOf())
+            getTestingUser(id)
         )
         usersRepository.update(
-            User(id, "PepeUpdated", Date(Date().time), "123", "img", mutableListOf())
+            getTestingUser(id).also { it.name = "PepeUpdated" }
         )
 
         val user = usersRepository.findbyId(id)
@@ -63,7 +66,7 @@ internal class UsersRepositoryTest {
     fun add() {
         val id = UUID.randomUUID()
         usersRepository.add(
-            User(id, "Pepe", Date(Date().time), "123", "img", mutableListOf())
+            getTestingUser(id)
         )
 
         val user = usersRepository.findbyId(id)
@@ -75,7 +78,7 @@ internal class UsersRepositoryTest {
     fun delete() {
         val id = UUID.randomUUID()
         usersRepository.add(
-            User(id, "Pepe", Date(Date().time), "123", "img", mutableListOf())
+            getTestingUser(id)
         )
 
         val user = usersRepository.findbyId(id)

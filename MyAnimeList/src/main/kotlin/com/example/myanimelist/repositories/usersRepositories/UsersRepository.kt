@@ -2,7 +2,8 @@ package com.example.myanimelist.repositories.usersRepositories
 
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
-import com.example.myanimelist.models.*
+import com.example.myanimelist.models.Anime
+import com.example.myanimelist.models.User
 import java.util.*
 
 
@@ -21,8 +22,10 @@ object UsersRepository : IUsersRepository {
                 val user = User(
                     id,
                     set.getString("nombre"),
-                    set.getDate("date_alta"),
+                    set.getString("email"),
                     set.getString("password"),
+                    set.getDate("date_alta"),
+                    set.getDate("date_nacimiento"),
                     set.getString("imageUrl"),
                     getAnimeLists(id)
                 )
@@ -41,8 +44,10 @@ object UsersRepository : IUsersRepository {
             return User(
                 UUID.fromString(set.getString("id")),
                 set.getString("nombre"),
-                set.getDate("date_alta"),
+                set.getString("email"),
                 set.getString("password"),
+                set.getDate("date_alta"),
+                set.getDate("date_nacimiento"),
                 set.getString("imageUrl"),
                 getAnimeLists(id)
             )
@@ -61,8 +66,10 @@ object UsersRepository : IUsersRepository {
                 val user = User(
                     id,
                     set.getString("nombre"),
-                    set.getDate("date_alta"),
+                    set.getString("email"),
                     set.getString("password"),
+                    set.getDate("date_alta"),
+                    set.getDate("date_nacimiento"),
                     set.getString("imageUrl"),
                     getAnimeLists(id)
                 )
@@ -77,12 +84,14 @@ object UsersRepository : IUsersRepository {
         databaseManager.execute {
             val modifiedRows = databaseManager
                 .update(
-                    "UPDATE Usuarios set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl = ? WHERE id = ?",
+                    "UPDATE Usuarios set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl = ?, email = ?, date_nacimiento = ? WHERE id = ?",
                     item.id.toString(),
                     item.name,
                     item.createDate,
                     item.password,
                     item.img,
+                    item.email,
+                    item.birthDate,
                     item.id.toString()
                 )
 
@@ -92,17 +101,18 @@ object UsersRepository : IUsersRepository {
         return null
     }
 
-    //TODO add lists of animes
     override fun add(item: User): User? {
         databaseManager.execute {
             databaseManager
                 .insert(
-                    "Insert into Usuarios (id,nombre,date_alta,password,imageUrl) values (?,?,?,?,?)",
+                    "Insert into Usuarios (id,nombre,date_alta,password,imageUrl,email,date_nacimiento) values (?,?,?,?,?,?,?)",
                     item.id.toString(),
                     item.name,
                     item.createDate,
                     item.password,
                     item.img,
+                    item.email,
+                    item.birthDate
                 )
 
             return item
@@ -118,7 +128,7 @@ object UsersRepository : IUsersRepository {
         }
     }
 
-
+    //TODO move to anime repository?
     private fun getAnimeLists(userId: UUID): List<Anime> {
         val list: MutableList<Anime> = mutableListOf()
 
@@ -134,12 +144,13 @@ object UsersRepository : IUsersRepository {
                 UUID.fromString(listSet.getString("id")),
                 listSet.getString("title"),
                 listSet.getString("title_english"),
-                Type.valueOf(listSet.getString("type")),
+                listSet.getString("type"),
                 listSet.getInt("episodes"),
-                Status.valueOf(listSet.getString("status")),
+                listSet.getString("status"),
                 listSet.getDate("releaseDate"),
                 listSet.getString("rating"),
-                listSet.getString("genre").split(",").map { Genre.valueOf(it) })
+                listSet.getString("genre").split(",")
+            )
             list.add(anime)
         }
 
