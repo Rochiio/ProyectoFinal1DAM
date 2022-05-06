@@ -1,6 +1,6 @@
 package com.example.myanimelist.repositories.reviews
 
-interface CRUDReview<T,ID> {
+interface ICRUDReview<T,ID> {
     /**
      * Añadir reviews al repositorio
      * @param review review a añadir

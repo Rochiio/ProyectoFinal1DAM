@@ -5,39 +5,41 @@ import com.example.myanimelist.models.Genre
 import com.example.myanimelist.models.Status
 import com.example.myanimelist.models.Type
 import java.sql.Date
-import java.util.*
 import java.sql.SQLException
+import java.util.*
 
 object DataDB {
 
     val db = DataBaseManager.getInstance()
 
-    fun insertAnimeTest(){
+    fun insertAnimeTest() {
         val query = "INSERT INTO animes VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
         db.open()
-        db.insert(query,
+        db.insert(
+            query,
             "00000000-0000-0000-0000-000000000000",
             "example",
             "example_english",
-            Status.CURRENTLY_AIRING,
-            Genre.FANTASY,
+            Status.CURRENTLY_AIRING.value,
+            Genre.FANTASY.value,
             Date(Date().time),
             "/example/example.png",
             "24",
             "PG 12",
-            Type.TV )
-            .orElseThrow{ SQLException("Error inserting the values") }
+            Type.TV.value
+        )
+            .orElseThrow { SQLException("Error inserting the values") }
         db.close()
     }
 
-    fun deleteAll(){
+    fun deleteAll() {
         val animeQuery = "DELETE FROM animes"
         db.open()
         db.delete(animeQuery)
         db.close()
     }
 
-    fun deleteAllReviews(){
+    fun deleteAllReviews() {
         val reviewQuery = "DELETE FROM reviews"
         db.open()
         db.delete(reviewQuery)
