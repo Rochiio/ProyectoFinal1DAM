@@ -1,9 +1,9 @@
 package com.example.myanimelist.models
 
-enum class Genre(value :String = "Unknown") {
+enum class Genre(val value: String = "Unknown") {
     ADVENTURE("Adventure"),
-    ACTION ("Action"),
-    COMEDY ("Comedy"),
+    ACTION("Action"),
+    COMEDY("Comedy"),
     SLICE_OF_LIFE("Slice of life"),
     DRAMA("Drama"),
     FANTASY("Fantasy"),
