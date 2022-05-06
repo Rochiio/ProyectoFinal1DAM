@@ -2,9 +2,6 @@ package com.example.myanimelist.repositories.animes
 
 import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Anime
-import com.example.myanimelist.models.Genre
-import com.example.myanimelist.models.Status
-import com.example.myanimelist.models.Type
 import java.sql.SQLException
 import java.util.*
 
@@ -32,18 +29,18 @@ object AnimeRepository : IAnimeRepository {
             if (result.next()) return null
 
 
-            val anime = Anime.AnimeBuilder(
+            val anime = Anime(
                 id = UUID.fromString(result.getString("id")),
                 title = result.getString("title"),
                 titleEnglish = result.getString("title_english"),
-                types = Type.valueOf(result.getString("type")),
+                types = result.getString("type"),
                 episodes = result.getInt("episodes"),
-                status = Status.valueOf(result.getString("status")),
+                status = result.getString("status"),
                 date = result.getDate("releaseDate"),
                 rating = result.getString("rating"),
-                genres = result.getString("genre").split(", ").map { Genre.valueOf(it) }.toList(),
+                genres = result.getString("genre").split(", ").toList(),
                 img = result.getString("imageUrl")
-            ).build()
+            )
             db.close()
             return anime
 
@@ -70,12 +67,12 @@ object AnimeRepository : IAnimeRepository {
                         id = UUID.fromString(result.getString("id")),
                         title = result.getString("title"),
                         titleEnglish = result.getString("title_english"),
-                        types = Type.valueOf(result.getString("type")),
+                        types = result.getString("type"),
                         episodes = result.getInt("episodes"),
-                        status = Status.valueOf(result.getString("status")),
+                        status = result.getString("status"),
                         date = result.getDate("releaseDate"),
                         rating = result.getString("rating"),
-                        genres = result.getString("genre").split(",").map { Genre.valueOf(it) },
+                        genres = result.getString("genre").split(", ").toList(),
                         img = result.getString("imageUrl")
                     )
                 )
@@ -110,13 +107,13 @@ object AnimeRepository : IAnimeRepository {
                 query,
                 item.title,
                 item.titleEnglish,
-                item.status.toString(),
+                item.status,
                 item.genres.joinToString(separator = ", "),
                 item.date,
                 item.img,
                 item.episodes,
                 item.rating,
-                item.types.toString(),
+                item.types,
                 item.id.toString()
             )
         } catch (e: SQLException) {
@@ -187,12 +184,12 @@ object AnimeRepository : IAnimeRepository {
                 id = UUID.fromString(result.getString("id")),
                 title = result.getString("title"),
                 titleEnglish = result.getString("title_english"),
-                types = Type.valueOf(result.getString("type")),
+                types = result.getString("type"),
                 episodes = result.getInt("episodes"),
-                status = Status.valueOf(result.getString("status")),
+                status = result.getString("status"),
                 date = result.getDate("releaseDate"),
                 rating = result.getString("rating"),
-                genres = result.getString("genre").split(",").map { Genre.valueOf(it) },
+                genres = result.getString("genre").split(", ").toList(),
                 img = result.getString("imageUrl")
             )
             db.close()
