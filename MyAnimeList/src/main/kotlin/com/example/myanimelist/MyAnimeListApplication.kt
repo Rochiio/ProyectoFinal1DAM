@@ -8,6 +8,7 @@ import javafx.stage.Stage
 import java.sql.ResultSet
 import java.sql.SQLException
 import java.util.*
+import kotlin.system.exitProcess
 
 class MyAnimeListApplication : Application() {
     override fun start(stage: Stage) {
@@ -37,6 +38,6 @@ fun checkDataBase(db: DataBaseManager) {
         }
     } catch (e: SQLException) {
         System.err.println("Error al conectar al servidor de Base de Datos: " + e.message)
-        System.exit(1)
+        exitProcess(1)
     }
 }
