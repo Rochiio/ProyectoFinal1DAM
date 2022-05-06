@@ -8,9 +8,8 @@ import com.example.myanimelist.models.Type
 import com.example.myanimelist.utilities.DataDB
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import java.sql.Date
 import java.util.*
@@ -19,17 +18,19 @@ internal class AnimeRepositoryTest {
 
     private val repo = AnimeRepository
 
-    private val animeGiven = Anime(id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
+    private val animeGiven = Anime(
+        id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
         title = "example",
         titleEnglish = "example_english",
-        status = Status.CURRENTLY_AIRING,
-        genres = listOf( Genre.FANTASY),
+        status = Status.CURRENTLY_AIRING.value,
+        genres = listOf(Genre.FANTASY.value),
         date = Date(Date().time),
         img = "/example/example.png",
         episodes = 24,
         rating = "PG 12",
-        types = Type.TV
+        types = Type.TV.value
     )
+
     @BeforeEach
     internal fun setUp() {
         DataDB.deleteAll()
@@ -62,21 +63,21 @@ internal class AnimeRepositoryTest {
         assertAll(
             { assertTrue(animeListTest.isNotEmpty()) },
             { Assertions.assertEquals(animeListTest.size, 1) },
-            { assertTrue(animeListTest.map{it.id}.contains(animeGiven.id)) },
+            { assertTrue(animeListTest.map { it.id }.contains(animeGiven.id)) },
         )
     }
 
     @Test
     fun update() {
         animeGiven.title = "new title"
-        animeGiven.titleEnglish= "new title"
-        animeGiven.status = Status.NOT_YET_AIRED
-        animeGiven.genres = listOf(Genre.ACTION)
+        animeGiven.titleEnglish = "new title"
+        animeGiven.status = Status.NOT_YET_AIRED.value
+        animeGiven.genres = listOf(Genre.ACTION.value)
         animeGiven.date = Date.valueOf("1950-01-02")
         animeGiven.img = "new directory"
         animeGiven.episodes = 64
         animeGiven.rating = "new rating"
-        animeGiven.types = Type.OVA
+        animeGiven.types = Type.OVA.value
 
         val response = repo.update(animeGiven)
 
@@ -96,14 +97,14 @@ internal class AnimeRepositoryTest {
     fun add() {
         val newAnime = Anime(
             title = "new title",
-            titleEnglish= "new title",
-            status = Status.NOT_YET_AIRED,
-            genres = listOf(Genre.ACTION),
+            titleEnglish = "new title",
+            status = Status.NOT_YET_AIRED.value,
+            genres = listOf(Genre.ACTION.value),
             date = Date(Date().time),
             img = "new directory",
             episodes = 64,
             rating = "new rating",
-            types = Type.OVA,
+            types = Type.OVA.value,
         )
 
         val response = repo.add(newAnime)
@@ -127,25 +128,6 @@ internal class AnimeRepositoryTest {
         val animeRecived = repo.findById(animeGiven.id)
         assertAll(
             { assertTrue(animeRecived == null) },
-        )
-    }
-
-    @Test
-    fun findByTitle() {
-        val animetest = repo.findByTitle(animeGiven.title)
-        assertAll(
-            { assertTrue(animetest != null) },
-            { Assertions.assertEquals(animetest!!.id, animeGiven.id) },
-            { Assertions.assertEquals(animetest!!.title, animeGiven.title) },
-            { Assertions.assertEquals(animetest.toString(), animeGiven.toString()) }
-        )
-    }
-
-    @Test
-    fun findByTitleNotPresent(){
-        val animetest = repo.findByTitle("error")
-        assertAll(
-            { assertTrue(animetest == null) }
         )
     }
 
