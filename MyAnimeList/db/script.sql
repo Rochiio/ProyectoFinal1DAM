@@ -39,7 +39,7 @@ create table usuarios
     password        varchar(50)  not null,
     imageurl        text,
     email           varchar(100) not null,
-    date_nacimiento varchar(10)
+    date_nacimiento Date
 );
 
 create table animeLists
