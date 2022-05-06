@@ -15,7 +15,6 @@ class MyAnimeListApplication : Application() {
         val sceneManager = SceneManager
         sceneManager.setInstance(MyAnimeListApplication::class.java)
         sceneManager.initSplash(stage)
-
     }
 
 }
