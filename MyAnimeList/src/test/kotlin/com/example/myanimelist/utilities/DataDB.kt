@@ -1,48 +1,50 @@
 package com.example.myanimelist.utilities
 
+import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
-import com.example.myanimelist.models.Genre
-import com.example.myanimelist.models.Status
-import com.example.myanimelist.models.Type
+import com.example.myanimelist.models.Anime
+import com.example.myanimelist.models.User
+import com.example.myanimelist.models.enums.Genre
+import com.example.myanimelist.models.enums.Status
+import com.example.myanimelist.models.enums.Type
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.sql.Date
-import java.sql.SQLException
 import java.util.*
 
-object DataDB {
+object DataDB : KoinComponent {
 
-    val db = DataBaseManager.getInstance()
+    private val dataBaseManager by inject<DataBaseManager>()
 
-    fun insertAnimeTest() {
-        val query = "INSERT INTO animes VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
-        db.open()
-        db.insert(
-            query,
-            "00000000-0000-0000-0000-000000000000",
-            "example",
-            "example_english",
-            Status.CURRENTLY_AIRING.value,
-            Genre.FANTASY.value,
+    fun deleteAll(table: String) {
+        val animeQuery = "DELETE FROM $table"
+        dataBaseManager.execute {
+            dataBaseManager.delete(animeQuery)
+        }
+    }
+
+    fun getTestingUser() =
+        User(
+            UUID.randomUUID(),
+            "Pepe",
+            "asdasd@gmail.com",
+            "123",
             Date(Date().time),
-            "/example/example.png",
-            "24",
-            "PG 12",
-            Type.TV.value
+            Date(Date().time),
+            "img",
+            sequenceOf()
         )
-            .orElseThrow { SQLException("Error inserting the values") }
-        db.close()
-    }
 
-    fun deleteAll() {
-        val animeQuery = "DELETE FROM animes"
-        db.open()
-        db.delete(animeQuery)
-        db.close()
-    }
-
-    fun deleteAllReviews() {
-        val reviewQuery = "DELETE FROM reviews"
-        db.open()
-        db.delete(reviewQuery)
-        db.close()
-    }
+    fun getTestingAnime() = Anime(
+        id = UUID.randomUUID(),
+        title = "example",
+        titleEnglish = "example_english",
+        status = Status.CURRENTLY_AIRING.value,
+        genres = listOf(Genre.FANTASY.value),
+        date = Date(Date().time),
+        img = "/example/example.png",
+        episodes = 24,
+        rating = "PG 12",
+        types = Type.TV.value
+    )
 }

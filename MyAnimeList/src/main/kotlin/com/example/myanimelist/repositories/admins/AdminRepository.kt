@@ -5,7 +5,8 @@ import com.example.myanimelist.models.Admin
 import java.sql.SQLException
 import java.util.*
 
-class AdminRepository(val db: DataBaseManager) : IAdminRepository {
+//TODO use database.execute {} that auto opens and close connection with try-catch-finally
+class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
     /**
      * Busca en el repositorio un usuari de tipo admin usando su uuid
      * @param id UUID
@@ -13,7 +14,7 @@ class AdminRepository(val db: DataBaseManager) : IAdminRepository {
      */
     override fun findById(id: UUID): Admin? {
         val query = "select * from usuarios where id = ?"
-        val result = db.select(query, id).get()
+        val result = db.select(query, id)
         if (result.first()) {
             val admin = Admin(
                 UUID.fromString(result.getString("id")),
@@ -37,7 +38,7 @@ class AdminRepository(val db: DataBaseManager) : IAdminRepository {
         val query = "select * from usuarios"
         val admins = ArrayList<Admin>()
         db.open()
-        val result = db.select(query).get()
+        val result = db.select(query)
         while (result.next()) {
             admins.add(
                 Admin(
@@ -101,7 +102,7 @@ class AdminRepository(val db: DataBaseManager) : IAdminRepository {
             item.password,
             item.email,
             item.birthDate
-        ).orElseThrow { SQLException("Error al añadir el admin a la tabla de usuarios") }
+        )
         db.close()
         return item
     }
@@ -112,7 +113,7 @@ class AdminRepository(val db: DataBaseManager) : IAdminRepository {
      * @return Admin? Deveulve el admin que ha sido eliminado
      * @throws SQLException en caso de que no exista un admin con el UUID dado o la base de datos no esté accesible
      */
-    override fun delete(id: UUID){
+    override fun delete(id: UUID) {
         val query = "delete from usuarios where id = ?"
         db.open()
         db.delete(query, id)
