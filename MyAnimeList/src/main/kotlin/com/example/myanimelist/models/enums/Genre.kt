@@ -1,4 +1,4 @@
-package com.example.myanimelist.models
+package com.example.myanimelist.models.enums
 
 enum class Genre(val value: String = "Unknown") {
     ADVENTURE("Adventure"),

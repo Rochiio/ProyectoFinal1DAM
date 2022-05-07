@@ -1,4 +1,4 @@
-package com.example.myanimelist.models
+package com.example.myanimelist.models.enums
 
 enum class Status(val value: String = "Unknown") {
     FINISHED_AIRING("Finished Airing"),
