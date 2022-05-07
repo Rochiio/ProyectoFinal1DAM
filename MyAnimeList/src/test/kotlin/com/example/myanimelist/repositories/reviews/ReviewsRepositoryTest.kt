@@ -1,17 +1,26 @@
 package com.example.myanimelist.repositories.reviews
 
-import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Reviews
+import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
 import com.example.myanimelist.utilities.DataDB
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.koin.core.context.startKoin
+import org.koin.test.inject
+import org.koin.test.junit5.AutoCloseKoinTest
 import java.util.*
 
-internal class ReviewsRepositoryTest {
-    var repository = ReviewsRepository(DataBaseManager.getInstance())
-    var reviewTest: Reviews = Reviews(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), 0, "Me ha gustado")
+internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
+    private val repository by inject<IRepositoryReview>()
+
+    init {
+        startKoin { modules(repositoryModule) }
+    }
+
+    private var reviewTest: Reviews =
+        Reviews(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), 0, "Me ha gustado")
 
     @AfterEach
     fun setUp() {

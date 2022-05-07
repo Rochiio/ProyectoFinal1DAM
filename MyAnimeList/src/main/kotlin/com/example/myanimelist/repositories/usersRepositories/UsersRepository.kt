@@ -7,11 +7,10 @@ import com.example.myanimelist.models.User
 import java.util.*
 
 
-object UsersRepository : IUsersRepository {
+class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepository {
     //TODO fill catch blocks with logger
     //TODO Throw custom exceptions
 
-    private val databaseManager: DataBaseManager = DataBaseManager.getInstance()
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<User>()
         databaseManager.execute {
@@ -35,7 +34,7 @@ object UsersRepository : IUsersRepository {
         return list
     }
 
-    override fun findbyId(id: UUID): User? {
+    override fun findById(id: UUID): User? {
         databaseManager.execute {
             val set = databaseManager.select("SELECT * FROM Usuarios WHERE id = ?", id.toString()).get()
 
@@ -121,7 +120,7 @@ object UsersRepository : IUsersRepository {
     }
 
     override fun delete(id: UUID) {
-        if (findbyId(id) == null) return
+        if (findById(id) == null) return
 
         databaseManager.execute {
             databaseManager.delete("Delete from Usuarios where id = ?", id)
