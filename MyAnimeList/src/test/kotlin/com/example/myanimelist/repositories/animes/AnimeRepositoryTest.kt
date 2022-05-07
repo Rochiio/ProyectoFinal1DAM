@@ -1,23 +1,30 @@
 package com.example.myanimelist.repositories.animes
 
-import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Genre
 import com.example.myanimelist.models.Status
 import com.example.myanimelist.models.Type
+import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
 import com.example.myanimelist.utilities.DataDB
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import org.koin.core.context.startKoin
+import org.koin.test.inject
+import org.koin.test.junit5.AutoCloseKoinTest
 import java.sql.Date
 import java.util.*
 
-internal class AnimeRepositoryTest {
+internal class AnimeRepositoryTest : AutoCloseKoinTest() {
 
-    private val repo = AnimeRepository
-  
+    private val repo by inject<IAnimeRepository>()
+
+    init {
+        startKoin { modules(repositoryModule) }
+    }
+
     private val animeGiven = Anime(
         id = UUID.fromString("00000000-0000-0000-0000-000000000000"),
 
@@ -61,7 +68,7 @@ internal class AnimeRepositoryTest {
 
     @Test
     fun findAll() {
-        val animeListTest = repo.findAll()
+        val animeListTest = repo.findAll().toList()
         assertAll(
             { assertTrue(animeListTest.isNotEmpty()) },
             { Assertions.assertEquals(animeListTest.size, 1) },
@@ -89,8 +96,8 @@ internal class AnimeRepositoryTest {
             { Assertions.assertEquals(animeRecived!!.id, animeGiven.id) },
             { Assertions.assertEquals(animeRecived!!.title, animeGiven.title) },
             { Assertions.assertEquals(animeRecived.toString(), animeGiven.toString()) },
-            { Assertions.assertEquals(response.id, animeGiven.id) },
-            { Assertions.assertEquals(response.title, animeGiven.title) },
+            { Assertions.assertEquals(response?.id, animeGiven.id) },
+            { Assertions.assertEquals(response?.title, animeGiven.title) },
             { Assertions.assertEquals(response.toString(), animeGiven.toString()) }
         )
     }
@@ -117,8 +124,8 @@ internal class AnimeRepositoryTest {
             { Assertions.assertEquals(animeRecived!!.id, newAnime.id) },
             { Assertions.assertEquals(animeRecived!!.title, newAnime.title) },
             { Assertions.assertEquals(animeRecived.toString(), newAnime.toString()) },
-            { Assertions.assertEquals(response.id, newAnime.id) },
-            { Assertions.assertEquals(response.title, newAnime.title) },
+            { Assertions.assertEquals(response?.id, newAnime.id) },
+            { Assertions.assertEquals(response?.title, newAnime.title) },
             { Assertions.assertEquals(response.toString(), newAnime.toString()) }
         )
     }
@@ -130,13 +137,6 @@ internal class AnimeRepositoryTest {
         val animeRecived = repo.findById(animeGiven.id)
         assertAll(
             { assertTrue(animeRecived == null) },
-        )
-    }
-
-    @Test
-    fun getDb() {
-        assertAll(
-            { assertTrue(repo.db == DataBaseManager.getInstance()) }
         )
     }
 }
