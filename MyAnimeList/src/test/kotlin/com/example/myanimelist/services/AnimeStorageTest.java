@@ -8,6 +8,7 @@ class AnimeStorageTest {
 
     @Test
     void save() {
+        //TODO save test
         assertAll(
                 () -> assertTrue(true)
         );
@@ -15,6 +16,7 @@ class AnimeStorageTest {
 
     @Test
     void load() {
+        //TODO load test
         assertAll(
                 () -> assertTrue(true)
         );
