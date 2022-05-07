@@ -42,7 +42,7 @@ public class DataBaseManager {
      * y abre la conexión
      * Aseguramos siempre una misma instancia.
      */
-    private DataBaseManager() {
+    public DataBaseManager() {
         // System.out.println("Mi nombre es: " + this.nombre);
         if (fromProperties) {
             // initConfigFromProperties();

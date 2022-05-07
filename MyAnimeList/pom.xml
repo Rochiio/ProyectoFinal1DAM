@@ -13,9 +13,30 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.2</junit.version>
         <kotlin.version>1.6.21</kotlin.version>
+        <koin.version>3.1.6</koin.version>
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.insert-koin/koin-core -->
+
+        <dependency>
+            <groupId>io.insert-koin</groupId>
+            <artifactId>koin-core-jvm</artifactId>
+            <version>${koin.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.insert-koin/koin-core -->
+        <dependency>
+            <groupId>io.insert-koin</groupId>
+            <artifactId>koin-test-junit5</artifactId>
+            <version>${koin.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.insert-koin</groupId>
+            <artifactId>koin-test-jvm</artifactId>
+            <version>${koin.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>

@@ -2,9 +2,11 @@ package com.example.myanimelist
 
 import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.managers.SceneManager
+import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.stage.Stage
+import org.koin.core.context.startKoin
 import java.sql.ResultSet
 import java.sql.SQLException
 import java.util.*
@@ -21,8 +23,13 @@ class MyAnimeListApplication : Application() {
 
 fun main() {
     val dataBaseManager = DataBaseManager.getInstance()
-        checkDataBase(dataBaseManager)
-        launch(MyAnimeListApplication::class.java)
+    checkDataBase(dataBaseManager)
+    launch(MyAnimeListApplication::class.java)
+
+
+    startKoin() {
+        modules(repositoryModule)
+    }
 }
 
 
