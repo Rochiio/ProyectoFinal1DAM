@@ -5,14 +5,13 @@ import com.example.myanimelist.models.Anime
 import java.sql.SQLException
 import java.util.*
 
-object AnimeRepository : IAnimeRepository {
+class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepository {
 
-    val db: DataBaseManager = DataBaseManager.getInstance()
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"
         try {
-            db.open()
-            val result = db.select(query, id.toString()).get()
+            databaseManager.open()
+            val result = databaseManager.select(query, id.toString()).get()
 
             if (!result.next()) return null
 
@@ -28,13 +27,13 @@ object AnimeRepository : IAnimeRepository {
                 genres = result.getString("genre").split(",").toList(),
                 img = result.getString("imageUrl")
             )
-            db.close()
+            databaseManager.close()
             return anime
 
         } catch (e: SQLException) {
             e.printStackTrace()
         } finally {
-            db.close()
+            databaseManager.close()
         }
         return null
     }
@@ -43,8 +42,8 @@ object AnimeRepository : IAnimeRepository {
         val query = "SELECT * FROM animes"
         val animes = ArrayList<Anime>()
         try {
-            db.open()
-            val result = db.select(query).get()
+            databaseManager.open()
+            val result = databaseManager.select(query).get()
             while (result.next()) {
                 animes.add(
                     Anime(
@@ -64,7 +63,7 @@ object AnimeRepository : IAnimeRepository {
         } catch (e: SQLException) {
             e.printStackTrace()
         } finally {
-            db.close()
+            databaseManager.close()
         }
         return animes
     }
@@ -82,8 +81,8 @@ object AnimeRepository : IAnimeRepository {
                 "type = ?" +
                 "WHERE id = ?"
         try {
-            db.open()
-            db.update(
+            databaseManager.open()
+            databaseManager.update(
                 query,
                 item.title,
                 item.titleEnglish,
@@ -99,7 +98,7 @@ object AnimeRepository : IAnimeRepository {
         } catch (e: SQLException) {
             e.printStackTrace()
         } finally {
-            db.close()
+            databaseManager.close()
         }
         return item
     }
@@ -107,8 +106,8 @@ object AnimeRepository : IAnimeRepository {
     override fun add(item: Anime): Anime {
         val query = "INSERT INTO animes VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
         try {
-            db.open()
-            db.insert(
+            databaseManager.open()
+            databaseManager.insert(
                 query,
                 item.id,
                 item.title,
@@ -124,7 +123,7 @@ object AnimeRepository : IAnimeRepository {
         } catch (e: SQLException) {
             e.printStackTrace()
         } finally {
-            db.close()
+            databaseManager.close()
         }
         return item
     }
@@ -132,12 +131,12 @@ object AnimeRepository : IAnimeRepository {
     override fun delete(id: UUID) {
         val query = "DELETE FROM animes WHERE id = ?"
         try {
-            db.open()
-            db.delete(query, id)
+            databaseManager.open()
+            databaseManager.delete(query, id)
         } catch (e: SQLException) {
             e.printStackTrace()
         } finally {
-            db.close()
+            databaseManager.close()
         }
     }
 }
