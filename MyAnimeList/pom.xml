@@ -104,6 +104,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M6</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -160,9 +161,8 @@
                         </goals>
                         <configuration>
                             <sourceDirs>
-                                <source>src/main/java</source>
-                                <source>src/main/kotlin</source>
-                                <source>src/main/resources</source>
+                                <source>src/test/java</source>
+                                <source>src/test/kotlin</source>
                             </sourceDirs>
                         </configuration>
                     </execution>
