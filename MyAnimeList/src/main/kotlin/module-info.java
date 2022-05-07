@@ -12,6 +12,7 @@ module com.example.myanimelist {
     requires org.mybatis;
     requires lombok;
     requires java.base;
+    requires koin.core.jvm;
 
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;

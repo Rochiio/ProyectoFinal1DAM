@@ -31,7 +31,7 @@ object SceneManager {
     fun initSplash(stage: Stage) {
         Platform.setImplicitExit(false)
         println("Iniciando Splash")
-        val fxmlLoader = FXMLLoader(MyAnimeListApplication::class.java.getResource("views/splash-view.fxml"))
+        val fxmlLoader = FXMLLoader(appClass.getResource("views/splash-view.fxml"))
         val scene = Scene(fxmlLoader.load())
         stage.title = "Splash"
         stage.isResizable = false

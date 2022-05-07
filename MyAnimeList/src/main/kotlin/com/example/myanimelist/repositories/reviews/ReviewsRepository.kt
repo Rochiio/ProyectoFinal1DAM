@@ -5,21 +5,23 @@ import com.example.myanimelist.models.Reviews
 import java.sql.SQLException
 import java.util.*
 
-class ReviewsRepository(var db: DataBaseManager) : IRepositoryReview {
+class ReviewsRepository(private var databaseManager: DataBaseManager) : IRepositoryReview {
 
     override fun addReview(review: Reviews): Reviews {
         val query = "INSERT INTO reviews VALUES(?,?,0,?,?)"
-        db.open()
-        var result = db.insert(query, review.idUser, review.idAnime, review.id, review.comment)
+        databaseManager.open()
+        databaseManager.insert(query, review.idUser, review.idAnime, review.id, review.comment)
             .orElseThrow { SQLException("Error al insertar review") }
-        db.close()
+        databaseManager.close()
         return review
     }
 
     override fun showReviewsAnime(animeId: UUID): List<Reviews> {
         val sql = "SELECT * FROM reviews WHERE idAnime=?"
-        db.open()
-        val res = db.select(sql, animeId.toString()).orElseThrow { SQLException("Error al seleccionar reviews del anime") }
+        databaseManager.open()
+        val res =
+            databaseManager.select(sql, animeId.toString())
+                .orElseThrow { SQLException("Error al seleccionar reviews del anime") }
         val list: ArrayList<Reviews> = ArrayList()
 
         while (res.next()) {
@@ -32,16 +34,16 @@ class ReviewsRepository(var db: DataBaseManager) : IRepositoryReview {
             )
             list.add(review)
         }
-        db.close()
+        databaseManager.close()
         return list
     }
 
     override fun addScore(review: Reviews): Reviews {
         val query = "INSERT INTO reviews VALUES(?,?,?,?,null)"
-        db.open()
-        var result = db.insert(query, review.idUser, review.idAnime, review.score, review.id)
+        databaseManager.open()
+        databaseManager.insert(query, review.idUser, review.idAnime, review.score, review.id)
             .orElseThrow { SQLException("Error al insertar puntuación") }
-        db.close()
+        databaseManager.close()
         return review
     }
 
