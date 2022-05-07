@@ -21,21 +21,18 @@ internal class UsersRepositoryTest : AutoCloseKoinTest() {
 
     @Test
     fun findById() {
-        val id = UUID.randomUUID()
-        val insertedUser = usersRepository.add(
-            getTestingUser(id)
-        )
-        val user = usersRepository.findById(id)
+        val user = getTestingUser(UUID.randomUUID())
+
+        usersRepository.add(user)
+        val insertedUser = usersRepository.findById(user.id)
 
         assert(user == insertedUser)
     }
 
     @Test
     fun findByName() {
-        val id = UUID.randomUUID()
-        val user = usersRepository.add(
-            getTestingUser(id)
-        )
+        val user = getTestingUser(UUID.randomUUID())
+        usersRepository.add(user)
         val users = usersRepository.findByName("Pep")
 
         assert(users.contains(user))
