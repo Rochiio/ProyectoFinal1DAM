@@ -6,11 +6,9 @@ inline fun DataBaseManager.execute(action: () -> Unit) {
     try {
         this.open()
         action()
-    }
-    catch (ex: Exception) {
-        error(ex)
-    }
-    finally {
+    } catch (ex: Exception) {
+        println(ex)
+    } finally {
         this.close()
     }
 }
