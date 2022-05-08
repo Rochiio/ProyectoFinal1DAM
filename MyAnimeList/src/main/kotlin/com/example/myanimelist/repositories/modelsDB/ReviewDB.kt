@@ -1,8 +1,8 @@
-package com.example.myanimelist.repositories.dto
+package com.example.myanimelist.repositories.modelsDB
 
 import java.util.*
 
-internal data class ReviewDto(
+internal data class ReviewDB(
     val id: UUID = UUID.randomUUID(),
     val idAnime: UUID,
     val idUser: UUID,

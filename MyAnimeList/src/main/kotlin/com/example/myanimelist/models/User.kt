@@ -12,7 +12,7 @@ data class User(
     override val createDate: Date,
     override val birthDate: Date,
     var img: String?,
-    val myList: Sequence<Anime>
+    val myList: List<Anime>
 
 ) : AbstractUser(id, name, email, password, createDate, birthDate) {
     override fun equals(other: Any?): Boolean {

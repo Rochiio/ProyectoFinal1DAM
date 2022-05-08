@@ -32,7 +32,7 @@ object DataDB : KoinComponent {
             Date(Date().time),
             Date(Date().time),
             "img",
-            sequenceOf()
+            emptyList()
         )
 
     fun getTestingAnime() = Anime(

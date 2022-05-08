@@ -6,7 +6,7 @@ import com.example.myanimelist.models.Review
 import com.example.myanimelist.models.User
 import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
 import com.example.myanimelist.repositories.animes.IAnimeRepository
-import com.example.myanimelist.repositories.usersRepositories.IUsersRepository
+import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import com.example.myanimelist.utilities.DataDB.getTestingUser

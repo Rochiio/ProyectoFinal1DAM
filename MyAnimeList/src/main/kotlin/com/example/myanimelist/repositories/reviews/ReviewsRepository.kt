@@ -5,10 +5,10 @@ import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.repositories.animes.IAnimeRepository
-import com.example.myanimelist.repositories.dto.ReviewDto
-import com.example.myanimelist.repositories.usersRepositories.IUsersRepository
+import com.example.myanimelist.repositories.users.IUsersRepository
 import java.util.*
 
+//TODO Review reviews
 class ReviewsRepository(
     private val databaseManager: DataBaseManager,
     private val animeRepository: IAnimeRepository,
@@ -17,8 +17,8 @@ class ReviewsRepository(
 
     override fun addReview(review: Review): Review? {
         databaseManager.execute {
-            val query = "INSERT INTO reviews VALUES(?,?,0,?,?)"
-            databaseManager.insert(query, review.user.id, review.anime.id, review.id, review.comment)
+            val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
+            databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id, review.comment)
             return review
         }
         return null
@@ -26,7 +26,7 @@ class ReviewsRepository(
 
     @kotlin.jvm.Throws(RepositoryException::class)
     override fun showReviewsAnime(animeId: UUID): List<Review> {
-        val list: MutableList<ReviewDto> = mutableListOf()
+        val list: MutableList<com.example.myanimelist.repositories.modelsDB.ReviewDB> = mutableListOf()
 
         databaseManager.execute {
             val sql = "SELECT * FROM reviews WHERE idAnime=?"
@@ -34,7 +34,7 @@ class ReviewsRepository(
                 databaseManager.select(sql, animeId.toString())
 
             while (res.next()) {
-                val review = ReviewDto(
+                val review = com.example.myanimelist.repositories.modelsDB.ReviewDB(
                     UUID.fromString(res.getString("id")),
                     UUID.fromString(res.getString("idAnime")),
                     UUID.fromString(res.getString("idUser")),
@@ -48,8 +48,8 @@ class ReviewsRepository(
         return list.map {
             Review(
                 it.id,
-                animeRepository.findById(it.idAnime) ?: throw RepositoryException("Couldn't load anime for review"),
-                usersRepository.findById(it.idUser) ?: throw RepositoryException("Couldn't load user for review"),
+                animeRepository.findById(it.idAnime) ?: return emptyList(),
+                usersRepository.findById(it.idUser) ?: return emptyList(),
                 it.score,
                 it.comment
             )
@@ -58,8 +58,8 @@ class ReviewsRepository(
 
     override fun addScore(review: Review): Review? {
         databaseManager.execute {
-            val query = "INSERT INTO reviews VALUES(?,?,?,?,null)"
-            databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id)
+            val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
+            databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id, review.comment)
             return review
         }
         return null
