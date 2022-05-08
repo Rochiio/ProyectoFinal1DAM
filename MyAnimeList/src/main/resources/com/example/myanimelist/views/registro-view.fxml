@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.InicioController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.InicioController">
    <children>
-      <VBox layoutX="14.0" layoutY="36.0" prefHeight="166.0" prefWidth="223.0" spacing="15.0" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="36.0">
+      <VBox layoutX="19.0" layoutY="63.0" prefHeight="146.0" prefWidth="369.0" spacing="15.0" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="212.0" AnchorPane.topAnchor="63.0">
          <children>
             <TextField fx:id="txtEmail" promptText="Email" />
             <TextField fx:id="txtUsernameRegister" promptText="Username" />
@@ -18,12 +18,12 @@
             <PasswordField fx:id="txtConfirmPassword" promptText="Confirm Password" />
          </children>
       </VBox>
-      <VBox layoutX="153.0" layoutY="222.0" prefHeight="71.0" prefWidth="149.0" spacing="10.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="153.0" AnchorPane.rightAnchor="152.0" AnchorPane.topAnchor="222.0">
+      <VBox layoutX="213.0" layoutY="265.0" prefHeight="80.0" prefWidth="175.0" spacing="10.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="213.0" AnchorPane.rightAnchor="212.0" AnchorPane.topAnchor="265.0">
          <children>
             <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="177.0" text="Register" />
-            <Hyperlink alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="149.0" styleClass="linkBasic" text="Login" textAlignment="JUSTIFY" underline="true" />
+            <Hyperlink alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="181.0" styleClass="linkBasic" text="Login" textAlignment="JUSTIFY" underline="true" />
          </children>
       </VBox>
-      <Circle depthTest="DISABLE" fill="#e2e9ef" layoutX="381.0" layoutY="70.0" radius="49.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="218.0" AnchorPane.leftAnchor="332.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="21.0" />
+      <Circle depthTest="DISABLE" fill="#e2e9ef" layoutX="528.0" layoutY="70.0" radius="49.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="281.0" AnchorPane.leftAnchor="479.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="21.0" />
    </children>
 </AnchorPane>
