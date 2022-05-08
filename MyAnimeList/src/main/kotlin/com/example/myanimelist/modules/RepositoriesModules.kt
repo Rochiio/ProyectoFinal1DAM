@@ -13,7 +13,7 @@ import org.koin.dsl.module
 
 object RepositoriesModules {
     val repositoryModule = module {
-        factory { DataBaseManager() }
+        single { DataBaseManager() }
         single<IUsersRepository> { UsersRepository(get()) }
         single<IAnimeRepository> { AnimeRepository(get()) }
         single<IAdminRepository> { AdminRepository(get()) }

@@ -2,7 +2,7 @@ package com.example.myanimelist.repositories.reviews
 
 import com.example.myanimelist.exceptions.RepositoryException
 import com.example.myanimelist.models.Anime
-import com.example.myanimelist.models.Reviews
+import com.example.myanimelist.models.Review
 import com.example.myanimelist.models.User
 import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
 import com.example.myanimelist.repositories.animes.IAnimeRepository
@@ -39,7 +39,7 @@ internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
 
 
     private var reviewTest =
-        Reviews(UUID.randomUUID(), anime, user, 0, "Me ha gustado")
+        Review(UUID.randomUUID(), anime, user, 0, "Me ha gustado")
 
     @Test
     fun addReview() {
