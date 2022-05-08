@@ -1,15 +1,13 @@
 package com.example.myanimelist.managers
 
-import com.example.myanimelist.MyAnimeListApplication
+import com.example.myanimelist.utils.viewConfig
 import javafx.application.Platform
 import javafx.fxml.FXMLLoader
 import javafx.scene.Node
 import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.scene.image.Image
 import javafx.stage.Stage
 import javafx.stage.StageStyle
-import org.apache.ibatis.io.Resources
 import java.io.IOException
 import java.util.*
 
@@ -43,10 +41,10 @@ object SceneManager {
 
     @Throws(IOException::class)
     fun initMain() {
-        println("Iniciando login")
+
         Platform.setImplicitExit(true)
         val fxmlLoader = FXMLLoader(Objects.requireNonNull(appClass.getResource("views/inicioSesion-view.fxml")))
-        val scene = Scene(fxmlLoader.load(), 600.0, 400.0)
+        val scene = Scene(fxmlLoader.load(), viewConfig.WIDTH.value.toDouble(), viewConfig.HEIGHT.value.toDouble())
         val stage = Stage()
         stage.isResizable = false
         stage.title = "Login"

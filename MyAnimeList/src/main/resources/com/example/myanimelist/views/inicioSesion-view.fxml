@@ -30,7 +30,7 @@
       <VBox alignment="CENTER" layoutX="40.0" layoutY="256.0" prefHeight="68.0" prefWidth="401.0" spacing="10.0" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="256.0">
          <children>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Loggin" textAlignment="CENTER" />
-            <Hyperlink alignment="CENTER" contentDisplay="CENTER" onAction="#changeSceneRegister" prefHeight="35.0" prefWidth="116.0" styleClass="linkBasic" text="Register" underline="true" />
+            <Hyperlink alignment="CENTER" contentDisplay="CENTER" fx:id="btnRegister" onAction="#changeSceneRegister" prefHeight="35.0" prefWidth="116.0" styleClass="linkBasic" text="Register" underline="true" />
          </children>
          <opaqueInsets>
             <Insets />
