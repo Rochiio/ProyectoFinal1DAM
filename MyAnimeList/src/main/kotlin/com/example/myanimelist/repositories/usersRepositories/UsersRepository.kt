@@ -8,13 +8,11 @@ import java.util.*
 
 
 class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepository {
-    //TODO fill catch blocks with logger
-    //TODO Throw custom exceptions
 
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<User>()
         databaseManager.execute {
-            val set = databaseManager.select("SELECT * FROM Usuarios WHERE nombre LIKE ?", "%$name%").get()
+            val set = databaseManager.select("SELECT * FROM Usuarios WHERE nombre LIKE ?", "%$name%")
 
             while (set.next()) {
                 val id = UUID.fromString(set.getString("id"))
@@ -36,7 +34,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
 
     override fun findById(id: UUID): User? {
         databaseManager.execute {
-            val set = databaseManager.select("SELECT * FROM Usuarios WHERE id = ?", id.toString()).get()
+            val set = databaseManager.select("SELECT * FROM Usuarios WHERE id = ?", id.toString())
 
             if (!set.next()) return null
 
@@ -58,7 +56,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
         val list: MutableList<User> = mutableListOf()
 
         databaseManager.execute {
-            val set = databaseManager.select("SELECT * FROM Usuarios").get()
+            val set = databaseManager.select("SELECT * FROM Usuarios")
 
             while (set.next()) {
                 val id = UUID.fromString(set.getString("id"))
@@ -127,33 +125,31 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
         }
     }
 
-    //TODO move to anime repository?
-    private fun getAnimeLists(userId: UUID): List<Anime> {
-        val list: MutableList<Anime> = mutableListOf()
+    private fun getAnimeLists(userId: UUID) = sequence {
+        databaseManager.execute {
+            val listSet = databaseManager
+                .select(
+                    "SELECT * FROM animeLists " +
+                            "INNER JOIN animes on animeLists.idAnime = animes.id " +
+                            "WHERE animeLists.idUser = ?", userId.toString()
+                )
 
-        val listSet = databaseManager
-            .select(
-                "SELECT * FROM animeLists " +
-                        "INNER JOIN animes on animeLists.idAnime = animes.id " +
-                        "WHERE animeLists.idUser = ?", userId.toString()
-            ).get()
-
-        while (listSet.next()) {
-            val anime = Anime(
-                UUID.fromString(listSet.getString("id")),
-                listSet.getString("title"),
-                listSet.getString("title_english"),
-                listSet.getString("type"),
-                listSet.getInt("episodes"),
-                listSet.getString("status"),
-                listSet.getDate("releaseDate"),
-                listSet.getString("rating"),
-                listSet.getString("genre").split(",")
+            while (listSet.next()) yield(
+                Anime(
+                    UUID.fromString(listSet.getString("id")),
+                    listSet.getString("title"),
+                    listSet.getString("title_english"),
+                    listSet.getString("type"),
+                    listSet.getInt("episodes"),
+                    listSet.getString("status"),
+                    listSet.getDate("releaseDate"),
+                    listSet.getString("rating"),
+                    listSet.getString("genre").split(","),
+                    listSet.getString("img")
+                )
             )
-            list.add(anime)
-        }
 
-        return list
+        }
     }
 
 }

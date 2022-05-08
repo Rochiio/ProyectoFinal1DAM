@@ -6,7 +6,6 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 
 import java.io.*;
 import java.sql.*;
-import java.util.Optional;
 
 /**
  * Manejador de Bases de Datos Relacionales
@@ -15,7 +14,6 @@ import java.util.Optional;
  * @version 1.0
  */
 public class DataBaseManager {
-    private static DataBaseManager controller;
     // No leemos de propiedades, porque no es necesario, estan hardcodeadas
     private final boolean fromProperties = false;
     private String serverUrl;
@@ -50,18 +48,6 @@ public class DataBaseManager {
         } else {
             initConfig();
         }
-    }
-
-    /**
-     * Devuelve una instancia del controlador
-     *
-     * @return instancia del controladorBD
-     */
-    public static DataBaseManager getInstance() {
-        if (controller == null) {
-            controller = new DataBaseManager();
-        }
-        return controller;
     }
 
     /**
@@ -122,6 +108,8 @@ public class DataBaseManager {
         if (preparedStatement != null)
             preparedStatement.close();
 
+        if (connection == null) return;
+
         if (!connection.isClosed())
             connection.close();
     }
@@ -151,8 +139,8 @@ public class DataBaseManager {
      * @return ResultSet de la consulta
      * @throws SQLException No se ha podido realizar la consulta o la tabla no existe
      */
-    public Optional<ResultSet> select(@NonNull String querySQL, Object... params) throws SQLException {
-        return Optional.of(executeQuery(querySQL, params));
+    public ResultSet select(@NonNull String querySQL, Object... params) throws SQLException {
+        return executeQuery(querySQL, params);
     }
 
     /**
@@ -165,9 +153,9 @@ public class DataBaseManager {
      * @return ResultSet de la consulta
      * @throws SQLException No se ha podido realizar la consulta o la tabla no existe o el desplazamiento es mayor que el número de registros
      */
-    public Optional<ResultSet> select(@NonNull String querySQL, int limit, int offset, Object... params) throws SQLException {
+    public ResultSet select(@NonNull String querySQL, int limit, int offset, Object... params) throws SQLException {
         String query = querySQL + " LIMIT " + limit + " OFFSET " + offset;
-        return Optional.of(executeQuery(query, params));
+        return executeQuery(query, params);
     }
 
     /**
@@ -178,7 +166,7 @@ public class DataBaseManager {
      * @return Clave del registro insertado
      * @throws SQLException tabla no existe o no se ha podido realizar la operación
      */
-    public Optional<ResultSet> insert(@NonNull String insertSQL, Object... params) throws SQLException {
+    public ResultSet insert(@NonNull String insertSQL, Object... params) throws SQLException {
         // Con return generated keys obtenemos las claves generadas las claves es autonumerica por ejemplo,
         // el id de la tabla si es autonumérico. Si no quitar.
         preparedStatement = connection.prepareStatement(insertSQL, preparedStatement.RETURN_GENERATED_KEYS);
@@ -187,7 +175,7 @@ public class DataBaseManager {
             preparedStatement.setObject(i + 1, params[i]);
         }
         preparedStatement.executeUpdate();
-        return Optional.of(preparedStatement.getGeneratedKeys());
+        return preparedStatement.getGeneratedKeys();
     }
 
     /**
