@@ -17,7 +17,8 @@ interface IRepositoryReview {
      * @param animeId id del anime a ver todas sus reviews
      * @return lista con todas las reviews de ese anime
      */
-    fun findByAnimeId(animeId: UUID): List<Review>
+    fun findByAnimeId(animeId: UUID): Iterable<Review>
+    fun findAll(): Iterable<Review>
 
     /**
      * Actualiza una review

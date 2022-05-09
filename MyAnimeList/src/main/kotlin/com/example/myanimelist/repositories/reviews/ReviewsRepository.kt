@@ -57,6 +57,37 @@ class ReviewsRepository(
         }
     }
 
+    override fun findAll(): Iterable<Review> {
+        val list: MutableList<ReviewDB> = mutableListOf()
+
+        databaseManager.execute {
+            val sql = "SELECT * FROM reviews"
+            val res =
+                databaseManager.select(sql)
+
+            while (res.next()) {
+                val review = ReviewDB(
+                    UUID.fromString(res.getString("id")),
+                    UUID.fromString(res.getString("idAnime")),
+                    UUID.fromString(res.getString("idUser")),
+                    res.getInt("score"),
+                    res.getString("review")
+                )
+                list.add(review)
+            }
+        }
+
+        return list.map {
+            Review(
+                animeRepository.findById(it.idAnime) ?: return emptyList(),
+                usersRepository.findById(it.idUser) ?: return emptyList(),
+                it.score,
+                it.comment,
+                it.id
+            )
+        }
+    }
+
     override fun update(review: Review): Review? {
         databaseManager.execute {
             val query = "Update reviews SET idUser = ?, idAnime = ?, score = ?, id = ?, review = ? WHERE id = ?"
