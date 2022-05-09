@@ -2,6 +2,7 @@ package com.example.myanimelist.utilities
 
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelist.models.Admin
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.models.enums.Genre
@@ -46,4 +47,15 @@ object DataDB : KoinComponent {
         rating = "PG 12",
         types = Type.TV.value
     )
+
+    fun getTestingAdmin(number : Int) =
+        Admin(
+            UUID.randomUUID(),
+            "Pepe$number",
+            "asdasd@gmail.com",
+            "123",
+            Date(Date().time),
+            Date(Date().time)
+        )
+
 }
