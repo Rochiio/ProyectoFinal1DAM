@@ -3,12 +3,11 @@ package com.example.myanimelist.models
 import java.sql.Date
 import java.util.*
 
-abstract class AbstractUser(
-    open val id: UUID = UUID.randomUUID(),
-    open var name: String,
-    open var email: String,
-    open var password: String,
-    open val createDate: Date,
-    open val birthDate: Date,
-
-    )
+abstract class AbstractUser {
+    abstract val id: UUID
+    abstract var name: String
+    abstract var email: String
+    abstract var password: String
+    abstract val createDate: Date
+    abstract val birthDate: Date
+}

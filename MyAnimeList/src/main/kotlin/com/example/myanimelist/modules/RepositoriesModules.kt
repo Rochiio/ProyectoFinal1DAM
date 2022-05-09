@@ -7,13 +7,13 @@ import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.reviews.IRepositoryReview
 import com.example.myanimelist.repositories.reviews.ReviewsRepository
-import com.example.myanimelist.repositories.usersRepositories.IUsersRepository
-import com.example.myanimelist.repositories.usersRepositories.UsersRepository
+import com.example.myanimelist.repositories.users.IUsersRepository
+import com.example.myanimelist.repositories.users.UsersRepository
 import org.koin.dsl.module
 
 object RepositoriesModules {
     val repositoryModule = module {
-        factory { DataBaseManager() }
+        single { DataBaseManager() }
         single<IUsersRepository> { UsersRepository(get()) }
         single<IAnimeRepository> { AnimeRepository(get()) }
         single<IAdminRepository> { AdminRepository(get()) }
