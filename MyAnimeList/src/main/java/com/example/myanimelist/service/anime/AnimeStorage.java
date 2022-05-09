@@ -24,7 +24,7 @@ public class AnimeStorage implements IAimeStorage {
     public void save(List<AnimeDTO> dtoList) {
         String header = "id,title,titleEnglish,types,episodes,status,date,rating,genres,img";
         StringBuilder csv = new StringBuilder(header);
-        var csvList = dtoList.stream().map(this::toCSV).collect(Collectors.toList());
+        var csvList = dtoList.stream().map(this::toCSV).toList();
         for (String s : csvList) {
             csv.append(s);
         }
@@ -37,12 +37,10 @@ public class AnimeStorage implements IAimeStorage {
 
     @Override
     public List<AnimeDTO> load() {
-        try {
-            List<AnimeDTO> dtoList = Files.lines(Path.of(Properties.ANIME_LOAD))
-                    .skip(0)
+        try (var list = Files.lines(Path.of(Properties.ANIME_LOAD))) {
+            return list.skip(1)
                     .map(this::parse)
                     .collect(Collectors.toList());
-            return dtoList;
         } catch (Exception e) {
             System.out.println("Error reading th file");
         }
@@ -65,19 +63,17 @@ public class AnimeStorage implements IAimeStorage {
     }
 
     private String toCSV(AnimeDTO animeDTO) {
-        StringBuilder csvLine = new StringBuilder();
-        csvLine.append("\n")
-                .append(animeDTO.getId())
-                .append(animeDTO.getTitle())
-                .append(animeDTO.getTitleEnglish())
-                .append(animeDTO.getTypes())
-                .append(animeDTO.getEpisodes())
-                .append(animeDTO.getStatus())
-                .append(animeDTO.getDate())
-                .append(animeDTO.getRating())
-                .append(animeDTO.getGenres())
-                .append(animeDTO.getImg());
 
-        return csvLine.toString();
+        return "\n" +
+                animeDTO.getId() +
+                animeDTO.getTitle() +
+                animeDTO.getTitleEnglish() +
+                animeDTO.getTypes() +
+                animeDTO.getEpisodes() +
+                animeDTO.getStatus() +
+                animeDTO.getDate() +
+                animeDTO.getRating() +
+                animeDTO.getGenres() +
+                animeDTO.getImg();
     }
 }

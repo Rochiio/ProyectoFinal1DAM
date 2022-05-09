@@ -27,7 +27,7 @@ public interface IStorage<T> {
         }
     }
 
-    void save(T dtoList) throws IOException;
+    void save(T dtoList);
 
-    T load() throws IOException;
+    T load();
 }
