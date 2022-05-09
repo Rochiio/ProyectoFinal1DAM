@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -43,7 +42,7 @@ public class AnimeStorage implements IAimeStorage {
     }
 
     @Override
-    public List<AnimeDTO> load() throws IOException, ClassNotFoundException {
+    public List<AnimeDTO> load() throws IOException {
         List<AnimeDTO> dtoList = Files.lines(Path.of(Properties.ANIME_LOAD))
                 .skip(0)
                 .map(this::parse)
@@ -63,7 +62,7 @@ public class AnimeStorage implements IAimeStorage {
         String rating = fields[7];
         String genres = fields[8];
         String img = fields[9];
-        return new AnimeDTO( id,title,titleEnglish,types,episodes,status,date,rating,genres,img );
+        return new AnimeDTO(id, title, titleEnglish, types, episodes, status, date, rating, genres, img);
     }
 
     private String toCSV(AnimeDTO animeDTO) {
