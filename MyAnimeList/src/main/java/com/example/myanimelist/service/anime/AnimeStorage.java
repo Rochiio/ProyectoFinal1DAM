@@ -4,6 +4,7 @@ import com.example.myanimelist.dto.AnimeDTO;
 import com.example.myanimelist.utils.Properties;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -18,6 +19,18 @@ public class AnimeStorage implements IAimeStorage {
 
     public AnimeStorage() {
         mkdir();
+    }
+
+    @Override
+    public void mkdir() {
+        Path dir = Path.of(Properties.CSV_DIR);
+        if (!Files.exists(dir)) {
+            try {
+                Files.createDirectory(dir);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
