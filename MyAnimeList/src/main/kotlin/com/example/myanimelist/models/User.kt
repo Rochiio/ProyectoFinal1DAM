@@ -4,17 +4,15 @@ import java.sql.Date
 import java.util.*
 
 data class User(
-
-    override val id: UUID = UUID.randomUUID(),
     override var name: String,
     override var email: String,
     override var password: String,
     override val createDate: Date,
     override val birthDate: Date,
     var img: String?,
-    val myList: List<Anime>
-
-) : AbstractUser(id, name, email, password, createDate, birthDate) {
+    val myList: List<Anime>,
+    override val id: UUID = UUID.randomUUID()
+) : AbstractUser() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

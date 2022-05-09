@@ -5,6 +5,7 @@ import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.repositories.animes.IAnimeRepository
+import com.example.myanimelist.repositories.modelsDB.ReviewDB
 import com.example.myanimelist.repositories.users.IUsersRepository
 import java.util.*
 
@@ -15,7 +16,7 @@ class ReviewsRepository(
     private val usersRepository: IUsersRepository
 ) : IRepositoryReview {
 
-    override fun addReview(review: Review): Review? {
+    override fun add(review: Review): Review? {
         databaseManager.execute {
             val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
             databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id, review.comment)
@@ -25,16 +26,16 @@ class ReviewsRepository(
     }
 
     @kotlin.jvm.Throws(RepositoryException::class)
-    override fun showReviewsAnime(animeId: UUID): List<Review> {
-        val list: MutableList<com.example.myanimelist.repositories.modelsDB.ReviewDB> = mutableListOf()
+    override fun findByAnimeId(animeId: UUID): List<Review> {
+        val list: MutableList<ReviewDB> = mutableListOf()
 
         databaseManager.execute {
-            val sql = "SELECT * FROM reviews WHERE idAnime=?"
+            val sql = "SELECT * FROM reviews WHERE idAnime = ?"
             val res =
                 databaseManager.select(sql, animeId.toString())
 
             while (res.next()) {
-                val review = com.example.myanimelist.repositories.modelsDB.ReviewDB(
+                val review = ReviewDB(
                     UUID.fromString(res.getString("id")),
                     UUID.fromString(res.getString("idAnime")),
                     UUID.fromString(res.getString("idUser")),
@@ -47,23 +48,29 @@ class ReviewsRepository(
 
         return list.map {
             Review(
-                it.id,
                 animeRepository.findById(it.idAnime) ?: return emptyList(),
                 usersRepository.findById(it.idUser) ?: return emptyList(),
                 it.score,
-                it.comment
+                it.comment,
+                it.id
             )
         }
     }
 
-    override fun addScore(review: Review): Review? {
+    override fun update(review: Review): Review? {
         databaseManager.execute {
-            val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
-            databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id, review.comment)
+            val query = "Update reviews SET idUser = ?, idAnime = ?, score = ?, id = ?, review = ? WHERE id = ?"
+            databaseManager.update(
+                query,
+                review.user.id,
+                review.anime.id,
+                review.score,
+                review.id,
+                review.comment,
+                review.id
+            )
             return review
         }
         return null
     }
-
-
 }

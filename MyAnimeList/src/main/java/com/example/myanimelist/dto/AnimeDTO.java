@@ -6,7 +6,6 @@ import lombok.Data;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Data
 public class AnimeDTO {
@@ -19,7 +18,7 @@ public class AnimeDTO {
     String date;
     String rating;
     String genres;
-    String img = null;
+    String img;
 
     public AnimeDTO(Anime anime) {
         this.id = anime.getId();
@@ -48,6 +47,6 @@ public class AnimeDTO {
     }
 
     public Anime fromDTO() {
-        return new Anime(id, title, titleEnglish, types, episodes, status, Date.valueOf(date), rating, Arrays.stream(genres.split(",")).collect(Collectors.toList()), img);
+        return new Anime(title, titleEnglish, types, episodes, status, Date.valueOf(date), rating, Arrays.stream(genres.split(",")).toList(), img, id);
     }
 }

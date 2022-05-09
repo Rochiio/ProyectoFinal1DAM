@@ -3,9 +3,9 @@ package com.example.myanimelist.models
 import java.util.*
 
 data class Review(
-    val id: UUID = UUID.randomUUID(),
     val anime: Anime,
     val user: User,
     var score: Int,
-    var comment: String
+    var comment: String,
+    val id: UUID = UUID.randomUUID()
 )

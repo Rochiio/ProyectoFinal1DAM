@@ -92,7 +92,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     item.birthDate,
                     item.id.toString()
                 )
-            if (modifiedRows > 0) returnItem = UserDB.fromDTO(item)
+            if (modifiedRows > 0) returnItem = UserDB.from(item)
         }
         return mapToDTO(returnItem)
     }
@@ -111,7 +111,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     item.email,
                     item.birthDate
                 )
-            returnItem = UserDB.fromDTO(item)
+            returnItem = UserDB.from(item)
         }
         return mapToDTO(returnItem)
     }
@@ -125,7 +125,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     item.id,
                     anime.id
                 )
-            returnItem = UserDB.fromDTO(item)
+            returnItem = UserDB.from(item)
         }
         return mapToDTO(returnItem)
     }
@@ -140,7 +140,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     item.id,
                     anime.id
                 )
-            returnItem = UserDB.fromDTO(item)
+            returnItem = UserDB.from(item)
         }
         return mapToDTO(returnItem)
     }
@@ -156,14 +156,14 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
     private fun mapToDTO(user: UserDB?): User? {
         if (user == null) return null
         return User(
-            user.id,
             user.name,
             user.email,
             user.password,
             user.createDate,
             user.birthDate,
             user.img,
-            getAnimeLists(user.id)
+            getAnimeLists(user.id),
+            user.id
         )
     }
 
@@ -178,7 +178,6 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 )
             while (listSet.next()) {
                 val anime = Anime(
-                    UUID.fromString(listSet.getString("id")),
                     listSet.getString("title"),
                     listSet.getString("title_english"),
                     listSet.getString("type"),
@@ -187,7 +186,8 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     listSet.getDate("releaseDate"),
                     listSet.getString("rating"),
                     listSet.getString("genre").split(","),
-                    listSet.getString("imageUrl")
+                    listSet.getString("imageUrl"),
+                    UUID.fromString(listSet.getString("id"))
                 )
                 list.add(anime)
             }
