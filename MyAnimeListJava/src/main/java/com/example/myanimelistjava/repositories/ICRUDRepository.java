@@ -13,4 +13,5 @@ public interface ICRUDRepository <T, K>{
     K add(K item) throws SQLException;
 
     void delete(T id) throws SQLException;
+
 }

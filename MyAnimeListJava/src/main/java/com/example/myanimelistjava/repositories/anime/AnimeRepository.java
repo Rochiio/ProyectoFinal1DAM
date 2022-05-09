@@ -53,6 +53,7 @@ public final class AnimeRepository implements IAnimeRepository {
             var result = db.select(query).orElseThrow();
             while (result.next()) {
                 var anime = new Anime(
+
                         result.getString("title"),
                         result.getString("title_english"),
                         result.getString("type"),
@@ -70,11 +71,13 @@ public final class AnimeRepository implements IAnimeRepository {
             return animes;
         } catch (SQLException ex) {
             db.close();
+
         }
         return null;
     }
 
     public Anime update(Anime item) throws SQLException {
+
         var query = "UPDATE animes SET " +
                 "title = ?," +
                 "title_english = ?," +
@@ -106,6 +109,7 @@ public final class AnimeRepository implements IAnimeRepository {
 
         } catch (Exception e) {
             db.close();
+
         }
 
         return null;
@@ -133,6 +137,7 @@ public final class AnimeRepository implements IAnimeRepository {
 
         } catch (Exception e) {
             db.close();
+
         }
         return null;
     }
@@ -146,6 +151,7 @@ public final class AnimeRepository implements IAnimeRepository {
         } catch (Exception e) {
             db.close();
         }
+
 
     }
 }
