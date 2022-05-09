@@ -33,7 +33,7 @@ class InicioController {
 
     fun changeSceneRegister(actionEvent: ActionEvent) {
         Platform.setImplicitExit(true)
-        val stage = Stage()
+        val stage = btnRegister.scene.window as Stage
         val fxmlLoader = FXMLLoader(MyAnimeListApplication::class.java.getResource("views/registro-view.fxml"))
         val scene = Scene(fxmlLoader.load(), viewConfig.WIDTH.value.toDouble(), viewConfig.HEIGHT.value.toDouble())
         stage.title = "Registro"

@@ -34,7 +34,7 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
      * Recuepra de la base de datos una lisa con todos los admins
      * @return List<Admin?> Lista con todos los usuarios de tipo admin
      */
-    override fun findAll(): List<Admin?> {
+    override fun findAll(): List<Admin> {
         val query = "select * from usuarios"
         val admins = ArrayList<Admin>()
         db.open()
@@ -60,7 +60,7 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
      * @param item Admin? Un admin con los datos que se quieren cambiar
      * @return Admin? Null si no se consigue. El nuevo admin si tiene exito
      */
-    override fun update(item: Admin?): Admin? {
+    override fun update(item: Admin): Admin? {
         val query = "UPDATE usuarios SET" +
                 "nombre = ?," +
                 "date_alta = ?," +
@@ -90,13 +90,13 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
      * @throws SQLException En el caso de que ya existiese un admin con el mismo UUID o no se pueda acceder a la base de datos
      *
      */
-    override fun add(item: Admin?): Admin? {
+    override fun add(item: Admin): Admin? {
         val query = "INSERT into Usuarios" +
                 "values ?,?,?,?, 'NONE', ?,?"
         db.open()
         db.insert(
             query,
-            item!!.id.toString(),
+            item.id.toString(),
             item.name,
             item.createDate,
             item.password,
