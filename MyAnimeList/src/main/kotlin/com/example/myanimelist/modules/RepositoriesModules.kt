@@ -1,6 +1,6 @@
 package com.example.myanimelist.modules
 
-import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelistjava.managers.DataBaseManager
 import com.example.myanimelist.repositories.admins.AdminRepository
 import com.example.myanimelist.repositories.admins.IAdminRepository
 import com.example.myanimelist.repositories.animes.AnimeRepository
@@ -13,7 +13,7 @@ import org.koin.dsl.module
 
 object RepositoriesModules {
     val repositoryModule = module {
-        single { DataBaseManager() }
+        single { _root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager() }
         single<IUsersRepository> { UsersRepository(get()) }
         single<IAnimeRepository> { AnimeRepository(get()) }
         single<IAdminRepository> { AdminRepository(get()) }

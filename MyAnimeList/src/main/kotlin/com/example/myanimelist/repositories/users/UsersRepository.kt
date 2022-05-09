@@ -1,14 +1,14 @@
 package com.example.myanimelist.repositories.users
 
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelistjava.managers.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
 import java.util.*
 
 
-class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepository {
+class UsersRepository(private val databaseManager: _root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager) : IUsersRepository {
 
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()

@@ -1,12 +1,12 @@
 package com.example.myanimelist.repositories.admins
 
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelistjava.managers.DataBaseManager
 import com.example.myanimelist.models.Admin
 import java.sql.SQLException
 import java.util.*
 
-class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
+class AdminRepository(private val db: _root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager) : IAdminRepository {
     /**
      * Busca en el repositorio un usuari de tipo admin usando su uuid
      * @param id UUID

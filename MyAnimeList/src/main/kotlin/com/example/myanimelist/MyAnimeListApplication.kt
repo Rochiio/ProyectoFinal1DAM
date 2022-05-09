@@ -1,6 +1,6 @@
 package com.example.myanimelist
 
-import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelistjava.managers.DataBaseManager
 import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
 import javafx.application.Application
@@ -26,7 +26,7 @@ fun main() {
         modules(repositoryModule)
     }
 
-    checkDataBase(get(DataBaseManager::class.java))
+    checkDataBase(get(_root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager::class.java))
 
     launch(MyAnimeListApplication::class.java)
 
@@ -34,7 +34,7 @@ fun main() {
 }
 
 
-fun checkDataBase(db: DataBaseManager) {
+fun checkDataBase(db: _root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager) {
     println("Comprobamos la conexión al Servidor BD")
     try {
         db.open()
