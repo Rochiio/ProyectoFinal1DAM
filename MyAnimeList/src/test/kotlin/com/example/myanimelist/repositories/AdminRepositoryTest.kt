@@ -57,10 +57,9 @@ internal class AdminRepositoryTest : AutoCloseKoinTest() {
         val admin = getTestingAdmin(1)
 
         val newAdmin = Admin(
-             admin.id,
             "Antonio",
             "asdasd@gmail.com", "abc",
-            admin.createDate, admin.birthDate
+            admin.createDate, admin.birthDate, admin.id
         )
 
         adminRepository.add(admin)
