@@ -9,6 +9,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @author JoaquinAyG
+ */
 @Data
 @Builder
 public class BackupDTO {
