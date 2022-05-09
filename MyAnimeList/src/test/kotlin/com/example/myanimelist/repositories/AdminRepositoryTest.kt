@@ -5,7 +5,6 @@ import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
 import com.example.myanimelist.repositories.admins.IAdminRepository
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAdmin
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -58,7 +57,8 @@ internal class AdminRepositoryTest : AutoCloseKoinTest() {
         val admin = getTestingAdmin(1)
 
         val newAdmin = Admin(
-            admin.id, "Antonio",
+             admin.id,
+            "Antonio",
             "asdasd@gmail.com", "abc",
             admin.createDate, admin.birthDate
         )
@@ -90,10 +90,10 @@ internal class AdminRepositoryTest : AutoCloseKoinTest() {
         val listaVacia = adminRepository.findAll()
 
         val admin = getTestingAdmin(1)
-        val addedAdmin = adminRepository.add(admin)
+        adminRepository.add(admin)
         adminRepository.delete(admin.id)
         val lista = adminRepository.findAll()
 
-        assertEquals(listaVacia , lista)
+        assertEquals(listaVacia, lista)
     }
 }

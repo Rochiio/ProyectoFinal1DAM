@@ -48,9 +48,8 @@ object DataDB : KoinComponent {
         types = Type.TV.value
     )
 
-    fun getTestingAdmin(number : Int) =
+    fun getTestingAdmin(number: Int) =
         Admin(
-            UUID.randomUUID(),
             "Pepe$number",
             "asdasd@gmail.com",
             "123",
