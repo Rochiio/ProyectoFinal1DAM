@@ -3,28 +3,56 @@ package com.example.myanimelistjava.repositories.anime;
 import com.example.myanimelistjava.managers.DataBaseManager;
 import com.example.myanimelistjava.models.Anime;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public final class AnimeRepository implements IAnimeRepository {
-    private final DataBaseManager databaseManager;
+    private final DataBaseManager db;
 
     public AnimeRepository(DataBaseManager databaseManager) {
-        this.databaseManager = databaseManager;
+        this.db = databaseManager;
     }
 
-    public Anime findById(UUID id) {
+    public Anime findById(UUID id) throws SQLException {
         var query = "SELECT * FROM animes WHERE id = ?";
         try {
-            databaseManager.execute {
-                var result = databaseManager.select(query, id.toString()).orElseThrow();
+            db.open();
+            var result = db.select(query, id.toString()).orElseThrow();
 
-                if (!result.next()) return null;
+            if (!result.next()) return null;
 
-                return new Anime(
+            var anime = new Anime(
+                    result.getString("title"),
+                    result.getString("title_english"),
+                    result.getString("type"),
+                    result.getInt("episodes"),
+                    result.getString("status"),
+                    result.getDate("releaseDate"),
+                    result.getString("rating"),
+                    Arrays.stream(result.getString("genre").split(",")).toList(),
+                    result.getString("imageUrl"),
+                    UUID.fromString(result.getString("id"))
+            );
+            db.close();
+
+            return anime;
+        } catch (Exception e) {
+            db.close();
+        }
+        return null;
+    }
+
+    public List<Anime> findAll() throws SQLException {
+        var query = "SELECT * FROM animes";
+        ArrayList<Anime> animes = new ArrayList<>();
+        try {
+            db.open();
+            var result = db.select(query).orElseThrow();
+            while (result.next()) {
+                var anime = new Anime(
                         result.getString("title"),
                         result.getString("title_english"),
                         result.getString("type"),
@@ -36,43 +64,17 @@ public final class AnimeRepository implements IAnimeRepository {
                         result.getString("imageUrl"),
                         UUID.fromString(result.getString("id"))
                 );
+                animes.add(anime);
             }
-        }catch (Exception e){
-            e.printStackTrace();
+            db.close();
+            return animes;
+        } catch (SQLException ex) {
+            db.close();
         }
         return null;
     }
 
-    public List<Anime> findAll() {
-        var query = "SELECT * FROM animes";
-        ArrayList animes = new ArrayList();
-        try {
-            databaseManager.execute {
-                var result = databaseManager.select(query).orElseThrow();
-                while (result.next()) {
-                    var anime = new Anime(
-                            result.getString("title"),
-                            result.getString("title_english"),
-                            result.getString("type"),
-                            result.getInt("episodes"),
-                            result.getString("status"),
-                            result.getDate("releaseDate"),
-                            result.getString("rating"),
-                            Arrays.stream(result.getString("genre").split(",")).toList(),
-                            result.getString("imageUrl"),
-                            UUID.fromString(result.getString("id"))
-                    );
-                    animes.add(anime);
-                }
-                return animes;
-            }
-        } catch (Exception e){
-
-        }
-        return animes;
-    }
-
-    public Anime update(Anime item) {
+    public Anime update(Anime item) throws SQLException {
         var query = "UPDATE animes SET " +
                 "title = ?," +
                 "title_english = ?," +
@@ -85,62 +87,65 @@ public final class AnimeRepository implements IAnimeRepository {
                 "type = ?" +
                 "WHERE id = ?";
         try {
-            databaseManager.execute {
-                databaseManager.update(
-                        query,
-                        item.title,
-                        item.titleEnglish,
-                        item.status,
-                        item.genres.stream().collect(Collectors.joining(",")),
-                        item.date,
-                        item.img,
-                        item.episodes,
-                        item.rating,
-                        item.types,
-                        item.id.toString()
-                );
-                return item;
-            }
-        } catch (Exception e){
+            db.open();
+            db.update(
+                    query,
+                    item.title,
+                    item.titleEnglish,
+                    item.status,
+                    String.join(",", item.genres),
+                    item.date,
+                    item.img,
+                    item.episodes,
+                    item.rating,
+                    item.types,
+                    item.id.toString()
+            );
+            db.close();
+            return item;
 
+        } catch (Exception e) {
+            db.close();
         }
 
         return null;
     }
 
-    public Anime add(Anime item) {
+    public Anime add(Anime item) throws SQLException {
         var query = "INSERT INTO animes VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
         try {
-            databaseManager.execute {
-                databaseManager.insert(
-                        query,
-                        item.id,
-                        item.title,
-                        item.titleEnglish,
-                        item.status,
-                        item.genres.stream().collect(Collectors.joining(",")),
-                        item.date,
-                        item.img,
-                        item.episodes,
-                        item.rating,
-                        item.types
-                );
-                return item;
-            }
-        } catch (Exception e){
+            db.open();
+            db.insert(
+                    query,
+                    item.id,
+                    item.title,
+                    item.titleEnglish,
+                    item.status,
+                    String.join(",", item.genres),
+                    item.date,
+                    item.img,
+                    item.episodes,
+                    item.rating,
+                    item.types
+            );
+            db.close();
+            return item;
 
+        } catch (Exception e) {
+            db.close();
         }
         return null;
     }
 
-    public void delete(UUID id) {
+    public void delete(UUID id) throws SQLException {
         var query = "DELETE FROM animes WHERE id = ?";
-        try{
-        databaseManager.execute {
-            databaseManager.delete(query, id);
+        try {
+            db.open();
+            db.delete(query, id);
+            db.close();
+        } catch (Exception e) {
+            db.close();
         }
-        } catch (Exception e){
 
-        }
     }
 }
