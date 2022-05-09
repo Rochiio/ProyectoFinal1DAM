@@ -18,4 +18,7 @@ public class Anime {
     public List<String> genres;
     public String img;
     public final UUID id= UUID.randomUUID();
+
+    public Anime(String title, String title_english, String type, int episodes, String status, java.sql.Date releaseDate, String rating, List<String> genre, String imageUrl, UUID id) {
+    }
 }
