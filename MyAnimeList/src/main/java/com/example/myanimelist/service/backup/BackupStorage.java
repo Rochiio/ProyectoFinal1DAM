@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -33,17 +32,13 @@ public class BackupStorage implements IBackupStorage {
     }
 
     @Override
-    public BackupDTO load() throws IOException {
+    public BackupDTO load() {
         Gson gson = new GsonBuilder().create();
         BackupDTO root = null;
-        Reader reader = null;
-        try {
-            reader = Files.newBufferedReader(Paths.get(Properties.JSON_FILE));
+        try (Reader reader = Files.newBufferedReader(Paths.get(Properties.JSON_FILE))) {
             root = gson.fromJson(reader, (Type) BackupDTO[].class);
         } catch (Exception e) {
             System.out.println("Error reading the file");
-        } finally {
-            if (reader != null) reader.close();
         }
         return root;
     }
