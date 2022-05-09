@@ -1,10 +1,10 @@
 package com.example.myanimelistjava.views.config;
 
-enum viewConfig{
+public enum ViewConfig {
     WIDTH("600.0"),
     HEIGHT("400.0");
     private final String value;
-    viewConfig(String value){
+    ViewConfig(String value){
         this.value = value;
     }
 
