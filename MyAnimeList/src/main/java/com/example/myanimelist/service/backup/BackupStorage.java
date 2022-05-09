@@ -9,8 +9,12 @@ import java.io.FileWriter;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * @author JoaquinAyG
+ */
 public class BackupStorage implements IBackupStorage {
 
     BackupDTO bck;
@@ -18,6 +22,18 @@ public class BackupStorage implements IBackupStorage {
     public BackupStorage(BackupDTO bck) {
         this.bck = bck;
         mkdir();
+    }
+
+    @Override
+    public void mkdir() {
+        Path dir = Path.of(Properties.JSON_DIR);
+        if (!Files.exists(dir)) {
+            try {
+                Files.createDirectory(dir);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
