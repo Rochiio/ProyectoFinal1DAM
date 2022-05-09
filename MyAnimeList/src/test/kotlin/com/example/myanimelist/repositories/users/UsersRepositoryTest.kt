@@ -1,7 +1,9 @@
-package com.example.myanimelist.repositories.usersRepositories
+package com.example.myanimelist.repositories.users
 
 import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
+import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.utilities.DataDB
+import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import com.example.myanimelist.utilities.DataDB.getTestingUser
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
@@ -13,13 +15,17 @@ import kotlin.test.assertNull
 
 internal class UsersRepositoryTest : AutoCloseKoinTest() {
     private val usersRepository by inject<IUsersRepository>()
+    private val animeRepository by inject<IAnimeRepository>()
 
     init {
         startKoin { modules(repositoryModule) }
     }
 
     @AfterEach
-    fun deleteAll() = DataDB.deleteAll("Usuarios")
+    fun deleteAll() {
+        DataDB.deleteAll("Usuarios")
+        DataDB.deleteAll("animeLists")
+    }
 
 
     @Test
@@ -99,6 +105,26 @@ internal class UsersRepositoryTest : AutoCloseKoinTest() {
 
         val user = usersRepository.findById(userTest.id)
         assert(user == userCreated)
+    }
+
+    @Test
+    fun addToList() {
+        val userCreated = usersRepository.add(getTestingUser()) ?: throw Exception()
+        val animeCreated = animeRepository.add(getTestingAnime()) ?: throw Exception()
+
+        val user = usersRepository.addToList(userCreated, animeCreated)
+        assert(user?.myList?.first() == animeCreated)
+    }
+
+    @Test
+    fun removeFromList() {
+        val userCreated = usersRepository.add(getTestingUser()) ?: throw Exception()
+        val animeCreated = animeRepository.add(getTestingAnime()) ?: throw Exception()
+
+        val list = usersRepository.addToList(userCreated, animeCreated)?.myList?.toList()
+        val listEmpty = usersRepository.removeFromList(userCreated, animeCreated)?.myList?.toList()
+
+        assert(list?.any()!! && !listEmpty?.any()!!)
     }
 
     @Test
