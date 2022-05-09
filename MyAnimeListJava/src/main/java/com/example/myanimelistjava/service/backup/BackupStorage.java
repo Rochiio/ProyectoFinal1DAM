@@ -1,7 +1,7 @@
 package com.example.myanimelistjava.service.backup;
 
-import com.example.myanimelist.dto.BackupDTO;
-import com.example.myanimelist.utils.Properties;
+import com.example.myanimelistjava.dto.BackupDTO;
+import com.example.myanimelistjava.utils.Properties;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
