@@ -13,6 +13,7 @@ module com.example.myanimelist {
     requires lombok;
     requires java.base;
     requires koin.core.jvm;
+    requires com.google.gson;
 
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;
