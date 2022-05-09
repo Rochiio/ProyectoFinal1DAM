@@ -4,10 +4,8 @@ import com.example.myanimelist.dto.AnimeDTO;
 import com.example.myanimelist.utils.Properties;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -17,38 +15,38 @@ import java.util.stream.Collectors;
  */
 
 public class AnimeStorage implements IAimeStorage {
-    private static AnimeStorage instance;
 
-    private AnimeStorage() {
+    public AnimeStorage() {
         mkdir();
     }
 
-    public static AnimeStorage getInstance() {
-        if (instance == null) {
-            instance = new AnimeStorage();
-        }
-        return instance;
-    }
-
     @Override
-    public void save(List<AnimeDTO> dtoList) throws IOException {
+    public void save(List<AnimeDTO> dtoList) {
         String header = "id,title,titleEnglish,types,episodes,status,date,rating,genres,img";
         StringBuilder csv = new StringBuilder(header);
         var csvList = dtoList.stream().map(this::toCSV).collect(Collectors.toList());
         for (String s : csvList) {
             csv.append(s);
         }
-        FileWriter writer = new FileWriter(Properties.ANIME_SAVE);
-        writer.write(csv.toString());
+        try (FileWriter writer = new FileWriter(Properties.ANIME_SAVE)) {
+            writer.write(csv.toString());
+        } catch (Exception e) {
+            System.out.println("Error writing the file");
+        }
     }
 
     @Override
-    public List<AnimeDTO> load() throws IOException, ClassNotFoundException {
-        List<AnimeDTO> dtoList = Files.lines(Path.of(Properties.ANIME_LOAD))
-                .skip(0)
-                .map(this::parse)
-                .collect(Collectors.toList());
-        return dtoList;
+    public List<AnimeDTO> load() {
+        try {
+            List<AnimeDTO> dtoList = Files.lines(Path.of(Properties.ANIME_LOAD))
+                    .skip(0)
+                    .map(this::parse)
+                    .collect(Collectors.toList());
+            return dtoList;
+        } catch (Exception e) {
+            System.out.println("Error reading th file");
+        }
+        return null;
     }
 
     private AnimeDTO parse(String line) {
@@ -63,7 +61,7 @@ public class AnimeStorage implements IAimeStorage {
         String rating = fields[7];
         String genres = fields[8];
         String img = fields[9];
-        return new AnimeDTO( id,title,titleEnglish,types,episodes,status,date,rating,genres,img );
+        return new AnimeDTO(id, title, titleEnglish, types, episodes, status, date, rating, genres, img);
     }
 
     private String toCSV(AnimeDTO animeDTO) {

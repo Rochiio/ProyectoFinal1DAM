@@ -95,6 +95,12 @@
             <artifactId>mybatis</artifactId>
             <version>3.5.9</version>
         </dependency>
+        <!-- Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.9.0</version>
+        </dependency>
     </dependencies>
 
     <build>

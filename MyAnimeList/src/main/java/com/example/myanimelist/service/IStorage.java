@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 /**
- * @author JoaquinAyG
  * @param <T> DTO from object to save or load
+ * @author JoaquinAyG
  */
 public interface IStorage<T> {
 
@@ -28,7 +27,7 @@ public interface IStorage<T> {
         }
     }
 
-    void save(List<T> dtoList)throws IOException;
+    void save(T dtoList) throws IOException;
 
-    List<T> load()throws IOException, ClassNotFoundException;
+    T load() throws IOException;
 }
