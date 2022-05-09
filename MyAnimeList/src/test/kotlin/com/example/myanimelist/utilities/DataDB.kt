@@ -50,7 +50,6 @@ object DataDB : KoinComponent {
 
     fun getTestingAdmin(number: Int) =
         Admin(
-            UUID.randomUUID(),
             "Pepe$number",
             "asdasd@gmail.com",
             "123",
