@@ -17,12 +17,12 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
         val result = db.select(query, id)
         if (result.first()) {
             val admin = Admin(
-                UUID.fromString(result.getString("id")),
                 result.getString("nombre"),
                 result.getString("email"),
                 result.getString("password"),
                 result.getDate("date_alta"),
-                result.getDate("date_nacimiento")
+                result.getDate("date_nacimiento"),
+                UUID.fromString(result.getString("id"))
             )
             db.close()
             return admin
@@ -42,12 +42,12 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
         while (result.next()) {
             admins.add(
                 Admin(
-                    UUID.fromString(result.getString("id")),
                     result.getString("nombre"),
                     result.getString("email"),
                     result.getString("password"),
                     result.getDate("date_alta"),
-                    result.getDate("date_nacimiento")
+                    result.getDate("date_nacimiento"),
+                    UUID.fromString(result.getString("id"))
                 )
             )
         }

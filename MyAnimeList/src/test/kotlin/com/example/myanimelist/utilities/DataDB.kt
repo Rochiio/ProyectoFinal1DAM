@@ -25,18 +25,17 @@ object DataDB : KoinComponent {
 
     fun getTestingUser() =
         User(
-            UUID.randomUUID(),
             "Pepe",
             "asdasd@gmail.com",
             "123",
             Date(Date().time),
             Date(Date().time),
             "img",
-            sequenceOf()
+            emptyList(),
+            UUID.randomUUID()
         )
 
     fun getTestingAnime() = Anime(
-        id = UUID.randomUUID(),
         title = "example",
         titleEnglish = "example_english",
         status = Status.CURRENTLY_AIRING.value,

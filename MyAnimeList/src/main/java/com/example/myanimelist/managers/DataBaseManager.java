@@ -13,7 +13,7 @@ import java.sql.*;
  * @author Jose Luis González Sánchez
  * @version 1.0
  */
-public class DataBaseManager {
+public class DataBaseManager implements AutoCloseable {
     // No leemos de propiedades, porque no es necesario, estan hardcodeadas
     private final boolean fromProperties = false;
     private String serverUrl;
@@ -21,18 +21,18 @@ public class DataBaseManager {
     private String dataBaseName;
     private String user;
     private String password;
+
     /*
-    Tipos de Driver
-    SQLite: "org.sqlite.JDBC";
-    MySQL: "com.mysql.jdbc.Driver"
-    MariaDB: "com.mysql.cj.jdbc.Driver"
-    PostgreSQL: "org.postgresql.Driver"
-    H2: "org.h2.Driver"
-    */
+        Tipos de Driver
+        SQLite: "org.sqlite.JDBC";
+        MySQL: "com.mysql.jdbc.Driver"
+        MariaDB: "com.mysql.cj.jdbc.Driver"
+        PostgreSQL: "org.postgresql.Driver"
+        H2: "org.h2.Driver"
+        */
     private String jdbcDriver;
     // Para manejar las conexiones y respuestas de las mismas
     private Connection connection;
-    private PreparedStatement preparedStatement;
 
     /**
      * Constructor privado para Singleton
@@ -95,7 +95,7 @@ public class DataBaseManager {
         // System.out.println(url);
         // Obtenemos la conexión
         // connection = DriverManager.getConnection(url, user, password);
-        if (connection == null || connection.isClosed())
+        if (connection == null || !connection.isValid(1))
             connection = DriverManager.getConnection(url);
     }
 
@@ -105,13 +105,9 @@ public class DataBaseManager {
      * @throws SQLException Servidor no responde o no puede realizar la operación de cierre
      */
     public void close() throws SQLException {
-        if (preparedStatement != null)
-            preparedStatement.close();
-
         if (connection == null) return;
 
-        if (!connection.isClosed())
-            connection.close();
+        connection.close();
     }
 
     /**
@@ -123,7 +119,7 @@ public class DataBaseManager {
      * @throws SQLException No se ha podido realizar la consulta o la tabla no existe
      */
     private ResultSet executeQuery(@NonNull String querySQL, Object... params) throws SQLException {
-        preparedStatement = connection.prepareStatement(querySQL);
+        PreparedStatement preparedStatement = connection.prepareStatement(querySQL);
         // Vamos a pasarle los parametros usando preparedStatement
         for (int i = 0; i < params.length; i++) {
             preparedStatement.setObject(i + 1, params[i]);
@@ -169,7 +165,7 @@ public class DataBaseManager {
     public ResultSet insert(@NonNull String insertSQL, Object... params) throws SQLException {
         // Con return generated keys obtenemos las claves generadas las claves es autonumerica por ejemplo,
         // el id de la tabla si es autonumérico. Si no quitar.
-        preparedStatement = connection.prepareStatement(insertSQL, preparedStatement.RETURN_GENERATED_KEYS);
+        PreparedStatement preparedStatement = connection.prepareStatement(insertSQL, PreparedStatement.RETURN_GENERATED_KEYS);
         // Vamos a pasarle los parametros usando preparedStatement
         for (int i = 0; i < params.length; i++) {
             preparedStatement.setObject(i + 1, params[i]);
@@ -212,7 +208,7 @@ public class DataBaseManager {
      */
     private int updateQuery(@NonNull String genericSQL, Object... params) throws SQLException {
         // Con return generated keys obtenemos las claves generadas
-        preparedStatement = connection.prepareStatement(genericSQL);
+        PreparedStatement preparedStatement = connection.prepareStatement(genericSQL);
         // Vamos a pasarle los parametros usando preparedStatement
         for (int i = 0; i < params.length; i++) {
             preparedStatement.setObject(i + 1, params[i]);
@@ -229,7 +225,7 @@ public class DataBaseManager {
      */
     public int genericUpdate(@NonNull String genericSQL) throws SQLException {
         // Con return generated keys obtenemos las claves generadas
-        preparedStatement = connection.prepareStatement(genericSQL);
+        PreparedStatement preparedStatement = connection.prepareStatement(genericSQL);
         return preparedStatement.executeUpdate();
     }
 
