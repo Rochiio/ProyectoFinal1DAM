@@ -14,7 +14,6 @@ data class Anime(
     var date: Date,
     var rating: String,
     var genres: List<String>,
+    var img: String?
 
-    var img: String? = null,
-
-    )
+)

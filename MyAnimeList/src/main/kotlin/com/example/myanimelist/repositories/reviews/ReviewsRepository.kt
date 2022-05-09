@@ -1,48 +1,68 @@
 package com.example.myanimelist.repositories.reviews
 
+import com.example.myanimelist.exceptions.RepositoryException
+import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
-import com.example.myanimelist.models.Reviews
-import java.sql.SQLException
+import com.example.myanimelist.models.Review
+import com.example.myanimelist.repositories.animes.IAnimeRepository
+import com.example.myanimelist.repositories.users.IUsersRepository
 import java.util.*
 
-class ReviewsRepository(var db: DataBaseManager) : IRepositoryReview {
+//TODO Review reviews
+class ReviewsRepository(
+    private val databaseManager: DataBaseManager,
+    private val animeRepository: IAnimeRepository,
+    private val usersRepository: IUsersRepository
+) : IRepositoryReview {
 
-    override fun addReview(review: Reviews): Reviews {
-        val query = "INSERT INTO reviews VALUES(?,?,0,?,?)"
-        db.open()
-        var result = db.insert(query, review.idUser, review.idAnime, review.id, review.comment)
-            .orElseThrow { SQLException("Error al insertar review") }
-        db.close()
-        return review
-    }
-
-    override fun showReviewsAnime(animeId: UUID): List<Reviews> {
-        val sql = "SELECT * FROM reviews WHERE idAnime=?"
-        db.open()
-        val res = db.select(sql, animeId.toString()).orElseThrow { SQLException("Error al seleccionar reviews del anime") }
-        val list: ArrayList<Reviews> = ArrayList()
-
-        while (res.next()) {
-            val review = Reviews(
-                UUID.fromString(res.getString("id")),
-                UUID.fromString(res.getString("idAnime")),
-                UUID.fromString(res.getString("idUser")),
-                res.getInt("score"),
-                res.getString("review")
-            )
-            list.add(review)
+    override fun addReview(review: Review): Review? {
+        databaseManager.execute {
+            val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
+            databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id, review.comment)
+            return review
         }
-        db.close()
-        return list
+        return null
     }
 
-    override fun addScore(review: Reviews): Reviews {
-        val query = "INSERT INTO reviews VALUES(?,?,?,?,null)"
-        db.open()
-        var result = db.insert(query, review.idUser, review.idAnime, review.score, review.id)
-            .orElseThrow { SQLException("Error al insertar puntuación") }
-        db.close()
-        return review
+    @kotlin.jvm.Throws(RepositoryException::class)
+    override fun showReviewsAnime(animeId: UUID): List<Review> {
+        val list: MutableList<com.example.myanimelist.repositories.modelsDB.ReviewDB> = mutableListOf()
+
+        databaseManager.execute {
+            val sql = "SELECT * FROM reviews WHERE idAnime=?"
+            val res =
+                databaseManager.select(sql, animeId.toString())
+
+            while (res.next()) {
+                val review = com.example.myanimelist.repositories.modelsDB.ReviewDB(
+                    UUID.fromString(res.getString("id")),
+                    UUID.fromString(res.getString("idAnime")),
+                    UUID.fromString(res.getString("idUser")),
+                    res.getInt("score"),
+                    res.getString("review")
+                )
+                list.add(review)
+            }
+        }
+
+        return list.map {
+            Review(
+                it.id,
+                animeRepository.findById(it.idAnime) ?: return emptyList(),
+                usersRepository.findById(it.idUser) ?: return emptyList(),
+                it.score,
+                it.comment
+            )
+        }
+    }
+
+    override fun addScore(review: Review): Review? {
+        databaseManager.execute {
+            val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
+            databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id, review.comment)
+            return review
+        }
+        return null
     }
 
 

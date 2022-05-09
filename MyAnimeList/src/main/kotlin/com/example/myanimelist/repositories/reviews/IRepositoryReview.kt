@@ -1,8 +1,8 @@
 package com.example.myanimelist.repositories.reviews
 
-import com.example.myanimelist.models.Reviews
+import com.example.myanimelist.models.Review
 import java.util.*
 
 
-interface IRepositoryReview: ICRUDReview<Reviews, UUID> {
+interface IRepositoryReview : ICRUDReview<Review, UUID> {
 }
