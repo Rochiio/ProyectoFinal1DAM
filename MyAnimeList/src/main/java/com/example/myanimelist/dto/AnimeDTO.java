@@ -7,6 +7,9 @@ import java.sql.Date;
 import java.util.Arrays;
 import java.util.UUID;
 
+/**
+ * @author JoaquinAyG
+ */
 @Data
 public class AnimeDTO {
     UUID id;
