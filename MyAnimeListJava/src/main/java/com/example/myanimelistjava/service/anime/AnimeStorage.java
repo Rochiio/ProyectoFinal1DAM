@@ -1,13 +1,14 @@
 package com.example.myanimelistjava.service.anime;
 
-import com.example.myanimelist.dto.AnimeDTO;
-import com.example.myanimelist.utils.Properties;
+import com.example.myanimelistjava.dto.AnimeDTO;
+import com.example.myanimelistjava.utils.Properties;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 import java.util.stream.Collectors;
 

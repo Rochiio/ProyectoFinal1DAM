@@ -1,7 +1,7 @@
 package com.example.myanimelistjava.service.anime;
 
-import com.example.myanimelist.dto.AnimeDTO;
-import com.example.myanimelist.service.IStorage;
+import com.example.myanimelistjava.dto.AnimeDTO;
+import com.example.myanimelistjava.service.IStorage;
 
 import java.util.List;
 

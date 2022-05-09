@@ -1,6 +1,6 @@
 package com.example.myanimelistjava.dto;
 
-import com.example.myanimelist.models.Anime;
+import com.example.myanimelistjava.models.Anime;
 import lombok.Data;
 
 import java.sql.Date;
