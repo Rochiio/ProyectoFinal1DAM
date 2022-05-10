@@ -1,8 +1,5 @@
 package com.example.myanimelistjava.managers;
 
-import com.example.myanimelistjava.utils.Properties;
-import com.example.myanimelistjava.views.config.ViewConfig;
-import com.example.myanimelistjava.views.config.ViewConfig;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

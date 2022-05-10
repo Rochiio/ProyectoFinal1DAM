@@ -1,14 +1,13 @@
 package com.example.myanimelistjava.service.anime;
 
 import com.example.myanimelistjava.dto.AnimeDTO;
-import com.example.myanimelistjava.utils.Properties;
+import com.example.myanimelistjava.configurations.Directories;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Properties;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -24,7 +23,7 @@ public class AnimeStorage implements IAimeStorage {
 
     @Override
     public void mkdir() {
-        Path dir = Path.of(Properties.CSV_DIR);
+        Path dir = Path.of(Directories.CSV_DIR);
         if (!Files.exists(dir)) {
             try {
                 Files.createDirectory(dir);
@@ -42,7 +41,7 @@ public class AnimeStorage implements IAimeStorage {
         for (String s : csvList) {
             csv.append(s);
         }
-        try (FileWriter writer = new FileWriter(Properties.ANIME_SAVE)) {
+        try (FileWriter writer = new FileWriter(Directories.ANIME_SAVE)) {
             writer.write(csv.toString());
         } catch (Exception e) {
             System.out.println("Error writing the file");
@@ -51,7 +50,7 @@ public class AnimeStorage implements IAimeStorage {
 
     @Override
     public List<AnimeDTO> load() {
-        try (var list = Files.lines(Path.of(Properties.ANIME_LOAD))) {
+        try (var list = Files.lines(Path.of(Directories.ANIME_LOAD))) {
             return list.skip(1)
                     .map(this::parse)
                     .collect(Collectors.toList());
@@ -62,7 +61,7 @@ public class AnimeStorage implements IAimeStorage {
     }
 
     private AnimeDTO parse(String line) {
-        String[] fields = line.split(Properties.CSV_SEPARATOR);
+        String[] fields = line.split(Directories.CSV_SEPARATOR);
         UUID id = UUID.fromString(fields[0]);
         String title = fields[1];
         String titleEnglish = fields[2];

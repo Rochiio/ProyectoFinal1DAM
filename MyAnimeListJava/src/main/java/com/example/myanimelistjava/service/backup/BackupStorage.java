@@ -1,7 +1,7 @@
 package com.example.myanimelistjava.service.backup;
 
 import com.example.myanimelistjava.dto.BackupDTO;
-import com.example.myanimelistjava.utils.Properties;
+import com.example.myanimelistjava.configurations.Directories;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -27,7 +27,7 @@ public class BackupStorage implements IBackupStorage {
 
     @Override
     public void mkdir() {
-        Path dir = Path.of(Properties.JSON_DIR);
+        Path dir = Path.of(Directories.JSON_DIR);
         if (!Files.exists(dir)) {
             try {
                 Files.createDirectory(dir);
@@ -41,7 +41,7 @@ public class BackupStorage implements IBackupStorage {
     public void save(BackupDTO dto) {
         var gson = new GsonBuilder().create();
         var json = gson.toJson(dto);
-        try (FileWriter writer = new FileWriter(Properties.JSON_FILE)) {
+        try (FileWriter writer = new FileWriter(Directories.JSON_FILE)) {
             writer.write(json);
         } catch (Exception e) {
             System.out.println("Error writing the file");
@@ -52,7 +52,7 @@ public class BackupStorage implements IBackupStorage {
     public BackupDTO load() {
         Gson gson = new GsonBuilder().create();
         BackupDTO root = null;
-        try (Reader reader = Files.newBufferedReader(Paths.get(Properties.JSON_FILE))) {
+        try (Reader reader = Files.newBufferedReader(Paths.get(Directories.JSON_FILE))) {
             root = gson.fromJson(reader, (Type) BackupDTO[].class);
         } catch (Exception e) {
             System.out.println("Error reading the file");
