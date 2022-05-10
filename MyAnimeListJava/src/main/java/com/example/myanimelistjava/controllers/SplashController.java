@@ -60,8 +60,7 @@ public class SplashController implements Initializable {
      * @return imagen aleatoria
      */
     private String randomImg(){
-        Random rNum = new Random();
-        rNum.nextInt(1,4);
+        int rNum = (int) Math.random()*4+1;
         return "src/main/resources/com/example/myanimelist/images/splash/splash2.png";
     }
 
