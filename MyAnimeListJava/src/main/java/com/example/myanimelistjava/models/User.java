@@ -24,6 +24,12 @@ public class User extends AbstractUser {
         this.img = img;
     }
 
+    public User(UUID id, String name, String email, String password, Date createDate, Date birthDate) {
+        super(id, name, email, password, createDate, birthDate);
+        this.myList = null;
+
+    }
+
     public List<Anime> getMyList() {
         return myList;
     }
