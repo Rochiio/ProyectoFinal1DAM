@@ -14,21 +14,36 @@ import java.util.UUID;
 public class AdminRepository implements IAdminRepository {
 
     private DataBaseManager db;
+    private AdminRepository instance;
 
+    public AdminRepository getInstance(){
+        if(instance != null)
+            return instance;
+        instance = new AdminRepository(DataBaseManager db);
+        return instance;
+    }
+
+    private AdminRepository(DataBaseManager db){
+       // db = db.getInstance();
+    }
     @Override
     public Admin findById(Admin id) throws SQLException {
         String query = "select * from admins where id = ?";
+        db.open();
+        ResultSet result = db.select(query, id);
+        if (result.next()) {
 
-/*
-            ResultSet result = db.select(query, id);
-            if (result.next()) {
-                Admin admin = new Admin(
-
-                );
-*
-                return admin;
-
-        }*/
+            Admin admin = new Admin(
+                    UUID.fromString(result.getString("id")),
+                    result.getString("name"),
+                    result.getString("email"),
+                    result.getString("password"),
+                    result.getString("createDate"),
+                    result.getString("birthDate")
+            );
+            db.close();
+            return admin;
+        }
         return null;
     }
 
