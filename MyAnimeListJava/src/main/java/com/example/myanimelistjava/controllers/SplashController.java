@@ -29,7 +29,7 @@ public class SplashController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            fondo.setImage( new Image(new FileInputStream(randomImg())));
+            fondo.setImage( new Image(new FileInputStream("src/main/resources/com/example/myanimelistjava/images/splash/splash1.png")));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -61,7 +61,7 @@ public class SplashController implements Initializable {
      */
     private String randomImg(){
         int rNum = (int) Math.random()*4+1;
-        return "src/main/resources/com/example/myanimelist/images/splash/splash2.png";
+        return "src/main/resources/com/example/myanimelist/images/splash/splash1.png";
     }
 
 
