@@ -1,22 +1,31 @@
 package com.example.myanimelistjava.models;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
-@Getter
-@Setter
-@NoArgsConstructor
-
-
 public abstract class AbstractUser {
-    private UUID id;
-    private String name;
-    private String email;
-    private String password;
-    private LocalDate createDate;
-    private LocalDate birthDate;
+    public final UUID id;
+    public String name;
+    public String email;
+    public String password;
+    public final Date createDate;
+    public final Date birthDate;
+
+    public AbstractUser(String name, String email, String password, Date createDate, Date birthDate) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.createDate = createDate;
+        this.birthDate = birthDate;
+    }
+
+    public AbstractUser(UUID id, String name, String email, String password, Date createDate, Date birthDate) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.createDate = createDate;
+        this.birthDate = birthDate;
+    }
 }

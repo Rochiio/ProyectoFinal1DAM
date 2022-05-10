@@ -1,26 +1,46 @@
 package com.example.myanimelistjava.models;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
-@Data
+public class User extends AbstractUser {
 
-public class User extends AbstractUser{
+    List<Anime> myList;
+    String img;
 
-    private String img;
-    private ArrayList<Anime> mylist;
-
-    public User(){
-        super();
-        this.img = "default.png";
-        this.mylist = new ArrayList<Anime>();
-
+    public User(String name, String email, String password, Date createDate, Date birthDate) {
+        super(name, email, password, createDate, birthDate);
+        this.myList = new ArrayList<>();
+        this.img = "";
     }
 
+    public User(UUID id, String name, String email, String password, Date createDate, Date birthDate, List<Anime> myList, String img) {
+        super(id, name, email, password, createDate, birthDate);
+        this.myList = myList;
+        this.img = img;
+    }
 
+    public List<Anime> getMyList() {
+        return myList;
+    }
+
+    public void setMyList(List<Anime> myList) {
+        this.myList = myList;
+    }
+
+    public void addToMyList(Anime anime){
+        this.myList.add(anime);
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 }
