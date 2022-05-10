@@ -1,4 +1,4 @@
-package com.example.myanimelistjava.views.config;
+package com.example.myanimelistjava.configurations;
 
 public enum ViewConfig {
     WIDTH("600.0"),

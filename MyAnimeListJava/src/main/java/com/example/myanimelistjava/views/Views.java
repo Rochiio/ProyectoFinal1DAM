@@ -1,4 +1,4 @@
-package com.example.myanimelistjava.views.config.views;
+package com.example.myanimelistjava.views;
 
 public enum Views {
     SPLASH("views/splash-view.fxml"),

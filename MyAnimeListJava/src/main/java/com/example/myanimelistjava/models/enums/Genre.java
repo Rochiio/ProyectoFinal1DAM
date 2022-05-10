@@ -17,6 +17,6 @@ public enum Genre {
 
 
 
-    Genre(String adventure) {
+    Genre(String value) {
     }
 }
