@@ -7,8 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -35,14 +34,24 @@ public class AnimeStorage implements IAimeStorage {
 
     @Override
     public void save(List<AnimeDTO> dtoList) {
-        String header = "id,title,titleEnglish,types,episodes,status,date,rating,genres,img";
-        StringBuilder csv = new StringBuilder(header);
+        String[] headers = {"id",
+                "title",
+                "titleEnglish",
+                "types",
+                "episodes",
+                "status",
+                "date",
+                "rating",
+                "genres",
+                "img"};
+        String csvHeader = String.join(Directories.CSV_SEPARATOR, headers);
         var csvList = dtoList.stream().map(this::toCSV).toList();
-        for (String s : csvList) {
-            csv.append(s);
-        }
+
         try (FileWriter writer = new FileWriter(Directories.ANIME_SAVE)) {
-            writer.write(csv.toString());
+            writer.write(csvHeader);
+            for (String line: csvList){
+                writer.append(line);
+            }
         } catch (Exception e) {
             System.out.println("Error writing the file");
         }
@@ -77,16 +86,16 @@ public class AnimeStorage implements IAimeStorage {
 
     private String toCSV(AnimeDTO animeDTO) {
 
-        return "\n" +
-                animeDTO.getId() +
-                animeDTO.getTitle() +
-                animeDTO.getTitleEnglish() +
-                animeDTO.getTypes() +
-                animeDTO.getEpisodes() +
-                animeDTO.getStatus() +
-                animeDTO.getDate() +
-                animeDTO.getRating() +
-                animeDTO.getGenres() +
-                animeDTO.getImg();
+        String[] fields =  {animeDTO.getId().toString() ,
+                animeDTO.getTitle() ,
+                animeDTO.getTitleEnglish() ,
+                animeDTO.getTypes() ,
+                animeDTO.getEpisodes().toString() ,
+                animeDTO.getStatus() ,
+                animeDTO.getDate() ,
+                animeDTO.getRating() ,
+                animeDTO.getGenres() ,
+                animeDTO.getImg()};
+        return String.join(Directories.CSV_SEPARATOR, fields);
     }
 }
