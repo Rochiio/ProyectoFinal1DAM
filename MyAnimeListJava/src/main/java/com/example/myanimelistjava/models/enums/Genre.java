@@ -15,8 +15,13 @@ public enum Genre {
     SCI_FI("Sci-Fi"),
     ROMANCE("Romance");
 
-
+    private final String value;
 
     Genre(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 }
