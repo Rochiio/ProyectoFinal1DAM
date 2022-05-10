@@ -13,7 +13,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.Objects;
 
-import static com.example.myanimelistjava.views.Views.MAIN;
 public class SceneManager {
     private static SceneManager instance;
     private final Class<?> appClass;
@@ -33,15 +32,16 @@ public class SceneManager {
         return instance;
     }
 
-    public void initSplash(Stage stage) throws IOException, InterruptedException {
+    public void     initSplash(Stage stage) throws IOException, InterruptedException {
         Platform.setImplicitExit(false);
         logger.info("Iniciando Splash");
         FXMLLoader fxmlLoader = new FXMLLoader(MyAnimeListApplication.class.getResource("views/splash-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),Double.parseDouble(ViewConfig.WIDTH.getValue()), Double.parseDouble(ViewConfig.HEIGHT.getValue()));
-        stage.setTitle("Programa");
+        stage.setTitle("Splash");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
+        logger.info("Scene Splash loaded");
         stage.show();
     }
 

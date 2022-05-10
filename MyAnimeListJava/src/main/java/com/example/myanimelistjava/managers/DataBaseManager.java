@@ -78,10 +78,6 @@ public class DataBaseManager {
         serverPort = "3306"; // No es necesario
         dataBaseName = DB_FILE; //
         jdbcDriver = "org.sqlite.JDBC"; // SQLite
-        user = "dam"; // No es necesario
-        password = "dam1234"; // No es necesario
-
-
     }
 
     /**
