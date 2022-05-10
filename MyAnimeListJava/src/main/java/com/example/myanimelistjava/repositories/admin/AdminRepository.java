@@ -19,13 +19,14 @@ public class AdminRepository implements IAdminRepository {
     public AdminRepository getInstance(){
         if(instance != null)
             return instance;
-        instance = new AdminRepository(DataBaseManager db);
+        instance = new AdminRepository(db);
         return instance;
     }
 
     private AdminRepository(DataBaseManager db){
        // db = db.getInstance();
     }
+
     @Override
     public Admin findById(Admin id) throws SQLException {
         String query = "select * from admins where id = ?";
