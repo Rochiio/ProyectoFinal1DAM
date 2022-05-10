@@ -8,16 +8,16 @@ import java.util.UUID;
 
 @Data
 public class Anime {
-    public String title;
-    public String titleEnglish;
-    public String types;
-    public int episodes;
-    public String status;
-    public Date date;
-    public String rating;
-    public List<String> genres;
-    public String img;
-    public final UUID id= UUID.randomUUID();
+    private String title;
+    private String titleEnglish;
+    private String types;
+    private int episodes;
+    private String status;
+    private Date date;
+    private String rating;
+    private List<String> genres;
+    private String img;
+    private final UUID id= UUID.randomUUID();
 
     public Anime(String title, String title_english, String type, int episodes, String status, java.sql.Date releaseDate, String rating, List<String> genre, String imageUrl, UUID id) {
     }

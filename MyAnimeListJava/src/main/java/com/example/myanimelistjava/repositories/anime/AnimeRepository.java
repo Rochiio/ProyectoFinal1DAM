@@ -93,16 +93,16 @@ public final class AnimeRepository implements IAnimeRepository {
             db.open();
             db.update(
                     query,
-                    item.title,
-                    item.titleEnglish,
-                    item.status,
-                    String.join(",", item.genres),
-                    item.date,
-                    item.img,
-                    item.episodes,
-                    item.rating,
-                    item.types,
-                    item.id.toString()
+                    item.getTitle(),
+                    item.getTitleEnglish(),
+                    item.getStatus(),
+                    String.join(",", item.getGenres()),
+                    item.getDate(),
+                    item.getImg(),
+                    item.getEpisodes(),
+                    item.getRating(),
+                    item.getTypes(),
+                    item.getId().toString()
             );
             db.close();
             return item;
@@ -121,16 +121,16 @@ public final class AnimeRepository implements IAnimeRepository {
             db.open();
             db.insert(
                     query,
-                    item.id,
-                    item.title,
-                    item.titleEnglish,
-                    item.status,
-                    String.join(",", item.genres),
-                    item.date,
-                    item.img,
-                    item.episodes,
-                    item.rating,
-                    item.types
+                    item.getId().toString(),
+                    item.getTitle(),
+                    item.getTitleEnglish(),
+                    item.getStatus(),
+                    String.join(",", item.getGenres()),
+                    item.getDate(),
+                    item.getImg(),
+                    item.getEpisodes(),
+                    item.getRating(),
+                    item.getTypes()
             );
             db.close();
             return item;
