@@ -5,7 +5,7 @@ public enum Status {
     CURRENTLY_AIRING("Currently Airing"),
     NOT_YET_AIRED("Not yet aired");
 
-    Status(String s) {
+    Status(String value) {
 
     }
 }

@@ -8,7 +8,7 @@ public enum Type {
     ONA("ONA"),
     SPECIAL("Special");
 
-    Type(String tv) {
+    Type(String value) {
 
     }
 }
