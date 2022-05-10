@@ -71,17 +71,13 @@ public class DataBaseManager {
     private void initConfig() {
         String APP_PATH = System.getProperty("user.dir");
         String DB_DIR = APP_PATH + File.separator + "db";
-        String DB_FILE = DB_DIR + File.separator + "personas.db";
+        String DB_FILE = DB_DIR + File.separator + "anime.db";
 
         // Para SQLite solo necesito el driver...
         serverUrl = "localhost"; // No es necesario
         serverPort = "3306"; // No es necesario
         dataBaseName = DB_FILE; //
         jdbcDriver = "org.sqlite.JDBC"; // SQLite
-        user = "dam"; // No es necesario
-        password = "dam1234"; // No es necesario
-
-
     }
 
     /**
