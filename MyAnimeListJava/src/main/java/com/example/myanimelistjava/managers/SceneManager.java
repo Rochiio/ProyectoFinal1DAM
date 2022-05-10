@@ -5,7 +5,6 @@ import com.example.myanimelistjava.configurations.ViewConfig;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +13,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.Objects;
 
-import static com.example.myanimelistjava.views.Views.MAIN;
 public class SceneManager {
     private static SceneManager instance;
     private final Class<?> appClass;
