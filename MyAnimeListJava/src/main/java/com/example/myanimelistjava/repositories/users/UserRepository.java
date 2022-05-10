@@ -35,7 +35,7 @@ public class UserRepository implements IUserRepository {
     public User findById(UUID id) throws SQLException {
         User user = null;
 
-        val set = db.select("SELECT * FROM Usuarios WHERE id = ?", id.toString()).get();
+        ResultSet set = db.select("SELECT * FROM Usuarios WHERE id = ?", id.toString()).get();
         db.open();
            /* if (!set.next()) return null;
 

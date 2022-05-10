@@ -11,5 +11,6 @@ module com.example.myanimelistjava {
     requires com.google.gson;
 
     opens com.example.myanimelistjava to javafx.fxml;
+    opens com.example.myanimelistjava.controllers to javafx.fxml;
     exports com.example.myanimelistjava;
 }

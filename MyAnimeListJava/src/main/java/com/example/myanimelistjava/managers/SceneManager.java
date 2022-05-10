@@ -53,7 +53,7 @@ public class SceneManager {
         logger.info("Iniciando Main");
         Platform.setImplicitExit(true);
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(appClass.getResource("views/inicioSesion-view.fxml")));
-        Scene scene = new Scene(fxmlLoader.load(), Double.parseDouble(ViewConfig.WIDTH.toString()), Double.parseDouble(ViewConfig.HEIGHT.toString()));
+        Scene scene = new Scene(fxmlLoader.load(), 600.0, 450.0);
         Stage stage = new Stage();
         stage.setResizable(false);
         stage.setTitle("Log In");
