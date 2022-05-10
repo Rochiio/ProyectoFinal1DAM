@@ -1,8 +1,5 @@
 package com.example.myanimelistjava.managers;
 
-import com.example.myanimelistjava.utils.Properties;
-import com.example.myanimelistjava.views.config.ViewConfig;
-import com.example.myanimelistjava.views.config.ViewConfig;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.Objects;
 
-import static com.example.myanimelistjava.views.config.views.Views.MAIN;
+import static com.example.myanimelistjava.views.Views.MAIN;
 
 public class SceneManager {
     private static SceneManager instance;
