@@ -5,7 +5,13 @@ public enum Status {
     CURRENTLY_AIRING("Currently Airing"),
     NOT_YET_AIRED("Not yet aired");
 
-    Status(String value) {
+    private final String value;
 
+    Status(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 }
