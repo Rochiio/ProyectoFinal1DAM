@@ -4,17 +4,21 @@ import com.example.myanimelistjava.managers.SceneManager;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lombok.val;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 
 public class SplashController implements Initializable {
@@ -24,6 +28,11 @@ public class SplashController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            fondo.setImage( new Image(new FileInputStream(randomImg())));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         // Una animación de fondo
         FadeTransition transition = new FadeTransition(Duration.millis(5000), fondo);
         transition.setFromValue(1.0);
@@ -43,6 +52,17 @@ public class SplashController implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+
+    /**
+     * Elegir imagen de splash aleatoria
+     * @return imagen aleatoria
+     */
+    private String randomImg(){
+        Random rNum = new Random();
+        rNum.nextInt(1,4);
+        return "src/main/resources/com/example/myanimelist/images/splash/splash2.png";
     }
 
 
