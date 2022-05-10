@@ -2,20 +2,21 @@ package com.example.myanimelistjava.views.models;
 
 import javafx.beans.property.*;
 import java.util.List;
+import java.util.UUID;
 
 public class AnimeView {
-    StringProperty title;
-    StringProperty titleEnglish;
-    StringProperty types;
-    IntegerProperty episodes;
-    StringProperty status;
-    StringProperty date;
-    StringProperty rating;
-    ObjectProperty<List<String>> genres;
-    StringProperty img;
-    StringProperty id;
+    private final StringProperty title;
+    private final StringProperty titleEnglish;
+    private final StringProperty types;
+    private final IntegerProperty episodes;
+    private final StringProperty status;
+    private final StringProperty date;
+    private final StringProperty rating;
+    private final ObjectProperty<List<String>> genres;
+    private final StringProperty img;
+    private final UUID id;
 
-    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, String date, String rating, List<String> genres, String img, String id) {
+    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, String date, String rating, List<String> genres, String img, UUID id) {
         this.title = new SimpleStringProperty(title);
         this.titleEnglish = new SimpleStringProperty(titleEnglish);
         this.types = new SimpleStringProperty(types);
@@ -25,7 +26,7 @@ public class AnimeView {
         this.rating = new SimpleStringProperty(rating);
         this.genres = new SimpleObjectProperty<>(genres);
         this.img = new SimpleStringProperty(img);
-        this.id = new SimpleStringProperty(id);
+        this.id = id;
     }
 
     public String getTitle() {
@@ -136,16 +137,8 @@ public class AnimeView {
         this.img.set(img);
     }
 
-    public String getId() {
-        return id.get();
-    }
-
-    public StringProperty idProperty() {
+    public UUID getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id.set(id);
     }
 
     @Override
