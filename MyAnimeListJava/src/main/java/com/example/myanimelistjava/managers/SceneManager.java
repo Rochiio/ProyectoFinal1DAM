@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.example.myanimelistjava.views.Views.MAIN;
 public class SceneManager {
     private static SceneManager instance;
     private final Class<?> appClass;

@@ -1,19 +1,15 @@
 package com.example.myanimelistjava.dto;
 
-import com.example.myanimelist.models.Admin;
-import com.example.myanimelist.models.Anime;
-import com.example.myanimelist.models.Review;
-import com.example.myanimelist.models.User;
-import lombok.Builder;
-import lombok.Data;
+import com.example.myanimelistjava.models.Admin;
+import com.example.myanimelistjava.models.Anime;
+import com.example.myanimelistjava.models.Review;
+import com.example.myanimelistjava.models.User;
 
 import java.util.List;
 
 /**
  * @author JoaquinAyG
  */
-@Data
-@Builder
 public class BackupDTO {
 
     List<User> users;
