@@ -13,7 +13,6 @@ import com.example.myanimelist.utilities.DataDB.getTestingUser
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
 import org.koin.core.context.startKoin
 import org.koin.test.inject
 import org.koin.test.junit5.AutoCloseKoinTest
@@ -43,26 +42,16 @@ internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
 
     @Test
     fun addReview() {
-        val result = reviewsRepository.add(reviewTest)
+        val result = reviewsRepository.addReview(reviewTest)
         assertEquals(result, reviewTest)
     }
 
     @Test
     fun showReviewsAnime() {
-        reviewsRepository.add(reviewTest)
+        reviewsRepository.addReview(reviewTest)
         val listResult = reviewsRepository.findByAnimeId(reviewTest.anime.id)
         assertEquals(listResult[0], reviewTest)
     }
 
-    @Test
-    fun updateReview() {
-        reviewsRepository.add(reviewTest)
-        reviewTest.score = 5
-        reviewTest.comment = "AAA"
-        val resultUpdated = reviewsRepository.update(reviewTest)
 
-        assertAll(
-            { assertEquals(resultUpdated?.score, 5) },
-            { assertEquals(resultUpdated?.comment, "AAA") })
-    }
 }
