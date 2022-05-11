@@ -1,4 +1,4 @@
-package com.example.myanimelist.managers;
+package com.example.myanimelist.manager;
 
 
 import lombok.NonNull;

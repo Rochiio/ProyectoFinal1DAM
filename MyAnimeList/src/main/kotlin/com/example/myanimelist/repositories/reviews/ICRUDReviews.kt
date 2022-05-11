@@ -1,8 +1,5 @@
 package com.example.myanimelist.repositories.reviews
 
-import com.example.myanimelist.models.Review
-import java.util.*
-
 interface ICRUDReviews<T,ID> {
     /**
      * Añadir reviews al repositorio

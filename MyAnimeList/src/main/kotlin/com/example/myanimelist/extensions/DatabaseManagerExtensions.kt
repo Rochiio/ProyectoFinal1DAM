@@ -1,6 +1,6 @@
 package com.example.myanimelist.extensions
 
-import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelist.manager.DataBaseManager
 
 //TODO add logger to log all db errors
 inline fun DataBaseManager.execute(action: () -> Unit) {

@@ -1,6 +1,6 @@
 package com.example.myanimelist.modules
 
-import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.repositories.admins.AdminRepository
 import com.example.myanimelist.repositories.admins.IAdminRepository
 import com.example.myanimelist.repositories.animes.AnimeRepository

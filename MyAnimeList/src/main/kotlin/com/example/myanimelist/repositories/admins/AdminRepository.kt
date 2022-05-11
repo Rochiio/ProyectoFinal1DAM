@@ -1,7 +1,7 @@
 package com.example.myanimelist.repositories.admins
 
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Admin
 import java.sql.SQLException
 import java.util.*

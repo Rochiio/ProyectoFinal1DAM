@@ -47,7 +47,7 @@ class SplashController : Initializable{
      * @return imagen aleatoria
      */
     private fun randomImg():String{
-        val rNum = (1..4).random()
-        return "src/main/resources/com/example/myanimelist/images/splash/splash$rNum.png"
+        val rNum = (1..5).random()
+        return "src/main/resources/com/example/myanimelist/images/splash$rNum.png"
     }
 }
