@@ -1,6 +1,6 @@
 package com.example.myanimelist.repositories.animes
 
-import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
+import com.example.myanimelist.modules.repositoryModule
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import org.junit.jupiter.api.AfterEach

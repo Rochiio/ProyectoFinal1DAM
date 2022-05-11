@@ -15,7 +15,7 @@ import java.util.*
 
 object DataDB : KoinComponent {
 
-    private val dataBaseManager by inject<_root_ide_package_.com.example.myanimelist.manager.DataBaseManager>()
+    private val dataBaseManager by inject<DataBaseManager>()
 
     fun deleteAll(table: String) {
         val animeQuery = "DELETE FROM $table"
