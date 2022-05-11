@@ -1,7 +1,7 @@
 package com.example.myanimelist.repositories
 
 import com.example.myanimelist.models.Admin
-import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
+import com.example.myanimelist.modules.repositoryModule
 import com.example.myanimelist.repositories.admins.IAdminRepository
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAdmin
