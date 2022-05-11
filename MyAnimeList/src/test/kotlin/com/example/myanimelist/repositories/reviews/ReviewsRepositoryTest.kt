@@ -43,23 +43,23 @@ internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
 
     @Test
     fun addReview() {
-        val result = reviewsRepository.add(reviewTest)
+        val result = reviewsRepository.addReview(reviewTest)
         assertEquals(result, reviewTest)
     }
 
     @Test
     fun showReviewsAnime() {
-        reviewsRepository.add(reviewTest)
+        reviewsRepository.addReview(reviewTest)
         val listResult = reviewsRepository.findByAnimeId(reviewTest.anime.id)
         assertEquals(listResult[0], reviewTest)
     }
 
     @Test
     fun updateReview() {
-        reviewsRepository.add(reviewTest)
+        reviewsRepository.addReview(reviewTest)
         reviewTest.score = 5
         reviewTest.comment = "AAA"
-        val resultUpdated = reviewsRepository.update(reviewTest)
+        val resultUpdated = reviewsRepository.addScore(reviewTest)
 
         assertAll(
             { assertEquals(resultUpdated?.score, 5) },
