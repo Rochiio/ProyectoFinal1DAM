@@ -21,13 +21,10 @@ class MyAnimeListApplication : Application() {
 }
 
 fun main() {
-
-    }
-
-    //checkDataBase(get(_root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager::class.java))
-
-
-
+    launch()
 }
+    //checkDataBase(get(_root_ide_package_.com.example.myanimelist.manager.DataBaseManager::class.java))
+
+//}
 
 

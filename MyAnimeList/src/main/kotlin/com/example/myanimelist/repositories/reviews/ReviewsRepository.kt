@@ -2,7 +2,7 @@ package com.example.myanimelist.repositories.reviews
 
 import com.example.myanimelist.exceptions.RepositoryException
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelistjava.managers.DataBaseManager
+import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.modelsDB.ReviewDB
@@ -11,7 +11,7 @@ import java.util.*
 
 //TODO Review reviews
 class ReviewsRepository(
-    private val databaseManager: _root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager,
+    private val databaseManager: DataBaseManager,
     private val animeRepository: IAnimeRepository,
     private val usersRepository: IUsersRepository
 ) : IRepositoryReview {
