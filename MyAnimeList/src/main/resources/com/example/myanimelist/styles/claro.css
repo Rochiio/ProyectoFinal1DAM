@@ -6,10 +6,23 @@
     -fx-border-radius:10;
     -fx-padding: 5;
     -fx-background-color: #67B99A;
-    -fx-text-fill:white;
+    -fx-text-fill:black;
 }
 
 .linkBasic{
-    -fx-text-fill:white;
+    -fx-text-fill:black;
     -fx-font-weight:bold;
+}
+
+.tittle{
+    -fx-text-fill:black;
+    -fx-font-weight: normal;
+    -fx-font-size: 40px;
+    -fx-font-family: Arial;
+    -fx-text-transform: uppercase;
+}
+
+
+.text-input:focused{
+    -fx-border-color:#036666;
 }
