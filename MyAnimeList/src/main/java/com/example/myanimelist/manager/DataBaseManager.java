@@ -1,9 +1,6 @@
 package com.example.myanimelist.manager;
 
 
-
-
-
 import lombok.NonNull;
 import org.apache.ibatis.jdbc.ScriptRunner;
 

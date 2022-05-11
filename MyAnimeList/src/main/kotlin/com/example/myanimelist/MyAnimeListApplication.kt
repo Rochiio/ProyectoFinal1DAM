@@ -17,6 +17,7 @@ class MyAnimeListApplication : Application() {
 }
 
 fun main() {
+
     startKoin {
         modules(repositoryModule)
     }
