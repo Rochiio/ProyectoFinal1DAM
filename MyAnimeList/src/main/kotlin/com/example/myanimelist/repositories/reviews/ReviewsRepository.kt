@@ -9,17 +9,16 @@ import com.example.myanimelist.repositories.modelsDB.ReviewDB
 import com.example.myanimelist.repositories.users.IUsersRepository
 import java.util.*
 
-//TODO Review reviews
 class ReviewsRepository(
     private val databaseManager: DataBaseManager,
     private val animeRepository: IAnimeRepository,
     private val usersRepository: IUsersRepository
 ) : IRepositoryReview {
 
-    override fun add(review: Review): Review? {
+    override fun addReview(review: Review): Review? {
         databaseManager.execute {
-            val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
-            databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id, review.comment)
+            val query = "INSERT INTO reviews VALUES(?,?,null,?,?)"
+            databaseManager.insert(query, review.user.id, review.anime.id, review.id, review.comment)
             return review
         }
         return null
@@ -57,18 +56,10 @@ class ReviewsRepository(
         }
     }
 
-    override fun update(review: Review): Review? {
+    override fun addScore(review: Review): Review? {
         databaseManager.execute {
-            val query = "Update reviews SET idUser = ?, idAnime = ?, score = ?, id = ?, review = ? WHERE id = ?"
-            databaseManager.update(
-                query,
-                review.user.id,
-                review.anime.id,
-                review.score,
-                review.id,
-                review.comment,
-                review.id
-            )
+            val query = "INSERT INTO reviews VALUES(?,?,?,?,null)"
+            databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id)
             return review
         }
         return null

@@ -3,7 +3,6 @@ package com.example.myanimelist.controllers
 import com.example.myanimelist.MyAnimeListApplication
 import com.example.myanimelist.utils.ViewConfig
 import javafx.application.Platform
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
@@ -29,7 +28,7 @@ class InicioController {
     lateinit var btnRegister: Hyperlink
 
 
-    fun changeSceneRegister(actionEvent: ActionEvent) {
+    fun changeSceneRegister() {
         Platform.setImplicitExit(true)
         val stage = btnRegister.scene.window as Stage
         val fxmlLoader = FXMLLoader(MyAnimeListApplication::class.java.getResource("views/registro-view.fxml"))
