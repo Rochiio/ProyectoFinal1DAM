@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" styleClass="fondo"
-            stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@../../../../../../../../MyAnimeList/src/main/resources/com/example/myanimelist/styles/claro.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.myanimelist.controllers.InicioController">
     <children>
         <VBox layoutX="19.0" layoutY="63.0" prefHeight="146.0" prefWidth="369.0" spacing="15.0"

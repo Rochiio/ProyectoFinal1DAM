@@ -1,3 +1,18 @@
+create table admins
+(
+    id         varchar(50)  not null
+        constraint admins_pk
+            primary key,
+    name       varchar(100) not null,
+    email      varchar(50),
+    password   varchar(50)  not null,
+    createDate Date         not null,
+    birthDate  Date         not null
+);
+
+create unique index admins_id_uindex
+    on admins (id);
+
 create table animes
 (
     id            varchar(50)
@@ -67,5 +82,3 @@ create table reviews
 
 create unique index reviews_idAnime_uindex
     on reviews (idAnime);
-
-

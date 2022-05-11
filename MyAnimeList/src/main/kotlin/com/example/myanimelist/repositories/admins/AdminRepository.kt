@@ -1,11 +1,11 @@
 package com.example.myanimelist.repositories.admins
 
-import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelist.extensions.execute
+import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Admin
 import java.sql.SQLException
 import java.util.*
 
-//TODO use database.execute {} that auto opens and close connection with try-catch-finally
 class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
     /**
      * Busca en el repositorio un usuari de tipo admin usando su uuid
@@ -13,19 +13,22 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
      * @return Admin? El admin que se busca o null si no existe
      */
     override fun findById(id: UUID): Admin? {
-        val query = "select * from usuarios where id = ?"
-        val result = db.select(query, id)
-        if (result.first()) {
-            val admin = Admin(
-                result.getString("nombre"),
-                result.getString("email"),
-                result.getString("password"),
-                result.getDate("date_alta"),
-                result.getDate("date_nacimiento"),
-                UUID.fromString(result.getString("id"))
-            )
-            db.close()
-            return admin
+        val query = "select * from admins where id = ?"
+        db.execute {
+
+            val result = db.select(query, id)
+            if (result.next()) {
+                val admin = Admin(
+                    result.getString("name"),
+                    result.getString("email"),
+                    result.getString("password"),
+                    result.getDate("createDate"),
+                    result.getDate("birthDate"),
+                    UUID.fromString(result.getString("id"))
+                )
+
+                return admin
+            }
         }
         return null
     }
@@ -34,24 +37,27 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
      * Recuepra de la base de datos una lisa con todos los admins
      * @return List<Admin?> Lista con todos los usuarios de tipo admin
      */
-    override fun findAll(): List<Admin?> {
-        val query = "select * from usuarios"
-        val admins = ArrayList<Admin>()
-        db.open()
-        val result = db.select(query)
-        while (result.next()) {
-            admins.add(
-                Admin(
-                    result.getString("nombre"),
-                    result.getString("email"),
-                    result.getString("password"),
-                    result.getDate("date_alta"),
-                    result.getDate("date_nacimiento"),
-                    UUID.fromString(result.getString("id"))
+    override fun findAll(): List<Admin> {
+        val query = "select * from admins"
+        val admins: MutableList<Admin> = mutableListOf()
+        db.execute {
+
+            val result = db.select(query)
+            while (result.next()) {
+                admins.add(
+                    Admin(
+                        result.getString("name"),
+                        result.getString("email"),
+                        result.getString("password"),
+                        result.getDate("createDate"),
+                        result.getDate("birthDate"),
+                        UUID.fromString(result.getString("id"))
+                    )
                 )
-            )
+            }
+
         }
-        db.close()
+
         return admins
     }
 
@@ -60,27 +66,32 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
      * @param item Admin? Un admin con los datos que se quieren cambiar
      * @return Admin? Null si no se consigue. El nuevo admin si tiene exito
      */
-    override fun update(item: Admin?): Admin? {
-        val query = "UPDATE usuarios SET" +
-                "nombre = ?," +
-                "date_alta = ?," +
-                "password = ?," +
-                "imageurl = 'NONE'," +
+    override fun update(item: Admin): Admin? {
+        val query = "UPDATE admins SET" +
+                "id = ?" +
+                "name = ?," +
+
                 "email = ?," +
-                "date_nacimiento =?" +
+                "password = ?," +
+                "createDate = ?," +
+                "birthDate =?" +
                 "where id = ?"
-        db.open()
-        val result = db.update(
-            query, item!!.name,
-            item.createDate,
-            item.password,
-            item.email,
-            item.birthDate,
-            item.id
-        )
-        db.close()
-        return if (result == 0) null
-        else item
+        db.execute {
+
+            db.update(
+                query,
+                item.id.toString(),
+                item.name,
+                item.email,
+                item.password,
+                item.createDate,
+                item.birthDate,
+                item.id
+            )
+
+            return item
+        }
+        return null
     }
 
     /**
@@ -90,21 +101,25 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
      * @throws SQLException En el caso de que ya existiese un admin con el mismo UUID o no se pueda acceder a la base de datos
      *
      */
-    override fun add(item: Admin?): Admin? {
-        val query = "INSERT into Usuarios" +
-                "values ?,?,?,?, 'NONE', ?,?"
-        db.open()
-        db.insert(
-            query,
-            item!!.id.toString(),
-            item.name,
-            item.createDate,
-            item.password,
-            item.email,
-            item.birthDate
-        )
-        db.close()
-        return item
+    override fun add(item: Admin): Admin? {
+        val query = "INSERT into admins (id, name, email, password, createDate, birthDate)" +
+                "values (?,?,?,?,?,?)"
+        db.execute {
+            db.insert(
+                query,
+                item.id.toString(),
+                item.name,
+                item.email,
+                item.password,
+                item.createDate,
+                item.birthDate
+            )
+            return item
+        }
+
+
+        return null
+
     }
 
     /**
@@ -114,9 +129,10 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
      * @throws SQLException en caso de que no exista un admin con el UUID dado o la base de datos no esté accesible
      */
     override fun delete(id: UUID) {
-        val query = "delete from usuarios where id = ?"
-        db.open()
-        db.delete(query, id)
-        db.close()
+        val query = "delete from admins where id = ?"
+        db.execute {
+            db.delete(query, id)
+        }
+
     }
 }

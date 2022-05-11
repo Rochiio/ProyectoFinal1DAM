@@ -2,7 +2,6 @@ package com.example.myanimelist.controllers
 
 import com.example.myanimelist.managers.SceneManager
 import javafx.animation.FadeTransition
-import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
@@ -27,7 +26,7 @@ class SplashController : Initializable{
         transition.toValue = 1.0
         transition.play()
 
-        transition.onFinished = EventHandler { event: ActionEvent? ->
+        transition.onFinished = EventHandler {
             // Nos cerramos
             val ventana = fondo.scene.window as Stage
             ventana.hide()
@@ -47,7 +46,7 @@ class SplashController : Initializable{
      * @return imagen aleatoria
      */
     private fun randomImg():String{
-        val rNum = (1..4).random()
-        return "src/main/resources/com/example/myanimelist/images/splash/splash$rNum.png"
+        val rNum = (1..5).random()
+        return "src/main/resources/com/example/myanimelist/images/splash$rNum.png"
     }
 }
