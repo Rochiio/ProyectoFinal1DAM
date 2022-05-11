@@ -17,8 +17,8 @@ class ReviewsRepository(
 
     override fun addReview(review: Review): Review? {
         databaseManager.execute {
-            val query = "INSERT INTO reviews VALUES(?,?,null,?,?)"
-            databaseManager.insert(query, review.user.id, review.anime.id, review.id, review.comment)
+            val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
+            databaseManager.insert(query, review.user.id, review.anime.id,review.score, review.id, review.comment)
             return review
         }
         return null
@@ -56,12 +56,4 @@ class ReviewsRepository(
         }
     }
 
-    override fun addScore(review: Review): Review? {
-        databaseManager.execute {
-            val query = "INSERT INTO reviews VALUES(?,?,?,?,null)"
-            databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id)
-            return review
-        }
-        return null
-    }
 }

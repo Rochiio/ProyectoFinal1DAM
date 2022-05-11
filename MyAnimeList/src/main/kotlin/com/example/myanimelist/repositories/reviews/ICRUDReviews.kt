@@ -15,10 +15,4 @@ interface ICRUDReviews<T,ID> {
      */
     fun findByAnimeId(animeId: ID): List<T>
 
-    /**
-     * Añade puntación al anime
-     * @param review review a añadir
-     * @return review si ha sido añadida
-     */
-    fun addScore(review: T): T?
 }

@@ -17,7 +17,7 @@ class MyAnimeListApplication : Application() {
 }
 
 fun main() {
-    launch()
+    launch(MyAnimeListApplication::class.java)
 }
     //checkDataBase(get(_root_ide_package_.com.example.myanimelist.manager.DataBaseManager::class.java))
 
