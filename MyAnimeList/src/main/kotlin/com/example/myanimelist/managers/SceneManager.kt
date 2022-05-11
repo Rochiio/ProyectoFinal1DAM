@@ -1,11 +1,12 @@
 package com.example.myanimelist.managers
 
-import com.example.myanimelist.utils.viewConfig
+import com.example.myanimelist.utils.ViewConfig
 import javafx.application.Platform
 import javafx.fxml.FXMLLoader
 import javafx.scene.Node
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.scene.image.Image
 import javafx.stage.Stage
 import javafx.stage.StageStyle
 import java.io.IOException
@@ -31,6 +32,7 @@ object SceneManager {
         println("Iniciando Splash")
         val fxmlLoader = FXMLLoader(appClass.getResource("views/splash-view.fxml"))
         val scene = Scene(fxmlLoader.load())
+        addIconStage(stage)
         stage.title = "Splash"
         stage.isResizable = false
         stage.scene = scene
@@ -41,11 +43,11 @@ object SceneManager {
 
     @Throws(IOException::class)
     fun initMain() {
-
         Platform.setImplicitExit(true)
         val fxmlLoader = FXMLLoader(Objects.requireNonNull(appClass.getResource("views/inicioSesion-view.fxml")))
-        val scene = Scene(fxmlLoader.load(), viewConfig.WIDTH.value.toDouble(), viewConfig.HEIGHT.value.toDouble())
+        val scene = Scene(fxmlLoader.load(), ViewConfig.WIDTH.value.toDouble(), ViewConfig.HEIGHT.value.toDouble())
         val stage = Stage()
+        addIconStage(stage)
         stage.isResizable = false
         stage.title = "Login"
         stage.initStyle(StageStyle.DECORATED)
@@ -70,5 +72,14 @@ object SceneManager {
         println("Scene loaded")
         stage.scene = newScene
         stage.show()
+    }
+
+
+    /**
+     * Para añadir el icono al crear stage más rápido
+     * @param stage escena a añadir el icono
+     */
+    fun addIconStage(stage: Stage){
+        stage.icons.add(Image(appClass.getResourceAsStream(ViewConfig.ICON.value)))
     }
 }
