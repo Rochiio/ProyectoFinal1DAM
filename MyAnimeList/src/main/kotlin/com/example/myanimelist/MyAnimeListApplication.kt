@@ -1,14 +1,10 @@
 package com.example.myanimelist
 
 import com.example.myanimelist.managers.SceneManager
-import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.stage.Stage
-import org.koin.core.context.startKoin
-import org.koin.java.KoinJavaComponent.get
-import java.sql.SQLException
-import kotlin.system.exitProcess
+
 
 class MyAnimeListApplication : Application() {
 
