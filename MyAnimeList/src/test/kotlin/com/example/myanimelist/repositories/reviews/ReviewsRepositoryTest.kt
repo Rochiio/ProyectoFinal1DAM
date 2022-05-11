@@ -4,7 +4,7 @@ import com.example.myanimelist.exceptions.RepositoryException
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.models.User
-import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
+import com.example.myanimelist.modules.repositoryModule
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.utilities.DataDB

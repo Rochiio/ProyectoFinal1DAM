@@ -11,12 +11,11 @@ import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.repositories.users.UsersRepository
 import org.koin.dsl.module
 
-object RepositoriesModules {
-    val repositoryModule = module {
-        single { DataBaseManager() }
-        single<IUsersRepository> { UsersRepository(get()) }
-        single<IAnimeRepository> { AnimeRepository(get()) }
-        single<IAdminRepository> { AdminRepository(get()) }
-        single<IRepositoryReview> { ReviewsRepository(get(), get(), get()) }
-    }
+
+val repositoryModule = module {
+    single { DataBaseManager() }
+    single<IUsersRepository> { UsersRepository(get()) }
+    single<IAnimeRepository> { AnimeRepository(get()) }
+    single<IAdminRepository> { AdminRepository(get()) }
+    single<IRepositoryReview> { ReviewsRepository(get(), get(), get()) }
 }
