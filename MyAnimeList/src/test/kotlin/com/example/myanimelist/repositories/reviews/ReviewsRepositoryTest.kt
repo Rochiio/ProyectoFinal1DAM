@@ -42,7 +42,7 @@ internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
 
     @Test
     fun addReview() {
-        val result = reviewsRepository.addReview(reviewTest)
+        val result = reviewsRepository.add(reviewTest)
         assertEquals(result, reviewTest)
     }
 
