@@ -1,14 +1,14 @@
 package com.example.myanimelist.services
 
 import com.example.myanimelist.dto.BackupDTO
-import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
+import com.example.myanimelist.modules.repositoryModule
 import com.example.myanimelist.repositories.admins.IAdminRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.reviews.IRepositoryReview
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.service.backup.IBackupStorage
-import org.junit.Test
 import org.junit.jupiter.api.Order
+import org.junit.jupiter.api.Test
 import org.koin.core.context.startKoin
 import org.koin.test.inject
 import org.koin.test.junit5.AutoCloseKoinTest

@@ -4,26 +4,4 @@ import com.example.myanimelist.models.Review
 import java.util.*
 
 
-interface IRepositoryReview {
-    /**
-     * Añadir reviews al repositorio
-     * @param review review a añadir
-     * @return la review añadida
-     */
-    fun add(review: Review): Review?
-
-    /**
-     * Mostrar todas las reviews de un anime
-     * @param animeId id del anime a ver todas sus reviews
-     * @return lista con todas las reviews de ese anime
-     */
-    fun findByAnimeId(animeId: UUID): Iterable<Review>
-    fun findAll(): Iterable<Review>
-
-    /**
-     * Actualiza una review
-     * @param review review a actualizar
-     * @return review si ha sido actualizada
-     */
-    fun update(review: Review): Review?
-}
+interface IRepositoryReview : ICRUDReviews<Review, UUID>

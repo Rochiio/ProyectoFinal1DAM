@@ -18,10 +18,7 @@ import java.nio.file.Paths;
  */
 public class BackupStorage implements IBackupStorage {
 
-    BackupDTO bck;
-
-    public BackupStorage(BackupDTO bck) {
-        this.bck = bck;
+    public BackupStorage() {
         mkdir();
     }
 
