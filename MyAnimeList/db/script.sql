@@ -26,7 +26,8 @@ create table animes
     imageUrl      text        not null,
     episodes      integer     not null,
     rating        varchar(50) not null,
-    type          varchar(20)
+    type          varchar(20),
+    scored_by     integer      default 0
 );
 
 create table sqlite_master
@@ -46,15 +47,13 @@ create table sqlite_sequence
 
 create table usuarios
 (
-    id              varchar(50)  not null
+    id        varchar(50)  not null
         constraint usuarios_pk
             primary key,
-    nombre          varchar(100) not null,
-    date_alta       Date         not null,
-    password        varchar(50)  not null,
-    imageurl        text,
-    email           varchar(100) not null,
-    date_nacimiento Date
+    nombre    varchar(100) not null,
+    date_alta Date         not null,
+    password  varchar(50)  not null,
+    imageurl  text
 );
 
 create table animeLists
@@ -73,12 +72,14 @@ create table reviews
         references usuarios,
     idAnime varchar(50) not null
         references animes,
-    score   integer,
+    score   integer      default 0 not null,
     id      varchar(50)
         constraint reviews_pk
             primary key,
-    review  varchar(500)
+    review  varchar(500) default NULL
 );
 
 create unique index reviews_idAnime_uindex
     on reviews (idAnime);
+
+
