@@ -29,7 +29,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 list.add(user)
             }
         }
-        return list.map { mapToDTO(it) ?: return emptyList() }
+        return list.map { mapToModel(it) ?: return emptyList() }
     }
 
     override fun findById(id: UUID): User? {
@@ -50,7 +50,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 set.getString("imageUrl")
             )
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun findAll(): List<User> {
@@ -74,7 +74,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
             }
         }
 
-        return list.map { mapToDTO(it) ?: return emptyList() }
+        return list.map { mapToModel(it) ?: return emptyList() }
     }
 
     override fun update(item: User): User? {
@@ -94,7 +94,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 )
             if (modifiedRows > 0) returnItem = UserDB.from(item)
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun add(item: User): User? {
@@ -113,7 +113,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 )
             returnItem = UserDB.from(item)
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun addToList(item: User, anime: Anime): User? {
@@ -127,7 +127,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 )
             returnItem = UserDB.from(item)
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
 
@@ -142,7 +142,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 )
             returnItem = UserDB.from(item)
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun delete(id: UUID) {
@@ -153,7 +153,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
         }
     }
 
-    private fun mapToDTO(user: UserDB?): User? {
+    private fun mapToModel(user: UserDB?): User? {
         if (user == null) return null
         return User(
             user.name,

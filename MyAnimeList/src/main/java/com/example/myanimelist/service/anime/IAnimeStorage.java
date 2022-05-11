@@ -5,5 +5,5 @@ import com.example.myanimelist.service.IStorage;
 
 import java.util.List;
 
-public interface IAimeStorage extends IStorage<List<AnimeDTO>> {
+public interface IAnimeStorage extends IStorage<List<AnimeDTO>> {
 }

@@ -9,16 +9,17 @@ import com.example.myanimelist.repositories.modelsDB.ReviewDB
 import com.example.myanimelist.repositories.users.IUsersRepository
 import java.util.*
 
+//TODO Review reviews
 class ReviewsRepository(
     private val databaseManager: DataBaseManager,
     private val animeRepository: IAnimeRepository,
     private val usersRepository: IUsersRepository
 ) : IRepositoryReview {
 
-    override fun addReview(review: Review): Review? {
+    override fun add(review: Review): Review? {
         databaseManager.execute {
             val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
-            databaseManager.insert(query, review.user.id, review.anime.id,review.score, review.id, review.comment)
+            databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id, review.comment)
             return review
         }
         return null
@@ -56,4 +57,34 @@ class ReviewsRepository(
         }
     }
 
+    override fun findAll(): Iterable<Review> {
+        val list: MutableList<ReviewDB> = mutableListOf()
+
+        databaseManager.execute {
+            val sql = "SELECT * FROM reviews"
+            val res =
+                databaseManager.select(sql)
+
+            while (res.next()) {
+                val review = ReviewDB(
+                    UUID.fromString(res.getString("id")),
+                    UUID.fromString(res.getString("idAnime")),
+                    UUID.fromString(res.getString("idUser")),
+                    res.getInt("score"),
+                    res.getString("review")
+                )
+                list.add(review)
+            }
+        }
+
+        return list.map {
+            Review(
+                animeRepository.findById(it.idAnime) ?: return emptyList(),
+                usersRepository.findById(it.idUser) ?: return emptyList(),
+                it.score,
+                it.comment,
+                it.id
+            )
+        }
+    }
 }
