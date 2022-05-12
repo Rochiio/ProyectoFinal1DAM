@@ -1,9 +1,8 @@
 package com.example.myanimelist.utils
 
-enum class ViewConfig(val value: String = "") {
-    WIDTH("600.0"),
-    HEIGHT("400.0"),
-    ABOUT_WIDTH("450.0"),
-    ABOUT_HEIGHT("300.0"),
-    ICON("icons/icono.png")
-}
+
+const val WIDTH: Double = 600.0
+const val HEIGHT: Double = 400.0
+const val ABOUT_WIDTH: Double = 450.0
+const val ABOUT_HEIGHT: Double = 300.0
+const val ICON: String = "icons/icono.png"
