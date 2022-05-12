@@ -1,19 +1,18 @@
 package com.example.myanimelist.repositories.reviews
 
 import com.example.myanimelist.exceptions.RepositoryException
+import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.models.User
-import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
+import com.example.myanimelist.modules.repositoryModule
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
-import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import com.example.myanimelist.utilities.DataDB.getTestingUser
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
 import org.koin.core.context.startKoin
 import org.koin.test.inject
 import org.koin.test.junit5.AutoCloseKoinTest
@@ -23,6 +22,7 @@ internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
     private val usersRepository by inject<IUsersRepository>()
     private val animeRepository by inject<IAnimeRepository>()
 
+    private val db by inject<DataBaseManager>()
     private val user: User
     private val anime: Anime
 
@@ -34,8 +34,8 @@ internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
             animeRepository.add(getTestingAnime()) ?: throw RepositoryException("Couldn't load anime for Reviews tests")
     }
 
-    @AfterEach
-    fun deleteAll() = DataDB.deleteAll("Reviews")
+    @BeforeEach
+    fun setUp() = db.initData("MyAnimeList/db/script.sql",false)
 
 
     private var reviewTest =
@@ -50,19 +50,14 @@ internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
     @Test
     fun showReviewsAnime() {
         reviewsRepository.add(reviewTest)
-        val listResult = reviewsRepository.findByAnimeId(reviewTest.anime.id)
+        val listResult = reviewsRepository.findByAnimeId(reviewTest.anime.id).toList()
         assertEquals(listResult[0], reviewTest)
     }
 
     @Test
-    fun updateReview() {
+    fun showAllReviews() {
         reviewsRepository.add(reviewTest)
-        reviewTest.score = 5
-        reviewTest.comment = "AAA"
-        val resultUpdated = reviewsRepository.update(reviewTest)
-
-        assertAll(
-            { assertEquals(resultUpdated?.score, 5) },
-            { assertEquals(resultUpdated?.comment, "AAA") })
+        val listResult = reviewsRepository.findAll().toList()
+        assert(listResult.contains(reviewTest))
     }
 }

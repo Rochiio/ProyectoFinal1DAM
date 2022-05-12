@@ -1,6 +1,6 @@
 package com.example.myanimelist.repositories.users
 
-import com.example.myanimelist.modules.RepositoriesModules.repositoryModule
+import com.example.myanimelist.modules.repositoryModule
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
@@ -13,7 +13,7 @@ import org.koin.test.junit5.AutoCloseKoinTest
 import java.util.*
 import kotlin.test.assertNull
 
-internal class UsersRepositoryTest : AutoCloseKoinTest() {
+class UsersRepositoryTest : AutoCloseKoinTest() {
     private val usersRepository by inject<IUsersRepository>()
     private val animeRepository by inject<IAnimeRepository>()
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.InicioController">
+    <children>
+        <VBox layoutX="19.0" layoutY="63.0" prefHeight="146.0" prefWidth="369.0" spacing="15.0" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="212.0" AnchorPane.topAnchor="63.0">
+            <children>
+                <TextField fx:id="txtEmail" promptText="Email" styleClass="text-input" />
+                <TextField fx:id="txtUsernameRegister" promptText="Username" styleClass="text-input" />
+                <PasswordField fx:id="txtPasswordRegister" promptText="Password" styleClass="text-input" />
+                <PasswordField fx:id="txtConfirmPassword" promptText="Confirm Password" styleClass="text-input" />
+            </children>
+        </VBox>
+        <VBox layoutX="213.0" layoutY="265.0" prefHeight="80.0" prefWidth="175.0" spacing="10.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="213.0" AnchorPane.rightAnchor="212.0" AnchorPane.topAnchor="265.0">
+            <children>
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="177.0" text="Register" />
+                <Hyperlink alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="181.0" styleClass="linkBasic" text="Login" textAlignment="JUSTIFY" underline="true" />
+            </children>
+        </VBox>
+        <Circle depthTest="DISABLE" fill="#e2e9ef" layoutX="517.0" layoutY="70.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="259.0" AnchorPane.leftAnchor="457.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="21.0" />
+    </children>
+</AnchorPane>

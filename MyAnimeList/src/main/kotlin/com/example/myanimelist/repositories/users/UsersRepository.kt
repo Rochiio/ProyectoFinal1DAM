@@ -1,14 +1,16 @@
 package com.example.myanimelist.repositories.users
 
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelistjava.managers.DataBaseManager
+import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
+import org.apache.logging.log4j.Logger
 import java.util.*
 
 
-class UsersRepository(private val databaseManager: _root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager) : IUsersRepository {
+class UsersRepository(val databaseManager: DataBaseManager, private val logger: Logger) : IUsersRepository {
+
 
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
@@ -26,10 +28,11 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                     set.getDate("date_nacimiento"),
                     set.getString("imageUrl")
                 )
+                logger.info("[findByName] Encotrado usuario $user")
                 list.add(user)
             }
         }
-        return list.map { mapToDTO(it) ?: return emptyList() }
+        return list.map { mapToModel(it) ?: return emptyList() }
     }
 
     override fun findById(id: UUID): User? {
@@ -49,8 +52,9 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                 set.getDate("date_nacimiento"),
                 set.getString("imageUrl")
             )
+            logger.info("Encotrado usuario $returnItem")
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun findAll(): List<User> {
@@ -71,10 +75,11 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                     set.getString("imageUrl")
                 )
                 list.add(user)
+                logger.info("Se han encontrado los usuarios: $list")
             }
         }
 
-        return list.map { mapToDTO(it) ?: return emptyList() }
+        return list.map { mapToModel(it) ?: return emptyList() }
     }
 
     override fun update(item: User): User? {
@@ -92,9 +97,14 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                     item.birthDate,
                     item.id.toString()
                 )
-            if (modifiedRows > 0) returnItem = UserDB.from(item)
+            if (modifiedRows > 0) {
+                returnItem = UserDB.from(item)
+                logger.info("Se ha modificado $modifiedRows elementos. ")
+            } else {
+                logger.info("No se han modificado elementos")
+            }
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun add(item: User): User? {
@@ -111,9 +121,11 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                     item.email,
                     item.birthDate
                 )
+
             returnItem = UserDB.from(item)
+            logger.info("Añadido usuario $returnItem")
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun addToList(item: User, anime: Anime): User? {
@@ -126,8 +138,9 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                     anime.id
                 )
             returnItem = UserDB.from(item)
+            logger.info("Se ha añadido a la lista de $item el anime $anime")
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
 
@@ -141,8 +154,9 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                     anime.id
                 )
             returnItem = UserDB.from(item)
+            logger.info("Se ha eliminado el anime $anime de la lista de $item")
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun delete(id: UUID) {
@@ -150,10 +164,11 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
 
         databaseManager.execute {
             databaseManager.delete("Delete from Usuarios where id = ?", id)
+            logger.info("Se ha eliminado el usuario ${findById(id)}")
         }
     }
 
-    private fun mapToDTO(user: UserDB?): User? {
+    private fun mapToModel(user: UserDB?): User? {
         if (user == null) return null
         return User(
             user.name,

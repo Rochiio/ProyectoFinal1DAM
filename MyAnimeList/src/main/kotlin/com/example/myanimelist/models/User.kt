@@ -13,6 +13,18 @@ data class User(
     val myList: List<Anime>,
     override val id: UUID = UUID.randomUUID()
 ) : AbstractUser() {
+
+    constructor(
+        name: String,
+        email: String,
+        password: String,
+        createDate: Date,
+        birthDate: Date,
+        img: String?,
+        id: UUID = UUID.randomUUID()
+    ) :
+            this(name, email, password, createDate, birthDate, img, emptyList<Anime>(), id)
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

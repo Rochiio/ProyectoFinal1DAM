@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * @author JoaquinAyG
  */
 
-public class AnimeStorage implements IAimeStorage {
+public class AnimeStorage implements IAnimeStorage {
 
     public AnimeStorage() {
         mkdir();

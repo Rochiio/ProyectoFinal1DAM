@@ -1,12 +1,13 @@
 package com.example.myanimelist.repositories.animes
 
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelistjava.managers.DataBaseManager
+import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
+import org.apache.logging.log4j.Logger
 import java.util.*
 
-class AnimeRepository(private val databaseManager: _root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager) : IAnimeRepository {
-
+class AnimeRepository(private val databaseManager: DataBaseManager, private val logger: Logger) :
+    IAnimeRepository {
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"
         databaseManager.execute {
@@ -14,7 +15,7 @@ class AnimeRepository(private val databaseManager: _root_ide_package_.com.exampl
 
             if (!result.next()) return null
 
-            return Anime(
+            val anime = Anime(
                 id = UUID.fromString(result.getString("id")),
                 title = result.getString("title"),
                 titleEnglish = result.getString("title_english"),
@@ -26,6 +27,8 @@ class AnimeRepository(private val databaseManager: _root_ide_package_.com.exampl
                 genres = result.getString("genre").split(",").toList(),
                 img = result.getString("imageUrl")
             )
+            logger.info("Encontrado el anime $anime")
+            return anime
         }
         return null
     }
@@ -49,6 +52,7 @@ class AnimeRepository(private val databaseManager: _root_ide_package_.com.exampl
                     img = result.getString("imageUrl")
                 )
                 animes.add(anime)
+                logger.info("Encontrados los animes: $animes")
             }
             return animes
         }
@@ -82,6 +86,7 @@ class AnimeRepository(private val databaseManager: _root_ide_package_.com.exampl
                 item.types,
                 item.id.toString()
             )
+            logger.info("actualizado el anime $item")
             return item
         }
 
@@ -104,6 +109,7 @@ class AnimeRepository(private val databaseManager: _root_ide_package_.com.exampl
                 item.rating,
                 item.types
             )
+            logger.info("Añadido anime $item")
             return item
         }
         return null
@@ -113,6 +119,7 @@ class AnimeRepository(private val databaseManager: _root_ide_package_.com.exampl
         val query = "DELETE FROM animes WHERE id = ?"
         databaseManager.execute {
             databaseManager.delete(query, id)
+            logger.info("Eliminado el anime ${findById(id)}")
         }
     }
 }
