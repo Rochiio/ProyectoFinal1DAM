@@ -1,5 +1,7 @@
 package com.example.myanimelist.modules
 
+import com.example.myanimelist.filters.login.LoginFilters
+import com.example.myanimelist.filters.login.RegisterFilters
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.repositories.admins.AdminRepository
 import com.example.myanimelist.repositories.admins.IAdminRepository
@@ -24,4 +26,7 @@ val repositoryModule = module {
     single<IRepositoryReview> { ReviewsRepository(get(), get(), get()) }
     single<IBackupStorage> { BackupStorage() }
     single<IAnimeStorage> { AnimeStorage() }
+    single { LoginFilters(get()) }
+    single { RegisterFilters(get()) }
+
 }

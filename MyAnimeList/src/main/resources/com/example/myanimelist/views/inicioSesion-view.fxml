@@ -35,7 +35,8 @@
               AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="136.0"
               AnchorPane.topAnchor="256.0">
             <children>
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0"
+                <Button onAction="#login" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                        prefHeight="25.0"
                         prefWidth="85.0" text="Log In" textAlignment="CENTER"/>
                 <Hyperlink fx:id="btnRegister" alignment="CENTER" contentDisplay="CENTER"
                            onAction="#changeSceneToRegister" prefHeight="35.0" prefWidth="116.0" styleClass="linkBasic"
