@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="480.0" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="480.0" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="260.0" prefWidth="480.0">
          <children>
@@ -15,41 +18,76 @@
                <image>
                   <Image url="@../images/logo/ProyectoFinal1DAMLogo.png" />
                </image>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
             </ImageView>
             <VBox alignment="CENTER_LEFT" prefHeight="260.0" prefWidth="323.0">
                <children>
-                  <Label alignment="TOP_CENTER" prefHeight="47.0" prefWidth="308.0" styleClass="tittle" text="Acerca de:" textAlignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
+                  <Label alignment="TOP_CENTER" prefHeight="47.0" prefWidth="308.0" styleClass="tittle" text="Acerca de" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Label>
-                  <Label prefHeight="37.0" prefWidth="326.0" text="Rocío Palao">
-                     <padding>
-                        <Insets top="20.0" />
-                     </padding>
+                  <Hyperlink prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Rocío Palao">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/github.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Mohamed Asidah">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/github.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
                   </Label>
-                  <Label prefHeight="27.0" prefWidth="369.0" text="Mohamed Asidah">
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
+                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Joaquín Ayllón">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/github.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
                   </Label>
-                  <Label prefHeight="27.0" prefWidth="349.0" text="Joaquín Ayllón">
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
+                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Roberto Blázquez">
+                     <graphic>
+                        <ImageView fitHeight="63.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/github.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
                   </Label>
-                  <Label prefHeight="27.0" prefWidth="342.0" text="Roberto Blázquez">
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </Label>
-                  <Label prefHeight="27.0" prefWidth="332.0" text="Fran Toribio">
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
+                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Fran Toribio">
+                     <graphic>
+                        <ImageView fitHeight="63.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/github.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
                   </Label>
                   <HBox alignment="TOP_RIGHT" prefHeight="68.0" prefWidth="315.0">
                      <children>
@@ -57,15 +95,14 @@
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="63.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/github.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Hyperlink>
-                        <ImageView fitHeight="63.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/github.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin>
-                        </ImageView>
                      </children>
                   </HBox>
                </children>
@@ -75,6 +112,6 @@
    </children>
    <styleClass>
       <String fx:value="fondo" />
-      <String fx:value="acercade" />
+      <String fx:value="acercaDe" />
    </styleClass>
 </Pane>
