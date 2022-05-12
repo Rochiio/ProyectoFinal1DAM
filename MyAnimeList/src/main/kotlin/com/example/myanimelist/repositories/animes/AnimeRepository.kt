@@ -3,6 +3,7 @@ package com.example.myanimelist.repositories.animes
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
+import java.time.LocalDate
 import java.util.*
 import java.util.logging.LogManager
 import java.util.logging.Logger
@@ -23,7 +24,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepo
                 types = result.getString("type"),
                 episodes = result.getInt("episodes"),
                 status = result.getString("status"),
-                date = result.getDate("releaseDate"),
+                date = LocalDate.parse(result.getString("releaseDate")),
                 rating = result.getString("rating"),
                 genres = result.getString("genre").split(",").toList(),
                 img = result.getString("imageUrl")
@@ -47,7 +48,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepo
                     types = result.getString("type"),
                     episodes = result.getInt("episodes"),
                     status = result.getString("status"),
-                    date = result.getDate("releaseDate"),
+                    date = LocalDate.parse(result.getString("releaseDate")),
                     rating = result.getString("rating"),
                     genres = result.getString("genre").split(",").toList(),
                     img = result.getString("imageUrl")

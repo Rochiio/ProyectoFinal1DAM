@@ -5,6 +5,7 @@ import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
+import java.time.LocalDate
 import java.util.*
 import java.util.logging.LogManager
 import java.util.logging.Logger
@@ -26,8 +27,8 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     set.getString("nombre"),
                     set.getString("email"),
                     set.getString("password"),
-                    set.getDate("date_alta"),
-                    set.getDate("date_nacimiento"),
+                    LocalDate.parse(set.getString("date_alta")),
+                    LocalDate.parse(set.getString("date_nacimiento")),
                     set.getString("imageUrl")
                 )
                 logger.info("[findByName] Encotrado usuario $user")
@@ -50,8 +51,8 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 set.getString("nombre"),
                 set.getString("email"),
                 set.getString("password"),
-                set.getDate("date_alta"),
-                set.getDate("date_nacimiento"),
+                LocalDate.parse(set.getString("date_alta")),
+                LocalDate.parse(set.getString("date_nacimiento")),
                 set.getString("imageUrl")
             )
             logger.info("Encotrado usuario $returnItem")
@@ -72,8 +73,8 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     set.getString("nombre"),
                     set.getString("email"),
                     set.getString("password"),
-                    set.getDate("date_alta"),
-                    set.getDate("date_nacimiento"),
+                    LocalDate.parse(set.getString("date_alta")),
+                    LocalDate.parse(set.getString("date_nacimiento")),
                     set.getString("imageUrl")
                 )
                 list.add(user)
@@ -200,7 +201,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     listSet.getString("type"),
                     listSet.getInt("episodes"),
                     listSet.getString("status"),
-                    listSet.getDate("releaseDate"),
+                    LocalDate.parse(listSet.getString("releaseDate")),
                     listSet.getString("rating"),
                     listSet.getString("genre").split(","),
                     listSet.getString("imageUrl"),
