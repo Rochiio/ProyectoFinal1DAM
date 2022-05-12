@@ -17,6 +17,7 @@ module com.example.myanimelist {
     requires org.apache.logging.log4j;
     requires dagger;
     requires javax.inject;
+    requires java.compiler;
 
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;
