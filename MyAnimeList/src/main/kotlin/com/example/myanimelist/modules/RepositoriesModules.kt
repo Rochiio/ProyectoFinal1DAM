@@ -14,14 +14,37 @@ import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.service.backup.BackupStorage
 import com.example.myanimelist.service.backup.IBackupStorage
 import org.koin.dsl.module
+import java.util.logging.LogManager
 
 
 val repositoryModule = module {
     single { DataBaseManager() }
-    single<IUsersRepository> { UsersRepository(get()) }
-    single<IAnimeRepository> { AnimeRepository(get()) }
-    single<IAdminRepository> { AdminRepository(get()) }
-    single<IRepositoryReview> { ReviewsRepository(get(), get(), get()) }
+    single<IUsersRepository> {
+        UsersRepository(
+            get(),
+            LogManager.getLogManager().getLogger("users.repository") ?: throw Exception("Logger Not found")
+        )
+    }
+    single<IAnimeRepository> {
+        AnimeRepository(
+            get(),
+            LogManager.getLogManager().getLogger("anime.repository") ?: throw Exception("Logger Not found")
+        )
+    }
+    single<IAdminRepository> {
+        AdminRepository(
+            get(),
+            LogManager.getLogManager().getLogger("admin.repository") ?: throw Exception("Logger Not found")
+        )
+    }
+    single<IRepositoryReview> {
+        ReviewsRepository(
+            get(),
+            get(),
+            get(),
+            LogManager.getLogManager().getLogger("reviews.repository") ?: throw Exception("Logger Not found")
+        )
+    }
     single<IBackupStorage> { BackupStorage() }
     single<IAnimeStorage> { AnimeStorage() }
 }

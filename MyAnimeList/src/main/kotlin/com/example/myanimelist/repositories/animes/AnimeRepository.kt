@@ -8,8 +8,8 @@ import java.util.*
 import java.util.logging.LogManager
 import java.util.logging.Logger
 
-class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepository {
-        val logger : Logger = LogManager.getLogManager().getLogger("anime.repository")
+class AnimeRepository(private val databaseManager: DataBaseManager, logger: Logger) : IAnimeRepository {
+    val logger: Logger = LogManager.getLogManager().getLogger("anime.repository")
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"
         databaseManager.execute {
@@ -17,14 +17,14 @@ class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepo
 
             if (!result.next()) return null
 
-            val anime =  Anime(
+            val anime = Anime(
                 id = UUID.fromString(result.getString("id")),
                 title = result.getString("title"),
                 titleEnglish = result.getString("title_english"),
                 types = result.getString("type"),
                 episodes = result.getInt("episodes"),
                 status = result.getString("status"),
-                date = LocalDate.parse(result.getString("releaseDate")),
+                date = result.getObject("releaseDate", LocalDate::class.java),
                 rating = result.getString("rating"),
                 genres = result.getString("genre").split(",").toList(),
                 img = result.getString("imageUrl")
@@ -48,7 +48,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepo
                     types = result.getString("type"),
                     episodes = result.getInt("episodes"),
                     status = result.getString("status"),
-                    date = LocalDate.parse(result.getString("releaseDate")),
+                    date = result.getObject("releaseDate", LocalDate::class.java),
                     rating = result.getString("rating"),
                     genres = result.getString("genre").split(",").toList(),
                     img = result.getString("imageUrl")

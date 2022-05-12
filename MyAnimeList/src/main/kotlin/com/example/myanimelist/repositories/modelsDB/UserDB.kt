@@ -1,7 +1,6 @@
 package com.example.myanimelist.repositories.modelsDB
 
 import com.example.myanimelist.models.User
-import java.sql.Date
 import java.time.LocalDate
 import java.util.*
 

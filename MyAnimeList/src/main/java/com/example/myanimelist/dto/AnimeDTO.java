@@ -3,7 +3,6 @@ package com.example.myanimelist.dto;
 import com.example.myanimelist.models.Anime;
 import lombok.Data;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.UUID;
