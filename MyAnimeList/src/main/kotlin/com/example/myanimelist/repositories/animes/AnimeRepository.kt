@@ -1,11 +1,11 @@
 package com.example.myanimelist.repositories.animes
 
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelistjava.managers.DataBaseManager
+import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import java.util.*
 
-class AnimeRepository(private val databaseManager: _root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager) : IAnimeRepository {
+class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepository {
 
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"

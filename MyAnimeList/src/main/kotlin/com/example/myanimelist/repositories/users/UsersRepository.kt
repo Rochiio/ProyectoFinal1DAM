@@ -1,14 +1,14 @@
 package com.example.myanimelist.repositories.users
 
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelistjava.managers.DataBaseManager
+import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
 import java.util.*
 
 
-class UsersRepository(private val databaseManager: _root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager) : IUsersRepository {
+class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepository {
 
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
@@ -29,7 +29,7 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                 list.add(user)
             }
         }
-        return list.map { mapToDTO(it) ?: return emptyList() }
+        return list.map { mapToModel(it) ?: return emptyList() }
     }
 
     override fun findById(id: UUID): User? {
@@ -50,7 +50,7 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                 set.getString("imageUrl")
             )
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun findAll(): List<User> {
@@ -74,7 +74,7 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
             }
         }
 
-        return list.map { mapToDTO(it) ?: return emptyList() }
+        return list.map { mapToModel(it) ?: return emptyList() }
     }
 
     override fun update(item: User): User? {
@@ -94,7 +94,7 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                 )
             if (modifiedRows > 0) returnItem = UserDB.from(item)
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun add(item: User): User? {
@@ -113,7 +113,7 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                 )
             returnItem = UserDB.from(item)
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun addToList(item: User, anime: Anime): User? {
@@ -127,7 +127,7 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                 )
             returnItem = UserDB.from(item)
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
 
@@ -142,7 +142,7 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
                 )
             returnItem = UserDB.from(item)
         }
-        return mapToDTO(returnItem)
+        return mapToModel(returnItem)
     }
 
     override fun delete(id: UUID) {
@@ -153,7 +153,7 @@ class UsersRepository(private val databaseManager: _root_ide_package_.com.exampl
         }
     }
 
-    private fun mapToDTO(user: UserDB?): User? {
+    private fun mapToModel(user: UserDB?): User? {
         if (user == null) return null
         return User(
             user.name,

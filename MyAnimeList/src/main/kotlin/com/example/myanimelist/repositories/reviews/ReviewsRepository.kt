@@ -2,7 +2,7 @@ package com.example.myanimelist.repositories.reviews
 
 import com.example.myanimelist.exceptions.RepositoryException
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelistjava.managers.DataBaseManager
+import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.modelsDB.ReviewDB
@@ -11,7 +11,7 @@ import java.util.*
 
 //TODO Review reviews
 class ReviewsRepository(
-    private val databaseManager: _root_ide_package_.com.example.myanimelistjava.managers.DataBaseManager,
+    private val databaseManager: DataBaseManager,
     private val animeRepository: IAnimeRepository,
     private val usersRepository: IUsersRepository
 ) : IRepositoryReview {
@@ -57,20 +57,34 @@ class ReviewsRepository(
         }
     }
 
-    override fun update(review: Review): Review? {
+    override fun findAll(): Iterable<Review> {
+        val list: MutableList<ReviewDB> = mutableListOf()
+
         databaseManager.execute {
-            val query = "Update reviews SET idUser = ?, idAnime = ?, score = ?, id = ?, review = ? WHERE id = ?"
-            databaseManager.update(
-                query,
-                review.user.id,
-                review.anime.id,
-                review.score,
-                review.id,
-                review.comment,
-                review.id
-            )
-            return review
+            val sql = "SELECT * FROM reviews"
+            val res =
+                databaseManager.select(sql)
+
+            while (res.next()) {
+                val review = ReviewDB(
+                    UUID.fromString(res.getString("id")),
+                    UUID.fromString(res.getString("idAnime")),
+                    UUID.fromString(res.getString("idUser")),
+                    res.getInt("score"),
+                    res.getString("review")
+                )
+                list.add(review)
+            }
         }
-        return null
+
+        return list.map {
+            Review(
+                animeRepository.findById(it.idAnime) ?: return emptyList(),
+                usersRepository.findById(it.idUser) ?: return emptyList(),
+                it.score,
+                it.comment,
+                it.id
+            )
+        }
     }
 }

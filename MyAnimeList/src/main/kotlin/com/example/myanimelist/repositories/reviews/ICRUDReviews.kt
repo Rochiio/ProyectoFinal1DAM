@@ -1,6 +1,6 @@
 package com.example.myanimelist.repositories.reviews
 
-interface ICRUDReviews<T,ID> {
+interface ICRUDReviews<T, ID> {
     /**
      * Añadir reviews al repositorio
      * @param review review a añadir
@@ -13,12 +13,6 @@ interface ICRUDReviews<T,ID> {
      * @param animeId id del anime a ver todas sus reviews
      * @return lista con todas las reviews de ese anime
      */
-    fun findByAnimeId(animeId: ID): List<T>
-
-    /**
-     * Actualiza una review
-     * @param review review a actualizar
-     * @return review si ha sido actualizada
-     */
-    fun update(review: T): T?
+    fun findByAnimeId(animeId: ID): Iterable<T>
+    fun findAll(): Iterable<T>
 }

@@ -4,6 +4,4 @@ import com.example.myanimelist.models.Review
 import java.util.*
 
 
-interface IRepositoryReview: ICRUDReviews<Review,UUID> {
-
-}
+interface IRepositoryReview : ICRUDReviews<Review, UUID>
