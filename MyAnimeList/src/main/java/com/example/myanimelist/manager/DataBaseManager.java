@@ -34,13 +34,14 @@ public class DataBaseManager implements AutoCloseable {
     // Para manejar las conexiones y respuestas de las mismas
     private Connection connection;
 
+    private static DataBaseManager instance;
     /**
      * Constructor privado para Singleton
      * Inicializa la configuración de acceso al servidor de base de datos
      * y abre la conexión
      * Aseguramos siempre una misma instancia.
      */
-    public DataBaseManager() {
+    private DataBaseManager() {
         // System.out.println("Mi nombre es: " + this.nombre);
         if (fromProperties) {
             // initConfigFromProperties();
@@ -48,6 +49,12 @@ public class DataBaseManager implements AutoCloseable {
         } else {
             initConfig();
         }
+    }
+
+    public static DataBaseManager getInstance() {
+        if(instance == null)
+            instance = new DataBaseManager();
+        return instance;
     }
 
     /**

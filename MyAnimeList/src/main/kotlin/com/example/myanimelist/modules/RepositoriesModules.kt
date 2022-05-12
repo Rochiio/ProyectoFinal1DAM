@@ -16,7 +16,7 @@ import com.example.myanimelist.service.backup.IBackupStorage
 import org.apache.logging.log4j.LogManager
 import org.koin.dsl.module
 
-
+/*
 val repositoryModule = module {
     single { DataBaseManager() }
     single<IUsersRepository> {
@@ -48,3 +48,4 @@ val repositoryModule = module {
     single<IBackupStorage> { BackupStorage() }
     single<IAnimeStorage> { AnimeStorage() }
 }
+*/

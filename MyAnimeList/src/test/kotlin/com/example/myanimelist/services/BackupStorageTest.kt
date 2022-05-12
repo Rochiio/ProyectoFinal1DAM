@@ -1,7 +1,7 @@
 package com.example.myanimelist.services
 
 import com.example.myanimelist.dto.BackupDTO
-import com.example.myanimelist.modules.repositoryModule
+//import com.example.myanimelist.modules.repositoryModule
 import com.example.myanimelist.repositories.admins.IAdminRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.reviews.IRepositoryReview
@@ -20,9 +20,7 @@ class BackupStorageTest : AutoCloseKoinTest() {
     private val reviewRepo: IRepositoryReview by inject()
     private val adminRepo: IAdminRepository by inject()
 
-    init {
-        startKoin { modules(repositoryModule) }
-    }
+
 
     @Test
     @Order(0)

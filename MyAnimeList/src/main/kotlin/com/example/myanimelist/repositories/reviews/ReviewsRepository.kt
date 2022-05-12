@@ -4,19 +4,30 @@ import com.example.myanimelist.exceptions.RepositoryException
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Review
+import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.modelsDB.ReviewDB
 import com.example.myanimelist.repositories.users.IUsersRepository
+import com.example.myanimelist.repositories.users.UsersRepository
+import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
+import javax.inject.Inject
 
 //TODO Review reviews
-class ReviewsRepository(
+class ReviewsRepository
+@Inject constructor(
+    private val databaseManager: DataBaseManager,
+    private val animeRepository: AnimeRepository,
+    private val usersRepository: UsersRepository
+) : IRepositoryReview{
+    val logger : Logger = LogManager.getLogger(ReviewsRepository::class)
+    /*(
     private val databaseManager: DataBaseManager,
     private val animeRepository: IAnimeRepository,
     private val usersRepository: IUsersRepository,
     private val logger: Logger
-) : IRepositoryReview {
+) : IRepositoryReview {*/
 
     override fun add(review: Review): Review? {
         databaseManager.execute {
