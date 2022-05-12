@@ -4,6 +4,7 @@ import com.example.myanimelist.models.Anime;
 import lombok.Data;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -50,6 +51,6 @@ public class AnimeDTO {
     }
 
     public Anime fromDTO() {
-        return new Anime(title, titleEnglish, types, episodes, status, Date.valueOf(date), rating, Arrays.stream(genres.split(",")).toList(), img, id);
+        return new Anime(title, titleEnglish, types, episodes, status, LocalDate.parse(date), rating, Arrays.stream(genres.split(",")).toList(), img, id);
     }
 }

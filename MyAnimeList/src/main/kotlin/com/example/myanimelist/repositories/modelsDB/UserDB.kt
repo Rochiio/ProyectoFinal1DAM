@@ -2,6 +2,7 @@ package com.example.myanimelist.repositories.modelsDB
 
 import com.example.myanimelist.models.User
 import java.sql.Date
+import java.time.LocalDate
 import java.util.*
 
 internal data class UserDB(
@@ -9,8 +10,8 @@ internal data class UserDB(
     var name: String,
     var email: String,
     var password: String,
-    val createDate: Date,
-    val birthDate: Date,
+    val createDate: LocalDate,
+    val birthDate: LocalDate,
     var img: String?
 ) {
     companion object {
