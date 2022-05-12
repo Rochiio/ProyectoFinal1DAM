@@ -1,32 +1,48 @@
 package com.example.myanimelist.views.models;
 
+import com.example.myanimelist.models.Anime;
 import javafx.beans.property.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 public class AnimeView {
-    StringProperty title;
-    StringProperty titleEnglish;
-    StringProperty types;
-    IntegerProperty episodes;
-    StringProperty status;
-    StringProperty date;
-    StringProperty rating;
-    ObjectProperty<List<String>> genres;
-    StringProperty img;
-    StringProperty id;
+    final StringProperty title;
+    final StringProperty titleEnglish;
+    final StringProperty types;
+    final IntegerProperty episodes;
+    final StringProperty status;
+    final ObjectProperty<LocalDate> date;
+    final StringProperty rating;
+    final StringProperty genres;
+    final StringProperty img;
+    final UUID id;
 
-    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, String date, String rating, List<String> genres, String img, String id) {
+    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, LocalDate date, String rating, List<String> genres, String img, UUID id) {
         this.title = new SimpleStringProperty(title);
         this.titleEnglish = new SimpleStringProperty(titleEnglish);
         this.types = new SimpleStringProperty(types);
         this.episodes = new SimpleIntegerProperty(episodes);
         this.status = new SimpleStringProperty(status);
-        this.date = new SimpleStringProperty(date);
+        this.date = new SimpleObjectProperty<>(date);
         this.rating = new SimpleStringProperty(rating);
-        this.genres = new SimpleObjectProperty<>(genres);
+        this.genres = new SimpleStringProperty(String.join(",", genres));
         this.img = new SimpleStringProperty(img);
-        this.id = new SimpleStringProperty(id);
+        this.id = id;
+    }
+
+    public AnimeView(Anime anime) {
+        this.title = new SimpleStringProperty(anime.getTitle());
+        this.titleEnglish = new SimpleStringProperty(anime.getTitleEnglish());
+        this.types = new SimpleStringProperty(anime.getTypes());
+        this.episodes = new SimpleIntegerProperty(anime.getEpisodes());
+        this.status = new SimpleStringProperty(anime.getStatus());
+        this.date = new SimpleObjectProperty<>(anime.getDate());
+        this.rating = new SimpleStringProperty(anime.getRating());
+        this.genres = new SimpleStringProperty(String.join(",", anime.getGenres()));
+        this.img = new SimpleStringProperty(anime.getImg());
+        this.id = anime.getId();
     }
 
     public String getTitle() {
@@ -89,15 +105,15 @@ public class AnimeView {
         this.status.set(status);
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date.get();
     }
 
-    public StringProperty dateProperty() {
+    public ObjectProperty<LocalDate> dateProperty() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date.set(date);
     }
 
@@ -113,15 +129,15 @@ public class AnimeView {
         this.rating.set(rating);
     }
 
-    public List<String> getGenres() {
+    public String getGenres() {
         return genres.get();
     }
 
-    public ObjectProperty<List<String>> genresProperty() {
+    public StringProperty genresProperty() {
         return genres;
     }
 
-    public void setGenres(List<String> genres) {
+    public void setGenres(String genres) {
         this.genres.set(genres);
     }
 
@@ -137,16 +153,8 @@ public class AnimeView {
         this.img.set(img);
     }
 
-    public String getId() {
-        return id.get();
-    }
-
-    public StringProperty idProperty() {
+    public UUID getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id.set(id);
     }
 
     @Override

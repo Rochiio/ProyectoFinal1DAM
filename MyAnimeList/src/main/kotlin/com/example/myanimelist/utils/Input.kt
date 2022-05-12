@@ -1,5 +1,7 @@
 package com.example.myanimelist.utils
 
+import java.awt.Desktop
+
 class Input {
 
     companion object {
@@ -14,4 +16,7 @@ class Input {
             return value.matches(regex)
         }
     }
+
+
+
 }

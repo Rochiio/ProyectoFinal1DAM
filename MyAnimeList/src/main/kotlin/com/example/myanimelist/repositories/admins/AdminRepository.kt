@@ -4,6 +4,7 @@ import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Admin
 import java.sql.SQLException
+import java.time.LocalDate
 import java.util.*
 
 class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
@@ -22,8 +23,8 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
                     result.getString("name"),
                     result.getString("email"),
                     result.getString("password"),
-                    result.getDate("createDate"),
-                    result.getDate("birthDate"),
+                    LocalDate.parse(result.getString("createDate")),
+                    LocalDate.parse(result.getString("birthDate")),
                     UUID.fromString(result.getString("id"))
                 )
 
@@ -49,8 +50,8 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
                         result.getString("name"),
                         result.getString("email"),
                         result.getString("password"),
-                        result.getDate("createDate"),
-                        result.getDate("birthDate"),
+                        LocalDate.parse(result.getString("createDate")),
+                        LocalDate.parse(result.getString("birthDate")),
                         UUID.fromString(result.getString("id"))
                     )
                 )
