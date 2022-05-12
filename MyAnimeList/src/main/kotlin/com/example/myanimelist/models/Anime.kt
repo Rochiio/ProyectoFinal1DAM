@@ -1,6 +1,7 @@
 package com.example.myanimelist.models
 
 import java.sql.Date
+import java.time.LocalDate
 import java.util.*
 
 data class Anime(
@@ -9,7 +10,7 @@ data class Anime(
     var types: String,
     var episodes: Int,
     var status: String,
-    var date: Date,
+    var date: LocalDate,
     var rating: String,
     var genres: List<String>,
     var img: String?,
