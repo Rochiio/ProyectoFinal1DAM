@@ -45,7 +45,7 @@ class RegisterController : InicioController() {
                 txtUsername.text, txtEmail.text, txtPassword.text, Date(Date().time), Date(Date().time), null,
                 emptyList()
             )
-        )
+        ) ?: Alert(Alert.AlertType.ERROR).show("Register error", "Error al crear usuario")
 
         Alert(Alert.AlertType.INFORMATION).show("Register completed", "You will go to the main page")
     }
