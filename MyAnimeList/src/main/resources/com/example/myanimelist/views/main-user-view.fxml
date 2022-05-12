@@ -22,7 +22,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="358.0" prefWidth="585.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="animeTable" prefHeight="358.0" prefWidth="585.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
                               <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Ranking" />
                               <TableColumn prefWidth="236.66661071777344">
@@ -30,7 +30,7 @@
                                     <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="214.0" spacing="20.0">
                                        <children>
                                           <Label text="Anime" />
-                                          <TextField id="nameSearch" fx:id="nameSearch" nodeOrientation="LEFT_TO_RIGHT" onAction="#sortBy" prefHeight="25.0" prefWidth="101.0" promptText="search" />
+                                          <TextField id="animeNameSearch" fx:id="animeNameSearch" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#sortByText" prefHeight="25.0" prefWidth="101.0" promptText="search" />
                                        </children>
                                     </HBox>
                                  </graphic>
@@ -49,7 +49,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="358.0" prefWidth="585.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="myListTable" prefHeight="358.0" prefWidth="585.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
                               <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Ranking" />
                               <TableColumn prefWidth="236.66661071777344">
@@ -57,7 +57,7 @@
                                     <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="214.0" spacing="20.0">
                                        <children>
                                           <Label text="Anime" />
-                                          <TextField id="nameSearch" fx:id="nameSearch1" nodeOrientation="LEFT_TO_RIGHT" onAction="#sortBy" prefHeight="25.0" prefWidth="101.0" promptText="search" />
+                                          <TextField id="nameSearch" fx:id="myListNameSearch" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#sortByText" prefHeight="25.0" prefWidth="101.0" promptText="search" />
                                        </children>
                                     </HBox>
                                  </graphic>
