@@ -6,7 +6,6 @@ import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
 import org.apache.logging.log4j.Logger
-import java.time.LocalDate
 import java.util.*
 
 
@@ -25,8 +24,8 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
                     set.getString("nombre"),
                     set.getString("email"),
                     set.getString("password"),
-                    set.getObject("date_alta", LocalDate::class.java),
-                    set.getObject("date_nacimiento", LocalDate::class.java),
+                    set.getDate("date_alta"),
+                    set.getDate("date_nacimiento"),
                     set.getString("imageUrl")
                 )
                 logger.info("[findByName] Encotrado usuario $user")
@@ -49,8 +48,8 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
                 set.getString("nombre"),
                 set.getString("email"),
                 set.getString("password"),
-                set.getObject("date_alta", LocalDate::class.java),
-                set.getObject("date_nacimiento", LocalDate::class.java),
+                set.getDate("date_alta"),
+                set.getDate("date_nacimiento"),
                 set.getString("imageUrl")
             )
             logger.info("Encotrado usuario $returnItem")
@@ -71,8 +70,8 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
                     set.getString("nombre"),
                     set.getString("email"),
                     set.getString("password"),
-                    set.getObject("date_alta", LocalDate::class.java),
-                    set.getObject("date_nacimiento", LocalDate::class.java),
+                    set.getDate("date_alta"),
+                    set.getDate("date_nacimiento"),
                     set.getString("imageUrl")
                 )
                 list.add(user)
@@ -199,7 +198,7 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
                     listSet.getString("type"),
                     listSet.getInt("episodes"),
                     listSet.getString("status"),
-                    listSet.getObject("releaseDate", LocalDate::class.java),
+                    listSet.getDate("releaseDate"),
                     listSet.getString("rating"),
                     listSet.getString("genre").split(","),
                     listSet.getString("imageUrl"),

@@ -4,7 +4,6 @@ import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import org.apache.logging.log4j.Logger
-import java.time.LocalDate
 import java.util.*
 
 class AnimeRepository(private val databaseManager: DataBaseManager, private val logger: Logger) :
@@ -23,7 +22,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager, private val 
                 types = result.getString("type"),
                 episodes = result.getInt("episodes"),
                 status = result.getString("status"),
-                date = result.getObject("releaseDate", LocalDate::class.java),
+                date = result.getDate("releaseDate"),
                 rating = result.getString("rating"),
                 genres = result.getString("genre").split(",").toList(),
                 img = result.getString("imageUrl")
@@ -47,7 +46,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager, private val 
                     types = result.getString("type"),
                     episodes = result.getInt("episodes"),
                     status = result.getString("status"),
-                    date = result.getObject("releaseDate", LocalDate::class.java),
+                    date = result.getDate("releaseDate"),
                     rating = result.getString("rating"),
                     genres = result.getString("genre").split(",").toList(),
                     img = result.getString("imageUrl")
