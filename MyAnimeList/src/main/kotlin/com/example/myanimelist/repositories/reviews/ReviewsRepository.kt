@@ -8,6 +8,8 @@ import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.modelsDB.ReviewDB
 import com.example.myanimelist.repositories.users.IUsersRepository
 import java.util.*
+import java.util.logging.LogManager
+import java.util.logging.Logger
 
 //TODO Review reviews
 class ReviewsRepository(
@@ -15,11 +17,13 @@ class ReviewsRepository(
     private val animeRepository: IAnimeRepository,
     private val usersRepository: IUsersRepository
 ) : IRepositoryReview {
+    val logger : Logger = LogManager.getLogManager().getLogger("reviews.repository")
 
     override fun add(review: Review): Review? {
         databaseManager.execute {
             val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
             databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id, review.comment)
+            logger.info("Añadida review $review")
             return review
         }
         return null

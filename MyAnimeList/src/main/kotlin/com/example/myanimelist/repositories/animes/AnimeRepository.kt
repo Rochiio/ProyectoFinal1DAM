@@ -4,9 +4,11 @@ import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import java.util.*
+import java.util.logging.LogManager
+import java.util.logging.Logger
 
 class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepository {
-
+        val logger : Logger = LogManager.getLogManager().getLogger("anime.repository")
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"
         databaseManager.execute {
@@ -14,7 +16,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepo
 
             if (!result.next()) return null
 
-            return Anime(
+            val anime =  Anime(
                 id = UUID.fromString(result.getString("id")),
                 title = result.getString("title"),
                 titleEnglish = result.getString("title_english"),
@@ -26,6 +28,8 @@ class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepo
                 genres = result.getString("genre").split(",").toList(),
                 img = result.getString("imageUrl")
             )
+            logger.info("Encontrado el anime $anime")
+            return anime
         }
         return null
     }
@@ -49,6 +53,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepo
                     img = result.getString("imageUrl")
                 )
                 animes.add(anime)
+                logger.info("Encontrados los animes: $animes")
             }
             return animes
         }

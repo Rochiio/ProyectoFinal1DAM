@@ -1,7 +1,10 @@
 .fondo{
     -fx-background-color: #99E2B4;
 }
-
+.acercade{
+    -fx-border-radius: 0 0 6 6;
+    -fx-background-radius: 0 0 6 6;
+}
 .button{
     -fx-border-radius:10;
     -fx-padding: 5;
