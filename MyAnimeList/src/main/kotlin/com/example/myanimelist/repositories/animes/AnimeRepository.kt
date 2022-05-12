@@ -3,13 +3,12 @@ package com.example.myanimelist.repositories.animes
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
+import org.apache.logging.log4j.Logger
 import java.time.LocalDate
 import java.util.*
-import java.util.logging.LogManager
-import java.util.logging.Logger
 
-class AnimeRepository(private val databaseManager: DataBaseManager, logger: Logger) : IAnimeRepository {
-    val logger: Logger = LogManager.getLogManager().getLogger("anime.repository")
+class AnimeRepository(private val databaseManager: DataBaseManager, private val logger: Logger) :
+    IAnimeRepository {
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"
         databaseManager.execute {
