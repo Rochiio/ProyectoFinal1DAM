@@ -10,7 +10,6 @@ import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.sql.Date
 import java.time.LocalDate
 import java.util.*
 
