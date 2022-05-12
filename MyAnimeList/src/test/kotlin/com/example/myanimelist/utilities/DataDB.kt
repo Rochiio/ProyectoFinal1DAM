@@ -8,14 +8,14 @@ import com.example.myanimelist.models.User
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
-import org.koin.core.component.KoinComponent
+
 import org.koin.core.component.inject
 import java.sql.Date
 import java.util.*
 
-object DataDB : KoinComponent {
+object DataDB {
 
-    private val dataBaseManager by inject<DataBaseManager>()
+    private val dataBaseManager = DataBaseManager.getInstance()
 
     fun deleteAll(table: String) {
         val animeQuery = "DELETE FROM $table"
