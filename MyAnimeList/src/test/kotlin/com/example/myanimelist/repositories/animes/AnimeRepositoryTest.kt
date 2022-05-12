@@ -1,6 +1,7 @@
 package com.example.myanimelist.repositories.animes
 
 //import com.example.myanimelist.modules.repositoryModule
+import com.example.myanimelist.di.components.DaggerAnimeRepositoryDI
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.utilities.DataDB
@@ -17,12 +18,8 @@ import kotlin.test.assertEquals
 
 internal class AnimeRepositoryTest : AutoCloseKoinTest() {
 
-   /* private val repo by inject<IAnimeRepository>()
 
-    init {
-        startKoin { modules(repositoryModule) }
-    }*/
-private val repo : AnimeRepository = AnimeRepository(DataBaseManager.getInstance())
+private val repo = DaggerAnimeRepositoryDI.create().build()
     @AfterEach
     internal fun deleteAll() = DataDB.deleteAll("Animes")
 

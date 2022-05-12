@@ -1,6 +1,8 @@
 package com.example.myanimelist.repositories.users
 
 //import com.example.myanimelist.modules.repositoryModule
+import com.example.myanimelist.di.components.DaggerAnimeRepositoryDI
+import com.example.myanimelist.di.components.DaggerUsersRepositoryDI
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
@@ -16,8 +18,9 @@ import java.util.*
 import kotlin.test.assertNull
 
 class UsersRepositoryTest : AutoCloseKoinTest() {
-    private val usersRepository : UsersRepository = UsersRepository(DataBaseManager.getInstance())
-    private val animeRepository : AnimeRepository = AnimeRepository(DataBaseManager.getInstance())
+    
+    private val usersRepository = DaggerUsersRepositoryDI.create().build()
+    private val animeRepository = DaggerAnimeRepositoryDI.create().build()
 
 
     @AfterEach

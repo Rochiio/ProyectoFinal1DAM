@@ -131,6 +131,7 @@
 
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -212,6 +213,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M6</version>
             </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -230,6 +232,7 @@
                             <noHeaderFiles>true</noHeaderFiles>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
 
