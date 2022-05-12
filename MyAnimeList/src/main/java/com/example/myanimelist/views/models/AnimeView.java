@@ -8,65 +8,61 @@ import java.util.List;
 import java.util.UUID;
 
 public class AnimeView {
-    final StringProperty title;
-    final StringProperty titleEnglish;
+
+    IntegerProperty ranking;
+    final ObjectProperty<Presentation> presentation;
     final StringProperty types;
     final IntegerProperty episodes;
     final StringProperty status;
     final ObjectProperty<Date> date;
     final StringProperty rating;
     final StringProperty genres;
-    final StringProperty img;
     final UUID id;
 
     public AnimeView(String title, String titleEnglish, String types, int episodes, String status, Date date, String rating, List<String> genres, String img, UUID id) {
-        this.title = new SimpleStringProperty(title);
-        this.titleEnglish = new SimpleStringProperty(titleEnglish);
+        this.presentation = new SimpleObjectProperty<>(new Presentation(title, titleEnglish, img));
         this.types = new SimpleStringProperty(types);
         this.episodes = new SimpleIntegerProperty(episodes);
         this.status = new SimpleStringProperty(status);
         this.date = new SimpleObjectProperty<>(date);
         this.rating = new SimpleStringProperty(rating);
         this.genres = new SimpleStringProperty(String.join(",", genres));
-        this.img = new SimpleStringProperty(img);
         this.id = id;
     }
 
     public AnimeView(Anime anime) {
-        this.title = new SimpleStringProperty(anime.getTitle());
-        this.titleEnglish = new SimpleStringProperty(anime.getTitleEnglish());
+        this.presentation = new SimpleObjectProperty<>(new Presentation(anime.getTitle(), anime.getTitleEnglish(), anime.getImg()));
         this.types = new SimpleStringProperty(anime.getTypes());
         this.episodes = new SimpleIntegerProperty(anime.getEpisodes());
         this.status = new SimpleStringProperty(anime.getStatus());
         this.date = new SimpleObjectProperty<>(anime.getDate());
         this.rating = new SimpleStringProperty(anime.getRating());
         this.genres = new SimpleStringProperty(String.join(",", anime.getGenres()));
-        this.img = new SimpleStringProperty(anime.getImg());
         this.id = anime.getId();
     }
 
-    public String getTitle() {
-        return title.get();
+    public int getRanking() {
+        return ranking.get();
     }
 
-    public StringProperty titleProperty() {
-        return title;
+    public IntegerProperty rankingProperty() {
+        return ranking;
     }
 
-    public void setTitle(String title) {
-        this.title.set(title);
+    public void setRanking(int ranking) {
+        this.ranking.set(ranking);
     }
 
-    public String getTitleEnglish() {
-        return titleEnglish.get();
+    public Presentation getPresentation() {
+        return presentation.get();
     }
 
-    public StringProperty titleEnglishProperty() {
-        return titleEnglish;
+    public ObjectProperty<Presentation> presentationProperty() {
+        return presentation;
     }
 
-    public void setTitleEnglish(String titleEnglish) {
-        this.titleEnglish.set(titleEnglish);
+    public void setPresentation(Presentation presentation) {
+        this.presentation.set(presentation);
     }
 
     public String getTypes() {
@@ -141,17 +137,6 @@ public class AnimeView {
         this.genres.set(genres);
     }
 
-    public String getImg() {
-        return img.get();
-    }
-
-    public StringProperty imgProperty() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img.set(img);
-    }
 
     public UUID getId() {
         return id;
@@ -160,15 +145,15 @@ public class AnimeView {
     @Override
     public String toString() {
         return "AnimeView{" +
-                "title=" + title +
-                ", titleEnglish=" + titleEnglish +
+                "title=" + presentation.get().getTitle() +
+                ", titleEnglish=" + presentation.get().getTitleEnglish() +
                 ", types=" + types +
                 ", episodes=" + episodes +
                 ", status=" + status +
                 ", date=" + date +
                 ", rating=" + rating +
                 ", genres=" + genres +
-                ", img=" + img +
+                ", img=" + presentation.get().getImg() +
                 ", id=" + id +
                 '}';
     }

@@ -1,12 +1,12 @@
 package com.example.myanimelist.controllers.main
 
-import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.views.models.AnimeView
+import com.example.myanimelist.views.models.Presentation
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.*
@@ -27,9 +27,9 @@ class MainUserController(
 
 
     @FXML
-    private lateinit var animeRankingCol: TableColumn<AnimeView, String>
+    private lateinit var animeRankingCol: TableColumn<AnimeView, Int>
     @FXML
-    private lateinit var animeTitleCol: TableColumn<AnimeView, AnimeView>
+    private lateinit var animeTitleCol: TableColumn<AnimeView, Presentation>
     @FXML
     private lateinit var animeScoreCol: TableColumn<AnimeView, String>
     @FXML
@@ -41,9 +41,9 @@ class MainUserController(
     @FXML
     private lateinit var myListGenderCol: TableColumn<AnimeView, String>
     @FXML
-    private lateinit var myListTitleCol: TableColumn<AnimeView, AnimeView>
+    private lateinit var myListTitleCol: TableColumn<AnimeView, Presentation>
     @FXML
-    private lateinit var myListRankingCol: TableColumn<AnimeView, String>
+    private lateinit var myListRankingCol: TableColumn<AnimeView, Int>
     @FXML
     private lateinit var myListTable: TableView<AnimeView>
     @FXML
@@ -76,17 +76,22 @@ class MainUserController(
             logger.warning("error while loading")
         }
 
-        // Asigno las columnas de la tabla
-        animeScoreCol.setCellValueFactory { cellData -> cellData.value.imgProperty() }
+        logger.info("Seting anime columns")
+        animeRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
+        animeScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
+        animeTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
+        setTitleCell()
+        myListGenderCol.setCellValueFactory { cellData -> cellData.value.genresProperty() }
+        myListRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
+        myListScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
+        myListStatusCol.setCellValueFactory { cellData -> cellData.value.statusProperty() }
+        myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
+        myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
 
-        // Asigno los manejadores de eventos
-        personasTable.getSelectionModel().selectedItemProperty().addListener { observable, oldValue, newValue ->
-            onPersonaSeleccionada(
-                newValue
-            )
-        }
-        clearDataInfo()
-        personasTable.getSelectionModel().selectFirst()
+    }
+
+    private fun setTitleCell() {
+        TODO("Not yet implemented")
     }
 
     fun generateHTML(actionEvent: ActionEvent) {
