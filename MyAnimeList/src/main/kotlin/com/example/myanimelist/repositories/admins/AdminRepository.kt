@@ -3,11 +3,12 @@ package com.example.myanimelist.repositories.admins
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Admin
+import org.apache.logging.log4j.Logger
 import java.sql.SQLException
-import java.time.LocalDate
 import java.util.*
 
-class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
+class AdminRepository(private val db: DataBaseManager, private val logger: Logger) :
+    IAdminRepository {
     /**
      * Busca en el repositorio un usuari de tipo admin usando su uuid
      * @param id UUID
@@ -23,8 +24,8 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
                     result.getString("name"),
                     result.getString("email"),
                     result.getString("password"),
-                    LocalDate.parse(result.getString("createDate")),
-                    LocalDate.parse(result.getString("birthDate")),
+                    result.getDate("createDate"),
+                    result.getDate("birthDate"),
                     UUID.fromString(result.getString("id"))
                 )
 
@@ -50,8 +51,8 @@ class AdminRepository(private val db: DataBaseManager) : IAdminRepository {
                         result.getString("name"),
                         result.getString("email"),
                         result.getString("password"),
-                        LocalDate.parse(result.getString("createDate")),
-                        LocalDate.parse(result.getString("birthDate")),
+                        result.getDate("createDate"),
+                        result.getDate("birthDate"),
                         UUID.fromString(result.getString("id"))
                     )
                 )

@@ -13,7 +13,7 @@ import org.koin.test.junit5.AutoCloseKoinTest
 import java.util.*
 import kotlin.test.assertNull
 
-internal class UsersRepositoryTest : AutoCloseKoinTest() {
+class UsersRepositoryTest : AutoCloseKoinTest() {
     private val usersRepository by inject<IUsersRepository>()
     private val animeRepository by inject<IAnimeRepository>()
 

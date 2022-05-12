@@ -10,7 +10,7 @@ import org.koin.core.context.startKoin
 class MyAnimeListApplication : Application() {
     override fun start(stage: Stage) {
         val sceneManager = SceneManager
-        sceneManager.setInstance(MyAnimeListApplication::class.java)
+        sceneManager.setAppClass<MyAnimeListApplication>()
         sceneManager.initSplash(stage)
     }
 
