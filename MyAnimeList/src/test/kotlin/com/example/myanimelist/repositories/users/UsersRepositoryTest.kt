@@ -1,6 +1,8 @@
 package com.example.myanimelist.repositories.users
 
-import com.example.myanimelist.modules.repositoryModule
+//import com.example.myanimelist.modules.repositoryModule
+import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
@@ -14,12 +16,9 @@ import java.util.*
 import kotlin.test.assertNull
 
 class UsersRepositoryTest : AutoCloseKoinTest() {
-    private val usersRepository by inject<IUsersRepository>()
-    private val animeRepository by inject<IAnimeRepository>()
+    private val usersRepository : UsersRepository = UsersRepository(DataBaseManager.getInstance())
+    private val animeRepository : AnimeRepository = AnimeRepository(DataBaseManager.getInstance())
 
-    init {
-        startKoin { modules(repositoryModule) }
-    }
 
     @AfterEach
     fun deleteAll() {
