@@ -8,16 +8,15 @@ import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.modelsDB.ReviewDB
 import com.example.myanimelist.repositories.users.IUsersRepository
 import java.util.*
-import java.util.logging.LogManager
 import java.util.logging.Logger
 
 //TODO Review reviews
 class ReviewsRepository(
     private val databaseManager: DataBaseManager,
     private val animeRepository: IAnimeRepository,
-    private val usersRepository: IUsersRepository
+    private val usersRepository: IUsersRepository,
+    private val logger: Logger
 ) : IRepositoryReview {
-    val logger : Logger = LogManager.getLogManager().getLogger("reviews.repository")
 
     override fun add(review: Review): Review? {
         databaseManager.execute {

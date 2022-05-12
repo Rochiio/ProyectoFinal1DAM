@@ -10,7 +10,7 @@ import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.sql.Date
+import java.time.LocalDate
 import java.util.*
 
 object DataDB : KoinComponent {
@@ -29,8 +29,8 @@ object DataDB : KoinComponent {
             "Pepe",
             "asdasd@gmail.com",
             "123",
-            Date(Date().time),
-            Date(Date().time),
+            LocalDate.now(),
+            LocalDate.now(),
             "img",
             emptyList(),
             UUID.randomUUID()
@@ -41,7 +41,7 @@ object DataDB : KoinComponent {
         titleEnglish = "example_english",
         status = Status.CURRENTLY_AIRING.value,
         genres = listOf(Genre.FANTASY.value),
-        date = Date(Date().time),
+        date = LocalDate.now(),
         img = "/example/example.png",
         episodes = 24,
         rating = "PG 12",
@@ -53,8 +53,8 @@ object DataDB : KoinComponent {
             "Pepe$number",
             "asdasd@gmail.com",
             "123",
-            Date(Date().time),
-            Date(Date().time)
+            LocalDate.now(),
+            LocalDate.now()
         )
 
 }

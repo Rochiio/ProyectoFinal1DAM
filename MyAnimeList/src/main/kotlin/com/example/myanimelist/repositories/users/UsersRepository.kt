@@ -5,13 +5,12 @@ import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
+import java.time.LocalDate
 import java.util.*
-import java.util.logging.LogManager
 import java.util.logging.Logger
 
 
-class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepository {
-    val logger : Logger = LogManager.getLogManager().getLogger("users.repository")
+class UsersRepository(val databaseManager: DataBaseManager, private val logger: Logger) : IUsersRepository {
 
 
     override fun findByName(name: String): List<User> {
@@ -26,8 +25,8 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     set.getString("nombre"),
                     set.getString("email"),
                     set.getString("password"),
-                    set.getDate("date_alta"),
-                    set.getDate("date_nacimiento"),
+                    set.getObject("date_alta", LocalDate::class.java),
+                    set.getObject("date_nacimiento", LocalDate::class.java),
                     set.getString("imageUrl")
                 )
                 logger.info("[findByName] Encotrado usuario $user")
@@ -50,8 +49,8 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 set.getString("nombre"),
                 set.getString("email"),
                 set.getString("password"),
-                set.getDate("date_alta"),
-                set.getDate("date_nacimiento"),
+                set.getObject("date_alta", LocalDate::class.java),
+                set.getObject("date_nacimiento", LocalDate::class.java),
                 set.getString("imageUrl")
             )
             logger.info("Encotrado usuario $returnItem")
@@ -72,8 +71,8 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     set.getString("nombre"),
                     set.getString("email"),
                     set.getString("password"),
-                    set.getDate("date_alta"),
-                    set.getDate("date_nacimiento"),
+                    set.getObject("date_alta", LocalDate::class.java),
+                    set.getObject("date_nacimiento", LocalDate::class.java),
                     set.getString("imageUrl")
                 )
                 list.add(user)
@@ -102,7 +101,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
             if (modifiedRows > 0) {
                 returnItem = UserDB.from(item)
                 logger.info("Se ha modificado $modifiedRows elementos. ")
-            }else{
+            } else {
                 logger.info("No se han modificado elementos")
             }
         }
@@ -200,7 +199,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     listSet.getString("type"),
                     listSet.getInt("episodes"),
                     listSet.getString("status"),
-                    listSet.getDate("releaseDate"),
+                    listSet.getObject("releaseDate", LocalDate::class.java),
                     listSet.getString("rating"),
                     listSet.getString("genre").split(","),
                     listSet.getString("imageUrl"),
