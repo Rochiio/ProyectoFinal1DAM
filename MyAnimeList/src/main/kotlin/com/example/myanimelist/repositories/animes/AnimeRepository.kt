@@ -87,6 +87,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepo
                 item.types,
                 item.id.toString()
             )
+            logger.info("actualizado el anime $item")
             return item
         }
 
@@ -109,6 +110,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepo
                 item.rating,
                 item.types
             )
+            logger.info("Añadido anime $item")
             return item
         }
         return null
@@ -118,6 +120,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager) : IAnimeRepo
         val query = "DELETE FROM animes WHERE id = ?"
         databaseManager.execute {
             databaseManager.delete(query, id)
+            logger.info("Eliminado el anime ${findById(id)}")
         }
     }
 }
