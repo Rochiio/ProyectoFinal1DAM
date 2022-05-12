@@ -1,7 +1,7 @@
 package com.example.myanimelist.controllers.inicio
 
 import com.example.myanimelist.extensions.loadScene
-import com.example.myanimelist.repositories.users.IUsersRepository
+import com.example.myanimelist.models.User
 import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.LOGIN
 import com.example.myanimelist.utils.WIDTH
@@ -9,8 +9,10 @@ import javafx.fxml.FXML
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.stage.Stage
+import java.sql.Date
+import java.util.*
 
-class RegisterController(repository: IUsersRepository) : InicioController(repository) {
+class RegisterController : InicioController() {
     @FXML
     private lateinit var txtEmail: TextField
 
@@ -27,6 +29,12 @@ class RegisterController(repository: IUsersRepository) : InicioController(reposi
 
     fun register() {
         //TODO filters
-        //userRepository.add(User(txtUsername, txtEmail, txtPassword, Date()))
+        if (userRepository.findByName(txtUsername.text).any()) return
+        userRepository.add(
+            User(
+                txtUsername.text, txtEmail.text, txtPassword.text, Date(Date().time), Date(Date().time), null,
+                emptyList()
+            )
+        )
     }
 }
