@@ -13,8 +13,8 @@ import com.example.myanimelist.service.anime.AnimeStorage
 import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.service.backup.BackupStorage
 import com.example.myanimelist.service.backup.IBackupStorage
+import org.apache.logging.log4j.LogManager
 import org.koin.dsl.module
-import java.util.logging.LogManager
 
 
 val repositoryModule = module {
@@ -22,19 +22,19 @@ val repositoryModule = module {
     single<IUsersRepository> {
         UsersRepository(
             get(),
-            LogManager.getLogManager().getLogger("users.repository") ?: throw Exception("Logger Not found")
+            LogManager.getLogger(UsersRepository::class.java) ?: throw Exception("Logger Not found")
         )
     }
     single<IAnimeRepository> {
         AnimeRepository(
             get(),
-            LogManager.getLogManager().getLogger("anime.repository") ?: throw Exception("Logger Not found")
+            LogManager.getLogger(AnimeRepository::class.java) ?: throw Exception("Logger Not found")
         )
     }
     single<IAdminRepository> {
         AdminRepository(
             get(),
-            LogManager.getLogManager().getLogger("admin.repository") ?: throw Exception("Logger Not found")
+            LogManager.getLogger(AdminRepository::class.java) ?: throw Exception("Logger Not found")
         )
     }
     single<IRepositoryReview> {
@@ -42,7 +42,7 @@ val repositoryModule = module {
             get(),
             get(),
             get(),
-            LogManager.getLogManager().getLogger("reviews.repository") ?: throw Exception("Logger Not found")
+            LogManager.getLogger(ReviewsRepository::class.java) ?: throw Exception("Logger Not found")
         )
     }
     single<IBackupStorage> { BackupStorage() }

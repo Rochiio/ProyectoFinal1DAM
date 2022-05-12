@@ -7,8 +7,8 @@ import com.example.myanimelist.models.Review
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.modelsDB.ReviewDB
 import com.example.myanimelist.repositories.users.IUsersRepository
+import org.apache.logging.log4j.Logger
 import java.util.*
-import java.util.logging.Logger
 
 //TODO Review reviews
 class ReviewsRepository(
