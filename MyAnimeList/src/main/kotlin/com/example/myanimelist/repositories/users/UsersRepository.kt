@@ -6,9 +6,13 @@ import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
 import java.util.*
+import java.util.logging.LogManager
+import java.util.logging.Logger
 
 
 class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepository {
+    val logger : Logger = LogManager.getLogManager().getLogger("users.repository")
+
 
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
@@ -26,6 +30,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     set.getDate("date_nacimiento"),
                     set.getString("imageUrl")
                 )
+                logger.info("[findByName] Encotrado usuario $user")
                 list.add(user)
             }
         }
@@ -49,6 +54,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 set.getDate("date_nacimiento"),
                 set.getString("imageUrl")
             )
+            logger.info("Encotrado usuario $returnItem")
         }
         return mapToModel(returnItem)
     }
@@ -71,6 +77,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     set.getString("imageUrl")
                 )
                 list.add(user)
+                logger.info("Se han encontrado los usuarios: $list")
             }
         }
 
@@ -92,7 +99,12 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     item.birthDate,
                     item.id.toString()
                 )
-            if (modifiedRows > 0) returnItem = UserDB.from(item)
+            if (modifiedRows > 0) {
+                returnItem = UserDB.from(item)
+                logger.info("Se ha modificado $modifiedRows elementos. ")
+            }else{
+                logger.info("No se han modificado elementos")
+            }
         }
         return mapToModel(returnItem)
     }
@@ -111,7 +123,9 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     item.email,
                     item.birthDate
                 )
+
             returnItem = UserDB.from(item)
+            logger.info("Añadido usuario $returnItem")
         }
         return mapToModel(returnItem)
     }
@@ -126,6 +140,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     anime.id
                 )
             returnItem = UserDB.from(item)
+            logger.info("Se ha añadido a la lista de $item el anime $anime")
         }
         return mapToModel(returnItem)
     }
@@ -141,6 +156,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     anime.id
                 )
             returnItem = UserDB.from(item)
+            logger.info("Se ha eliminado el anime $anime de la lista de $item")
         }
         return mapToModel(returnItem)
     }
@@ -150,6 +166,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
 
         databaseManager.execute {
             databaseManager.delete("Delete from Usuarios where id = ?", id)
+            logger.info("Se ha eliminado el usuario ${findById(id)}")
         }
     }
 
