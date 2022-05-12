@@ -14,6 +14,7 @@ module com.example.myanimelist {
     requires java.base;
     requires koin.core.jvm;
     requires com.google.gson;
+    requires org.apache.logging.log4j;
 
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;
