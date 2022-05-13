@@ -23,7 +23,7 @@ class LoginController : InicioController() {
     fun login() {
         val message = StringBuilder()
         if (!validateFields(message)) {
-            Alert(Alert.AlertType.WARNING).show("Register invalid", message.toString())
+            Alert(Alert.AlertType.WARNING).show("Login invalid", message.toString())
             return
         }
 
