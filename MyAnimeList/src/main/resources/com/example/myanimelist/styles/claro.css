@@ -1,0 +1,36 @@
+.fondo{
+    -fx-background-color: #99E2B4;
+}
+.acercaDe{
+    -fx-border-radius:  12px;
+    -fx-background-radius: 12px;
+}
+.acercaDeTexto{
+    -fx-background-color: #88D4AB;
+    -fx-border-radius:  6px;
+    -fx-background-radius: 6px;
+}
+.button{
+    -fx-border-radius:10;
+    -fx-padding: 5;
+    -fx-background-color: #67B99A;
+    -fx-text-fill:black;
+}
+
+.linkBasic{
+    -fx-text-fill:black;
+    -fx-font-weight:bold;
+}
+
+.tittle{
+    -fx-text-fill:black;
+    -fx-font-weight: normal;
+    -fx-font-size: 40px;
+    -fx-font-family: Arial;
+    -fx-text-transform: uppercase;
+}
+
+
+.text-input:focused{
+    -fx-border-color:#036666;
+}
