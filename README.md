@@ -1,4 +1,4 @@
-# Proyecto Final 1 DAM
+# Proyecto Final 1 DAM [![Java CI with Maven](https://github.com/Rochiio/ProyectoFinal1DAM/actions/workflows/maven.yml/badge.svg)](https://github.com/Rochiio/ProyectoFinal1DAM/actions/workflows/maven.yml)
 ## Título: My Anime List🍜
 ![](./imgReadme/ProyectoFinal%201DAMBanner.png)
 ### Equipo:

@@ -5,13 +5,17 @@ import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
+import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
+import javax.inject.Inject
 
 
-class UsersRepository(val databaseManager: DataBaseManager, private val logger: Logger) : IUsersRepository {
-
-
+class UsersRepository
+@Inject constructor(
+    private val databaseManager : DataBaseManager
+) : IUsersRepository{
+    val logger : Logger = LogManager.getLogger(UsersRepository::class)
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
         databaseManager.execute {

@@ -1,6 +1,7 @@
 module com.example.myanimelist {
     opens com.example.myanimelist to javafx.fxml;
     opens com.example.myanimelist.controllers to javafx.fxml;
+    opens com.example.myanimelist.controllers.inicio to javafx.fxml;
 
     requires javafx.controls;
     requires javafx.fxml;
@@ -15,6 +16,9 @@ module com.example.myanimelist {
     requires koin.core.jvm;
     requires com.google.gson;
     requires org.apache.logging.log4j;
+    requires dagger;
+    requires javax.inject;
+    requires java.compiler;
 
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;

@@ -1,4 +1,3 @@
 package com.example.myanimelist.exceptions
 
-class RepositoryException(override val message: String?) : Exception(message) {
-}
+class RepositoryException(message: String) : Exception(message) 
