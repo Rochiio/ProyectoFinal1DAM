@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="480.0" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="480.0" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="com.example.myanimelist.controllers.AcercaDeController">
    <children>
       <HBox prefHeight="260.0" prefWidth="480.0">
          <children>
@@ -29,7 +30,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Label>
-                  <Hyperlink prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Rocío Palao">
+                  <Hyperlink onAction="#linkGitHubRo" prefHeight="30.0" prefWidth="313.0" text="Rocío Palao">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -38,10 +39,30 @@
                         </ImageView>
                      </graphic>
                      <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets bottom="5.0" right="160.0" top="5.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="acercaDeTexto" />
+                        <String fx:value="linkBasic" />
+                     </styleClass>
+                  </Hyperlink>
+                  <Hyperlink onAction="#linkGitHubMo" prefHeight="26.0" prefWidth="302.0" text="Mohamed Asidah">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/github.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="acercaDeTexto" />
+                        <String fx:value="linkBasic" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="5.0" right="160.0" top="5.0" />
                      </VBox.margin>
                   </Hyperlink>
-                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Mohamed Asidah">
+                  <Hyperlink onAction="#linkGitHubJo" prefHeight="26.0" prefWidth="315.0" text="Joaquín Ayllon">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -49,23 +70,15 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <styleClass>
+                        <String fx:value="acercaDeTexto" />
+                        <String fx:value="linkBasic" />
+                     </styleClass>
                      <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets bottom="5.0" right="160.0" top="5.0" />
                      </VBox.margin>
-                  </Label>
-                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Joaquín Ayllón">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/github.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Roberto Blázquez">
+                  </Hyperlink>
+                  <Hyperlink onAction="#linkGitHubRob" prefHeight="26.0" prefWidth="331.0" text="Roberto Blázquez">
                      <graphic>
                         <ImageView fitHeight="63.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -73,11 +86,15 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <styleClass>
+                        <String fx:value="linkBasic" />
+                        <String fx:value="acercaDeTexto" />
+                     </styleClass>
                      <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets bottom="5.0" right="160.0" top="5.0" />
                      </VBox.margin>
-                  </Label>
-                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Fran Toribio">
+                  </Hyperlink>
+                  <Hyperlink onAction="#linkGitHubFr" prefHeight="26.0" prefWidth="322.0" text="Fran Toribio">
                      <graphic>
                         <ImageView fitHeight="63.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -85,10 +102,14 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <styleClass>
+                        <String fx:value="acercaDeTexto" />
+                        <String fx:value="linkBasic" />
+                     </styleClass>
                      <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets bottom="5.0" right="160.0" top="5.0" />
                      </VBox.margin>
-                  </Label>
+                  </Hyperlink>
                </children>
             </VBox>
          </children>
