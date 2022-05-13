@@ -105,7 +105,8 @@ class MainUserController(
     }
 
     private fun setEnumCol(consumer: TableColumn<AnimeView, String>, enumSet: ObservableList<*>) {
-        consumer.setCellFactory { param -> object: TableCell<AnimeView, String>() {
+        consumer.setCellFactory {
+            object: TableCell<AnimeView, String>() {
                 override fun updateItem(item: String, empty: Boolean) {
                     val choice: ChoiceBox<*> = ChoiceBox(enumSet)
                     choice.selectionModel.select(enumSet.indexOf(item))
@@ -116,7 +117,8 @@ class MainUserController(
     }
 
     private fun setTitleCell(consumer : TableColumn<AnimeView, Presentation>) {
-        consumer.setCellFactory { param -> object: TableCell<AnimeView, Presentation>(){
+        consumer.setCellFactory {
+            object: TableCell<AnimeView, Presentation>(){
                 override fun updateItem(item: Presentation, empty: Boolean) {
                     val vbox = VBox()
                     vbox.spacing = 20.0
