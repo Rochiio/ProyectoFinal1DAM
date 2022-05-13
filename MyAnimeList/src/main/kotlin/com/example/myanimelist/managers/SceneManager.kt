@@ -68,6 +68,6 @@ object SceneManager {
      * Para añadir el icono al crear stage más rápido
      * @param stage escena a añadir el icono
      */
-    private fun addIconStage(stage: Stage) = stage.icons.add(Image(appClass.getResourceAsStream(ICON)))
+     fun addIconStage(stage: Stage) = stage.icons.add(Image(appClass.getResourceAsStream(ICON)))
 
 }

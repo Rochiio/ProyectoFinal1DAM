@@ -3,9 +3,11 @@ package com.example.myanimelist.controllers.inicio
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.login.LoginFilters
+import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.utils.*
 import javafx.application.Platform
 import javafx.scene.control.Alert
+import javafx.scene.image.Image
 import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.StageStyle
@@ -23,6 +25,7 @@ class LoginController : InicioController() {
             it.isResizable = false
             it.initModality(Modality.APPLICATION_MODAL)
             stage.initStyle(StageStyle.TRANSPARENT)
+            SceneManager.addIconStage(stage)
         }.show()
 
     }
