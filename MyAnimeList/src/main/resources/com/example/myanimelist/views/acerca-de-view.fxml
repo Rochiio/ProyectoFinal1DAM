@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="480.0" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="480.0" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.AcercaDeController">
    <children>
       <HBox prefHeight="260.0" prefWidth="480.0">
          <children>
@@ -29,7 +29,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Label>
-                  <Hyperlink prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Rocío Palao">
+                  <Hyperlink fx:id="gitHubLinkRo" onAction="#linkGitHubRo" prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Rocío Palao">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -41,7 +41,7 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Hyperlink>
-                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Mohamed Asidah">
+                  <Hyperlink fx:id="gitHubLinkMo" layoutX="10.0" layoutY="115.0" onAction="#linkGitHubMo" prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Mohamed Asidah">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -49,11 +49,8 @@
                            </image>
                         </ImageView>
                      </graphic>
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Joaquín Ayllón">
+                  </Hyperlink>
+                  <Hyperlink fx:id="gitHubLinkJo" layoutX="10.0" layoutY="135.0" onAction="#linkGitHubJo" prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Joaquín Ayllón">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -61,34 +58,41 @@
                            </image>
                         </ImageView>
                      </graphic>
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Roberto Blázquez">
+                  </Hyperlink>
+                  <Hyperlink fx:id="gitHubLinkRob" layoutX="10.0" layoutY="150.0" onAction="#linkGitHubRob" prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Roberto Blázquez">
                      <graphic>
-                        <ImageView fitHeight="63.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/github.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Fran Toribio">
+                  </Hyperlink>
+                  <Hyperlink fx:id="gitHubLinkFr" layoutX="10.0" layoutY="165.0" onAction="#linkGitHubFr" prefHeight="30.0" prefWidth="134.0" styleClass="acercaDeTexto" text="Fran Toribio">
                      <graphic>
-                        <ImageView fitHeight="63.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/github.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                     <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                     </VBox.margin>
-                  </Label>
+                  </Hyperlink>
+                  <HBox alignment="TOP_RIGHT" prefHeight="68.0" prefWidth="315.0">
+                     <children>
+                        <Hyperlink fx:id="gitHubOpenProject" alignment="CENTER_RIGHT" onAction="#openProject" prefHeight="68.0" prefWidth="244.0" styleClass="linkBasic" text="Proyecto" underline="true">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="63.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/github.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>
