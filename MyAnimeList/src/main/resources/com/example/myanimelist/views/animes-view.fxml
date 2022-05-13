@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="fondo" stylesheets="@../myanimelist/styles/claro.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="600.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="600.0" styleClass="fondo">
          <children>
-            <TabPane prefHeight="385.0" prefWidth="583.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="385.0" prefWidth="583.0" styleClass="fondo" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Animes">
                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fondo">
                            <children>
-                              <TableView prefHeight="358.0" prefWidth="585.0">
+                              <TableView prefHeight="358.0" prefWidth="585.0" styleClass="fondo">
                                 <columns>
                                   <TableColumn prefWidth="93.3333410024643" text="Ranking" />
                                   <TableColumn prefWidth="140.6667251586914" text="Imágen" />
