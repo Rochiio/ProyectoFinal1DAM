@@ -16,7 +16,7 @@ fun Stage.loadScene(
     val fxmlLoader = FXMLLoader(MyAnimeListApplication::class.java.getResource(scene))
 
     val newScene: Scene = if (width != null && height != null)
-        Scene(fxmlLoader.load(), WIDTH, HEIGHT)
+        Scene(fxmlLoader.load(), width, height)
     else
         Scene(fxmlLoader.load())
 
