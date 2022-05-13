@@ -7,44 +7,34 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="577.0" styleClass="fondo"
-            stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.myanimelist.controllers.inicio.LoginController">
-    <children>
-        <ImageView fitHeight="151.0" fitWidth="316.0" layoutX="169.0" nodeOrientation="INHERIT" pickOnBounds="true"
-                   preserveRatio="true" AnchorPane.bottomAnchor="199.0" AnchorPane.leftAnchor="169.0"
-                   AnchorPane.rightAnchor="139.5555419921875" AnchorPane.topAnchor="0.0">
-            <image>
-                <Image url="@../images/splash1.png"/>
-            </image>
-        </ImageView>
-        <VBox layoutX="165.0" layoutY="159.0" spacing="10.0" AnchorPane.bottomAnchor="111.0"
-              AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="159.0">
-            <children>
-                <TextField fx:id="txtUsername" prefHeight="25.0" prefWidth="273.0" promptText="Username"
-                           styleClass="text-input">
-                    <VBox.margin>
-                        <Insets top="10.0"/>
-                    </VBox.margin>
-                </TextField>
-                <PasswordField fx:id="txtPassword" promptText="Password" styleClass="text-input"/>
-            </children>
-        </VBox>
-        <VBox alignment="CENTER" layoutX="40.0" layoutY="256.0" prefHeight="68.0" prefWidth="401.0" spacing="10.0"
-              AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="136.0"
-              AnchorPane.topAnchor="256.0">
-            <children>
-                <Button onAction="#login" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                        prefHeight="25.0"
-                        prefWidth="85.0" text="Log In" textAlignment="CENTER"/>
-                <Hyperlink fx:id="btnRegister" alignment="CENTER" contentDisplay="CENTER"
-                           onAction="#changeSceneToRegister" prefHeight="35.0" prefWidth="116.0" styleClass="linkBasic"
-                           text="Register" underline="true"/>
-            </children>
-            <opaqueInsets>
-                <Insets/>
-            </opaqueInsets>
-        </VBox>
-    </children>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="577.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.InicioController">
+   <children>
+      <ImageView fitHeight="151.0" fitWidth="316.0" layoutX="169.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="199.0" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="139.5555419921875" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../images/splash1.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="165.0" layoutY="159.0" spacing="10.0" AnchorPane.bottomAnchor="111.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="159.0">
+         <children>
+            <TextField fx:id="txtUsername" prefHeight="25.0" prefWidth="273.0" promptText="Username" styleClass="text-input">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <PasswordField fx:id="txtPassword" promptText="Password" styleClass="text-input" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="40.0" layoutY="256.0" prefHeight="68.0" prefWidth="401.0" spacing="10.0" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="256.0">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Log In" textAlignment="CENTER" />
+            <Hyperlink fx:id="btnRegister" alignment="CENTER" contentDisplay="CENTER" onAction="#changeSceneRegister" prefHeight="35.0" prefWidth="116.0" styleClass="linkBasic" text="Register" underline="true" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
 </AnchorPane>
