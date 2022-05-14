@@ -3,14 +3,18 @@ package com.example.myanimelist.repositories.animes
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
+import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
 
-class AnimeRepository(private val databaseManager: DataBaseManager, private val logger: Logger) :
+class AnimeRepository(private val databaseManager: DataBaseManager) :
     IAnimeRepository {
+
+    private val logger: Logger = LogManager.getLogger(AnimeRepository::class.java)
+
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val result = databaseManager.select(query, id.toString())
 
             if (!result.next()) return null
@@ -36,7 +40,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager, private val 
     override fun findAll(): List<Anime> {
         val query = "SELECT * FROM animes"
         val animes = mutableListOf<Anime>()
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val result = databaseManager.select(query)
             while (result.next()) {
                 val anime = Anime(
@@ -72,7 +76,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager, private val 
                 "type = ?" +
                 "WHERE id = ?"
 
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             databaseManager.update(
                 query,
                 item.title,
@@ -95,7 +99,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager, private val 
 
     override fun add(item: Anime): Anime? {
         val query = "INSERT INTO animes VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             databaseManager.insert(
                 query,
                 item.id,
@@ -117,7 +121,7 @@ class AnimeRepository(private val databaseManager: DataBaseManager, private val 
 
     override fun delete(id: UUID) {
         val query = "DELETE FROM animes WHERE id = ?"
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             databaseManager.delete(query, id)
             logger.info("Eliminado el anime ${findById(id)}")
         }

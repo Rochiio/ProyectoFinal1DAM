@@ -4,32 +4,18 @@ import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.managers.SceneManager
-import com.example.myanimelist.utils.*
-import javafx.application.Platform
+import com.example.myanimelist.utils.HEIGHT
+import com.example.myanimelist.utils.REGISTER
+import com.example.myanimelist.utils.WIDTH
 import javafx.scene.control.Alert
-import javafx.scene.image.Image
-import javafx.stage.Modality
 import javafx.stage.Stage
-import javafx.stage.StageStyle
 import org.koin.java.KoinJavaComponent.inject
-
 
 
 class LoginController : InicioController() {
     private val loginFilters by inject<LoginFilters>(LoginFilters::class.java)
 
-     fun openStageAbout() {
-        val stage = Stage()
-        stage.loadScene(ABOUT,ABOUT_WIDTH, ABOUT_HEIGHT){
-            it.title="About"
-            it.isResizable = false
-            it.initModality(Modality.APPLICATION_MODAL)
-            stage.initStyle(StageStyle.TRANSPARENT)
-            SceneManager.addIconStage(stage)
-        }.show()
-
-    }
-
+    fun openStageAbout() = SceneManager.openStageAbout()
 
     fun changeSceneToRegister() {
         val stage = btnRegister.scene.window as Stage
@@ -52,9 +38,9 @@ class LoginController : InicioController() {
     }
 
     private fun validateFields(errorMessage: StringBuilder): Boolean {
-        if (!loginFilters.checkUserCorrect(txtUsername.text, txtPassword.text)) {
+        if (!loginFilters.checkUserCorrect(txtUsername.text, txtPassword.text))
             errorMessage.appendLine("Usuario no existe")
-        }
+
         return errorMessage.isEmpty()
     }
 }
