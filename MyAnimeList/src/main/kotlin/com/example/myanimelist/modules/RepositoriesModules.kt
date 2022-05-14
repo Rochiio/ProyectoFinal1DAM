@@ -9,36 +9,21 @@ import com.example.myanimelist.repositories.reviews.IRepositoryReview
 import com.example.myanimelist.repositories.reviews.ReviewsRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.repositories.users.UsersRepository
-import org.apache.logging.log4j.LogManager
 import org.koin.dsl.module
 
 
 val repositoryModule = module {
     single { DataBaseManager() }
     single<IUsersRepository> {
-        UsersRepository(
-            get(),
-            LogManager.getLogger(UsersRepository::class.java)
-        )
+        UsersRepository(get())
     }
     single<IAnimeRepository> {
-        AnimeRepository(
-            get(),
-            LogManager.getLogger(AnimeRepository::class.java)
-        )
+        AnimeRepository(get())
     }
     single<IAdminRepository> {
-        AdminRepository(
-            get(),
-            LogManager.getLogger(AdminRepository::class.java)
-        )
+        AdminRepository(get())
     }
     single<IRepositoryReview> {
-        ReviewsRepository(
-            get(),
-            get(),
-            get(),
-            LogManager.getLogger(ReviewsRepository::class.java)
-        )
+        ReviewsRepository(get(), get(), get())
     }
 }
