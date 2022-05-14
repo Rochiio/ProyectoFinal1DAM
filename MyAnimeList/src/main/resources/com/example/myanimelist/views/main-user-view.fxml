@@ -27,7 +27,7 @@
                               <TableColumn fx:id="animeRankingCol" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Ranking" />
                               <TableColumn fx:id="animeTitleCol" prefWidth="236.66661071777344">
                                  <graphic>
-                                    <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="214.0" spacing="20.0">
+                                    <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#addToMyList" prefHeight="28.0" prefWidth="214.0" spacing="20.0">
                                        <children>
                                           <Label text="Anime" />
                                           <TextField id="animeNameSearch" fx:id="animeNameSearch" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#sortByText" prefHeight="25.0" prefWidth="101.0" promptText="search" />
@@ -130,6 +130,6 @@
             </Tab>
          </tabs>
       </TabPane>
-      <Button id="menuButton" fx:id="menuButton" mnemonicParsing="false" onAction="#show" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="3.0" />
+      <Button id="menuButton" fx:id="menuButton" mnemonicParsing="false" onAction="#showMenu" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="3.0" />
    </children>
 </AnchorPane>
