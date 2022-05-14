@@ -5,7 +5,7 @@ package com.example.myanimelist.repositories
  * @param T es la clave primaria
  * @param K el modelo sobre el que trabaja el repositorio
  */
-interface ICRUDRepository<T ,K> {
+interface ICRUDRepository<in T, K> {
 
     fun findById(id: T): K?
 
