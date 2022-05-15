@@ -1,5 +1,7 @@
 package com.example.myanimelist.controllers.inicio
 
+
+import com.example.myanimelist.di.components.DaggerControllersComponent
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.login.LoginFilters
@@ -9,11 +11,17 @@ import com.example.myanimelist.utils.REGISTER
 import com.example.myanimelist.utils.WIDTH
 import javafx.scene.control.Alert
 import javafx.stage.Stage
-import org.koin.java.KoinJavaComponent.inject
+import javax.inject.Inject
 
 
 class LoginController : InicioController() {
-    private val loginFilters by inject<LoginFilters>(LoginFilters::class.java)
+    @Inject
+    lateinit var loginFilters: LoginFilters
+
+    init {
+        DaggerControllersComponent.create().inject(this)
+    }
+
 
     fun openStageAbout() = SceneManager.openStageAbout()
 

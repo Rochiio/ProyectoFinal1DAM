@@ -2,6 +2,9 @@ module com.example.myanimelist {
     opens com.example.myanimelist to javafx.fxml;
     opens com.example.myanimelist.controllers to javafx.fxml;
     opens com.example.myanimelist.controllers.inicio to javafx.fxml;
+    opens com.example.myanimelist.di.components to javafx.fxml;
+    opens com.example.myanimelist.di.modules to javafx.fxml;
+    opens com.example.myanimelist.filters.login to javafx.fxml;
 
     requires javafx.controls;
     requires javafx.fxml;
@@ -13,7 +16,6 @@ module com.example.myanimelist {
     requires org.mybatis;
     requires lombok;
     requires java.base;
-    requires koin.core.jvm;
     requires com.google.gson;
     requires org.apache.logging.log4j;
 
@@ -21,8 +23,14 @@ module com.example.myanimelist {
     requires javax.inject;
     requires java.compiler;
     requires java.desktop;
+    requires com.google.errorprone.annotations;
 
 
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;
+    exports com.example.myanimelist.controllers.inicio;
+    exports com.example.myanimelist.repositories;
+    exports com.example.myanimelist.manager;
+    exports com.example.myanimelist.filters.login;
+    exports com.example.myanimelist.di.modules;
 }

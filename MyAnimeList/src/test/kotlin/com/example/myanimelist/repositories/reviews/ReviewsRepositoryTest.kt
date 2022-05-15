@@ -1,18 +1,10 @@
 package com.example.myanimelist.repositories.reviews
 
-import com.example.myanimelist.di.components.DaggerAnimeRepositoryDI
-import com.example.myanimelist.di.components.DaggerReviewsRepositoryDI
-import com.example.myanimelist.di.components.DaggerUsersRepositoryDI
-import com.example.myanimelist.exceptions.RepositoryException
-import com.example.myanimelist.manager.DataBaseManager
+//import com.example.myanimelist.modules.repositoryModule
+import com.example.myanimelist.di.components.DaggerRepositoriesComponent
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.models.User
-//import com.example.myanimelist.modules.repositoryModule
-import com.example.myanimelist.repositories.animes.AnimeRepository
-import com.example.myanimelist.repositories.animes.IAnimeRepository
-import com.example.myanimelist.repositories.users.IUsersRepository
-import com.example.myanimelist.repositories.users.UsersRepository
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import com.example.myanimelist.utilities.DataDB.getTestingUser
@@ -20,26 +12,23 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
-import org.koin.core.context.startKoin
-import org.koin.test.inject
-import org.koin.test.junit5.AutoCloseKoinTest
 
-internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
+internal class ReviewsRepositoryTest {
 //    private val reviewsRepository by inject<IRepositoryReview>()
 
-    private val usersRepository = DaggerUsersRepositoryDI.create().build()
-    private val animeRepository = DaggerAnimeRepositoryDI.create().build()
-    private val reviewsRepository = DaggerReviewsRepositoryDI.create().build()
+    private val usersRepository = DaggerRepositoriesComponent.create().buildUserRepo()
+    private val animeRepository = DaggerRepositoriesComponent.create().buildAnimeRepo()
+    private val reviewsRepository = DaggerRepositoriesComponent.create().buildReviewRepo()
 
     private lateinit var user: User
     private lateinit var anime: Anime
 
     @BeforeAll
-    fun init(){
+    fun init() {
         user = usersRepository.add(getTestingUser())!!
         anime = animeRepository.add(getTestingAnime())!!
     }
+
     @AfterEach
     fun deleteAll() = DataDB.deleteAll("Reviews")
 
