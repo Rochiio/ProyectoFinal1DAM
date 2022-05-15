@@ -1,7 +1,6 @@
 package com.example.myanimelist.controllers.main
 
 import com.example.myanimelist.factories.TableItemFactory
-import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
@@ -13,6 +12,7 @@ import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
 import javafx.collections.ObservableList
+import javafx.collections.transformation.FilteredList
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.*
@@ -20,6 +20,7 @@ import javafx.scene.input.KeyEvent
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import java.sql.SQLException
+import java.util.*
 import java.util.logging.LogManager
 import java.util.logging.Logger
 
@@ -37,6 +38,7 @@ class MainUserController(
 
     lateinit var animeList: ObservableList<AnimeView>
     lateinit var myList: ObservableList<AnimeView>
+    lateinit var flAnime: FilteredList<AnimeView>
 
     var logger : Logger = LogManager.getLogManager().getLogger("main_user.controller")
 
@@ -106,6 +108,9 @@ class MainUserController(
         myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
         setEnumCol(myListTypeCol, Type.sample)
 
+        flAnime = FilteredList(animeList) { true }
+        animeTable.items = flAnime
+        animeTable.columns.addAll(animeRankingCol, animeTitleCol, animeScoreCol)
         
 
     }
@@ -146,8 +151,12 @@ class MainUserController(
         TODO("menu popup")
     }
 
-    fun sortByText(keyEvent: KeyEvent) {
-
+    fun sortAnimeByText(keyEvent: KeyEvent) {
+        logger.info("organizando la lista...")
+        flAnime.setPredicate { anime ->
+            anime.presentation.title.lowercase(Locale.getDefault()).contains(
+                animeNameSearch.text.lowercase(Locale.getDefault()).trim())
+        }
     }
 
     private fun loadData() {
@@ -170,5 +179,9 @@ class MainUserController(
         animeRepository.add(anime)
         myListTable.refresh()
         myListTable.getSelectionModel().select(animeView)
+    }
+
+    fun sortMyListByText(keyEvent: KeyEvent) {
+
     }
 }
