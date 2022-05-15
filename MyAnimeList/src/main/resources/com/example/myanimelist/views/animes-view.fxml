@@ -54,7 +54,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -97,7 +97,7 @@
     </MenuBar>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <GridPane prefHeight="46.0" prefWidth="800.0">
+            <GridPane prefHeight="46.0" prefWidth="800.0" styleClass="fondo" stylesheets="@../styles/claro.css">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="18.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="516.0" minWidth="10.0" prefWidth="421.0" />
@@ -140,13 +140,13 @@
             </GridPane>
          </children>
       </AnchorPane>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="556.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="556.0" prefWidth="800.0" stylesheets="@../styles/claro.css" VBox.vgrow="ALWAYS">
       <children>
-            <TabPane prefHeight="575.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="575.0" prefWidth="800.0" styleClass="fondo" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab fx:id="tabAnime" text="Animes">
                      <content>
-                        <TableView prefHeight="200.0" prefWidth="200.0">
+                        <TableView prefHeight="200.0" prefWidth="200.0" styleClass="fondo" stylesheets="@../styles/claro.css">
                           <columns>
                             <TableColumn fx:id="animeRanking" text="Ranking" />
                               <TableColumn fx:id="animePortada" minWidth="-Infinity" prefWidth="200.0" sortable="false" text="Portada" />
@@ -158,7 +158,7 @@
                   </Tab>
                 <Tab fx:id="tabMiLista" text="Mi lista">
                      <content>
-                        <TableView prefHeight="200.0" prefWidth="200.0">
+                        <TableView prefHeight="200.0" prefWidth="200.0" styleClass="fondo">
                           <columns>
                             <TableColumn fx:id="miListaRanking" text="Ranking" />
                             <TableColumn fx:id="miListaPortada" prefWidth="200.0" sortable="false" text="Portada" />
