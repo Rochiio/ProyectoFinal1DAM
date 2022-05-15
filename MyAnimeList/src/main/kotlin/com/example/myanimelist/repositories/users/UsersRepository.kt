@@ -11,6 +11,7 @@ import java.util.*
 import javax.inject.Inject
 
 
+
 class UsersRepository
 @Inject constructor(
     private val databaseManager : DataBaseManager
@@ -18,7 +19,7 @@ class UsersRepository
     val logger : Logger = LogManager.getLogger(UsersRepository::class)
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val set = databaseManager.select("SELECT * FROM Usuarios WHERE nombre LIKE ?", "%$name%")
 
             while (set.next()) {
@@ -42,7 +43,7 @@ class UsersRepository
     override fun findById(id: UUID): User? {
         var returnItem: UserDB? = null
 
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val set = databaseManager.select("SELECT * FROM Usuarios WHERE id = ?", id.toString())
 
             if (!set.next()) return null
@@ -64,7 +65,7 @@ class UsersRepository
     override fun findAll(): List<User> {
         val list: MutableList<UserDB> = mutableListOf()
 
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val set = databaseManager.select("SELECT * FROM Usuarios")
 
             while (set.next()) {
@@ -88,7 +89,7 @@ class UsersRepository
 
     override fun update(item: User): User? {
         var returnItem: UserDB? = null
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val modifiedRows = databaseManager
                 .update(
                     "UPDATE Usuarios set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl = ?, email = ?, date_nacimiento = ? WHERE id = ?",
@@ -113,7 +114,7 @@ class UsersRepository
 
     override fun add(item: User): User? {
         var returnItem: UserDB? = null
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             databaseManager
                 .insert(
                     "Insert into Usuarios (id,nombre,date_alta,password,imageUrl,email,date_nacimiento) values (?,?,?,?,?,?,?)",
@@ -134,7 +135,7 @@ class UsersRepository
 
     override fun addToList(item: User, anime: Anime): User? {
         var returnItem: UserDB? = null
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             databaseManager
                 .insert(
                     "Insert into AnimeLists (idUser,idAnime) values (?,?)",
@@ -150,7 +151,7 @@ class UsersRepository
 
     override fun removeFromList(item: User, anime: Anime): User? {
         var returnItem: UserDB? = null
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             databaseManager
                 .delete(
                     "Delete from AnimeLists where idUser = ? and idAnime = ?",
@@ -166,7 +167,7 @@ class UsersRepository
     override fun delete(id: UUID) {
         if (findById(id) == null) return
 
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             databaseManager.delete("Delete from Usuarios where id = ?", id)
             logger.info("Se ha eliminado el usuario ${findById(id)}")
         }
@@ -188,7 +189,7 @@ class UsersRepository
 
     private fun getAnimeLists(userId: UUID): List<Anime> {
         val list = mutableListOf<Anime>()
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val listSet = databaseManager
                 .select(
                     "SELECT * FROM animeLists " +
