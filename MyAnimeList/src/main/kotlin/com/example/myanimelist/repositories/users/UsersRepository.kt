@@ -8,12 +8,18 @@ import com.example.myanimelist.repositories.modelsDB.UserDB
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
+import javax.inject.Inject
 
 
 class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepository {
 
     private val logger: Logger = LogManager.getLogger(UsersRepository::class.java)
 
+class UsersRepository
+@Inject constructor(
+    private val databaseManager : DataBaseManager
+) : IUsersRepository{
+    val logger : Logger = LogManager.getLogger(UsersRepository::class)
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
         databaseManager.execute(logger) {

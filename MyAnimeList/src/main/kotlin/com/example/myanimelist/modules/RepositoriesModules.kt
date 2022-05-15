@@ -11,7 +11,7 @@ import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.repositories.users.UsersRepository
 import org.koin.dsl.module
 
-
+/*
 val repositoryModule = module {
     single { DataBaseManager() }
     single<IUsersRepository> {
@@ -27,3 +27,4 @@ val repositoryModule = module {
         ReviewsRepository(get(), get(), get())
     }
 }
+*/

@@ -3,9 +3,21 @@ package com.example.myanimelist.repositories.animes
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
+import dagger.internal.DaggerGenerated
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class AnimeRepository
+@Inject constructor(
+    private val databaseManager: DataBaseManager
+) : IAnimeRepository {
+
+
+    val logger: Logger = LogManager.getLogger("anime.repository")
 
 class AnimeRepository(private val databaseManager: DataBaseManager) :
     IAnimeRepository {
