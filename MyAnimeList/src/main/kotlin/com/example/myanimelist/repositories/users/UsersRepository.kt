@@ -11,6 +11,9 @@ import java.util.*
 import javax.inject.Inject
 
 
+class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepository {
+
+    private val logger: Logger = LogManager.getLogger(UsersRepository::class.java)
 
 class UsersRepository
 @Inject constructor(
