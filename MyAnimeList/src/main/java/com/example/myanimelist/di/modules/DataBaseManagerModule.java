@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 public class DataBaseManagerModule {
     @Singleton
     @Provides
-    DataBaseManager provideDB(){
-        return DataBaseManager.getInstance();
+    DataBaseManager provideDB() {
+        return new DataBaseManager();
     }
 }
