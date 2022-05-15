@@ -3,7 +3,7 @@ package com.example.myanimelist.views.models;
 import com.example.myanimelist.models.Anime;
 import javafx.beans.property.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,13 +13,13 @@ public class AnimeView {
     final StringProperty types;
     final IntegerProperty episodes;
     final StringProperty status;
-    final ObjectProperty<Date> date;
+    final ObjectProperty<LocalDate> date;
     final StringProperty rating;
     final StringProperty genres;
     final StringProperty img;
     final UUID id;
 
-    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, Date date, String rating, List<String> genres, String img, UUID id) {
+    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, LocalDate date, String rating, List<String> genres, String img, UUID id) {
         this.title = new SimpleStringProperty(title);
         this.titleEnglish = new SimpleStringProperty(titleEnglish);
         this.types = new SimpleStringProperty(types);
@@ -105,15 +105,15 @@ public class AnimeView {
         this.status.set(status);
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date.get();
     }
 
-    public ObjectProperty<Date> dateProperty() {
+    public ObjectProperty<LocalDate> dateProperty() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date.set(date);
     }
 

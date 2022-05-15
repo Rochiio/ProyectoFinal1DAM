@@ -26,8 +26,8 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     set.getString("nombre"),
                     set.getString("email"),
                     set.getString("password"),
-                    set.getDate("date_alta"),
-                    set.getDate("date_nacimiento"),
+                    set.getDate("date_alta").toLocalDate(),
+                    set.getDate("date_nacimiento").toLocalDate(),
                     set.getString("imageUrl")
                 )
                 logger.info("[findByName] Encotrado usuario $user")
@@ -50,8 +50,8 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                 set.getString("nombre"),
                 set.getString("email"),
                 set.getString("password"),
-                set.getDate("date_alta"),
-                set.getDate("date_nacimiento"),
+                set.getDate("date_alta").toLocalDate(),
+                set.getDate("date_nacimiento").toLocalDate(),
                 set.getString("imageUrl")
             )
             logger.info("Encotrado usuario $returnItem")
@@ -72,8 +72,8 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     set.getString("nombre"),
                     set.getString("email"),
                     set.getString("password"),
-                    set.getDate("date_alta"),
-                    set.getDate("date_nacimiento"),
+                    set.getDate("date_alta").toLocalDate(),
+                    set.getDate("date_nacimiento").toLocalDate(),
                     set.getString("imageUrl")
                 )
                 list.add(user)
@@ -200,7 +200,7 @@ class UsersRepository(private val databaseManager: DataBaseManager) : IUsersRepo
                     listSet.getString("type"),
                     listSet.getInt("episodes"),
                     listSet.getString("status"),
-                    listSet.getDate("releaseDate"),
+                    listSet.getDate("releaseDate").toLocalDate(),
                     listSet.getString("rating"),
                     listSet.getString("genre").split(","),
                     listSet.getString("imageUrl"),

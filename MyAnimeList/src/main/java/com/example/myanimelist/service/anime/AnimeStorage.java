@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author JoaquinAyG
@@ -24,13 +24,14 @@ public class AnimeStorage implements IAnimeStorage {
     @Override
     public void mkdir() {
         Path dir = Path.of(Properties.CSV_DIR);
-        if (!Files.exists(dir)) {
-            try {
-                Files.createDirectory(dir);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (Files.exists(dir)) return;
+
+        try {
+            Files.createDirectory(dir);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     @Override
@@ -49,15 +50,15 @@ public class AnimeStorage implements IAnimeStorage {
     }
 
     @Override
-    public List<AnimeDTO> load() {
-        try (var list = Files.lines(Path.of(Properties.ANIME_LOAD))) {
-            return list.skip(1)
+    public Optional<List<AnimeDTO>> load() {
+        try (var list = Files.lines(Path.of(Properties.ANIME_LOAD)).skip(1)) {
+            return Optional.of(list
                     .map(this::parse)
-                    .collect(Collectors.toList());
+                    .toList());
         } catch (Exception e) {
             System.out.println("Error reading th file");
         }
-        return null;
+        return Optional.empty();
     }
 
     private AnimeDTO parse(String line) {

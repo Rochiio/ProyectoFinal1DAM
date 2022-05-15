@@ -6,6 +6,7 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 
 import java.io.*;
 import java.sql.*;
+import java.time.LocalDate;
 
 /**
  * Manejador de Bases de Datos Relacionales
@@ -122,7 +123,7 @@ public class DataBaseManager implements AutoCloseable {
         PreparedStatement preparedStatement = connection.prepareStatement(querySQL);
         // Vamos a pasarle los parametros usando preparedStatement
         for (int i = 0; i < params.length; i++) {
-            preparedStatement.setObject(i + 1, params[i]);
+            preparedStatement.setObject(i + 1, parseValue(params[i]));
         }
         return preparedStatement.executeQuery();
     }
@@ -168,7 +169,7 @@ public class DataBaseManager implements AutoCloseable {
         PreparedStatement preparedStatement = connection.prepareStatement(insertSQL, PreparedStatement.RETURN_GENERATED_KEYS);
         // Vamos a pasarle los parametros usando preparedStatement
         for (int i = 0; i < params.length; i++) {
-            preparedStatement.setObject(i + 1, params[i]);
+            preparedStatement.setObject(i + 1, parseValue(params[i]));
         }
         preparedStatement.executeUpdate();
         return preparedStatement.getGeneratedKeys();
@@ -211,7 +212,7 @@ public class DataBaseManager implements AutoCloseable {
         PreparedStatement preparedStatement = connection.prepareStatement(genericSQL);
         // Vamos a pasarle los parametros usando preparedStatement
         for (int i = 0; i < params.length; i++) {
-            preparedStatement.setObject(i + 1, params[i]);
+            preparedStatement.setObject(i + 1, parseValue(params[i]));
         }
         return preparedStatement.executeUpdate();
     }
@@ -260,5 +261,13 @@ public class DataBaseManager implements AutoCloseable {
     public void rollback() throws SQLException {
         connection.rollback();
         connection.setAutoCommit(true);
+    }
+
+    // JDBC no sabe convertir localDate a sql date asi que parsea aqui
+    private Object parseValue(Object value) {
+        if (value instanceof LocalDate)
+            return Date.valueOf((LocalDate) value);
+        else
+            return value;
     }
 }
