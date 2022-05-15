@@ -11,12 +11,11 @@ import java.util.*
 import javax.inject.Inject
 
 
-
 class UsersRepository
 @Inject constructor(
-    private val databaseManager : DataBaseManager
-) : IUsersRepository{
-    val logger : Logger = LogManager.getLogger(UsersRepository::class)
+    private val databaseManager: DataBaseManager
+) : IUsersRepository {
+    val logger: Logger = LogManager.getLogger(UsersRepository::class.java)
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
         databaseManager.execute(logger) {
