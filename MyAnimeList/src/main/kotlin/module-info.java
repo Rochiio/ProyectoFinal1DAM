@@ -20,6 +20,7 @@ module com.example.myanimelist {
     requires dagger;
     requires javax.inject;
     requires java.compiler;
+    requires java.desktop;
 
 
     exports com.example.myanimelist;
