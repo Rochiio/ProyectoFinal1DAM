@@ -15,7 +15,7 @@ import java.net.URISyntaxException;
 
 public class AcercaDeController {
     private final Desktop desktop = Desktop.getDesktop();
-    private final Logger logger = LogManager.getLogger(AcercaDeController.class);
+    private final Logger logger = LogManager.getLogger(com.example.myanimelist.controllers.AcercaDeController.class);
 
     @FXML
     private void linkGitHub(ActionEvent event) {

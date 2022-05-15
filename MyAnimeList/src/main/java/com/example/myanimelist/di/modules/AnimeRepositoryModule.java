@@ -4,6 +4,7 @@ import com.example.myanimelist.repositories.animes.AnimeRepository;
 import com.example.myanimelist.repositories.animes.IAnimeRepository;
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 
 import javax.inject.Singleton;
 
