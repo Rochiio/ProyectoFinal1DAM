@@ -27,8 +27,6 @@ class LoginController : InicioController() {
     }
 
 
-    //fun openStageAbout() = SceneManager.openStageAbout()
-
     fun changeSceneToRegister() {
         val stage = btnRegister.scene.window as Stage
         stage.loadScene(REGISTER, WIDTH, HEIGHT) {
@@ -36,6 +34,16 @@ class LoginController : InicioController() {
             it.isResizable = false
         }.show()
     }
+
+
+    private fun changeSceneToMain(){
+        val stage = btnLogin.scene.window as Stage
+                stage.loadScene(REGISTER, WIDTH, HEIGHT) {
+                    it.title = "Animes"
+                    it.isResizable = false
+                }.show()
+    }
+
 
     fun login() {
         val message = StringBuilder()
@@ -46,8 +54,9 @@ class LoginController : InicioController() {
 
         Alert(Alert.AlertType.INFORMATION).show("Login completed", "You will go to the main page")
 
-        //TODO si pasa ir a pagina principal
+        changeSceneToMain();
     }
+
 
     private fun validateFields(errorMessage: StringBuilder): Boolean {
         if (!loginFilters.checkUserCorrect(txtUsername.text, txtPassword.text))
