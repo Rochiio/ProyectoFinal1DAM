@@ -1,8 +1,7 @@
 package com.example.myanimelist.repositories.users
 
 //import com.example.myanimelist.modules.repositoryModule
-import com.example.myanimelist.di.components.DaggerAnimeRepositoryDI
-import com.example.myanimelist.di.components.DaggerUsersRepositoryDI
+
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
@@ -10,22 +9,20 @@ import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import com.example.myanimelist.utilities.DataDB.getTestingUser
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
-import org.koin.core.context.startKoin
-import org.koin.test.inject
-import org.koin.test.junit5.AutoCloseKoinTest
-import java.util.*
-import kotlin.test.assertNull
 
-class UsersRepositoryTest : AutoCloseKoinTest() {
+import java.util.*
+
+class UsersRepositoryTest  {
     
-    private val usersRepository = DaggerUsersRepositoryDI.create().build()
-    private val animeRepository = DaggerAnimeRepositoryDI.create().build()
+    private val usersRepository = UsersRepository(DataBaseManager.getInstance())
+    private val animeRepository = AnimeRepository(DataBaseManager.getInstance())
 
 
     @AfterEach
     fun deleteAll() {
-        DataDB.deleteAll("Usuarios")
+        DataDB.deleteAll("usuarios")
         DataDB.deleteAll("animeLists")
     }
 

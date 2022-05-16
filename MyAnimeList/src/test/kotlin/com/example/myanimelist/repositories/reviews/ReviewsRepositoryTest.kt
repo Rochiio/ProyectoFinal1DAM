@@ -1,8 +1,5 @@
 package com.example.myanimelist.repositories.reviews
 
-import com.example.myanimelist.di.components.DaggerAnimeRepositoryDI
-import com.example.myanimelist.di.components.DaggerReviewsRepositoryDI
-import com.example.myanimelist.di.components.DaggerUsersRepositoryDI
 import com.example.myanimelist.exceptions.RepositoryException
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
@@ -21,16 +18,14 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
-import org.koin.core.context.startKoin
-import org.koin.test.inject
-import org.koin.test.junit5.AutoCloseKoinTest
 
-internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
+
+internal class ReviewsRepositoryTest {
 //    private val reviewsRepository by inject<IRepositoryReview>()
 
-    private val usersRepository = DaggerUsersRepositoryDI.create().build()
-    private val animeRepository = DaggerAnimeRepositoryDI.create().build()
-    private val reviewsRepository = DaggerReviewsRepositoryDI.create().build()
+    private val usersRepository = UsersRepository(DataBaseManager.getInstance())
+    private val animeRepository = AnimeRepository(DataBaseManager.getInstance())
+    private val reviewsRepository = ReviewsRepository(DataBaseManager.getInstance(), animeRepository, usersRepository)
 
     private lateinit var user: User
     private lateinit var anime: Anime

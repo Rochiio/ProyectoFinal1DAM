@@ -9,11 +9,11 @@ import com.example.myanimelist.utils.REGISTER
 import com.example.myanimelist.utils.WIDTH
 import javafx.scene.control.Alert
 import javafx.stage.Stage
-import org.koin.java.KoinJavaComponent.inject
+
 
 
 class LoginController : InicioController() {
-    private val loginFilters by inject<LoginFilters>(LoginFilters::class.java)
+    private lateinit var loginFilters : LoginFilters
 
     fun openStageAbout() = SceneManager.openStageAbout()
 

@@ -6,18 +6,16 @@ import com.example.myanimelist.models.Anime
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class AnimeRepository
-@Inject constructor(
-    private val databaseManager: DataBaseManager
-) : IAnimeRepository {
+
+class AnimeRepository constructor(
+    private var  databaseManager: DataBaseManager
+): IAnimeRepository {
     private val logger: Logger = LogManager.getLogger(AnimeRepository::class.java)
 
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"
+
         databaseManager.execute(logger) {
             val result = databaseManager.select(query, id.toString())
 
