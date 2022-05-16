@@ -3,12 +3,16 @@ package com.example.myanimelist.repositories.admins
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Admin
+import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.sql.SQLException
 import java.util.*
 
-class AdminRepository(private val db: DataBaseManager, private val logger: Logger) :
+class AdminRepository(private val db: DataBaseManager) :
     IAdminRepository {
+
+    private val logger: Logger = LogManager.getLogger(AdminRepository::class.java)
+
     /**
      * Busca en el repositorio un usuari de tipo admin usando su uuid
      * @param id UUID
@@ -16,11 +20,11 @@ class AdminRepository(private val db: DataBaseManager, private val logger: Logge
      */
     override fun findById(id: UUID): Admin? {
         val query = "select * from admins where id = ?"
-        db.execute {
+        db.execute(logger) {
 
             val result = db.select(query, id)
             if (result.next()) {
-                val admin = Admin(
+                return Admin(
                     result.getString("name"),
                     result.getString("email"),
                     result.getString("password"),
@@ -28,8 +32,6 @@ class AdminRepository(private val db: DataBaseManager, private val logger: Logge
                     result.getDate("birthDate"),
                     UUID.fromString(result.getString("id"))
                 )
-
-                return admin
             }
         }
         return null
@@ -42,7 +44,7 @@ class AdminRepository(private val db: DataBaseManager, private val logger: Logge
     override fun findAll(): List<Admin> {
         val query = "select * from admins"
         val admins: MutableList<Admin> = mutableListOf()
-        db.execute {
+        db.execute(logger) {
 
             val result = db.select(query)
             while (result.next()) {
@@ -78,7 +80,7 @@ class AdminRepository(private val db: DataBaseManager, private val logger: Logge
                 "createDate = ?," +
                 "birthDate =?" +
                 "where id = ?"
-        db.execute {
+        db.execute(logger) {
 
             db.update(
                 query,
@@ -106,7 +108,7 @@ class AdminRepository(private val db: DataBaseManager, private val logger: Logge
     override fun add(item: Admin): Admin? {
         val query = "INSERT into admins (id, name, email, password, createDate, birthDate)" +
                 "values (?,?,?,?,?,?)"
-        db.execute {
+        db.execute(logger) {
             db.insert(
                 query,
                 item.id.toString(),
@@ -132,7 +134,7 @@ class AdminRepository(private val db: DataBaseManager, private val logger: Logge
      */
     override fun delete(id: UUID) {
         val query = "delete from admins where id = ?"
-        db.execute {
+        db.execute(logger) {
             db.delete(query, id)
         }
 

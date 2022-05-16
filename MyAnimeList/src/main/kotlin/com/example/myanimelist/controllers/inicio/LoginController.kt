@@ -7,16 +7,14 @@ import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.utils.*
 import javafx.application.Platform
 import javafx.scene.control.Alert
-import javafx.scene.image.Image
 import javafx.stage.Modality
 import javafx.stage.Stage
-import javafx.stage.StageStyle
-import org.koin.java.KoinJavaComponent.inject
 
 
 
 class LoginController : InicioController() {
-    private val loginFilters by inject<LoginFilters>(LoginFilters::class.java)
+    private lateinit var loginFilters : LoginFilters
+
 
      fun openStageAbout() {
         val stage = Stage()
@@ -25,12 +23,13 @@ class LoginController : InicioController() {
             it.isResizable = false
             Platform.setImplicitExit(true)
             it.initModality(Modality.APPLICATION_MODAL)
-            stage.initStyle(StageStyle.TRANSPARENT)
             SceneManager.addIconStage(stage)
         }.show()
 
     }
 
+
+    //fun openStageAbout() = SceneManager.openStageAbout()
 
     fun changeSceneToRegister() {
         val stage = btnRegister.scene.window as Stage
@@ -53,9 +52,9 @@ class LoginController : InicioController() {
     }
 
     private fun validateFields(errorMessage: StringBuilder): Boolean {
-        if (!loginFilters.checkUserCorrect(txtUsername.text, txtPassword.text)) {
+        if (!loginFilters.checkUserCorrect(txtUsername.text, txtPassword.text))
             errorMessage.appendLine("Usuario no existe")
-        }
+
         return errorMessage.isEmpty()
     }
 }

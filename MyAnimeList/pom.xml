@@ -22,24 +22,6 @@
         <!-- https://mvnrepository.com/artifact/io.insert-koin/koin-core -->
 
         <dependency>
-            <groupId>io.insert-koin</groupId>
-            <artifactId>koin-core-jvm</artifactId>
-            <version>${koin.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.insert-koin/koin-core -->
-        <dependency>
-            <groupId>io.insert-koin</groupId>
-            <artifactId>koin-test-junit5</artifactId>
-            <version>${koin.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.insert-koin</groupId>
-            <artifactId>koin-test-jvm</artifactId>
-            <version>${koin.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>17.0.1</version>
@@ -95,13 +77,8 @@
             <version>2.17.2</version>
         </dependency>
 
-        <!-- Lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <scope>compile</scope>
-        </dependency>
+
+
         <!-- MyBatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -114,23 +91,26 @@
             <artifactId>gson</artifactId>
             <version>2.9.0</version>
         </dependency>
-        <!-- Dagger -->
-        <dependency>
-            <groupId>com.google.dagger</groupId>
-            <artifactId>dagger</artifactId>
-            <version>2.41</version>
-        </dependency>
+
 
 
     </dependencies>
 
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
                 <executions>
+                    <execution>
+                        <id>kapt</id>
+                        <goals>
+                            <goal>kapt</goal>
+                        </goals>
+
+                    </execution>
                     <execution>
                         <id>compile</id>
                         <goals>
@@ -161,6 +141,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
+
                 <executions>
                     <!-- Replacing default-compile as it is treated specially by maven -->
                     <execution>
@@ -193,6 +174,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M6</version>
             </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -211,6 +193,7 @@
                             <noHeaderFiles>true</noHeaderFiles>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
 

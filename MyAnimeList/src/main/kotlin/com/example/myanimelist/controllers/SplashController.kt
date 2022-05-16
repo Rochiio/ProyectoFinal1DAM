@@ -9,12 +9,16 @@ import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
 import javafx.util.Duration
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import java.io.FileInputStream
 import java.io.IOException
 import java.net.URL
 import java.util.*
 
-class SplashController : Initializable{
+class SplashController : Initializable {
+
+    private val logger: Logger = LogManager.getLogger(SplashController::class.java)
 
     @FXML
     lateinit var fondo: ImageView
@@ -34,8 +38,9 @@ class SplashController : Initializable{
             val sceneManager = SceneManager
             try {
                 sceneManager.initMain()
-            } catch (e: IOException) {
-                e.printStackTrace()
+            }
+            catch (e: IOException) {
+                logger.error(e)
             }
         }
     }
@@ -45,7 +50,7 @@ class SplashController : Initializable{
      * Elegir imagen de splash aleatoria
      * @return imagen aleatoria
      */
-    private fun randomImg():String{
+    private fun randomImg(): String {
         val rNum = (1..6).random()
         return "src/main/resources/com/example/myanimelist/images/splash$rNum.png"
     }
