@@ -10,6 +10,7 @@ import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import com.example.myanimelist.utilities.DataDB.getTestingUser
+import com.example.myanimelist.utils.Properties.SCRIPT_FILE_DATABASE
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -35,7 +36,7 @@ internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
     }
 
     @BeforeEach
-    fun setUp() = db.initData("MyAnimeList/db/script.sql",false)
+    fun setUp() = db.initData(SCRIPT_FILE_DATABASE,false)
 
 
     private var reviewTest =

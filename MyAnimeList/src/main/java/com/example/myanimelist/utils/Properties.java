@@ -9,6 +9,7 @@ public class Properties {
 
     //Directories
     public static final String PATH = System.getProperty("user.dir");
+    public static final String DB_DIR = PATH + File.separator + "db";
     public static final String DATA_DIR = PATH + File.separator + "data";
     public static final String CSV_DIR = DATA_DIR + File.separator + "csv";
     public static final String JSON_DIR = DATA_DIR + File.separator + "json";
@@ -19,4 +20,6 @@ public class Properties {
     public static final String RESOURCES_DIR = PATH + File.separator + "resources";
     public static final String ICONS_DIR = RESOURCES_DIR + File.separator + "icons";
     public static final String DEFAULT_USER_ICON = ICONS_DIR + File.separator + "default.png";
+
+    public static final String SCRIPT_FILE_DATABASE = DB_DIR + File.separator + "script.sql";
 }
