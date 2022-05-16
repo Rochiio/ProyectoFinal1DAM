@@ -2,8 +2,6 @@ module com.example.myanimelist {
     opens com.example.myanimelist to javafx.fxml;
     opens com.example.myanimelist.controllers to javafx.fxml;
     opens com.example.myanimelist.controllers.inicio to javafx.fxml;
-    opens com.example.myanimelist.di.components to javafx.fxml;
-    opens com.example.myanimelist.di.modules to javafx.fxml;
     opens com.example.myanimelist.filters.login to javafx.fxml;
 
     requires javafx.controls;
@@ -20,8 +18,6 @@ module com.example.myanimelist {
 
     requires java.compiler;
     requires java.desktop;
-    requires com.google.errorprone.annotations;
-
 
 
     exports com.example.myanimelist;
@@ -30,5 +26,4 @@ module com.example.myanimelist {
     exports com.example.myanimelist.repositories;
     exports com.example.myanimelist.manager;
     exports com.example.myanimelist.filters.login;
-    exports com.example.myanimelist.di.modules;
 }

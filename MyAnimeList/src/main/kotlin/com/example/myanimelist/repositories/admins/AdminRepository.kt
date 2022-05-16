@@ -7,9 +7,8 @@ import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.sql.SQLException
 import java.util.*
-import javax.inject.Inject
 
-class AdminRepository @Inject constructor(private val db: DataBaseManager) :
+class AdminRepository(private val db: DataBaseManager) :
     IAdminRepository {
 
     private val logger: Logger = LogManager.getLogger(AdminRepository::class.java)
