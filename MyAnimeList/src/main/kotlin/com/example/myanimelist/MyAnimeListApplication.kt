@@ -1,15 +1,9 @@
 package com.example.myanimelist
 
 import com.example.myanimelist.managers.SceneManager
-
-import com.example.myanimelist.modules.controllerModules
-import com.example.myanimelist.modules.repositoryModule
-import com.example.myanimelist.modules.servicesModules
-
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.stage.Stage
-import org.koin.core.context.startKoin
 
 class MyAnimeListApplication : Application() {
     override fun start(stage: Stage) {
@@ -21,11 +15,6 @@ class MyAnimeListApplication : Application() {
 }
 
 fun main() {
-
-
-    startKoin {
-        modules(repositoryModule, controllerModules, servicesModules)
-    }
 
     launch(MyAnimeListApplication::class.java)
 }

@@ -12,12 +12,11 @@ import javafx.scene.control.Alert
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.stage.Stage
-import org.koin.java.KoinJavaComponent.inject
 import java.sql.Date
 import java.util.*
 
 class RegisterController : InicioController() {
-    private val registerFilters by inject<RegisterFilters>(RegisterFilters::class.java)
+    private lateinit var registerFilters : RegisterFilters
 
     @FXML
     private lateinit var txtEmail: TextField

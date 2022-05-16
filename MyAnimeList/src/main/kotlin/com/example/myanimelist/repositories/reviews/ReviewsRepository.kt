@@ -11,19 +11,15 @@ import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.repositories.users.UsersRepository
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-
 import java.util.*
-import javax.inject.Inject
 
 //TODO Review reviews
-class ReviewsRepository
-@Inject constructor(
+class ReviewsRepository constructor(
     private val databaseManager: DataBaseManager,
-    private val animeRepository: AnimeRepository,
-    private val usersRepository: UsersRepository
-) : IRepositoryReview{
-    val logger : Logger = LogManager.getLogger(ReviewsRepository::class)
-
+    private val animeRepository: IAnimeRepository,
+    private val usersRepository: IUsersRepository
+) : IRepositoryReview {
+    private val logger = LogManager.getLogger(ReviewsRepository::class.java)
 
     override fun add(review: Review): Review? {
         databaseManager.execute(logger) {
