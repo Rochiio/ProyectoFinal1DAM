@@ -29,6 +29,8 @@ class TableItemFactory {
     }
 
     fun getMenu(): VBox{
-        return VBox()
+        val vBox = VBox()
+        TODO("un monton de codigo pa hacer el menu to wapo")
+        return vBox
     }
 }

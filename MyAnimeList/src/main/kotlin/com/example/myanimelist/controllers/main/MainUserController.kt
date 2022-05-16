@@ -38,7 +38,8 @@ class MainUserController(
 
     lateinit var animeList: ObservableList<AnimeView>
     lateinit var myList: ObservableList<AnimeView>
-    lateinit var flAnime: FilteredList<AnimeView>
+    var flAnime: FilteredList<AnimeView>
+    var flMyList: FilteredList<AnimeView>
 
     var logger : Logger = LogManager.getLogManager().getLogger("main_user.controller")
 
@@ -81,8 +82,7 @@ class MainUserController(
     @FXML
     private lateinit var generateButton: Button
 
-    @FXML
-    private fun initialize() {
+    init {
 
         // DaggerRepositoryFactory.create().inject(this);
 
@@ -110,7 +110,9 @@ class MainUserController(
 
         flAnime = FilteredList(animeList) { true }
         animeTable.items = flAnime
-        animeTable.columns.addAll(animeRankingCol, animeTitleCol, animeScoreCol)
+
+        flMyList = FilteredList(myList) { true }
+        myListTable.items = flMyList
         
 
     }
@@ -162,7 +164,7 @@ class MainUserController(
 
     private fun loadData() {
 
-        logger.info("loading files")
+        logger.info("cargando datos a memoria")
         animeList.addAll(animeRepository.findAll().map { AnimeView(it) }.toList())
         myList.addAll(usersRepository.getAnimeLists(user.id).map { AnimeView(it) }.toList())
     }
@@ -179,10 +181,14 @@ class MainUserController(
         val anime = animeView.toPOJO()
         animeRepository.add(anime)
         myListTable.refresh()
-        myListTable.getSelectionModel().select(animeView)
+        myListTable.selectionModel.select(animeView)
     }
 
     fun sortMyListByText(keyEvent: KeyEvent) {
-
+        logger.info("organizando la lista...")
+        flAnime.setPredicate { anime ->
+            anime.presentation.title.lowercase(Locale.getDefault()).contains(
+                animeNameSearch.text.lowercase(Locale.getDefault()).trim())
+        }
     }
 }

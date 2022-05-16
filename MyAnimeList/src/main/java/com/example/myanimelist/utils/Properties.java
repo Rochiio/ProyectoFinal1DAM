@@ -5,7 +5,7 @@ import java.io.File;
 public class Properties {
 
     //Misc
-    public static final String CSV_SEPARATOR = ",";
+    public static final String CSV_SEPARATOR = ";";
 
     //Directories
     public static final String PATH = System.getProperty("user.dir");
