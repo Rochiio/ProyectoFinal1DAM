@@ -20,9 +20,6 @@ public class DataBaseManager implements AutoCloseable {
     private String dataBaseName;
     private String user;
     private String password;
-
-
-    private static DataBaseManager instance = null;
     /*
         Tipos de Driver
         SQLite: "org.sqlite.JDBC";
@@ -35,13 +32,8 @@ public class DataBaseManager implements AutoCloseable {
     // Para manejar las conexiones y respuestas de las mismas
     private Connection connection;
 
-    public static DataBaseManager getInstance(){
-        if(instance == null)
-            instance = new DataBaseManager();
-        return instance;
-    }
 
-    private DataBaseManager(){
+    public DataBaseManager() {
         if (fromProperties) {
             // initConfigFromProperties();
             System.out.println("Comentado el método de leer de propiedades");
@@ -135,7 +127,7 @@ public class DataBaseManager implements AutoCloseable {
      * @return ResultSet de la consulta
      * @throws SQLException No se ha podido realizar la consulta o la tabla no existe
      */
-    public ResultSet select( String querySQL, Object... params) throws SQLException {
+    public ResultSet select(String querySQL, Object... params) throws SQLException {
         return executeQuery(querySQL, params);
     }
 

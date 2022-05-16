@@ -1,22 +1,21 @@
 package com.example.myanimelist.repositories.animes
 
 //import com.example.myanimelist.modules.repositoryModule
-import com.example.myanimelist.models.Anime
-import com.example.myanimelist.manager.DataBaseManager
+
+import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-
 import java.util.*
-import javax.xml.crypto.Data
 
 internal class AnimeRepositoryTest {
 
 
-private val repo = AnimeRepository(DataBaseManager.getInstance())
+    private val repo = getAnimesRepo()
+
     @AfterEach
     internal fun deleteAll() = DataDB.deleteAll("Animes")
 

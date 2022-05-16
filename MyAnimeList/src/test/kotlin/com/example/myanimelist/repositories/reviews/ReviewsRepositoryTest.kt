@@ -1,39 +1,29 @@
 package com.example.myanimelist.repositories.reviews
 
-import com.example.myanimelist.exceptions.RepositoryException
-import com.example.myanimelist.manager.DataBaseManager
+//import com.example.myanimelist.modules.repositoryModule
+import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
+import com.example.myanimelist.managers.DependenciesManager.getReviewsRepo
+import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.models.User
-//import com.example.myanimelist.modules.repositoryModule
-import com.example.myanimelist.repositories.animes.AnimeRepository
-import com.example.myanimelist.repositories.animes.IAnimeRepository
-import com.example.myanimelist.repositories.users.IUsersRepository
-import com.example.myanimelist.repositories.users.UsersRepository
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import com.example.myanimelist.utilities.DataDB.getTestingUser
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
 
 
 internal class ReviewsRepositoryTest {
-//    private val reviewsRepository by inject<IRepositoryReview>()
 
-    private val usersRepository = UsersRepository(DataBaseManager.getInstance())
-    private val animeRepository = AnimeRepository(DataBaseManager.getInstance())
-    private val reviewsRepository = ReviewsRepository(DataBaseManager.getInstance(), animeRepository, usersRepository)
+    private val usersRepository = getUsersRepo()
+    private val animeRepository = getAnimesRepo()
+    private val reviewsRepository = getReviewsRepo()
 
-    private lateinit var user: User
-    private lateinit var anime: Anime
+    private var user: User = usersRepository.add(getTestingUser()) ?: throw Exception()
+    private var anime: Anime = animeRepository.add(getTestingAnime()) ?: throw Exception()
 
-    init{
-        user = usersRepository.add(getTestingUser())!!
-        anime = animeRepository.add(getTestingAnime())!!
-    }
     @AfterEach
     fun deleteAll() = DataDB.deleteAll("Reviews")
 

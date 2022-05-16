@@ -1,11 +1,11 @@
 package com.example.myanimelist.controllers;
 
 import com.example.myanimelist.extensions.AlertExtensionsKt;
+import com.example.myanimelist.managers.DependenciesManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
@@ -15,7 +15,7 @@ import java.net.URISyntaxException;
 
 public class AcercaDeController {
     private final Desktop desktop = Desktop.getDesktop();
-    private final Logger logger = LogManager.getLogger(com.example.myanimelist.controllers.AcercaDeController.class);
+    private final Logger logger = DependenciesManager.getLogger(AcercaDeController.class);
 
     @FXML
     private void linkGitHub(ActionEvent event) {

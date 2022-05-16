@@ -3,15 +3,13 @@ package com.example.myanimelist.repositories.admins
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Admin
-import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.sql.SQLException
 import java.util.*
 
-class AdminRepository(private val db: DataBaseManager) :
+class AdminRepository(private val db: DataBaseManager, val logger: Logger) :
     IAdminRepository {
 
-    private val logger: Logger = LogManager.getLogger(AdminRepository::class.java)
 
     /**
      * Busca en el repositorio un usuari de tipo admin usando su uuid
