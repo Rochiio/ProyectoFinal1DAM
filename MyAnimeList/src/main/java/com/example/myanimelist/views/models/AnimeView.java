@@ -1,10 +1,15 @@
 package com.example.myanimelist.views.models;
 
 import com.example.myanimelist.models.Anime;
+import com.example.myanimelist.models.enums.Genre;
+import com.example.myanimelist.models.enums.Status;
+import com.example.myanimelist.models.enums.Type;
 import javafx.beans.property.*;
 
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class AnimeView {
@@ -39,6 +44,20 @@ public class AnimeView {
         this.rating = new SimpleStringProperty(anime.getRating());
         this.genres = new SimpleStringProperty(String.join(",", anime.getGenres()));
         this.id = anime.getId();
+    }
+
+    public Anime toPOJO(){
+        return new Anime(this.presentation.get().getTitle(),
+                this.presentation.get().getTitleEnglish(),
+                this.getTypes(),
+                this.getEpisodes(),
+                this.getStatus(),
+                this.getDate(),
+                this.getRating(),
+                Arrays.stream(this.getGenres().split(",")).toList(),
+                this.presentation.get().getImg(),
+                this.getId()
+                );
     }
 
     public int getRanking() {
@@ -156,5 +175,21 @@ public class AnimeView {
                 ", img=" + presentation.get().getImg() +
                 ", id=" + id +
                 '}';
+    }
+
+    public void enumParser(String selection) {
+        for(String sample :Genre.Companion.getSample()){
+            if (Objects.equals(selection, sample.split(",")[0])) setGenres(selection);
+            return;
+        }
+
+        for(String sample : Status.Companion.getSample()){
+            if (Objects.equals(selection, sample)) setStatus(selection);
+            return;
+        }
+
+        for(String sample : Type.Companion.getSample()){
+            if (Objects.equals(selection, sample)) setTypes(selection);
+        }
     }
 }

@@ -182,7 +182,7 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
         )
     }
 
-    private fun getAnimeLists(userId: UUID): List<Anime> {
+    override fun getAnimeLists(userId: UUID): List<Anime> {
         val list = mutableListOf<Anime>()
         databaseManager.execute {
             val listSet = databaseManager
