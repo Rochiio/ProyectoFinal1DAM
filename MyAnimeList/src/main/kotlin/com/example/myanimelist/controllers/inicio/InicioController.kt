@@ -1,5 +1,6 @@
 package com.example.myanimelist.controllers.inicio
 
+import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
 import com.example.myanimelist.repositories.users.IUsersRepository
 import javafx.fxml.FXML
 import javafx.scene.control.Hyperlink
@@ -7,7 +8,7 @@ import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 
 abstract class InicioController {
-    protected lateinit var userRepository : IUsersRepository
+    protected var userRepository: IUsersRepository = getUsersRepo()
 
     @FXML
     protected lateinit var txtUsername: TextField

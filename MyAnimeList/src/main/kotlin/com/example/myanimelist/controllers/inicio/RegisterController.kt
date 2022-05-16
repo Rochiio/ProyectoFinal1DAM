@@ -3,6 +3,7 @@ package com.example.myanimelist.controllers.inicio
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.login.RegisterFilters
+import com.example.myanimelist.managers.DependenciesManager.getRegisterFilter
 import com.example.myanimelist.models.User
 import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.LOGIN
@@ -16,7 +17,7 @@ import java.sql.Date
 import java.util.*
 
 class RegisterController : InicioController() {
-    private lateinit var registerFilters : RegisterFilters
+    private var registerFilters: RegisterFilters = getRegisterFilter()
 
     @FXML
     private lateinit var txtEmail: TextField
