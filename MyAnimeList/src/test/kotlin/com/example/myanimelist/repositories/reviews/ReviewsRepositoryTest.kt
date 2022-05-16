@@ -38,18 +38,18 @@ internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
     @BeforeEach
     fun setUp() = db.initData(SCRIPT_FILE_DATABASE,false)
 
+    var reviewTest = Review(anime, user, 0, "Me ha gustado")
 
 
     @Test
     fun addReview() {
-        var reviewTest = Review(anime, user, 0, "Me ha gustado")
         val result = reviewsRepository.add(reviewTest)
         assertEquals(result, reviewTest)
     }
 
     @Test
     fun showReviewsAnime() {
-        val listResult = reviewsRepository.findByAnimeId().toList()
+        val listResult = reviewsRepository.findByAnimeId(reviewTest.anime.id).toList()
         assertEquals(listResult[0], reviewTest)
     }
 

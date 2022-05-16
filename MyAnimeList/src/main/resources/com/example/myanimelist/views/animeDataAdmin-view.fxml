@@ -49,7 +49,12 @@
             <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="450.0" spacing="80.0">
                <children>
                   <ImageView fitHeight="280.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button mnemonicParsing="false" text="Añadir a Mi Lista" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="70.0" text="Editar" />
+                        <Button mnemonicParsing="false" prefWidth="70.0" text="Eliminar" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>
