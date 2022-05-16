@@ -30,8 +30,7 @@ internal class ReviewsRepositoryTest {
     private lateinit var user: User
     private lateinit var anime: Anime
 
-    @BeforeAll
-    fun init(){
+    init{
         user = usersRepository.add(getTestingUser())!!
         anime = animeRepository.add(getTestingAnime())!!
     }
