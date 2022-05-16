@@ -14,16 +14,14 @@ module com.example.myanimelist {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
     requires org.mybatis;
-    requires lombok;
     requires java.base;
     requires com.google.gson;
     requires org.apache.logging.log4j;
 
-    requires dagger;
-    requires javax.inject;
     requires java.compiler;
     requires java.desktop;
     requires com.google.errorprone.annotations;
+
 
 
     exports com.example.myanimelist;

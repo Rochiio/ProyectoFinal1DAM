@@ -8,11 +8,9 @@ import com.example.myanimelist.repositories.modelsDB.UserDB
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
-import javax.inject.Inject
 
 
-class UsersRepository
-@Inject constructor(
+class UsersRepository constructor(
     private val databaseManager: DataBaseManager
 ) : IUsersRepository {
     val logger: Logger = LogManager.getLogger(UsersRepository::class.java)

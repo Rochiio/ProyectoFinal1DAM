@@ -10,12 +10,13 @@ import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
 import java.sql.Date
 import java.util.*
-import javax.inject.Inject
 
 object DataDB {
 
-    @Inject
-    private lateinit var dataBaseManager: DataBaseManager
+    private var dataBaseManager: DataBaseManager = DataBaseManager.getInstance()
+init {
+
+}
 
     fun deleteAll(table: String) {
         val animeQuery = "DELETE FROM $table"

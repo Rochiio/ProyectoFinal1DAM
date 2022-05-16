@@ -12,11 +12,9 @@ import com.example.myanimelist.repositories.users.UsersRepository
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
-import javax.inject.Inject
 
 //TODO Review reviews
-class ReviewsRepository
-@Inject constructor(
+class ReviewsRepository constructor(
     private val databaseManager: DataBaseManager,
     private val animeRepository: IAnimeRepository,
     private val usersRepository: IUsersRepository

@@ -5,11 +5,9 @@ import javafx.fxml.FXML
 import javafx.scene.control.Hyperlink
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
-import javax.inject.Inject
 
 abstract class InicioController {
-    @Inject
-    protected lateinit var userRepository: IUsersRepository
+    protected lateinit var userRepository : IUsersRepository
 
     @FXML
     protected lateinit var txtUsername: TextField

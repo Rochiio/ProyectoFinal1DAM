@@ -1,6 +1,5 @@
 package com.example.myanimelist.controllers.inicio
 
-import com.example.myanimelist.di.components.DaggerControllersComponent
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.login.RegisterFilters
@@ -15,21 +14,15 @@ import javafx.scene.control.TextField
 import javafx.stage.Stage
 import java.sql.Date
 import java.util.*
-import javax.inject.Inject
 
 class RegisterController : InicioController() {
-    @Inject
-    lateinit var registerFilters: RegisterFilters
+    private lateinit var registerFilters : RegisterFilters
 
     @FXML
     private lateinit var txtEmail: TextField
 
     @FXML
     private lateinit var txtConfirmPassword: PasswordField
-
-    init {
-        DaggerControllersComponent.create().inject(this)
-    }
 
     fun changeSceneToLogin() {
         val stage = btnLogin.scene.window as Stage
