@@ -13,40 +13,36 @@ import com.example.myanimelist.repositories.users.UsersRepository
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import com.example.myanimelist.utilities.DataDB.getTestingUser
-<<<<<<< HEAD
+
 import com.example.myanimelist.utils.Properties.SCRIPT_FILE_DATABASE
-=======
-import org.junit.jupiter.api.AfterEach
->>>>>>> develop
+import org.junit.jupiter.api.*
+
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
 
 
 internal class ReviewsRepositoryTest {
 //    private val reviewsRepository by inject<IRepositoryReview>()
 
-<<<<<<< HEAD
-    @BeforeEach
-    fun setUp() = db.initData(SCRIPT_FILE_DATABASE,false)
-=======
+    private val db: DataBaseManager
     private val usersRepository = UsersRepository(DataBaseManager.getInstance())
     private val animeRepository = AnimeRepository(DataBaseManager.getInstance())
     private val reviewsRepository = ReviewsRepository(DataBaseManager.getInstance(), animeRepository, usersRepository)
 
-    private lateinit var user: User
-    private lateinit var anime: Anime
+    private var user: User
+    private var anime: Anime
 
     init{
         user = usersRepository.add(getTestingUser())!!
         anime = animeRepository.add(getTestingAnime())!!
+        db = DataBaseManager.getInstance()
     }
-    @AfterEach
-    fun deleteAll() = DataDB.deleteAll("Reviews")
->>>>>>> develop
 
-    var reviewTest = Review(anime, user, 0, "Me ha gustado")
+    @BeforeEach
+    fun setUp() {
+        DataDB.deleteAll("Reviews")
+    }
+
+    val reviewTest = Review(anime, user, 0, "Me ha gustado")
 
 
     @Test
@@ -57,6 +53,7 @@ internal class ReviewsRepositoryTest {
 
     @Test
     fun showReviewsAnime() {
+        reviewsRepository.add(reviewTest)
         val listResult = reviewsRepository.findByAnimeId(reviewTest.anime.id).toList()
         assertEquals(listResult[0], reviewTest)
     }
