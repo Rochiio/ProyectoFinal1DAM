@@ -123,8 +123,8 @@ class MainUserController(
                     choiceBox.selectionModel.select(enumSet.indexOf(item))
                     choiceBox.setOnAction {
                         val selection = choiceBox.selectionModel.selectedItem as String
-                        val item  = tableView.items[index]
-                        item.enumParser(selection)
+                        val anime  = tableView.items[index]
+                        anime.enumParser(selection)
                     }
                     graphic = choiceBox;
                 }
@@ -145,7 +145,7 @@ class MainUserController(
     }
 
     fun generateHTML(actionEvent: ActionEvent) {
-
+        TODO("generate HTML")
     }
 
     fun showMenu(actionEvent: ActionEvent) {
