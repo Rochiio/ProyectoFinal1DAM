@@ -40,6 +40,7 @@ class LoginController : InicioController() {
         val stage = txtUsername.scene.window as Stage
         stage.loadScene(MAIN) {
             it.title = "Animes"
+            it.isResizable = false
         }.show()
     }
 
