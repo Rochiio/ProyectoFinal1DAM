@@ -91,3 +91,6 @@ create table reviews
 
 create unique index reviews_idAnime_uindex
     on reviews (idAnime);
+
+INSERT INTO reviews VALUES('af8ed5f2-2e3e-4b4e-83bb-72174f8e71b4','853b2cea-997b-4bff-adce-05eeb1924916'
+,5,'3942cf52-a330-4918-ba89-0c7bc6fc171b','Me ha gustado');
