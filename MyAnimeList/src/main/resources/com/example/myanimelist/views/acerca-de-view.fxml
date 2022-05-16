@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="480.0" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.AcercaDeController">
    <children>
-      <HBox prefHeight="260.0" prefWidth="480.0">
+      <HBox prefHeight="260.0" prefWidth="480.0" styleClass="fondo">
          <children>
             <ImageView fitHeight="170.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -24,8 +24,6 @@ class LoginController : InicioController() {
             it.title="About"
             it.isResizable = false
             Platform.setImplicitExit(true)
-            it.initModality(Modality.APPLICATION_MODAL)
-            stage.initStyle(StageStyle.TRANSPARENT)
             SceneManager.addIconStage(stage)
         }.show()
 
