@@ -23,6 +23,7 @@ class LoginController : InicioController() {
         stage.loadScene(ABOUT,ABOUT_WIDTH, ABOUT_HEIGHT){
             it.title="About"
             it.isResizable = false
+            Platform.setImplicitExit(true)
             it.initModality(Modality.APPLICATION_MODAL)
             stage.initStyle(StageStyle.TRANSPARENT)
             SceneManager.addIconStage(stage)
