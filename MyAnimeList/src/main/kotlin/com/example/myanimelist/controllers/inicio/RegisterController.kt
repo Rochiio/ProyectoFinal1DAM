@@ -12,12 +12,11 @@ import javafx.scene.control.Alert
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.stage.Stage
-import org.koin.java.KoinJavaComponent.inject
 import java.sql.Date
 import java.util.*
 
 class RegisterController : InicioController() {
-    private val registerFilters by inject<RegisterFilters>(RegisterFilters::class.java)
+    private lateinit var registerFilters : RegisterFilters
 
     @FXML
     private lateinit var txtEmail: TextField
@@ -35,37 +34,42 @@ class RegisterController : InicioController() {
 
     fun register() {
         val message = StringBuilder()
+
         if (!validateFields(message)) {
             Alert(Alert.AlertType.WARNING).show("Register invalid", message.toString())
             return
         }
 
-        userRepository.add(
-            User(
-                txtUsername.text, txtEmail.text, txtPassword.text, Date(Date().time), Date(Date().time), null,
-                emptyList()
-            )
-        ) ?: Alert(Alert.AlertType.ERROR).show("Register error", "Error al crear usuario")
+        if (createUser() == null) {
+            Alert(Alert.AlertType.ERROR).show("Register error", "Error al crear usuario")
+            return
+        }
 
-        Alert(Alert.AlertType.INFORMATION).show("Register completed", "You will go to the main page")
+        Alert(Alert.AlertType.INFORMATION).show("Register completed", "Bienvenido ${txtUsername.text}")
     }
 
     private fun validateFields(errorMessage: StringBuilder): Boolean {
-        if (txtUsername.text.isNullOrBlank()) {
+        if (txtUsername.text.isNullOrBlank())
             errorMessage.appendLine("Username vacio")
-        }
-        if (txtPassword.text != txtConfirmPassword.text) {
+
+        if (txtPassword.text != txtConfirmPassword.text)
             errorMessage.appendLine("Las contraseñas no coinciden")
-        }
-        if (!registerFilters.checkPass(txtPassword.text)) {
+
+        if (!registerFilters.checkPass(txtPassword.text))
             errorMessage.appendLine("La contraseña debe tener ${registerFilters.passLength} caracteres")
-        }
-        if (!registerFilters.checkEmail(txtEmail.text)) {
+
+        if (!registerFilters.checkEmail(txtEmail.text))
             errorMessage.appendLine("Email incorrecto")
-        }
-        if (registerFilters.checkUserNameExists(txtUsername.text)) {
+
+        if (registerFilters.checkUserNameExists(txtUsername.text))
             errorMessage.appendLine("Username ya existe")
-        }
+
         return errorMessage.isEmpty()
     }
+
+    private fun createUser() = userRepository.add(
+        User(
+            txtUsername.text, txtEmail.text, txtPassword.text, Date(Date().time), Date(Date().time), null
+        )
+    )
 }

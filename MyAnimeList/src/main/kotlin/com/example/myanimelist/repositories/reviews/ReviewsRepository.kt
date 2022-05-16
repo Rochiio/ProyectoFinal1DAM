@@ -4,22 +4,25 @@ import com.example.myanimelist.exceptions.RepositoryException
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Review
+import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.modelsDB.ReviewDB
 import com.example.myanimelist.repositories.users.IUsersRepository
+import com.example.myanimelist.repositories.users.UsersRepository
+import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
 
 //TODO Review reviews
-class ReviewsRepository(
+class ReviewsRepository constructor(
     private val databaseManager: DataBaseManager,
     private val animeRepository: IAnimeRepository,
-    private val usersRepository: IUsersRepository,
-    private val logger: Logger
+    private val usersRepository: IUsersRepository
 ) : IRepositoryReview {
+    private val logger = LogManager.getLogger(ReviewsRepository::class.java)
 
     override fun add(review: Review): Review? {
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val query = "INSERT INTO reviews VALUES(?,?,?,?,?)"
             databaseManager.insert(query, review.user.id, review.anime.id, review.score, review.id, review.comment)
             logger.info("Añadida review $review")
@@ -32,7 +35,7 @@ class ReviewsRepository(
     override fun findByAnimeId(animeId: UUID): List<Review> {
         val list: MutableList<ReviewDB> = mutableListOf()
 
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val sql = "SELECT * FROM reviews WHERE idAnime = ?"
             val res =
                 databaseManager.select(sql, animeId.toString())
@@ -63,7 +66,7 @@ class ReviewsRepository(
     override fun findAll(): Iterable<Review> {
         val list: MutableList<ReviewDB> = mutableListOf()
 
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val sql = "SELECT * FROM reviews"
             val res =
                 databaseManager.select(sql)

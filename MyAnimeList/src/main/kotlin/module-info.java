@@ -11,12 +11,14 @@ module com.example.myanimelist {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
     requires org.mybatis;
-    requires lombok;
     requires java.base;
-    requires koin.core.jvm;
     requires com.google.gson;
     requires org.apache.logging.log4j;
+
+    requires java.compiler;
     requires java.desktop;
+
+
 
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;

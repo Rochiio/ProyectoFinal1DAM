@@ -5,10 +5,9 @@ import javafx.fxml.FXML
 import javafx.scene.control.Hyperlink
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
-import org.koin.java.KoinJavaComponent.inject
 
 abstract class InicioController {
-    protected val userRepository: IUsersRepository by inject(IUsersRepository::class.java)
+    protected lateinit var userRepository : IUsersRepository
 
     @FXML
     protected lateinit var txtUsername: TextField
