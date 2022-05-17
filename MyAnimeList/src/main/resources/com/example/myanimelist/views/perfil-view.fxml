@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="38.0" layoutY="33.0" prefHeight="148.0" prefWidth="149.0">
+         <children>
+            <TextField promptText="Email" styleClass="text-input" />
+            <TextField layoutY="15.0" promptText="Username" styleClass="text-input">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField layoutY="15.0" promptText="Password" styleClass="text-input">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField promptText="Confirm Password" styleClass="text-input">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+      <Button layoutX="162.0" layoutY="254.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="177.0" text="Save" />
+      <Circle depthTest="DISABLE" fill="#e2e9ef" layoutX="358.0" layoutY="102.0" radius="62.0" stroke="BLACK" strokeType="INSIDE" />
+   </children>
+</AnchorPane>
