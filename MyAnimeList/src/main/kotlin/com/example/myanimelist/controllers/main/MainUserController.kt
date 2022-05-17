@@ -1,23 +1,20 @@
 package com.example.myanimelist.controllers.main
 
 import com.example.myanimelist.factories.TableItemFactory
-import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
 import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
-import com.example.myanimelist.models.User
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
-import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
-import com.example.myanimelist.repositories.users.UsersRepository
 import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
+import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.collections.transformation.FilteredList
 import javafx.event.ActionEvent
@@ -26,7 +23,6 @@ import javafx.scene.control.*
 import javafx.scene.input.KeyEvent
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
-import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.sql.SQLException
 import java.util.*
@@ -41,14 +37,14 @@ class MainUserController(
     val user = DependenciesManager.globalUser
     lateinit var animeStorage: IAnimeStorage
     lateinit var imgStorage: IImgStorage
-    var animeRepository: IAnimeRepository = getAnimesRepo()
-    var usersRepository: IUsersRepository = getUsersRepo()
+    private var animeRepository: IAnimeRepository = getAnimesRepo()
+    private var usersRepository: IUsersRepository = getUsersRepo()
     var itemFactory: TableItemFactory = TableItemFactory()
 
-    lateinit var animeList: ObservableList<AnimeView>
-    lateinit var myList: ObservableList<AnimeView>
-    private lateinit var flAnime: FilteredList<AnimeView>
-    private lateinit var flMyList: FilteredList<AnimeView>
+    private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
+    private var myList: ObservableList<AnimeView> = FXCollections.observableArrayList()
+    private var flAnime: FilteredList<AnimeView> = FilteredList(FXCollections.observableArrayList())
+    private var flMyList: FilteredList<AnimeView> = FilteredList(FXCollections.observableArrayList())
 
     @FXML
     private lateinit var animeRankingCol: TableColumn<AnimeView, Int>
@@ -89,7 +85,8 @@ class MainUserController(
     @FXML
     private lateinit var generateButton: Button
 
-    init {
+    @FXML
+    fun initialize(){
 
         // DaggerRepositoryFactory.create().inject(this);
 
