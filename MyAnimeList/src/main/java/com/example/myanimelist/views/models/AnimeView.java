@@ -6,6 +6,7 @@ import com.example.myanimelist.models.enums.Status;
 import com.example.myanimelist.models.enums.Type;
 import javafx.beans.property.*;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -22,7 +23,7 @@ public class AnimeView {
     final StringProperty genres;
     final UUID id;
 
-    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, Date date, String rating, List<String> genres, String img, UUID id) {
+    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, LocalDate date, String rating, List<String> genres, String img, UUID id) {
         this.presentation = new SimpleObjectProperty<>(new Presentation(title, titleEnglish, img));
         this.types = new SimpleStringProperty(types);
         this.episodes = new SimpleIntegerProperty(episodes);

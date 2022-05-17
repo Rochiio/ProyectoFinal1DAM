@@ -1,9 +1,11 @@
 package com.example.myanimelist.service.img;
 
+import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
 import com.example.myanimelist.service.utils.Utils;
 import com.example.myanimelist.utils.Properties;
 import javafx.scene.image.Image;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,11 +14,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-import java.util.Optional;
-
 public class ImgStorage implements IImgStorage {
 
-    public Logger logger = LogManager.getLogManager().getLogger("main_user.controller");
+    private Logger logger = DependenciesManager.getLogger(ImgStorage.class);
     public ImgStorage() {
         mkdir();
     }
@@ -41,12 +41,6 @@ public class ImgStorage implements IImgStorage {
         logger.info("to: " + to);
         Utils.cp(from, to);
         user.setImg(to);
-    }
-
-    @Override
-
-    public Optional<User> load() {
-        return Optional.empty();
     }
 
     @Override
