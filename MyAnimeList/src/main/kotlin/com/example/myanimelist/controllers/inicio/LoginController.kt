@@ -15,16 +15,7 @@ class LoginController : InicioController() {
     private var loginFilters: LoginFilters = getLoginFilter()
 
 
-    fun openStageAbout() {
-        val stage = Stage()
-        stage.loadScene(ABOUT, ABOUT_WIDTH, ABOUT_HEIGHT) {
-            it.title = "About"
-            it.isResizable = false
-            Platform.setImplicitExit(true)
-            SceneManager.addIconStage(stage)
-        }.show()
-
-    }
+    fun openStageAbout()  = SceneManager.openStageAbout()
 
 
     fun changeSceneToRegister() {
