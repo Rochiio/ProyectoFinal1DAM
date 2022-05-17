@@ -11,8 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+
+import java.util.Optional;
 
 public class ImgStorage implements IImgStorage {
 
@@ -41,6 +41,12 @@ public class ImgStorage implements IImgStorage {
         logger.info("to: " + to);
         Utils.cp(from, to);
         user.setImg(to);
+    }
+
+    @Override
+
+    public Optional<User> load() {
+        return Optional.empty();
     }
 
     @Override
