@@ -6,15 +6,15 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class UserView {
     private final StringProperty name;
     private final StringProperty email;
     private final StringProperty password;
-    private final ObjectProperty<Date> createDate;
-    private final ObjectProperty<Date> birthDate;
+    private final ObjectProperty<LocalDate> createDate;
+    private final ObjectProperty<LocalDate> birthDate;
     private final StringProperty img;
     private UUID id;
 
@@ -22,7 +22,7 @@ public class UserView {
         this(null, null, null, null, null, null, null);
     }
 
-    public UserView(String name, String email, String password, Date createDate, Date birthDate, String img, UUID id) {
+    public UserView(String name, String email, String password, LocalDate createDate, LocalDate birthDate, String img, UUID id) {
         this.id = id;
         this.name = new SimpleStringProperty(name);
         this.email = new SimpleStringProperty(email);
@@ -37,8 +37,8 @@ public class UserView {
         this.name = new SimpleStringProperty(user.getName());
         this.email = new SimpleStringProperty(user.getEmail());
         this.password = new SimpleStringProperty(user.getPassword());
-        this.createDate = new SimpleObjectProperty<Date>(user.getCreateDate());
-        this.birthDate = new SimpleObjectProperty<Date>(user.getBirthDate());
+        this.createDate = new SimpleObjectProperty<LocalDate>(user.getCreateDate());
+        this.birthDate = new SimpleObjectProperty<LocalDate>(user.getBirthDate());
         this.img = new SimpleStringProperty(user.getImg());
     }
 
@@ -82,27 +82,27 @@ public class UserView {
         this.password.set(password);
     }
 
-    public Date getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate.get();
     }
 
-    public ObjectProperty<Date> createDateProperty() {
+    public ObjectProperty<LocalDate> createDateProperty() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate.set(createDate);
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate.get();
     }
 
-    public ObjectProperty<Date> birthDateProperty() {
+    public ObjectProperty<LocalDate> birthDateProperty() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate.set(birthDate);
     }
 

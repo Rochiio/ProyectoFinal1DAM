@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.Optional;
 
 public class ImgStorage implements IImgStorage {
 
@@ -41,8 +42,8 @@ public class ImgStorage implements IImgStorage {
     }
 
     @Override
-    public User load() {
-        return null;
+    public Optional<User> load() {
+        return Optional.empty();
     }
 
     @Override

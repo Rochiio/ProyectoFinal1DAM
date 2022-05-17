@@ -26,8 +26,8 @@ class AdminRepository(private val db: DataBaseManager, val logger: Logger) :
                     result.getString("name"),
                     result.getString("email"),
                     result.getString("password"),
-                    result.getDate("createDate"),
-                    result.getDate("birthDate"),
+                    result.getDate("createDate").toLocalDate(),
+                    result.getDate("birthDate").toLocalDate(),
                     UUID.fromString(result.getString("id"))
                 )
             }
@@ -51,8 +51,8 @@ class AdminRepository(private val db: DataBaseManager, val logger: Logger) :
                         result.getString("name"),
                         result.getString("email"),
                         result.getString("password"),
-                        result.getDate("createDate"),
-                        result.getDate("birthDate"),
+                        result.getDate("createDate").toLocalDate(),
+                        result.getDate("birthDate").toLocalDate(),
                         UUID.fromString(result.getString("id"))
                     )
                 )

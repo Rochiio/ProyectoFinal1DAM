@@ -1,14 +1,14 @@
 package com.example.myanimelist.models
 
-import java.sql.Date
+import java.time.LocalDate
 import java.util.*
 
 data class User(
     override var name: String,
     override var email: String,
     override var password: String,
-    override val createDate: Date,
-    override val birthDate: Date,
+    override val createDate: LocalDate,
+    override val birthDate: LocalDate,
     var img: String?,
     val myList: List<Anime>,
     override val id: UUID = UUID.randomUUID()
@@ -18,8 +18,8 @@ data class User(
         name: String,
         email: String,
         password: String,
-        createDate: Date,
-        birthDate: Date,
+        createDate: LocalDate,
+        birthDate: LocalDate,
         img: String?,
         id: UUID = UUID.randomUUID()
     ) : this(name, email, password, createDate, birthDate, img, emptyList<Anime>(), id)
