@@ -13,6 +13,6 @@ data class Anime(
     var rating: String,
     var genres: List<String>,
     var img: String?,
-    val id: UUID = UUID.randomUUID()
-
+    var id: UUID = UUID.randomUUID()
 )
+

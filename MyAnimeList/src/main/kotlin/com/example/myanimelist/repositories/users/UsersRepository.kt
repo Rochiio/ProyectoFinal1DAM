@@ -9,13 +9,14 @@ import org.apache.logging.log4j.Logger
 import java.util.*
 
 
-class UsersRepository(val databaseManager: DataBaseManager, private val logger: Logger) : IUsersRepository {
-
-
+class UsersRepository(
+    private val databaseManager: DataBaseManager,
+    val logger: Logger
+) : IUsersRepository {
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
-        databaseManager.execute {
-            val set = databaseManager.select("SELECT * FROM Usuarios WHERE nombre LIKE ?", "%$name%")
+        databaseManager.execute(logger) {
+            val set = databaseManager.select("SELECT * FROM usuarios WHERE nombre LIKE ?", "%$name%")
 
             while (set.next()) {
                 val id = UUID.fromString(set.getString("id"))
@@ -38,8 +39,8 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
     override fun findById(id: UUID): User? {
         var returnItem: UserDB? = null
 
-        databaseManager.execute {
-            val set = databaseManager.select("SELECT * FROM Usuarios WHERE id = ?", id.toString())
+        databaseManager.execute(logger) {
+            val set = databaseManager.select("SELECT * FROM usuarios WHERE id = ?", id.toString())
 
             if (!set.next()) return null
 
@@ -60,8 +61,8 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
     override fun findAll(): List<User> {
         val list: MutableList<UserDB> = mutableListOf()
 
-        databaseManager.execute {
-            val set = databaseManager.select("SELECT * FROM Usuarios")
+        databaseManager.execute(logger) {
+            val set = databaseManager.select("SELECT * FROM usuarios")
 
             while (set.next()) {
                 val id = UUID.fromString(set.getString("id"))
@@ -84,10 +85,10 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
 
     override fun update(item: User): User? {
         var returnItem: UserDB? = null
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val modifiedRows = databaseManager
                 .update(
-                    "UPDATE Usuarios set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl = ?, email = ?, date_nacimiento = ? WHERE id = ?",
+                    "UPDATE usuarios set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl = ?, email = ?, date_nacimiento = ? WHERE id = ?",
                     item.id.toString(),
                     item.name,
                     item.createDate,
@@ -109,10 +110,10 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
 
     override fun add(item: User): User? {
         var returnItem: UserDB? = null
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             databaseManager
                 .insert(
-                    "Insert into Usuarios (id,nombre,date_alta,password,imageUrl,email,date_nacimiento) values (?,?,?,?,?,?,?)",
+                    "Insert into usuarios (id,nombre,date_alta,password,imageUrl,email,date_nacimiento) values (?,?,?,?,?,?,?)",
                     item.id.toString(),
                     item.name,
                     item.createDate,
@@ -130,7 +131,7 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
 
     override fun addToList(item: User, anime: Anime): User? {
         var returnItem: UserDB? = null
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             databaseManager
                 .insert(
                     "Insert into AnimeLists (idUser,idAnime) values (?,?)",
@@ -146,7 +147,7 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
 
     override fun removeFromList(item: User, anime: Anime): User? {
         var returnItem: UserDB? = null
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             databaseManager
                 .delete(
                     "Delete from AnimeLists where idUser = ? and idAnime = ?",
@@ -162,8 +163,8 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
     override fun delete(id: UUID) {
         if (findById(id) == null) return
 
-        databaseManager.execute {
-            databaseManager.delete("Delete from Usuarios where id = ?", id)
+        databaseManager.execute(logger) {
+            databaseManager.delete("Delete from usuarios where id = ?", id)
             logger.info("Se ha eliminado el usuario ${findById(id)}")
         }
     }
@@ -184,7 +185,7 @@ class UsersRepository(val databaseManager: DataBaseManager, private val logger: 
 
     override fun getAnimeLists(userId: UUID): List<Anime> {
         val list = mutableListOf<Anime>()
-        databaseManager.execute {
+        databaseManager.execute(logger) {
             val listSet = databaseManager
                 .select(
                     "SELECT * FROM animeLists " +

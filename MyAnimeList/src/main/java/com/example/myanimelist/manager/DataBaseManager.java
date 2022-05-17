@@ -1,7 +1,6 @@
 package com.example.myanimelist.manager;
 
 
-import lombok.NonNull;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import java.io.*;
@@ -21,7 +20,6 @@ public class DataBaseManager implements AutoCloseable {
     private String dataBaseName;
     private String user;
     private String password;
-
     /*
         Tipos de Driver
         SQLite: "org.sqlite.JDBC";
@@ -34,14 +32,8 @@ public class DataBaseManager implements AutoCloseable {
     // Para manejar las conexiones y respuestas de las mismas
     private Connection connection;
 
-    /**
-     * Constructor privado para Singleton
-     * Inicializa la configuración de acceso al servidor de base de datos
-     * y abre la conexión
-     * Aseguramos siempre una misma instancia.
-     */
+
     public DataBaseManager() {
-        // System.out.println("Mi nombre es: " + this.nombre);
         if (fromProperties) {
             // initConfigFromProperties();
             System.out.println("Comentado el método de leer de propiedades");
@@ -118,7 +110,7 @@ public class DataBaseManager implements AutoCloseable {
      * @return ResultSet de la consulta
      * @throws SQLException No se ha podido realizar la consulta o la tabla no existe
      */
-    private ResultSet executeQuery(@NonNull String querySQL, Object... params) throws SQLException {
+    private ResultSet executeQuery(String querySQL, Object... params) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(querySQL);
         // Vamos a pasarle los parametros usando preparedStatement
         for (int i = 0; i < params.length; i++) {
@@ -135,7 +127,7 @@ public class DataBaseManager implements AutoCloseable {
      * @return ResultSet de la consulta
      * @throws SQLException No se ha podido realizar la consulta o la tabla no existe
      */
-    public ResultSet select(@NonNull String querySQL, Object... params) throws SQLException {
+    public ResultSet select(String querySQL, Object... params) throws SQLException {
         return executeQuery(querySQL, params);
     }
 
@@ -149,7 +141,7 @@ public class DataBaseManager implements AutoCloseable {
      * @return ResultSet de la consulta
      * @throws SQLException No se ha podido realizar la consulta o la tabla no existe o el desplazamiento es mayor que el número de registros
      */
-    public ResultSet select(@NonNull String querySQL, int limit, int offset, Object... params) throws SQLException {
+    public ResultSet select(String querySQL, int limit, int offset, Object... params) throws SQLException {
         String query = querySQL + " LIMIT " + limit + " OFFSET " + offset;
         return executeQuery(query, params);
     }
@@ -162,7 +154,7 @@ public class DataBaseManager implements AutoCloseable {
      * @return Clave del registro insertado
      * @throws SQLException tabla no existe o no se ha podido realizar la operación
      */
-    public ResultSet insert(@NonNull String insertSQL, Object... params) throws SQLException {
+    public ResultSet insert(String insertSQL, Object... params) throws SQLException {
         // Con return generated keys obtenemos las claves generadas las claves es autonumerica por ejemplo,
         // el id de la tabla si es autonumérico. Si no quitar.
         PreparedStatement preparedStatement = connection.prepareStatement(insertSQL, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -182,7 +174,7 @@ public class DataBaseManager implements AutoCloseable {
      * @return número de registros actualizados
      * @throws SQLException tabla no existe o no se ha podido realizar la operación
      */
-    public int update(@NonNull String updateSQL, Object... params) throws SQLException {
+    public int update(String updateSQL, Object... params) throws SQLException {
         return updateQuery(updateSQL, params);
     }
 
@@ -194,7 +186,7 @@ public class DataBaseManager implements AutoCloseable {
      * @return número de registros eliminados
      * @throws SQLException tabla no existe o no se ha podido realizar la operación
      */
-    public int delete(@NonNull String deleteSQL, Object... params) throws SQLException {
+    public int delete(String deleteSQL, Object... params) throws SQLException {
         return updateQuery(deleteSQL, params);
     }
 
@@ -206,7 +198,7 @@ public class DataBaseManager implements AutoCloseable {
      * @return número de registros eliminados
      * @throws SQLException tabla no existe o no se ha podido realizar la operación
      */
-    private int updateQuery(@NonNull String genericSQL, Object... params) throws SQLException {
+    private int updateQuery(String genericSQL, Object... params) throws SQLException {
         // Con return generated keys obtenemos las claves generadas
         PreparedStatement preparedStatement = connection.prepareStatement(genericSQL);
         // Vamos a pasarle los parametros usando preparedStatement
@@ -223,7 +215,7 @@ public class DataBaseManager implements AutoCloseable {
      * @return si ha tenido, 1
      * @throws SQLException no se ha podido realizar la operación
      */
-    public int genericUpdate(@NonNull String genericSQL) throws SQLException {
+    public int genericUpdate(String genericSQL) throws SQLException {
         // Con return generated keys obtenemos las claves generadas
         PreparedStatement preparedStatement = connection.prepareStatement(genericSQL);
         return preparedStatement.executeUpdate();
@@ -232,7 +224,7 @@ public class DataBaseManager implements AutoCloseable {
     /**
      * Carga los datos desde un fichero externo
      */
-    public void initData(@NonNull String sqlFile, boolean logWriter) throws FileNotFoundException {
+    public void initData(String sqlFile, boolean logWriter) throws FileNotFoundException {
         ScriptRunner sr = new ScriptRunner(connection);
         Reader reader = new BufferedReader(new FileReader(sqlFile));
         sr.setLogWriter(logWriter ? new PrintWriter(System.out) : null);

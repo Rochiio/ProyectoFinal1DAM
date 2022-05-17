@@ -8,6 +8,7 @@ import javafx.scene.Node
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.image.Image
+import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.StageStyle
 import java.io.IOException
@@ -20,6 +21,14 @@ object SceneManager {
         this.appClass = T::class.java
     }
 
+    //Si se usa mas de una vez dejar openStageAbout aqui o en un utils
+    fun openStageAbout() =
+        Stage().loadScene(ABOUT, ABOUT_WIDTH, ABOUT_HEIGHT) {
+            it.title = "About"
+            it.isResizable = false
+            it.initModality(Modality.APPLICATION_MODAL)
+            addIconStage(it)
+        }.show()
 
     @Throws(IOException::class, InterruptedException::class)
     fun initSplash(stage: Stage) {
@@ -68,6 +77,6 @@ object SceneManager {
      * Para añadir el icono al crear stage más rápido
      * @param stage escena a añadir el icono
      */
-    private fun addIconStage(stage: Stage) = stage.icons.add(Image(appClass.getResourceAsStream(ICON)))
+    fun addIconStage(stage: Stage) = stage.icons.add(Image(appClass.getResourceAsStream(ICON)))
 
 }
