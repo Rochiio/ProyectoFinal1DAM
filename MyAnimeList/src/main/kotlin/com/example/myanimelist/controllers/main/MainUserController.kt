@@ -38,8 +38,8 @@ class MainUserController(
 
     lateinit var animeList: ObservableList<AnimeView>
     lateinit var myList: ObservableList<AnimeView>
-    var flAnime: FilteredList<AnimeView>
-    var flMyList: FilteredList<AnimeView>
+    private lateinit var flAnime: FilteredList<AnimeView>
+    private lateinit var flMyList: FilteredList<AnimeView>
 
     var logger : Logger = LogManager.getLogManager().getLogger("main_user.controller")
 
@@ -92,29 +92,55 @@ class MainUserController(
             logger.warning("error while loading")
         }
 
-        logger.info("Seting anime columns")
-        animeRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
-        animeScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
-        animeTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-        setTitleCell(animeTitleCol)
-        myListGenderCol.setCellValueFactory { cellData -> cellData.value.genresProperty() }
-        setEnumCol(myListGenderCol, Genre.sample)
-        myListRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
-        myListScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
-        myListStatusCol.setCellValueFactory { cellData -> cellData.value.statusProperty() }
-        setEnumCol(myListStatusCol, Status.sample)
-        myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-        setTitleCell(myListTitleCol)
-        myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
-        setEnumCol(myListTypeCol, Type.sample)
+        logger.info("Iniciando anime columns")
+        setAnimeCols()
 
+        logger.info("Iniciando miLista columns")
+        setMyListCols()
+
+        logger.info("Iniciando columnas ordenables")
+        setFilteredLists()
+
+        setGraphLabels()
+    }
+
+    private fun setGraphLabels() {
+        val list = usersRepository.getAnimeLists(user.id)
+        onHoldCount.text = list.count { it.status == Status.CURRENTLY_AIRING.value }.toString()
+        finishedCount.text = list.count { it.status == Status.FINISHED_AIRING.value }.toString()
+        botRankAnime.text = list.minByOrNull { it.rating }?.title
+        topRankAnime.text = list.maxByOrNull { it.rating }?.title
+    }
+
+    private fun setFilteredLists() {
         flAnime = FilteredList(animeList) { true }
         animeTable.items = flAnime
 
         flMyList = FilteredList(myList) { true }
         myListTable.items = flMyList
-        
+    }
 
+    private fun setMyListCols() {
+        myListGenderCol.setCellValueFactory { cellData -> cellData.value.genresProperty() }
+        setEnumCol(myListGenderCol, Genre.sample)
+
+        myListRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
+        myListScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
+        myListStatusCol.setCellValueFactory { cellData -> cellData.value.statusProperty() }
+        setEnumCol(myListStatusCol, Status.sample)
+
+        myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
+        setTitleCell(myListTitleCol)
+
+        myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
+        setEnumCol(myListTypeCol, Type.sample)
+    }
+
+    private fun setAnimeCols() {
+        animeRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
+        animeScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
+        animeTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
+        setTitleCell(animeTitleCol)
     }
 
     private fun setEnumCol(consumer: TableColumn<AnimeView, String>, enumSet: ObservableList<*>) {
@@ -158,6 +184,8 @@ class MainUserController(
         logger.info("organizando la lista...")
         flAnime.setPredicate { anime ->
             anime.presentation.title.lowercase(Locale.getDefault()).contains(
+                animeNameSearch.text.lowercase(Locale.getDefault()).trim()) ||
+            anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
                 animeNameSearch.text.lowercase(Locale.getDefault()).trim())
         }
     }
@@ -188,7 +216,13 @@ class MainUserController(
         logger.info("organizando la lista...")
         flAnime.setPredicate { anime ->
             anime.presentation.title.lowercase(Locale.getDefault()).contains(
-                animeNameSearch.text.lowercase(Locale.getDefault()).trim())
+                myListNameSearch.text.lowercase(Locale.getDefault()).trim()) ||
+            anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
+                myListNameSearch.text.lowercase(Locale.getDefault()).trim())
         }
+    }
+
+    fun save(){
+        TODO("salvar los animes cambiados los usuarios y la lista del usuario")
     }
 }

@@ -1,8 +1,6 @@
 package com.example.myanimelist.factories
 
 import com.example.myanimelist.views.models.Presentation
-import javafx.collections.ObservableList
-import javafx.scene.control.ChoiceBox
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
