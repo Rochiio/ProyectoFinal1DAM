@@ -1,7 +1,7 @@
 package com.example.myanimelist.utilities
 
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.managers.DependenciesManager.getDatabaseManager
 import com.example.myanimelist.models.Admin
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
@@ -9,14 +9,12 @@ import com.example.myanimelist.models.User
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import java.time.LocalDate
 import java.util.*
 
-object DataDB : KoinComponent {
+object DataDB {
 
-    private val dataBaseManager by inject<DataBaseManager>()
+    private val dataBaseManager = getDatabaseManager()
 
     fun deleteAll(table: String) {
         val animeQuery = "DELETE FROM $table"

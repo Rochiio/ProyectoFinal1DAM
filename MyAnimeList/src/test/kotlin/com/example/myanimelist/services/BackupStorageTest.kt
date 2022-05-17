@@ -1,32 +1,23 @@
 package com.example.myanimelist.services
 
-import com.example.myanimelist.adapters.LocalDateTypeAdapter
 import com.example.myanimelist.dto.BackupDTO
-import com.example.myanimelist.modules.servicesModules
+import com.example.myanimelist.managers.DependenciesManager.getBackupStorage
+import com.example.myanimelist.managers.DependenciesManager.getGson
 import com.example.myanimelist.service.backup.IBackupStorage
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utils.Properties
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
-import org.koin.core.context.startKoin
-import org.koin.test.inject
-import org.koin.test.junit5.AutoCloseKoinTest
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
-import java.time.LocalDate
 
-class BackupStorageTest : AutoCloseKoinTest() {
-    private val storage: IBackupStorage by inject()
-    private val gson: Gson = GsonBuilder().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
+class BackupStorageTest {
+    private val storage: IBackupStorage = getBackupStorage()
+    private val gson: Gson = getGson()
 
-
-    init {
-        startKoin { modules(servicesModules) }
-    }
 
     @BeforeEach
     fun setup() {

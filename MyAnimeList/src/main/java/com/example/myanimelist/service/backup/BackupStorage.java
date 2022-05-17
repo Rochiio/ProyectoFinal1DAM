@@ -1,30 +1,27 @@
 package com.example.myanimelist.service.backup;
 
-import com.example.myanimelist.adapters.LocalDateTypeAdapter;
 import com.example.myanimelist.dto.BackupDTO;
 import com.example.myanimelist.utils.Properties;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.Optional;
 
 /**
  * @author JoaquinAyG
  */
 public class BackupStorage implements IBackupStorage {
-    private final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
-            .setPrettyPrinting()
-            .create();
 
-    public BackupStorage() {
+    private final Gson gson;
+
+
+    public BackupStorage(Gson gson) {
         mkdir();
+        this.gson = gson;
     }
 
     @Override
