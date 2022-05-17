@@ -2,6 +2,7 @@ package com.example.myanimelist.services
 
 import com.example.myanimelist.dto.BackupDTO
 import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.managers.DependenciesManager
 //import com.example.myanimelist.modules.repositoryModule
 import com.example.myanimelist.repositories.admins.IAdminRepository
 import com.example.myanimelist.repositories.animes.AnimeRepository
@@ -10,16 +11,17 @@ import com.example.myanimelist.repositories.reviews.IRepositoryReview
 import com.example.myanimelist.repositories.reviews.ReviewsRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.repositories.users.UsersRepository
+import com.example.myanimelist.service.backup.BackupStorage
 import com.example.myanimelist.service.backup.IBackupStorage
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 
 
 class BackupStorageTest  {
-    private lateinit var storage: IBackupStorage
-    private  var animesRepo: IAnimeRepository = AnimeRepository(DataBaseManager.getInstance())
-    private  var usersRepo: IUsersRepository = UsersRepository(DataBaseManager.getInstance())
-    private  var reviewRepo: IRepositoryReview = ReviewsRepository(DataBaseManager.getInstance(), animesRepo, usersRepo)
+    private   var storage: IBackupStorage  = BackupStorage()
+    private  var animesRepo: IAnimeRepository = DependenciesManager.getAnimesRepo()
+    private  var usersRepo: IUsersRepository = DependenciesManager.getUsersRepo()
+    private  var reviewRepo: IRepositoryReview = DependenciesManager.getReviewsRepo()
 
 
 
