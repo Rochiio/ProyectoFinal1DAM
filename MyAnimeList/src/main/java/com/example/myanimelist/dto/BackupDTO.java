@@ -11,7 +11,7 @@ import com.example.myanimelist.models.User;
  */
 
 public class BackupDTO {
-    public BackupDTO(Iterable<User> users, Iterable<Review> reviews, Iterable<Anime> animes, Iterable<Admin> admins) {
+    public BackupDTO(Iterable<User> users, Iterable<Review> reviews, Iterable<Anime> animes) {
     }
 
 
