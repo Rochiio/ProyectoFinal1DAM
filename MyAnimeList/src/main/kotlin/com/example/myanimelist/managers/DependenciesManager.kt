@@ -4,6 +4,7 @@ import com.example.myanimelist.adapters.LocalDateTypeAdapter
 import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.filters.login.RegisterFilters
 import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.admins.AdminRepository
 import com.example.myanimelist.repositories.admins.IAdminRepository
 import com.example.myanimelist.repositories.animes.AnimeRepository
@@ -22,6 +23,7 @@ import java.time.LocalDate
 
 object DependenciesManager {
     //Singleton instances
+    lateinit var globalUser : User
     private val dataBaseManager: DataBaseManager = DataBaseManager()
     private val gson: Gson = GsonBuilder().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
     private val adminsRepository: IAdminRepository = AdminRepository(getDatabaseManager(), getLogger<AdminRepository>())
