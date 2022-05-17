@@ -9,4 +9,5 @@ interface IUsersRepository : ICRUDRepository<UUID, User> {
     fun findByName(name: String): Iterable<User>
     fun addToList(item: User, anime: Anime): User?
     fun removeFromList(item: User, anime: Anime): User?
+    fun getAnimeLists(userId: UUID): List<Anime>
 }
