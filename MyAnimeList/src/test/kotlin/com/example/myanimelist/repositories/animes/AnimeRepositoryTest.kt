@@ -1,24 +1,20 @@
 package com.example.myanimelist.repositories.animes
 
-import com.example.myanimelist.modules.repositoryModule
+//import com.example.myanimelist.modules.repositoryModule
+
+import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.koin.core.context.startKoin
-import org.koin.test.inject
-import org.koin.test.junit5.AutoCloseKoinTest
 import java.util.*
-import kotlin.test.assertEquals
 
-internal class AnimeRepositoryTest : AutoCloseKoinTest() {
+internal class AnimeRepositoryTest {
 
-    private val repo by inject<IAnimeRepository>()
 
-    init {
-        startKoin { modules(repositoryModule) }
-    }
+    private val repo = getAnimesRepo()
 
     @AfterEach
     internal fun deleteAll() = DataDB.deleteAll("Animes")

@@ -1,41 +1,31 @@
 package com.example.myanimelist.repositories.reviews
 
-import com.example.myanimelist.exceptions.RepositoryException
-import com.example.myanimelist.manager.DataBaseManager
+//import com.example.myanimelist.modules.repositoryModule
+import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
+import com.example.myanimelist.managers.DependenciesManager.getReviewsRepo
+import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.models.User
-import com.example.myanimelist.modules.repositoryModule
-import com.example.myanimelist.repositories.animes.IAnimeRepository
-import com.example.myanimelist.repositories.users.IUsersRepository
+import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import com.example.myanimelist.utilities.DataDB.getTestingUser
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.koin.core.context.startKoin
-import org.koin.test.inject
-import org.koin.test.junit5.AutoCloseKoinTest
 
-internal class ReviewsRepositoryTest : AutoCloseKoinTest() {
-    private val reviewsRepository by inject<IRepositoryReview>()
-    private val usersRepository by inject<IUsersRepository>()
-    private val animeRepository by inject<IAnimeRepository>()
 
-    private val db by inject<DataBaseManager>()
-    private val user: User
-    private val anime: Anime
+internal class ReviewsRepositoryTest {
 
-    init {
-        startKoin { modules(repositoryModule) }
-        user =
-            usersRepository.add(getTestingUser()) ?: throw RepositoryException("Couldn't load user for Reviews tests")
-        anime =
-            animeRepository.add(getTestingAnime()) ?: throw RepositoryException("Couldn't load anime for Reviews tests")
-    }
+    private val usersRepository = getUsersRepo()
+    private val animeRepository = getAnimesRepo()
+    private val reviewsRepository = getReviewsRepo()
 
-    @BeforeEach
-    fun setUp() = db.initData("MyAnimeList/db/script.sql",false)
+    private var user: User = usersRepository.add(getTestingUser()) ?: throw Exception()
+    private var anime: Anime = animeRepository.add(getTestingAnime()) ?: throw Exception()
+
+    @AfterEach
+    fun deleteAll() = DataDB.deleteAll("Reviews")
 
 
     private var reviewTest =
