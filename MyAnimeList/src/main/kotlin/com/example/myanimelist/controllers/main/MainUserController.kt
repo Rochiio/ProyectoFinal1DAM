@@ -1,12 +1,19 @@
 package com.example.myanimelist.controllers.main
 
 import com.example.myanimelist.factories.TableItemFactory
+import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
+import com.example.myanimelist.managers.DependenciesManager.getLogger
+import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
 import com.example.myanimelist.models.User
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
+import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
+import com.example.myanimelist.repositories.users.UsersRepository
 import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.views.models.AnimeView
@@ -19,29 +26,29 @@ import javafx.scene.control.*
 import javafx.scene.input.KeyEvent
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import java.sql.SQLException
 import java.util.*
-import java.util.logging.LogManager
-import java.util.logging.Logger
+
 
 
 class MainUserController(
 
 ) {
 
-    lateinit var user : User
+    val logger : Logger = getLogger<MainUserController>()
+    val user = DependenciesManager.globalUser
     lateinit var animeStorage: IAnimeStorage
     lateinit var imgStorage: IImgStorage
-    lateinit var animeRepository: IAnimeRepository
-    lateinit var usersRepository: IUsersRepository
-    lateinit var itemFactory: TableItemFactory
+    var animeRepository: IAnimeRepository = getAnimesRepo()
+    var usersRepository: IUsersRepository = getUsersRepo()
+    var itemFactory: TableItemFactory = TableItemFactory()
 
     lateinit var animeList: ObservableList<AnimeView>
     lateinit var myList: ObservableList<AnimeView>
     private lateinit var flAnime: FilteredList<AnimeView>
     private lateinit var flMyList: FilteredList<AnimeView>
-
-    var logger : Logger = LogManager.getLogManager().getLogger("main_user.controller")
 
     @FXML
     private lateinit var animeRankingCol: TableColumn<AnimeView, Int>
@@ -89,7 +96,7 @@ class MainUserController(
         try {
             loadData()
         } catch (e: SQLException) {
-            logger.warning("error while loading")
+            logger.warn("error while loading")
         }
 
         logger.info("Iniciando anime columns")

@@ -3,6 +3,7 @@ package com.example.myanimelist.controllers.inicio
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.login.LoginFilters
+import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLoginFilter
 import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.utils.*
@@ -28,6 +29,7 @@ class LoginController : InicioController() {
 
 
     private fun changeSceneToMain() {
+        DependenciesManager.globalUser = userRepository.findByName(txtUsername.text).first {it.name == txtUsername.text}
         val stage = txtUsername.scene.window as Stage
         stage.loadScene(MAIN) {
             it.title = "Animes"

@@ -3,6 +3,7 @@ package com.example.myanimelist.managers
 import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.filters.login.RegisterFilters
 import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.admins.AdminRepository
 import com.example.myanimelist.repositories.admins.IAdminRepository
 import com.example.myanimelist.repositories.animes.AnimeRepository
@@ -16,6 +17,7 @@ import org.apache.logging.log4j.Logger
 
 object DependenciesManager {
     //Singleton instances
+    lateinit var globalUser : User
     private val dataBaseManager: DataBaseManager = DataBaseManager()
     private val adminsRepository: IAdminRepository = AdminRepository(getDatabaseManager(), getLogger<AdminRepository>())
     private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
