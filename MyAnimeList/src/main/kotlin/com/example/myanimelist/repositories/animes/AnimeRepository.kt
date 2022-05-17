@@ -27,7 +27,7 @@ class AnimeRepository(
                 types = result.getString("type"),
                 episodes = result.getInt("episodes"),
                 status = result.getString("status"),
-                date = result.getDate("releaseDate"),
+                date = result.getDate("releaseDate").toLocalDate(),
                 rating = result.getString("rating"),
                 genres = result.getString("genre").split(",").toList(),
                 img = result.getString("imageUrl")
@@ -51,7 +51,7 @@ class AnimeRepository(
                     types = result.getString("type"),
                     episodes = result.getInt("episodes"),
                     status = result.getString("status"),
-                    date = result.getDate("releaseDate"),
+                    date = result.getDate("releaseDate").toLocalDate(),
                     rating = result.getString("rating"),
                     genres = result.getString("genre").split(",").toList(),
                     img = result.getString("imageUrl")

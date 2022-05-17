@@ -3,6 +3,8 @@ module com.example.myanimelist {
     opens com.example.myanimelist.controllers to javafx.fxml;
     opens com.example.myanimelist.controllers.inicio to javafx.fxml;
     opens com.example.myanimelist.filters.login to javafx.fxml;
+    opens com.example.myanimelist.dto to com.google.gson;
+    opens com.example.myanimelist.models to com.google.gson;
 
     requires javafx.controls;
     requires javafx.fxml;
