@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="38.0" layoutY="33.0" prefHeight="148.0" prefWidth="149.0">
          <children>
-            <TextField promptText="Email" styleClass="text-input" />
-            <TextField layoutY="15.0" promptText="Username" styleClass="text-input">
+            <TextField promptText="Email" />
+            <TextField layoutY="15.0" promptText="Username">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
             </TextField>
-            <TextField layoutY="15.0" promptText="Password" styleClass="text-input">
+            <TextField layoutY="15.0" promptText="Password">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
             </TextField>
-            <TextField promptText="Confirm Password" styleClass="text-input">
+            <TextField promptText="Confirm Password">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>

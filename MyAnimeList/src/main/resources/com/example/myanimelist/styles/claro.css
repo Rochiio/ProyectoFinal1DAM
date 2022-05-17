@@ -1,10 +1,7 @@
 .fondo{
     -fx-background-color: #99E2B4;
 }
-.acercaDe{
-    -fx-border-radius:  12px;
-    -fx-background-radius: 12px;
-}
+
 .acercaDeTexto{
     -fx-background-color: #88D4AB;
     -fx-border-radius:  6px;
@@ -33,4 +30,16 @@
 
 .text-input:focused{
     -fx-border-color:#036666;
+}
+
+.animeDataText{
+    -fx-text-fill:black;
+    -fx-background-color: #88D4AB;
+    -fx-font-weight: normal;
+    -fx-font-size: 20px;
+    -fx-alignment: left;
+    -fx-font-family: Arial;
+    -fx-border-color: #469D89;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
 }

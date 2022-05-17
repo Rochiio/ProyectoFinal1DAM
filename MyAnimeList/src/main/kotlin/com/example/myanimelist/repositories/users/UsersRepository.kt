@@ -5,19 +5,18 @@ import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
-import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
 
 
-class UsersRepository constructor(
-    private val databaseManager: DataBaseManager
+class UsersRepository(
+    private val databaseManager: DataBaseManager,
+    val logger: Logger
 ) : IUsersRepository {
-    val logger: Logger = LogManager.getLogger(UsersRepository::class.java)
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
         databaseManager.execute(logger) {
-            val set = databaseManager.select("SELECT * FROM Usuarios WHERE nombre LIKE ?", "%$name%")
+            val set = databaseManager.select("SELECT * FROM usuarios WHERE nombre LIKE ?", "%$name%")
 
             while (set.next()) {
                 val id = UUID.fromString(set.getString("id"))
@@ -41,7 +40,7 @@ class UsersRepository constructor(
         var returnItem: UserDB? = null
 
         databaseManager.execute(logger) {
-            val set = databaseManager.select("SELECT * FROM Usuarios WHERE id = ?", id.toString())
+            val set = databaseManager.select("SELECT * FROM usuarios WHERE id = ?", id.toString())
 
             if (!set.next()) return null
 
@@ -63,7 +62,7 @@ class UsersRepository constructor(
         val list: MutableList<UserDB> = mutableListOf()
 
         databaseManager.execute(logger) {
-            val set = databaseManager.select("SELECT * FROM Usuarios")
+            val set = databaseManager.select("SELECT * FROM usuarios")
 
             while (set.next()) {
                 val id = UUID.fromString(set.getString("id"))
@@ -89,7 +88,7 @@ class UsersRepository constructor(
         databaseManager.execute(logger) {
             val modifiedRows = databaseManager
                 .update(
-                    "UPDATE Usuarios set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl = ?, email = ?, date_nacimiento = ? WHERE id = ?",
+                    "UPDATE usuarios set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl = ?, email = ?, date_nacimiento = ? WHERE id = ?",
                     item.id.toString(),
                     item.name,
                     item.createDate,
@@ -114,7 +113,7 @@ class UsersRepository constructor(
         databaseManager.execute(logger) {
             databaseManager
                 .insert(
-                    "Insert into Usuarios (id,nombre,date_alta,password,imageUrl,email,date_nacimiento) values (?,?,?,?,?,?,?)",
+                    "Insert into usuarios (id,nombre,date_alta,password,imageUrl,email,date_nacimiento) values (?,?,?,?,?,?,?)",
                     item.id.toString(),
                     item.name,
                     item.createDate,
@@ -165,7 +164,7 @@ class UsersRepository constructor(
         if (findById(id) == null) return
 
         databaseManager.execute(logger) {
-            databaseManager.delete("Delete from Usuarios where id = ?", id)
+            databaseManager.delete("Delete from usuarios where id = ?", id)
             logger.info("Se ha eliminado el usuario ${findById(id)}")
         }
     }
