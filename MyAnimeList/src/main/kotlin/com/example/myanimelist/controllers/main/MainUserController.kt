@@ -1,13 +1,13 @@
 package com.example.myanimelist.controllers.main
 
-import com.example.myanimelist.factories.TableItemFactory
+import com.example.myanimelist.javafx.factories.AnimeViewTableCell
+import com.example.myanimelist.javafx.factories.AnimeViewTableCellPresentation
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
 import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
-import com.example.myanimelist.models.enums.Type
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.service.anime.IAnimeStorage
@@ -24,7 +24,6 @@ import javafx.scene.input.KeyEvent
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import org.apache.logging.log4j.Logger
-import java.sql.SQLException
 import java.util.*
 
 
@@ -38,7 +37,6 @@ class MainUserController(
     lateinit var imgStorage: IImgStorage
     private var animeRepository: IAnimeRepository = getAnimesRepo()
     private var usersRepository: IUsersRepository = getUsersRepo()
-    var itemFactory: TableItemFactory = TableItemFactory()
 
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private var myList: ObservableList<AnimeView> = FXCollections.observableArrayList()
@@ -105,13 +103,7 @@ class MainUserController(
     @FXML
     fun initialize() {
 
-        // DaggerRepositoryFactory.create().inject(this);
-
-        try {
-            loadData()
-        } catch (e: SQLException) {
-            logger.warn("error while loading")
-        }
+        loadData()
 
         logger.info("Iniciando anime columns")
         setAnimeCols()
@@ -134,63 +126,38 @@ class MainUserController(
     }
 
     private fun setFilteredLists() {
-        flAnime = FilteredList(animeList) { true }
+        flAnime = FilteredList(animeList)
         animeTable.items = flAnime
 
-        flMyList = FilteredList(myList) { true }
+        flMyList = FilteredList(myList)
         myListTable.items = flMyList
     }
 
     private fun setMyListCols() {
-        myListGenderCol.setCellValueFactory { cellData -> cellData.value.genresProperty() }
-        setEnumCol(myListGenderCol, Genre.sample)
+        myListGenderCol.setCellValueFactory { it.value.genresProperty() }
+        myListGenderCol.setCellFactory { AnimeViewTableCell(Genre.sample) }
 
-        myListRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
-        myListScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
-        myListStatusCol.setCellValueFactory { cellData -> cellData.value.statusProperty() }
-        setEnumCol(myListStatusCol, Status.sample)
+        myListRankingCol.setCellValueFactory { it.value.rankingProperty().asObject() }
+        myListScoreCol.setCellValueFactory { it.value.ratingProperty() }
+        myListStatusCol.setCellValueFactory { it.value.statusProperty() }
+        myListStatusCol.setCellFactory { AnimeViewTableCell(Status.sample) }
 
-        myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-        setTitleCell(myListTitleCol)
+        myListTitleCol.setCellValueFactory { it.value.presentationProperty() }
+        myListTitleCol.setCellFactory { AnimeViewTableCellPresentation() }
 
-        myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
-        setEnumCol(myListTypeCol, Type.sample)
+        myListTypeCol.setCellValueFactory { it.value.typesProperty() }
+        myListTypeCol.setCellFactory { AnimeViewTableCell(Status.sample) }
+
+
     }
 
     private fun setAnimeCols() {
         animeRankingCol.setCellValueFactory { it.value.rankingProperty().asObject() }
         animeScoreCol.setCellValueFactory { it.value.ratingProperty() }
         animeTitleCol.setCellValueFactory { it.value.presentationProperty() }
-        setTitleCell(animeTitleCol)
+        animeTitleCol.setCellFactory { AnimeViewTableCellPresentation() }
     }
 
-    private fun setEnumCol(consumer: TableColumn<AnimeView, String>, enumSet: ObservableList<*>) {
-        consumer.setCellFactory {
-            object : TableCell<AnimeView, String>() {
-                override fun updateItem(item: String, empty: Boolean) {
-                    val choiceBox: ChoiceBox<*> = ChoiceBox(enumSet)
-                    choiceBox.selectionModel.select(enumSet.indexOf(item))
-                    choiceBox.setOnAction {
-                        val selection = choiceBox.selectionModel.selectedItem as String
-                        val anime = tableView.items[index]
-                        anime.enumParser(selection)
-                    }
-                    graphic = choiceBox;
-                }
-            }
-        }
-    }
-
-
-    private fun setTitleCell(consumer: TableColumn<AnimeView, Presentation>) {
-        consumer.setCellFactory {
-            object : TableCell<AnimeView, Presentation>() {
-                override fun updateItem(item: Presentation, empty: Boolean) {
-                    graphic = itemFactory.getAnimePresentation(item)
-                }
-            }
-        }
-    }
 
     fun generateHTML(actionEvent: ActionEvent) {
         TODO("generate HTML")
