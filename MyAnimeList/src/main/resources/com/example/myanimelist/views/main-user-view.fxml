@@ -30,7 +30,8 @@
                                     <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#addToMyList" prefHeight="28.0" prefWidth="214.0" spacing="20.0">
                                        <children>
                                           <Label text="Anime" />
-                                          <TextField id="animeNameSearch" fx:id="animeNameSearch" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#sortAnimeByText" prefHeight="25.0" prefWidth="101.0" promptText="search" />
+                                          <TextField id="animeNameSearch" fx:id="txtAnimeSearch" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="101.0" promptText="search" />
+                                          <Button fx:id="searchAnimeButon" mnemonicParsing="false" onAction="#sortAnime" text="Button" />
                                        </children>
                                     </HBox>
                                  </graphic>
@@ -57,7 +58,8 @@
                                     <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="214.0" spacing="20.0">
                                        <children>
                                           <Label text="Anime" />
-                                          <TextField id="nameSearch" fx:id="myListNameSearch" nodeOrientation="LEFT_TO_RIGHT" onKeyTyped="#sortMyListByText" prefHeight="25.0" prefWidth="101.0" promptText="search" />
+                                          <TextField id="nameSearch" fx:id="txtMyListSearch" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="101.0" promptText="search" />
+                                          <Button fx:id="searchMyListButon" mnemonicParsing="false" onAction="#sortMyList" text="Button" />
                                        </children>
                                     </HBox>
                                  </graphic>

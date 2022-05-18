@@ -24,6 +24,7 @@ import javafx.scene.input.KeyEvent
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import org.apache.logging.log4j.Logger
+import java.io.IOException
 import java.sql.SQLException
 import java.util.*
 
@@ -84,17 +85,17 @@ class MainUserController(
     private lateinit var topRankAnime: Label
     @FXML
     private lateinit var generateButton: Button
+    @FXML
+    private lateinit var searchAnimeButon: Button
+    @FXML
+    private lateinit var searchMyListButon: Button
 
     @FXML
     fun initialize(){
 
         // DaggerRepositoryFactory.create().inject(this);
 
-        try {
-            loadData()
-        } catch (e: SQLException) {
-            logger.warn("error while loading")
-        }
+        loadData()
 
         logger.info("Iniciando anime columns")
         setAnimeCols()
@@ -134,7 +135,13 @@ class MainUserController(
         setEnumCol(myListStatusCol, Status.sample)
 
         myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-        setTitleCell(myListTitleCol)
+        myListTitleCol.setCellFactory {
+            object: TableCell<AnimeView, Presentation>(){
+                override fun updateItem(item: Presentation, empty: Boolean) {
+                    graphic = itemFactory.getAnimePresentation(item)
+                }
+            }
+        }
 
         myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
         setEnumCol(myListTypeCol, Type.sample)
@@ -144,7 +151,13 @@ class MainUserController(
         animeRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
         animeScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
         animeTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-        setTitleCell(animeTitleCol)
+        animeTitleCol.setCellFactory {
+            object: TableCell<AnimeView, Presentation>(){
+                override fun updateItem(item: Presentation, empty: Boolean) {
+                    graphic = itemFactory.getAnimePresentation(item)
+                }
+            }
+        }
     }
 
     private fun setEnumCol(consumer: TableColumn<AnimeView, String>, enumSet: ObservableList<*>) {
@@ -163,18 +176,6 @@ class MainUserController(
             }
         }
     }
-    
-    
-
-    private fun setTitleCell(consumer : TableColumn<AnimeView, Presentation>) {
-        consumer.setCellFactory {
-            object: TableCell<AnimeView, Presentation>(){
-                override fun updateItem(item: Presentation, empty: Boolean) {
-                    graphic = itemFactory.getAnimePresentation(item)
-                }
-            }
-        }
-    }
 
     fun generateHTML(actionEvent: ActionEvent) {
         TODO("generate HTML")
@@ -184,21 +185,13 @@ class MainUserController(
         TODO("menu popup")
     }
 
-    fun sortAnimeByText(keyEvent: KeyEvent) {
-        logger.info("organizando la lista...")
-        flAnime.setPredicate { anime ->
-            anime.presentation.title.lowercase(Locale.getDefault()).contains(
-                animeNameSearch.text.lowercase(Locale.getDefault()).trim()) ||
-            anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
-                animeNameSearch.text.lowercase(Locale.getDefault()).trim())
-        }
-    }
-
     private fun loadData() {
-
         logger.info("cargando datos a memoria")
         animeList.addAll(animeRepository.findAll().map { AnimeView(it) }.toList())
         myList.addAll(usersRepository.getAnimeLists(user.id).map { AnimeView(it) }.toList())
+
+        animeList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }.forEach { it.ranking = animeList.indexOf(it) }
+        myList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }.forEach { it.ranking = animeList.indexOf(it) }
     }
 
     fun addToMyList(mouseEvent: MouseEvent) {
@@ -216,17 +209,27 @@ class MainUserController(
         myListTable.selectionModel.select(animeView)
     }
 
-    fun sortMyListByText(keyEvent: KeyEvent) {
+    fun save(){
+        TODO("salvar los animes cambiados los usuarios y la lista del usuario")
+    }
+
+    fun sortAnime(actionEvent: ActionEvent) {
+        logger.info("organizando la lista...")
+        flAnime.setPredicate { anime ->
+            anime.presentation.title.lowercase(Locale.getDefault()).contains(
+                animeNameSearch.text.lowercase(Locale.getDefault()).trim()) ||
+                    anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
+                        animeNameSearch.text.lowercase(Locale.getDefault()).trim())
+        }
+    }
+
+    fun sortMyList(actionEvent: ActionEvent) {
         logger.info("organizando la lista...")
         flAnime.setPredicate { anime ->
             anime.presentation.title.lowercase(Locale.getDefault()).contains(
                 myListNameSearch.text.lowercase(Locale.getDefault()).trim()) ||
-            anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
-                myListNameSearch.text.lowercase(Locale.getDefault()).trim())
+                    anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
+                        myListNameSearch.text.lowercase(Locale.getDefault()).trim())
         }
-    }
-
-    fun save(){
-        TODO("salvar los animes cambiados los usuarios y la lista del usuario")
     }
 }

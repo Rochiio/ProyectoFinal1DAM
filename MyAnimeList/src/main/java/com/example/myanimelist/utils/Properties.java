@@ -1,5 +1,7 @@
 package com.example.myanimelist.utils;
 
+import com.example.myanimelist.MyAnimeListApplication;
+
 import java.io.File;
 
 public class Properties {
@@ -18,7 +20,9 @@ public class Properties {
     public static final String ANIME_LOAD = CSV_DIR + File.separator + "anime_load.csv";
     public static final String JSON_FILE = JSON_DIR + File.separator + "backup.json";
     public static final String RESOURCES_DIR = PATH + File.separator + "resources";
-    public static final String ICONS_DIR = RESOURCES_DIR + File.separator + "icons";
+    public static final String ICONS_DIR = MyAnimeListApplication.class.getResource("icons").toString();
     public static final String DEFAULT_USER_ICON = ICONS_DIR + File.separator + "default.png";
+
+    public static final String DEFAULT_IMAGE = ICONS_DIR + File.separator + "image.png";
     public static final String SCRIPT_FILE_DATABASE = DB_DIR + File.separator + "script.sql";
 }

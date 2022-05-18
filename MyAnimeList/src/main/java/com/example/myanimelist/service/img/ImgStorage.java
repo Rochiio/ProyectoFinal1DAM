@@ -1,9 +1,11 @@
 package com.example.myanimelist.service.img;
 
+import com.example.myanimelist.MyAnimeListApplication;
 import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
 import com.example.myanimelist.service.utils.Utils;
 import com.example.myanimelist.utils.Properties;
+import com.example.myanimelist.views.models.Presentation;
 import javafx.scene.image.Image;
 import org.apache.logging.log4j.Logger;
 
@@ -52,5 +54,15 @@ public class ImgStorage implements IImgStorage {
         logger.info("loading default img");
         user.setImg(Properties.DEFAULT_USER_ICON);
         return new Image(Properties.DEFAULT_USER_ICON);
+    }
+
+    public Image loadImg(Presentation present) {
+        if (!Objects.requireNonNull(present.getImg()).isBlank() && Files.exists(Paths.get(present.getImg()))) {
+            logger.info("loading img");
+            return new Image(new File(present.getImg()).toURI().toString());
+        }
+        logger.info("loading default img");
+        present.setImg(Properties.DEFAULT_IMAGE);
+        return new Image(Properties.DEFAULT_IMAGE);
     }
 }
