@@ -10,4 +10,5 @@ abstract class AbstractUser {
     abstract var password: String
     abstract val createDate: LocalDate
     abstract val birthDate: LocalDate
+    abstract val admin: Boolean
 }
