@@ -27,8 +27,8 @@ class RegisterController : InicioController() {
     fun changeSceneToLogin() {
         val stage = btnLogin.scene.window as Stage
         stage.loadScene(LOGIN, WIDTH, HEIGHT) {
-            it.title = "Login"
-            it.isResizable = false
+            title = "Login"
+            isResizable = false
         }.show()
     }
 
