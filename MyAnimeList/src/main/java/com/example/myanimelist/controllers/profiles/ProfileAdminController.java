@@ -5,31 +5,24 @@ import com.example.myanimelist.models.User;
 import com.example.myanimelist.service.img.ImgStorage;
 import com.example.myanimelist.utils.Filters;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class ProfileUserController {
+public class ProfileAdminController {
 
-    @FXML
     public TextField emailLabel;
-    @FXML
     public TextField nameLabel;
-    @FXML
     public TextField passLabel;
-    @FXML
     public TextField confirmLabel;
-    @FXML
     public Button saveBut;
-    @FXML
+    public Button deleteBut;
     public ImageView img;
 
-
     private final User user= DependenciesManager.globalUser;
-    ImgStorage imgStorage = new ImgStorage();
 
+    ImgStorage imgStorage = new ImgStorage();
 
     public void onSave(ActionEvent actionEvent) {
         StringBuilder errorLog = new StringBuilder();
@@ -41,20 +34,7 @@ public class ProfileUserController {
         this.user.setEmail(emailLabel.getText());
         this.user.setName(nameLabel.getText());
         this.user.setPassword(passLabel.getText());
-//todo incorporar la img
     }
-
-    @FXML
-    public void initialize() {
-        emailLabel.setText(user.getEmail());
-        nameLabel.setText(user.getName());
-        img.setImage(imgStorage.loadImg(user));
-    }
-
-
-
-
-
     private boolean validate(StringBuilder error) {
 
         boolean validation = true;
@@ -84,8 +64,6 @@ public class ProfileUserController {
             error.append("Email no válido");
         }
 
-
         return validation;
     }
 }
-
