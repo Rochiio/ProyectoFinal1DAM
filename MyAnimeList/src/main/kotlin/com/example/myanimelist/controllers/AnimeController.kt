@@ -3,6 +3,8 @@ package com.example.myanimelist.controllers
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.repositories.animeList.ICRUDAnimeList
+import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.utils.ANIME_DATA
 import com.example.myanimelist.utils.HEIGHT
@@ -15,6 +17,8 @@ import javafx.scene.control.Button
 import javafx.scene.control.ButtonType
 import javafx.scene.control.Label
 import javafx.stage.Stage
+import org.apache.logging.log4j.LogManager
+import java.util.logging.Logger
 
 
 class AnimeController {
@@ -32,10 +36,10 @@ class AnimeController {
     @FXML
      lateinit var btnAdd: Button
 
-
+    private var logger = DependenciesManager.getLogger(AnimeController::class.java)
     private lateinit var anime: AnimeView
+    private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
     private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
-    //TODO añadir repositorio animeLists para añadir animes del usuario loggeado
 
 
 
@@ -46,10 +50,11 @@ class AnimeController {
         val action = alert.showAndWait()
 
             if (action.get() == ButtonType.OK) {
-                var user = DependenciesManager.globalUser
-                var animeAux= animeRepository.findById(anime.id)
+                val user = DependenciesManager.globalUser
+                val animeAux= animeRepository.findById(anime.id)
+                animeListRepository.add(animeAux!!,user)
+                logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
 
-                //TODO añadir anime id y user id al repo de animelist
 
             } else {
                 val alert= Alert(Alert.AlertType.INFORMATION)

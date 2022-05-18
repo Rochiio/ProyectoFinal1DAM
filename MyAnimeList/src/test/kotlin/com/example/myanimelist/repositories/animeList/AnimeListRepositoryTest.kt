@@ -13,7 +13,7 @@ internal class AnimeListRepositoryTest {
 
     private val user = getTestingUser()
     private val anime = getTestingAnime()
-    private var animeListRepository : AnimeListRepository = AnimeListRepository(DependenciesManager.getDatabaseManager())
+    private var animeListRepository : AnimeListRepository = AnimeListRepository(DependenciesManager.getDatabaseManager(),DependenciesManager.getLogger(AnimeListRepository::class.java))
 
     @AfterEach
     fun deleteAll() {
