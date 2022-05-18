@@ -27,7 +27,7 @@ import org.apache.logging.log4j.Logger
 import java.util.*
 
 
-open class MainUserController(
+class MainUserController(
 
 ) {
 
@@ -50,55 +50,55 @@ open class MainUserController(
     protected lateinit var animeTitleCol: TableColumn<AnimeView, Presentation>
 
     @FXML
-    protected lateinit var animeScoreCol: TableColumn<AnimeView, String>
+    private lateinit var animeScoreCol: TableColumn<AnimeView, String>
 
     @FXML
-    protected lateinit var myListScoreCol: TableColumn<AnimeView, String>
+    private lateinit var myListScoreCol: TableColumn<AnimeView, String>
 
     @FXML
-    protected lateinit var myListTypeCol: TableColumn<AnimeView, String>
+    private lateinit var myListTypeCol: TableColumn<AnimeView, String>
 
     @FXML
-    protected lateinit var myListStatusCol: TableColumn<AnimeView, String>
+    private lateinit var myListStatusCol: TableColumn<AnimeView, String>
 
     @FXML
-    protected lateinit var myListGenderCol: TableColumn<AnimeView, String>
+    private lateinit var myListGenderCol: TableColumn<AnimeView, String>
 
     @FXML
-    protected lateinit var myListTitleCol: TableColumn<AnimeView, Presentation>
+    private lateinit var myListTitleCol: TableColumn<AnimeView, Presentation>
 
     @FXML
-    protected lateinit var myListRankingCol: TableColumn<AnimeView, Int>
+    private lateinit var myListRankingCol: TableColumn<AnimeView, Int>
 
     @FXML
-    protected lateinit var myListTable: TableView<AnimeView>
+    private lateinit var myListTable: TableView<AnimeView>
 
     @FXML
-    protected lateinit var animeTable: TableView<AnimeView>
+    private lateinit var animeTable: TableView<AnimeView>
 
     @FXML
-    protected lateinit var myListNameSearch: TextField
+    private lateinit var myListNameSearch: TextField
 
     @FXML
-    protected lateinit var animeNameSearch: TextField
+    private lateinit var animeNameSearch: TextField
 
     @FXML
-    protected lateinit var menuButton: Button
+    private lateinit var menuButton: Button
 
     @FXML
-    protected lateinit var onHoldCount: Label
+    private lateinit var onHoldCount: Label
 
     @FXML
-    protected lateinit var finishedCount: Label
+    private lateinit var finishedCount: Label
 
     @FXML
-    protected lateinit var botRankAnime: Label
+    private lateinit var botRankAnime: Label
 
     @FXML
-    protected lateinit var topRankAnime: Label
+    private lateinit var topRankAnime: Label
 
     @FXML
-    protected lateinit var generateButton: Button
+    private lateinit var generateButton: Button
 
     @FXML
     fun initialize() {
@@ -126,10 +126,10 @@ open class MainUserController(
     }
 
     private fun setFilteredLists() {
-        flAnime = FilteredList(animeList) { true }
+        flAnime = FilteredList(animeList)
         animeTable.items = flAnime
 
-        flMyList = FilteredList(myList) { true }
+        flMyList = FilteredList(myList)
         myListTable.items = flMyList
     }
 
