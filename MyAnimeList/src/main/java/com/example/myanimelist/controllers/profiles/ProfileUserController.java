@@ -61,30 +61,9 @@ public class ProfileUserController {
         img.setImage(imgStorage.loadImg(user));
     }
 
-    public void changeImg(MouseEvent mouseEvent) {
-        if ((mouseEvent.getButton() == MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
-            FileChooser filechooser = new FileChooser();
-            filechooser.setTitle("Selecciona un avatar");
-            filechooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.png"));
-            File file = filechooser.showOpenDialog(img.getScene().getWindow());
 
-            if (file != null) {
-                logger.info("Ha seleccionado el archivo: " + file.getAbsolutePath());
-                img.setImage(new Image(file.toURI().toString()));
-                // Se lo asignamos a la persona...
-                user.setImg(file.getAbsolutePath());
-                logger.info("Se ha asignado el avatar a la persona desde: " + user.getImg());
-                imgStorage.save(user);
-            }
-        }
-    }
 
-    public void showLabel(MouseEvent event) {
-        if ((event.getEventType() == MouseEvent.MOUSE_ENTERED)) {
-            imgLabel.setText("Cambiar foto de perfil");
-        }
 
-    }
 
     private boolean validate(StringBuilder error) {
 
