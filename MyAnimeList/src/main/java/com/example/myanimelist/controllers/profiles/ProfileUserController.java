@@ -22,12 +22,19 @@ import java.io.File;
 
 public class ProfileUserController {
     Logger logger = LogManager.getLogger();
+    @FXML
     public TextField emailLabel;
+    @FXML
     public TextField nameLabel;
+    @FXML
     public TextField passLabel;
+    @FXML
     public TextField confirmLabel;
+    @FXML
     public Button saveBut;
+    @FXML
     public ImageView img;
+    @FXML
     public Label imgLabel;
 
     private final User user= DependenciesManager.globalUser;
