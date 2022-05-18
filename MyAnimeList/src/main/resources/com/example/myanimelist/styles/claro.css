@@ -1,0 +1,45 @@
+.fondo{
+    -fx-background-color: #99E2B4;
+}
+
+.acercaDeTexto{
+    -fx-background-color: #88D4AB;
+    -fx-border-radius:  6px;
+    -fx-background-radius: 6px;
+}
+.button{
+    -fx-border-radius:10;
+    -fx-padding: 5;
+    -fx-background-color: #67B99A;
+    -fx-text-fill:black;
+}
+
+.linkBasic{
+    -fx-text-fill:black;
+    -fx-font-weight:bold;
+}
+
+.tittle{
+    -fx-text-fill:black;
+    -fx-font-weight: normal;
+    -fx-font-size: 40px;
+    -fx-font-family: Arial;
+    -fx-text-transform: uppercase;
+}
+
+
+.text-input:focused{
+    -fx-border-color:#036666;
+}
+
+.animeDataText{
+    -fx-text-fill:black;
+    -fx-background-color: #88D4AB;
+    -fx-font-weight: normal;
+    -fx-font-size: 20px;
+    -fx-alignment: left;
+    -fx-font-family: Arial;
+    -fx-border-color: #469D89;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+}
