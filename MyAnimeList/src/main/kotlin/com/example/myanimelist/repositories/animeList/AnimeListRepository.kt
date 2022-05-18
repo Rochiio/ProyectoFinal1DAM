@@ -11,8 +11,9 @@ import java.util.*
 
 class AnimeListRepository(
     var dataBaseManager: DataBaseManager,
-) : ICRUDAnimeList<Anime, User> {
-    val logger: Logger = LogManager.getLogger(AnimeListRepository::class)
+    val logger: Logger
+) : IRepositoryAnimeList {
+
 
     /**
      * Añade un anime a la lista de un usuario

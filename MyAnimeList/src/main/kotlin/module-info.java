@@ -21,8 +21,7 @@ module com.example.myanimelist {
 
     requires java.compiler;
     requires java.desktop;
-    requires javax.inject;
-    requires dagger;
+
 
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;

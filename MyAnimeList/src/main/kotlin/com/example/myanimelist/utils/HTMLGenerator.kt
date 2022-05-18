@@ -1,26 +1,25 @@
 package com.example.myanimelist.utils
 
 class HTMLGenerator {
-    /*
-    <!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="autor" content="Mohamed Asidah Bchiri">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Examen segunda evaluacion</title>
-</head>
-     */
-    private var HEAD = """
+    private val HEAD = """
             <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="autor" content="Mohamed Asidah Bchiri">
+    <meta name="autor" content="My Anime List">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Examen segunda evaluacion</title>
+    <title>Gráficos y Estadísticas</title>
 </head>
     """
+
+
+   private val BODY = """
+      <body>
+       <h1>Gráficos y Estadísticas</h1>
+   """
+
+   private val BODY_CLOSE = """</body>
+       </html>
+   """
 }
