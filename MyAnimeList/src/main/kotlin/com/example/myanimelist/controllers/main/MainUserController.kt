@@ -1,7 +1,9 @@
 package com.example.myanimelist.controllers.main
 
+import com.example.myanimelist.controllers.AnimeController
 import com.example.myanimelist.factories.TableItemFactory
 import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.managers.DependenciesManager.getAnimeController
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
 import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
@@ -38,6 +40,7 @@ class MainUserController(
     lateinit var imgStorage: IImgStorage
     private var animeRepository: IAnimeRepository = getAnimesRepo()
     private var usersRepository: IUsersRepository = getUsersRepo()
+    private var animeController: AnimeController = getAnimeController()
     var itemFactory: TableItemFactory = TableItemFactory()
 
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
@@ -222,7 +225,8 @@ class MainUserController(
     fun addToMyList(mouseEvent: MouseEvent) {
         if (mouseEvent.button === MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
             val anime: AnimeView = animeTable.selectionModel.selectedItem
-            addAnime(anime)
+            animeController.initStageAnimeData(anime)
+            //addAnime(anime)
         }
     }
 
