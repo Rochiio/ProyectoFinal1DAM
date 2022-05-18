@@ -11,10 +11,11 @@ internal data class UserDB(
     var password: String,
     val createDate: LocalDate,
     val birthDate: LocalDate,
-    var img: String?
+    var img: String?,
+    var admin: Boolean
 ) {
     companion object {
         fun from(item: User): UserDB =
-            UserDB(item.id, item.name, item.email, item.password, item.createDate, item.birthDate, item.img)
+            UserDB(item.id, item.name, item.email, item.password, item.createDate, item.birthDate, item.img, item.admin)
     }
 }

@@ -27,7 +27,8 @@ class UsersRepository(
                     set.getString("password"),
                     set.getDate("date_alta").toLocalDate(),
                     set.getDate("date_nacimiento").toLocalDate(),
-                    set.getString("imageUrl")
+                    set.getString("imageUrl"),
+                    set.getBoolean("admin")
                 )
                 logger.info("[findByName] Encotrado usuario $user")
                 list.add(user)
@@ -51,7 +52,8 @@ class UsersRepository(
                 set.getString("password"),
                 set.getDate("date_alta").toLocalDate(),
                 set.getDate("date_nacimiento").toLocalDate(),
-                set.getString("imageUrl")
+                set.getString("imageUrl"),
+                set.getBoolean("admin")
             )
             logger.info("Encotrado usuario $returnItem")
         }
@@ -73,7 +75,8 @@ class UsersRepository(
                     set.getString("password"),
                     set.getDate("date_alta").toLocalDate(),
                     set.getDate("date_nacimiento").toLocalDate(),
-                    set.getString("imageUrl")
+                    set.getString("imageUrl"),
+                    set.getBoolean("admin")
                 )
                 list.add(user)
                 logger.info("Se han encontrado los usuarios: $list")
@@ -179,7 +182,8 @@ class UsersRepository(
             user.birthDate,
             user.img,
             getAnimeLists(user.id),
-            user.id
+            user.id,
+            user.admin
         )
     }
 
