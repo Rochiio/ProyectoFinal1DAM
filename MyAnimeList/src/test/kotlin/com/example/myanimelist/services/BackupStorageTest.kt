@@ -30,7 +30,6 @@ class BackupStorageTest {
             arrayListOf(DataDB.getTestingUser()),
             arrayListOf(DataDB.getTestingReview()),
             arrayListOf(DataDB.getTestingAnime()),
-            arrayListOf(DataDB.getTestingAdmin())
         )
         storage.save(dto)
 
@@ -41,7 +40,6 @@ class BackupStorageTest {
         assertAll(
             { assert(dto.animes == savedDto.animes) },
             { assert(dto.users == savedDto.users) },
-            { assert(dto.admins == savedDto.admins) },
             { assert(dto.reviews == savedDto.reviews) },
         )
 
@@ -52,8 +50,7 @@ class BackupStorageTest {
         val dto = BackupDTO(
             arrayListOf(DataDB.getTestingUser()),
             arrayListOf(DataDB.getTestingReview()),
-            arrayListOf(DataDB.getTestingAnime()),
-            arrayListOf(DataDB.getTestingAdmin())
+            arrayListOf(DataDB.getTestingAnime())
         )
 
         FileWriter(Properties.JSON_FILE).use {
@@ -65,7 +62,6 @@ class BackupStorageTest {
         assertAll(
             { assert(dto.animes == savedDto?.animes) },
             { assert(dto.users == savedDto?.users) },
-            { assert(dto.admins == savedDto?.admins) },
             { assert(dto.reviews == savedDto?.reviews) }
         )
     }

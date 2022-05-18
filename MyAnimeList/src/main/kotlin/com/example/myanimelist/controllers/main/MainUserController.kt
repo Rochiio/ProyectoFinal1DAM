@@ -44,10 +44,10 @@ class MainUserController(
     private var flMyList: FilteredList<AnimeView> = FilteredList(FXCollections.observableArrayList())
 
     @FXML
-    protected lateinit var animeRankingCol: TableColumn<AnimeView, Int>
+    private lateinit var animeRankingCol: TableColumn<AnimeView, Int>
 
     @FXML
-    protected lateinit var animeTitleCol: TableColumn<AnimeView, Presentation>
+    private lateinit var animeTitleCol: TableColumn<AnimeView, Presentation>
 
     @FXML
     private lateinit var animeScoreCol: TableColumn<AnimeView, String>
