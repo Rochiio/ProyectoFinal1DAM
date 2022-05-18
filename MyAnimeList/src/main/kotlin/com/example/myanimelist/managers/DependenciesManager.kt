@@ -1,6 +1,7 @@
 package com.example.myanimelist.managers
 
 import com.example.myanimelist.adapters.LocalDateTypeAdapter
+import com.example.myanimelist.controllers.AnimeController
 import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.filters.login.RegisterFilters
 import com.example.myanimelist.manager.DataBaseManager
@@ -48,6 +49,9 @@ object DependenciesManager {
 
     @JvmStatic
     fun getLoginFilter(): LoginFilters = LoginFilters(getUsersRepo())
+
+    @JvmStatic
+    fun getAnimeController(): AnimeController = AnimeController()
 
     @JvmStatic
     fun getRegisterFilter(): RegisterFilters = RegisterFilters(getUsersRepo())
