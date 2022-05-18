@@ -34,10 +34,18 @@ class LoginController : InicioController() {
         DependenciesManager.globalUser =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
         val stage = txtUsername.scene.window as Stage
-        stage.loadScene(MAIN) {
-            title = "Animes"
-            isResizable = false
-        }.show()
+
+        if(DependenciesManager.globalUser.admin==false) {
+            stage.loadScene(MAIN) {
+                title = "Animes"
+                isResizable = false
+            }.show()
+        }else{
+            stage.loadScene(MAIN) {
+                title = "Animes"
+                isResizable = false
+            }.show()
+        }
     }
 
 
