@@ -1,7 +1,7 @@
 package com.example.myanimelist.controllers.main
 
-import com.example.myanimelist.factories.AnimeViewTableCell
-import com.example.myanimelist.factories.AnimeViewTableCellPresentation
+import com.example.myanimelist.javafx.factories.AnimeViewTableCell
+import com.example.myanimelist.javafx.factories.AnimeViewTableCellPresentation
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
 import com.example.myanimelist.managers.DependenciesManager.getLogger

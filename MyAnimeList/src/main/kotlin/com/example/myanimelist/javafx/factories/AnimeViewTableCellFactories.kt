@@ -1,4 +1,4 @@
-package com.example.myanimelist.factories
+package com.example.myanimelist.javafx.factories
 
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
