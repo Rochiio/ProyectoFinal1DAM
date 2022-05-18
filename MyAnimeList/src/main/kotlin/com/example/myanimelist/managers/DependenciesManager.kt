@@ -1,12 +1,11 @@
 package com.example.myanimelist.managers
 
 import com.example.myanimelist.adapters.LocalDateTypeAdapter
+import com.example.myanimelist.controllers.AnimeController
 import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.filters.login.RegisterFilters
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.User
-import com.example.myanimelist.repositories.admins.AdminRepository
-import com.example.myanimelist.repositories.admins.IAdminRepository
 import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.reviews.IRepositoryReview
@@ -26,7 +25,6 @@ object DependenciesManager {
     lateinit var globalUser : User
     private val dataBaseManager: DataBaseManager = DataBaseManager()
     private val gson: Gson = GsonBuilder().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
-    private val adminsRepository: IAdminRepository = AdminRepository(getDatabaseManager(), getLogger<AdminRepository>())
     private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
     private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager(), getLogger<AnimeRepository>())
     private val reviewsRepository: IRepositoryReview = ReviewsRepository(
@@ -39,8 +37,6 @@ object DependenciesManager {
     @JvmStatic
     fun getDatabaseManager(): DataBaseManager = dataBaseManager
 
-    @JvmStatic
-    fun getAdminsRepo(): IAdminRepository = adminsRepository
 
     @JvmStatic
     fun getUsersRepo(): IUsersRepository = usersRepository
@@ -53,6 +49,9 @@ object DependenciesManager {
 
     @JvmStatic
     fun getLoginFilter(): LoginFilters = LoginFilters(getUsersRepo())
+
+    @JvmStatic
+    fun getAnimeController(): AnimeController = AnimeController()
 
     @JvmStatic
     fun getRegisterFilter(): RegisterFilters = RegisterFilters(getUsersRepo())

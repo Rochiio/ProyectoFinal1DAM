@@ -1,4 +1,4 @@
-package com.example.myanimelist.factories
+package com.example.myanimelist.javafx.factories
 
 import com.example.myanimelist.views.models.Presentation
 import javafx.scene.control.Label
@@ -20,13 +20,13 @@ class TableItemFactory {
         val imageview = ImageView()
         imageview.fitHeight = 40.0
         imageview.fitWidth = 40.0
-        val dirImage = Path.of(item.img);
+        val dirImage = Path.of(item.img)
         imageview.image = Image(dirImage.toUri().toString())
         vbox.children.addAll(imageview, vbox)
         return vbox
     }
 
-    fun getMenu(): VBox{
+    fun getMenu(): VBox {
         val vBox = VBox()
         TODO("un monton de codigo pa hacer el menu to wapo")
         return vBox
