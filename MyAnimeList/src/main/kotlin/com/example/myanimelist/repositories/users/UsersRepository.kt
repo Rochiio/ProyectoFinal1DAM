@@ -5,19 +5,18 @@ import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
-import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
 
 
-class UsersRepository constructor(
-    private val databaseManager: DataBaseManager
+class UsersRepository(
+    private val databaseManager: DataBaseManager,
+    val logger: Logger
 ) : IUsersRepository {
-    val logger: Logger = LogManager.getLogger(UsersRepository::class.java)
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
         databaseManager.execute(logger) {
-            val set = databaseManager.select("SELECT * FROM Usuarios WHERE nombre LIKE ?", "%$name%")
+            val set = databaseManager.select("SELECT * FROM usuarios WHERE nombre LIKE ?", "%$name%")
 
             while (set.next()) {
                 val id = UUID.fromString(set.getString("id"))
@@ -26,9 +25,10 @@ class UsersRepository constructor(
                     set.getString("nombre"),
                     set.getString("email"),
                     set.getString("password"),
-                    set.getDate("date_alta"),
-                    set.getDate("date_nacimiento"),
-                    set.getString("imageUrl")
+                    set.getDate("date_alta").toLocalDate(),
+                    set.getDate("date_nacimiento").toLocalDate(),
+                    set.getString("imageUrl"),
+                    set.getBoolean("admin")
                 )
                 logger.info("[findByName] Encotrado usuario $user")
                 list.add(user)
@@ -41,7 +41,7 @@ class UsersRepository constructor(
         var returnItem: UserDB? = null
 
         databaseManager.execute(logger) {
-            val set = databaseManager.select("SELECT * FROM Usuarios WHERE id = ?", id.toString())
+            val set = databaseManager.select("SELECT * FROM usuarios WHERE id = ?", id.toString())
 
             if (!set.next()) return null
 
@@ -50,9 +50,10 @@ class UsersRepository constructor(
                 set.getString("nombre"),
                 set.getString("email"),
                 set.getString("password"),
-                set.getDate("date_alta"),
-                set.getDate("date_nacimiento"),
-                set.getString("imageUrl")
+                set.getDate("date_alta").toLocalDate(),
+                set.getDate("date_nacimiento").toLocalDate(),
+                set.getString("imageUrl"),
+                set.getBoolean("admin")
             )
             logger.info("Encotrado usuario $returnItem")
         }
@@ -63,7 +64,7 @@ class UsersRepository constructor(
         val list: MutableList<UserDB> = mutableListOf()
 
         databaseManager.execute(logger) {
-            val set = databaseManager.select("SELECT * FROM Usuarios")
+            val set = databaseManager.select("SELECT * FROM usuarios")
 
             while (set.next()) {
                 val id = UUID.fromString(set.getString("id"))
@@ -72,9 +73,10 @@ class UsersRepository constructor(
                     set.getString("nombre"),
                     set.getString("email"),
                     set.getString("password"),
-                    set.getDate("date_alta"),
-                    set.getDate("date_nacimiento"),
-                    set.getString("imageUrl")
+                    set.getDate("date_alta").toLocalDate(),
+                    set.getDate("date_nacimiento").toLocalDate(),
+                    set.getString("imageUrl"),
+                    set.getBoolean("admin")
                 )
                 list.add(user)
                 logger.info("Se han encontrado los usuarios: $list")
@@ -89,7 +91,7 @@ class UsersRepository constructor(
         databaseManager.execute(logger) {
             val modifiedRows = databaseManager
                 .update(
-                    "UPDATE Usuarios set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl = ?, email = ?, date_nacimiento = ? WHERE id = ?",
+                    "UPDATE usuarios set id = ?, nombre = ?, date_alta = ?, password = ?, imageUrl = ?, email = ?, date_nacimiento = ? WHERE id = ?",
                     item.id.toString(),
                     item.name,
                     item.createDate,
@@ -114,7 +116,7 @@ class UsersRepository constructor(
         databaseManager.execute(logger) {
             databaseManager
                 .insert(
-                    "Insert into Usuarios (id,nombre,date_alta,password,imageUrl,email,date_nacimiento) values (?,?,?,?,?,?,?)",
+                    "Insert into usuarios (id,nombre,date_alta,password,imageUrl,email,date_nacimiento) values (?,?,?,?,?,?,?)",
                     item.id.toString(),
                     item.name,
                     item.createDate,
@@ -165,7 +167,7 @@ class UsersRepository constructor(
         if (findById(id) == null) return
 
         databaseManager.execute(logger) {
-            databaseManager.delete("Delete from Usuarios where id = ?", id)
+            databaseManager.delete("Delete from usuarios where id = ?", id)
             logger.info("Se ha eliminado el usuario ${findById(id)}")
         }
     }
@@ -180,11 +182,12 @@ class UsersRepository constructor(
             user.birthDate,
             user.img,
             getAnimeLists(user.id),
-            user.id
+            user.id,
+            user.admin
         )
     }
 
-    private fun getAnimeLists(userId: UUID): List<Anime> {
+    override fun getAnimeLists(userId: UUID): List<Anime> {
         val list = mutableListOf<Anime>()
         databaseManager.execute(logger) {
             val listSet = databaseManager
@@ -200,7 +203,7 @@ class UsersRepository constructor(
                     listSet.getString("type"),
                     listSet.getInt("episodes"),
                     listSet.getString("status"),
-                    listSet.getDate("releaseDate"),
+                    listSet.getDate("releaseDate").toLocalDate(),
                     listSet.getString("rating"),
                     listSet.getString("genre").split(","),
                     listSet.getString("imageUrl"),

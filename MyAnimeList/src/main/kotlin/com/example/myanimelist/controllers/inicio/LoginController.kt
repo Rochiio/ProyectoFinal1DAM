@@ -3,51 +3,41 @@ package com.example.myanimelist.controllers.inicio
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.login.LoginFilters
-import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.managers.DependenciesManager.getLoginFilter
 import com.example.myanimelist.managers.SceneManager
-import com.example.myanimelist.repositories.users.UsersRepository
-import com.example.myanimelist.utils.*
-import javafx.application.Platform
+import com.example.myanimelist.utils.HEIGHT
+import com.example.myanimelist.utils.MAIN
+import com.example.myanimelist.utils.REGISTER
+import com.example.myanimelist.utils.WIDTH
 import javafx.scene.control.Alert
 import javafx.stage.Stage
 
 
-
 class LoginController : InicioController() {
-    private var loginFilters : LoginFilters
-
-    init {
-        loginFilters = LoginFilters(UsersRepository(DataBaseManager.getInstance()))
-    }
+    private var loginFilters: LoginFilters = getLoginFilter()
 
 
-     fun openStageAbout() {
-        val stage = Stage()
-        stage.loadScene(ABOUT,ABOUT_WIDTH, ABOUT_HEIGHT){
-            it.title="About"
-            it.isResizable = false
-            Platform.setImplicitExit(true)
-            SceneManager.addIconStage(stage)
-        }.show()
-
-    }
+    fun openStageAbout() = SceneManager.openStageAbout()
 
 
     fun changeSceneToRegister() {
         val stage = btnRegister.scene.window as Stage
         stage.loadScene(REGISTER, WIDTH, HEIGHT) {
-            it.title = "Registro"
-            it.isResizable = false
+            title = "Registro"
+            isResizable = false
         }.show()
     }
 
 
-    private fun changeSceneToMain(){
+    private fun changeSceneToMain() {
+        DependenciesManager.globalUser =
+            userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
         val stage = txtUsername.scene.window as Stage
-                stage.loadScene(MAIN, WIDTH, HEIGHT) {
-                    it.title = "Animes"
-                    it.isResizable = false
-                }.show()
+        stage.loadScene(MAIN, WIDTH, HEIGHT) {
+            title = "Animes"
+            isResizable = false
+        }.show()
     }
 
 

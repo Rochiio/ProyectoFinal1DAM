@@ -5,6 +5,7 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 
 import java.io.*;
 import java.sql.*;
+import java.time.LocalDate;
 
 /**
  * Manejador de Bases de Datos Relacionales
@@ -20,9 +21,6 @@ public class DataBaseManager implements AutoCloseable {
     private String dataBaseName;
     private String user;
     private String password;
-
-
-    private static DataBaseManager instance = null;
     /*
         Tipos de Driver
         SQLite: "org.sqlite.JDBC";
@@ -35,13 +33,8 @@ public class DataBaseManager implements AutoCloseable {
     // Para manejar las conexiones y respuestas de las mismas
     private Connection connection;
 
-    public static DataBaseManager getInstance(){
-        if(instance == null)
-            instance = new DataBaseManager();
-        return instance;
-    }
 
-    private DataBaseManager(){
+    public DataBaseManager() {
         if (fromProperties) {
             // initConfigFromProperties();
             System.out.println("Comentado el método de leer de propiedades");
@@ -122,7 +115,7 @@ public class DataBaseManager implements AutoCloseable {
         PreparedStatement preparedStatement = connection.prepareStatement(querySQL);
         // Vamos a pasarle los parametros usando preparedStatement
         for (int i = 0; i < params.length; i++) {
-            preparedStatement.setObject(i + 1, params[i]);
+            preparedStatement.setObject(i + 1, parseValue(params[i]));
         }
         return preparedStatement.executeQuery();
     }
@@ -135,7 +128,7 @@ public class DataBaseManager implements AutoCloseable {
      * @return ResultSet de la consulta
      * @throws SQLException No se ha podido realizar la consulta o la tabla no existe
      */
-    public ResultSet select( String querySQL, Object... params) throws SQLException {
+    public ResultSet select(String querySQL, Object... params) throws SQLException {
         return executeQuery(querySQL, params);
     }
 
@@ -168,7 +161,7 @@ public class DataBaseManager implements AutoCloseable {
         PreparedStatement preparedStatement = connection.prepareStatement(insertSQL, PreparedStatement.RETURN_GENERATED_KEYS);
         // Vamos a pasarle los parametros usando preparedStatement
         for (int i = 0; i < params.length; i++) {
-            preparedStatement.setObject(i + 1, params[i]);
+            preparedStatement.setObject(i + 1, parseValue(params[i]));
         }
         preparedStatement.executeUpdate();
         return preparedStatement.getGeneratedKeys();
@@ -211,7 +204,7 @@ public class DataBaseManager implements AutoCloseable {
         PreparedStatement preparedStatement = connection.prepareStatement(genericSQL);
         // Vamos a pasarle los parametros usando preparedStatement
         for (int i = 0; i < params.length; i++) {
-            preparedStatement.setObject(i + 1, params[i]);
+            preparedStatement.setObject(i + 1, parseValue(params[i]));
         }
         return preparedStatement.executeUpdate();
     }
@@ -260,5 +253,13 @@ public class DataBaseManager implements AutoCloseable {
     public void rollback() throws SQLException {
         connection.rollback();
         connection.setAutoCommit(true);
+    }
+
+    // JDBC no sabe convertir localDate a sql date asi que parsea aqui
+    private Object parseValue(Object value) {
+        if (value instanceof LocalDate)
+            return Date.valueOf((LocalDate) value);
+        else
+            return value;
     }
 }

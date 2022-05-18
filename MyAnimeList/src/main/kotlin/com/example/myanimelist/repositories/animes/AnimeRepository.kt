@@ -3,15 +3,14 @@ package com.example.myanimelist.repositories.animes
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.Anime
-import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
 
 
-class AnimeRepository constructor(
-    private var  databaseManager: DataBaseManager
-): IAnimeRepository {
-    private val logger: Logger = LogManager.getLogger(AnimeRepository::class.java)
+class AnimeRepository(
+    private var databaseManager: DataBaseManager,
+    val logger: Logger
+) : IAnimeRepository {
 
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"
@@ -28,7 +27,7 @@ class AnimeRepository constructor(
                 types = result.getString("type"),
                 episodes = result.getInt("episodes"),
                 status = result.getString("status"),
-                date = result.getDate("releaseDate"),
+                date = result.getDate("releaseDate").toLocalDate(),
                 rating = result.getString("rating"),
                 genres = result.getString("genre").split(",").toList(),
                 img = result.getString("imageUrl")
@@ -52,7 +51,7 @@ class AnimeRepository constructor(
                     types = result.getString("type"),
                     episodes = result.getInt("episodes"),
                     status = result.getString("status"),
-                    date = result.getDate("releaseDate"),
+                    date = result.getDate("releaseDate").toLocalDate(),
                     rating = result.getString("rating"),
                     genres = result.getString("genre").split(",").toList(),
                     img = result.getString("imageUrl")

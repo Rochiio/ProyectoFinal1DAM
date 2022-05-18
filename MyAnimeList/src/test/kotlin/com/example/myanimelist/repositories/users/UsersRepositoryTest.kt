@@ -2,23 +2,20 @@ package com.example.myanimelist.repositories.users
 
 //import com.example.myanimelist.modules.repositoryModule
 
-import com.example.myanimelist.manager.DataBaseManager
-import com.example.myanimelist.repositories.animes.AnimeRepository
-import com.example.myanimelist.repositories.animes.IAnimeRepository
+import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
+import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
 import com.example.myanimelist.utilities.DataDB
 import com.example.myanimelist.utilities.DataDB.getTestingAnime
 import com.example.myanimelist.utilities.DataDB.getTestingUser
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
-
 import java.util.*
 
-class UsersRepositoryTest  {
-    
-    private val usersRepository = UsersRepository(DataBaseManager.getInstance())
-    private val animeRepository = AnimeRepository(DataBaseManager.getInstance())
+class UsersRepositoryTest {
 
+    private val usersRepository = getUsersRepo()
+    private val animeRepository = getAnimesRepo()
 
     @AfterEach
     fun deleteAll() {
