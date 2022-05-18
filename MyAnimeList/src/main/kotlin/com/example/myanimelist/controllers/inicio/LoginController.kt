@@ -31,7 +31,7 @@ class LoginController : InicioController() {
     private fun changeSceneToMain() {
         DependenciesManager.globalUser = userRepository.findByName(txtUsername.text).first {it.name == txtUsername.text}
         val stage = txtUsername.scene.window as Stage
-        stage.loadScene(MAIN) {
+        stage.loadScene(MAIN, WIDTH, HEIGHT) {
             it.title = "Animes"
             it.isResizable = false
         }.show()
