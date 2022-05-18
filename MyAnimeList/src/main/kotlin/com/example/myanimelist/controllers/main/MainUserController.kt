@@ -1,13 +1,17 @@
 package com.example.myanimelist.controllers.main
 
-import com.example.myanimelist.factories.TableItemFactory
+import com.example.myanimelist.javafx.factories.TableItemFactory
+
+import com.example.myanimelist.controllers.AnimeController
+import com.example.myanimelist.javafx.factories.AnimeViewTableCell
+import com.example.myanimelist.javafx.factories.AnimeViewTableCellPresentation
 import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.managers.DependenciesManager.getAnimeController
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
 import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
-import com.example.myanimelist.models.enums.Type
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.service.anime.IAnimeStorage
@@ -24,22 +28,22 @@ import javafx.scene.input.KeyEvent
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import org.apache.logging.log4j.Logger
-import java.sql.SQLException
 import java.util.*
-
 
 
 class MainUserController(
 
 ) {
 
-    val logger : Logger = getLogger<MainUserController>()
+    val logger: Logger = getLogger<MainUserController>()
     val user = DependenciesManager.globalUser
     lateinit var animeStorage: IAnimeStorage
     lateinit var imgStorage: IImgStorage
     private var animeRepository: IAnimeRepository = getAnimesRepo()
     private var usersRepository: IUsersRepository = getUsersRepo()
+    private var animeController: AnimeController = getAnimeController()
     var itemFactory: TableItemFactory = TableItemFactory()
+
 
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private var myList: ObservableList<AnimeView> = FXCollections.observableArrayList()
@@ -48,53 +52,65 @@ class MainUserController(
 
     @FXML
     private lateinit var animeRankingCol: TableColumn<AnimeView, Int>
+
     @FXML
     private lateinit var animeTitleCol: TableColumn<AnimeView, Presentation>
+
     @FXML
     private lateinit var animeScoreCol: TableColumn<AnimeView, String>
+
     @FXML
     private lateinit var myListScoreCol: TableColumn<AnimeView, String>
+
     @FXML
     private lateinit var myListTypeCol: TableColumn<AnimeView, String>
+
     @FXML
     private lateinit var myListStatusCol: TableColumn<AnimeView, String>
+
     @FXML
     private lateinit var myListGenderCol: TableColumn<AnimeView, String>
+
     @FXML
     private lateinit var myListTitleCol: TableColumn<AnimeView, Presentation>
+
     @FXML
     private lateinit var myListRankingCol: TableColumn<AnimeView, Int>
+
     @FXML
     private lateinit var myListTable: TableView<AnimeView>
+
     @FXML
     private lateinit var animeTable: TableView<AnimeView>
+
     @FXML
     private lateinit var myListNameSearch: TextField
+
     @FXML
     private lateinit var animeNameSearch: TextField
+
     @FXML
     private lateinit var menuButton: Button
+
     @FXML
     private lateinit var onHoldCount: Label
+
     @FXML
     private lateinit var finishedCount: Label
+
     @FXML
     private lateinit var botRankAnime: Label
+
     @FXML
     private lateinit var topRankAnime: Label
+
     @FXML
     private lateinit var generateButton: Button
 
     @FXML
-    fun initialize(){
+    fun initialize() {
 
-        // DaggerRepositoryFactory.create().inject(this);
-
-        try {
-            loadData()
-        } catch (e: SQLException) {
-            logger.warn("error while loading")
-        }
+        loadData()
 
         logger.info("Iniciando anime columns")
         setAnimeCols()
@@ -117,64 +133,38 @@ class MainUserController(
     }
 
     private fun setFilteredLists() {
-        flAnime = FilteredList(animeList) { true }
+        flAnime = FilteredList(animeList)
         animeTable.items = flAnime
 
-        flMyList = FilteredList(myList) { true }
+        flMyList = FilteredList(myList)
         myListTable.items = flMyList
     }
 
     private fun setMyListCols() {
-        myListGenderCol.setCellValueFactory { cellData -> cellData.value.genresProperty() }
-        setEnumCol(myListGenderCol, Genre.sample)
+        myListGenderCol.setCellValueFactory { it.value.genresProperty() }
+        myListGenderCol.setCellFactory { AnimeViewTableCell(Genre.sample) }
 
-        myListRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
-        myListScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
-        myListStatusCol.setCellValueFactory { cellData -> cellData.value.statusProperty() }
-        setEnumCol(myListStatusCol, Status.sample)
+        myListRankingCol.setCellValueFactory { it.value.rankingProperty().asObject() }
+        myListScoreCol.setCellValueFactory { it.value.ratingProperty() }
+        myListStatusCol.setCellValueFactory { it.value.statusProperty() }
+        myListStatusCol.setCellFactory { AnimeViewTableCell(Status.sample) }
 
-        myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-        setTitleCell(myListTitleCol)
+        myListTitleCol.setCellValueFactory { it.value.presentationProperty() }
+        myListTitleCol.setCellFactory { AnimeViewTableCellPresentation() }
 
-        myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
-        setEnumCol(myListTypeCol, Type.sample)
+        myListTypeCol.setCellValueFactory { it.value.typesProperty() }
+        myListTypeCol.setCellFactory { AnimeViewTableCell(Status.sample) }
+
+
     }
 
     private fun setAnimeCols() {
-        animeRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
-        animeScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
-        animeTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-        setTitleCell(animeTitleCol)
+        animeRankingCol.setCellValueFactory { it.value.rankingProperty().asObject() }
+        animeScoreCol.setCellValueFactory { it.value.ratingProperty() }
+        animeTitleCol.setCellValueFactory { it.value.presentationProperty() }
+        animeTitleCol.setCellFactory { AnimeViewTableCellPresentation() }
     }
 
-    private fun setEnumCol(consumer: TableColumn<AnimeView, String>, enumSet: ObservableList<*>) {
-        consumer.setCellFactory {
-            object: TableCell<AnimeView, String>() {
-                override fun updateItem(item: String, empty: Boolean) {
-                    val choiceBox: ChoiceBox<*> = ChoiceBox(enumSet)
-                    choiceBox.selectionModel.select(enumSet.indexOf(item))
-                    choiceBox.setOnAction {
-                        val selection = choiceBox.selectionModel.selectedItem as String
-                        val anime  = tableView.items[index]
-                        anime.enumParser(selection)
-                    }
-                    graphic = choiceBox;
-                }
-            }
-        }
-    }
-    
-    
-
-    private fun setTitleCell(consumer : TableColumn<AnimeView, Presentation>) {
-        consumer.setCellFactory {
-            object: TableCell<AnimeView, Presentation>(){
-                override fun updateItem(item: Presentation, empty: Boolean) {
-                    graphic = itemFactory.getAnimePresentation(item)
-                }
-            }
-        }
-    }
 
     fun generateHTML(actionEvent: ActionEvent) {
         TODO("generate HTML")
@@ -188,9 +178,11 @@ class MainUserController(
         logger.info("organizando la lista...")
         flAnime.setPredicate { anime ->
             anime.presentation.title.lowercase(Locale.getDefault()).contains(
-                animeNameSearch.text.lowercase(Locale.getDefault()).trim()) ||
-            anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
-                animeNameSearch.text.lowercase(Locale.getDefault()).trim())
+                animeNameSearch.text.lowercase(Locale.getDefault()).trim()
+            ) ||
+                    anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
+                        animeNameSearch.text.lowercase(Locale.getDefault()).trim()
+                    )
         }
     }
 
@@ -204,7 +196,8 @@ class MainUserController(
     fun addToMyList(mouseEvent: MouseEvent) {
         if (mouseEvent.button === MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
             val anime: AnimeView = animeTable.selectionModel.selectedItem
-            addAnime(anime)
+            animeController.initStageAnimeData(anime)
+            //addAnime(anime)
         }
     }
 
@@ -220,13 +213,15 @@ class MainUserController(
         logger.info("organizando la lista...")
         flAnime.setPredicate { anime ->
             anime.presentation.title.lowercase(Locale.getDefault()).contains(
-                myListNameSearch.text.lowercase(Locale.getDefault()).trim()) ||
-            anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
-                myListNameSearch.text.lowercase(Locale.getDefault()).trim())
+                myListNameSearch.text.lowercase(Locale.getDefault()).trim()
+            ) ||
+                    anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
+                        myListNameSearch.text.lowercase(Locale.getDefault()).trim()
+                    )
         }
     }
 
-    fun save(){
+    fun save() {
         TODO("salvar los animes cambiados los usuarios y la lista del usuario")
     }
 }

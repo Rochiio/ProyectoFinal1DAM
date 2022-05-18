@@ -2,7 +2,6 @@ package com.example.myanimelist.utilities
 
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DependenciesManager.getDatabaseManager
-import com.example.myanimelist.models.Admin
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.models.User
@@ -32,7 +31,8 @@ object DataDB {
             LocalDate.now(),
             "img",
             emptyList(),
-            UUID.randomUUID()
+            UUID.randomUUID(),
+            false
         )
 
     fun getTestingAnime() = Anime(
@@ -47,14 +47,6 @@ object DataDB {
         types = Type.TV.value
     )
 
-    fun getTestingAdmin(number: Int = 0) =
-        Admin(
-            "Pepe$number",
-            "asdasd@gmail.com",
-            "123",
-            LocalDate.now(),
-            LocalDate.now()
-        )
 
     fun getTestingReview() = Review(getTestingAnime(), getTestingUser(), 0, "", UUID.randomUUID())
 
