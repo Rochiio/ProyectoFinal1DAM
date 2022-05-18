@@ -1,5 +1,8 @@
 package com.example.myanimelist.models.enums
 
+import javafx.collections.FXCollections
+
+
 enum class Genre(val value: String = "Unknown") {
     ADVENTURE("Adventure"),
     ACTION("Action"),
@@ -13,5 +16,8 @@ enum class Genre(val value: String = "Unknown") {
     HORROR("Horror"),
     PSYCHOLOGICAL("Psychological"),
     SCI_FI("Sci-Fi"),
-    ROMANCE("Romance")
+    ROMANCE("Romance");
+    companion object {
+        val sample = FXCollections.observableArrayList(Genre.values().map{it.value}.toList())
+    }
 }

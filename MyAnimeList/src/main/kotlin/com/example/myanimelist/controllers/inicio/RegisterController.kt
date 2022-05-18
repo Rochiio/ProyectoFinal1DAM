@@ -13,8 +13,7 @@ import javafx.scene.control.Alert
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.stage.Stage
-import java.sql.Date
-import java.util.*
+import java.time.LocalDate
 
 class RegisterController : InicioController() {
     private var registerFilters: RegisterFilters = getRegisterFilter()
@@ -70,7 +69,7 @@ class RegisterController : InicioController() {
 
     private fun createUser() = userRepository.add(
         User(
-            txtUsername.text, txtEmail.text, txtPassword.text, Date(Date().time), Date(Date().time), null
+            txtUsername.text, txtEmail.text, txtPassword.text, LocalDate.now(), LocalDate.now(), null
         )
     )
 }
