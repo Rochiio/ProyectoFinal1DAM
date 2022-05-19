@@ -185,7 +185,7 @@ class MainUserController(
     fun addToMyList(mouseEvent: MouseEvent) {
         if (mouseEvent.button === MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
             val anime: AnimeView = animeTable.selectionModel.selectedItem
-            animeController.initStageAnimeData(anime)
+            //TODO open AnimeController y antes DependenciesManager animeSelection=anime
             //addAnime(anime)
         }
     }

@@ -6,12 +6,15 @@ import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLoginFilter
 import com.example.myanimelist.managers.SceneManager
-import com.example.myanimelist.utils.HEIGHT
-import com.example.myanimelist.utils.MAIN_USER_MYLIST
-import com.example.myanimelist.utils.REGISTER
-import com.example.myanimelist.utils.WIDTH
+import com.example.myanimelist.models.enums.Genre
+import com.example.myanimelist.models.enums.Status
+import com.example.myanimelist.models.enums.Type
+import com.example.myanimelist.utils.*
+import com.example.myanimelist.views.models.AnimeView
 import javafx.scene.control.Alert
 import javafx.stage.Stage
+import java.time.LocalDate
+import java.util.*
 
 
 class LoginController : InicioController() {
@@ -35,13 +38,13 @@ class LoginController : InicioController() {
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
         val stage = txtUsername.scene.window as Stage
 
-        if(DependenciesManager.globalUser.admin==false) {
-            stage.loadScene(MAIN_USER_MYLIST) {
+        if(!DependenciesManager.globalUser.admin) {
+            stage.loadScene(MAIN) {
                 title = "Animes"
                 isResizable = false
             }.show()
         }else{
-            stage.loadScene(MAIN_USER_MYLIST) {
+            stage.loadScene(MAIN) {
                 title = "Animes"
                 isResizable = false
             }.show()
