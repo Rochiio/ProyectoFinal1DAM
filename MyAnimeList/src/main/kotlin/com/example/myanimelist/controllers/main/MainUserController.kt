@@ -1,6 +1,9 @@
 package com.example.myanimelist.controllers.main
 
-import com.example.myanimelist.factories.TableItemFactory
+import com.example.myanimelist.controllers.AnimeController
+import com.example.myanimelist.javafx.factories.TableItemFactory
+import com.example.myanimelist.javafx.factories.AnimeViewTableCell
+import com.example.myanimelist.javafx.factories.AnimeViewTableCellPresentation
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getAnimeController
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
@@ -102,8 +105,10 @@ class MainUserController(
 
     @FXML
     private lateinit var generateButton: Button
+
     @FXML
     private lateinit var searchAnimeButon: Button
+
     @FXML
     private lateinit var searchMyListButon: Button
 
@@ -154,7 +159,7 @@ class MainUserController(
 
         myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
         myListTitleCol.setCellFactory {
-            object: TableCell<AnimeView, Presentation>(){
+            object : TableCell<AnimeView, Presentation>() {
                 override fun updateItem(item: Presentation, empty: Boolean) {
                     graphic = itemFactory.getAnimePresentation(item)
                 }
@@ -169,26 +174,9 @@ class MainUserController(
         animeScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
         animeTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
         animeTitleCol.setCellFactory {
-            object: TableCell<AnimeView, Presentation>(){
+            object : TableCell<AnimeView, Presentation>() {
                 override fun updateItem(item: Presentation, empty: Boolean) {
                     graphic = itemFactory.getAnimePresentation(item)
-                }
-            }
-        }
-    }
-
-    private fun setEnumCol(consumer: TableColumn<AnimeView, String>, enumSet: ObservableList<*>) {
-        consumer.setCellFactory {
-            object: TableCell<AnimeView, String>() {
-                override fun updateItem(item: String, empty: Boolean) {
-                    val choiceBox: ChoiceBox<*> = ChoiceBox(enumSet)
-                    choiceBox.selectionModel.select(enumSet.indexOf(item))
-                    choiceBox.setOnAction {
-                        val selection = choiceBox.selectionModel.selectedItem as String
-                        val anime  = tableView.items[index]
-                        anime.enumParser(selection)
-                    }
-                    graphic = choiceBox;
                 }
             }
         }
@@ -202,25 +190,15 @@ class MainUserController(
         TODO("menu popup")
     }
 
-    fun sortAnimeByText(keyEvent: KeyEvent) {
-        logger.info("organizando la lista...")
-        flAnime.setPredicate { anime ->
-            anime.presentation.title.lowercase(Locale.getDefault()).contains(
-                animeNameSearch.text.lowercase(Locale.getDefault()).trim()
-            ) ||
-                    anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
-                        animeNameSearch.text.lowercase(Locale.getDefault()).trim()
-                    )
-        }
-    }
-
     private fun loadData() {
         logger.info("cargando datos a memoria")
         animeList.addAll(animeRepository.findAll().map { AnimeView(it) }.toList())
         myList.addAll(usersRepository.getAnimeLists(user.id).map { AnimeView(it) }.toList())
 
-        animeList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }.forEach { it.ranking = animeList.indexOf(it) }
-        myList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }.forEach { it.ranking = animeList.indexOf(it) }
+        animeList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }
+            .forEach { it.ranking = animeList.indexOf(it) }
+        myList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }
+            .forEach { it.ranking = animeList.indexOf(it) }
     }
 
     fun addToMyList(mouseEvent: MouseEvent) {
@@ -239,7 +217,7 @@ class MainUserController(
         myListTable.selectionModel.select(animeView)
     }
 
-    fun save(){
+    fun save() {
         TODO("salvar los animes cambiados los usuarios y la lista del usuario")
     }
 
@@ -247,9 +225,11 @@ class MainUserController(
         logger.info("organizando la lista...")
         flAnime.setPredicate { anime ->
             anime.presentation.title.lowercase(Locale.getDefault()).contains(
-                animeNameSearch.text.lowercase(Locale.getDefault()).trim()) ||
+                animeNameSearch.text.lowercase(Locale.getDefault()).trim()
+            ) ||
                     anime.presentation.titleEnglish.lowercase(Locale.getDefault()).contains(
-                        animeNameSearch.text.lowercase(Locale.getDefault()).trim())
+                        animeNameSearch.text.lowercase(Locale.getDefault()).trim()
+                    )
         }
     }
 
@@ -263,9 +243,5 @@ class MainUserController(
                         myListNameSearch.text.lowercase(Locale.getDefault()).trim()
                     )
         }
-    }
-
-    fun save() {
-        TODO("salvar los animes cambiados los usuarios y la lista del usuario")
     }
 }

@@ -1,6 +1,8 @@
-package com.example.myanimelist.factories
+package com.example.myanimelist.javafx.factories
 
+import com.example.myanimelist.service.img.ImgStorage
 import com.example.myanimelist.views.models.Presentation
+import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
@@ -11,7 +13,7 @@ import java.nio.file.Path
 class TableItemFactory {
 
     //val imgstorage: ImgStorage = DependenciesManager.getImgStorage
-    val imgstorage: ImgStorage = ImgStorage()
+    private val imgStorage: ImgStorage = ImgStorage()
     fun getAnimePresentation(item: Presentation): VBox {
         val vbox = VBox()
         vbox.spacing = 20.0
@@ -23,7 +25,7 @@ class TableItemFactory {
         val imageview = ImageView()
         imageview.fitHeight = 40.0
         imageview.fitWidth = 40.0
-        imageview.image = imgstorage.loadImg(item)
+        imageview.image = imgStorage.loadImg(item)
         vbox.children.add(imageview)
         vbox.children.add(hbox)
         return vbox
