@@ -2,7 +2,7 @@
 ## Título: My Anime List🍜
 ![](./imgReadme/ProyectoFinal%201DAMBanner.png)
 ### Equipo:
-    - Jefa de Proyecto😎: Rocío Palao
+    - Jefa de Proyecto: Rocío Palao
     - Product Owner: Mohamed Asidah
     - Joaquín Ayllon
     - Roberto Blázquez
@@ -19,4 +19,6 @@ Tendremos un sistema de almacenamiento de usuarios entre los que habrá un usuar
 Por otra parte, los usuarios podrán gestionar su lista de animes, sus datos personales y sus reviews.
 
 Nuestro producto son los animes.
+
+
 

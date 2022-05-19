@@ -1,13 +1,16 @@
 package com.example.myanimelist.controllers
 
 import com.example.myanimelist.extensions.loadScene
-import com.example.myanimelist.extensions.show
 import com.example.myanimelist.managers.DependenciesManager
-import com.example.myanimelist.repositories.animeList.ICRUDAnimeList
+import com.example.myanimelist.managers.SceneManager
+import com.example.myanimelist.models.enums.Genre
+import com.example.myanimelist.models.enums.Status
+import com.example.myanimelist.models.enums.Type
 import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.utils.ANIME_DATA
 import com.example.myanimelist.utils.HEIGHT
+import com.example.myanimelist.utils.LOGIN
 import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.AnimeView
 import javafx.event.ActionEvent
@@ -17,8 +20,9 @@ import javafx.scene.control.Button
 import javafx.scene.control.ButtonType
 import javafx.scene.control.Label
 import javafx.stage.Stage
-import org.apache.logging.log4j.LogManager
-import java.util.logging.Logger
+import javafx.stage.StageStyle
+import java.time.LocalDate
+import java.util.*
 
 
 class AnimeController {
@@ -55,7 +59,6 @@ class AnimeController {
                 animeListRepository.add(animeAux!!,user)
                 logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
 
-
             } else {
                 val alert= Alert(Alert.AlertType.INFORMATION)
                 alert.title="Saliendo del anime"
@@ -66,14 +69,14 @@ class AnimeController {
     }
 
     fun initStageAnimeData(anime: AnimeView){
-        this.anime=anime
-        val stage = Stage()
-            stage.loadScene(ANIME_DATA, WIDTH, HEIGHT) {
-                title = "Anime-Data"
-                isResizable = false
-            }.show()
+        this.anime= anime
+        val stage = Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
+            isResizable = false
+            title = "Data"
+        }
 
-            showAnime()
+        showAnime()
+        stage.show()
     }
 
     private fun showAnime(){
