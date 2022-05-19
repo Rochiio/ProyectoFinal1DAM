@@ -1,9 +1,7 @@
 package com.example.myanimelist.controllers.main
 
 import com.example.myanimelist.controllers.AnimeController
-import com.example.myanimelist.javafx.factories.TableItemFactory
 import com.example.myanimelist.javafx.factories.AnimeViewTableCell
-import com.example.myanimelist.javafx.factories.AnimeViewTableCellPresentation
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getAnimeController
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
@@ -17,6 +15,7 @@ import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
+import com.example.myanimelist.views.tableextensions.PresentationCellFactory
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.collections.transformation.FilteredList
@@ -36,17 +35,14 @@ class MainUserController(
 
     val logger: Logger = getLogger<MainUserController>()
     val user = DependenciesManager.globalUser
-    lateinit var animeStorage: IAnimeStorage
-    lateinit var imgStorage: IImgStorage
     private var animeRepository: IAnimeRepository = getAnimesRepo()
     private var usersRepository: IUsersRepository = getUsersRepo()
     private var animeController: AnimeController = getAnimeController()
-    var itemFactory: TableItemFactory = TableItemFactory()
 
 
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
-    private var myList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private var flAnime: FilteredList<AnimeView> = FilteredList(FXCollections.observableArrayList())
+    private var myList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private var flMyList: FilteredList<AnimeView> = FilteredList(FXCollections.observableArrayList())
 
     @FXML
@@ -155,31 +151,16 @@ class MainUserController(
         myListStatusCol.setCellFactory { AnimeViewTableCell(Status.sample) }
 
         myListTitleCol.setCellValueFactory { it.value.presentationProperty() }
-        myListTitleCol.setCellFactory { AnimeViewTableCellPresentation() }
+        myListTitleCol.setCellFactory { PresentationCellFactory() }
 
         myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-        myListTitleCol.setCellFactory {
-            object : TableCell<AnimeView, Presentation>() {
-                override fun updateItem(item: Presentation, empty: Boolean) {
-                    graphic = itemFactory.getAnimePresentation(item)
-                }
-            }
-        }
+        myListTitleCol.setCellFactory {PresentationCellFactory()}
 
 
     }
 
     private fun setAnimeCols() {
-        animeRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
-        animeScoreCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
-        animeTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-        animeTitleCol.setCellFactory {
-            object : TableCell<AnimeView, Presentation>() {
-                override fun updateItem(item: Presentation, empty: Boolean) {
-                    graphic = itemFactory.getAnimePresentation(item)
-                }
-            }
-        }
+
     }
 
     fun generateHTML(actionEvent: ActionEvent) {

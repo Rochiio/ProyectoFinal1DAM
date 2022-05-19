@@ -1,10 +1,23 @@
-package com.example.myanimelist.controllers.main
+package com.example.myanimelist.controllers.main.user
 
 import javafx.event.ActionEvent
+import javafx.fxml.FXML
+import javafx.scene.control.Button
+import javafx.scene.control.MenuButton
+import javafx.scene.control.RadioButton
 import javafx.scene.input.MouseEvent
-//TODO: Implementar MainUserMyListController
 
 class MainUserMyListController {
+
+    @FXML
+    private lateinit var radioNoche1: RadioButton
+
+    @FXML
+    private lateinit var menuButton1: MenuButton
+
+    @FXML
+    private lateinit var searchMyListButton1: Button
+
     fun changeSceneToAcercaDe(actionEvent: ActionEvent) {
 
     }

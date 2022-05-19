@@ -7,7 +7,7 @@ import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLoginFilter
 import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.utils.HEIGHT
-import com.example.myanimelist.utils.MAIN
+import com.example.myanimelist.utils.MAIN_USER_MYLIST
 import com.example.myanimelist.utils.REGISTER
 import com.example.myanimelist.utils.WIDTH
 import javafx.scene.control.Alert
@@ -36,12 +36,12 @@ class LoginController : InicioController() {
         val stage = txtUsername.scene.window as Stage
 
         if(DependenciesManager.globalUser.admin==false) {
-            stage.loadScene(MAIN) {
+            stage.loadScene(MAIN_USER_MYLIST) {
                 title = "Animes"
                 isResizable = false
             }.show()
         }else{
-            stage.loadScene(MAIN) {
+            stage.loadScene(MAIN_USER_MYLIST) {
                 title = "Animes"
                 isResizable = false
             }.show()

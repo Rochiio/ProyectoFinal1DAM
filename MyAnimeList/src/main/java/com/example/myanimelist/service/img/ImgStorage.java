@@ -1,7 +1,5 @@
 package com.example.myanimelist.service.img;
 
-import com.example.myanimelist.MyAnimeListApplication;
-import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
 import com.example.myanimelist.service.utils.Utils;
 import com.example.myanimelist.utils.Properties;
@@ -18,8 +16,9 @@ import java.util.Objects;
 
 public class ImgStorage implements IImgStorage {
 
-    private Logger logger = DependenciesManager.getLogger(ImgStorage.class);
-    public ImgStorage() {
+    private Logger logger;
+    public ImgStorage(Logger logger) {
+        this.logger = logger;
         mkdir();
     }
 
@@ -56,6 +55,7 @@ public class ImgStorage implements IImgStorage {
         return new Image(Properties.DEFAULT_USER_ICON);
     }
 
+    @Override
     public Image loadImg(Presentation present) {
         if (!Objects.requireNonNull(present.getImg()).isBlank() && Files.exists(Paths.get(present.getImg()))) {
             logger.info("loading img");

@@ -22,6 +22,7 @@ public class Properties {
     public static final String RESOURCES_DIR = PATH + File.separator + "resources";
     public static final String ICONS_DIR = MyAnimeListApplication.class.getResource("icons").toString();
     public static final String DEFAULT_USER_ICON = ICONS_DIR + File.separator + "default.png";
+    public static final String ADD_ICON = ICONS_DIR + File.separator + "add.png";
 
     public static final String DEFAULT_IMAGE = ICONS_DIR + File.separator + "image.png";
     public static final String SCRIPT_FILE_DATABASE = DB_DIR + File.separator + "script.sql";

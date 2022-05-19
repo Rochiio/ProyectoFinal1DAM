@@ -16,6 +16,8 @@ import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.repositories.users.UsersRepository
 import com.example.myanimelist.service.backup.BackupStorage
 import com.example.myanimelist.service.backup.IBackupStorage
+import com.example.myanimelist.service.img.IImgStorage
+import com.example.myanimelist.service.img.ImgStorage
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.apache.logging.log4j.LogManager
@@ -24,12 +26,14 @@ import java.time.LocalDate
 
 object DependenciesManager {
     //Singleton instances
+
     lateinit var globalUser : User
     private val dataBaseManager: DataBaseManager = DataBaseManager()
     private val gson: Gson = GsonBuilder().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
     private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
     private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager(), getLogger<AnimeRepository>())
     private val animeListRepository: IRepositoryAnimeList = AnimeListRepository(getDatabaseManager(),getLogger<AnimeListRepository>())
+    private val imgStorage: IImgStorage = ImgStorage(getLogger<ImgStorage>())
     private val reviewsRepository: IRepositoryReview = ReviewsRepository(
         getDatabaseManager(), getAnimesRepo(),
         getUsersRepo(),
@@ -39,7 +43,6 @@ object DependenciesManager {
     //Factories
     @JvmStatic
     fun getDatabaseManager(): DataBaseManager = dataBaseManager
-
 
     @JvmStatic
     fun getUsersRepo(): IUsersRepository = usersRepository
@@ -66,6 +69,9 @@ object DependenciesManager {
 
     @JvmStatic
     fun getGson(): Gson = gson
+
+    @JvmStatic
+    fun getImgStorage(): IImgStorage = imgStorage
 
     inline fun <reified T> getLogger(): Logger =
         LogManager.getLogger(T::class.java)
