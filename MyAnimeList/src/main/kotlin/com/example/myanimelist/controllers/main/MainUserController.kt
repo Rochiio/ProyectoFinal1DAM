@@ -1,10 +1,9 @@
 package com.example.myanimelist.controllers.main
 
-import com.example.myanimelist.javafx.factories.TableItemFactory
-
 import com.example.myanimelist.controllers.AnimeController
 import com.example.myanimelist.javafx.factories.AnimeViewTableCell
 import com.example.myanimelist.javafx.factories.AnimeViewTableCellPresentation
+import com.example.myanimelist.javafx.factories.TableItemFactory
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getAnimeController
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
@@ -154,8 +153,6 @@ class MainUserController(
 
         myListTypeCol.setCellValueFactory { it.value.typesProperty() }
         myListTypeCol.setCellFactory { AnimeViewTableCell(Status.sample) }
-
-
     }
 
     private fun setAnimeCols() {
