@@ -1,10 +1,13 @@
 package com.example.myanimelist.managers
 
 import com.example.myanimelist.adapters.LocalDateTypeAdapter
+import com.example.myanimelist.controllers.AnimeController
 import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.filters.login.RegisterFilters
 import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.User
+import com.example.myanimelist.repositories.animeList.AnimeListRepository
+import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.reviews.IRepositoryReview
@@ -26,6 +29,7 @@ object DependenciesManager {
     private val gson: Gson = GsonBuilder().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
     private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
     private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager(), getLogger<AnimeRepository>())
+    private val animeListRepository: IRepositoryAnimeList = AnimeListRepository(getDatabaseManager(),getLogger<AnimeListRepository>())
     private val reviewsRepository: IRepositoryReview = ReviewsRepository(
         getDatabaseManager(), getAnimesRepo(),
         getUsersRepo(),
@@ -47,7 +51,12 @@ object DependenciesManager {
     fun getReviewsRepo(): IRepositoryReview = reviewsRepository
 
     @JvmStatic
+    fun getAnimeListRepo(): IRepositoryAnimeList =animeListRepository
+    @JvmStatic
     fun getLoginFilter(): LoginFilters = LoginFilters(getUsersRepo())
+
+    @JvmStatic
+    fun getAnimeController(): AnimeController = AnimeController()
 
     @JvmStatic
     fun getRegisterFilter(): RegisterFilters = RegisterFilters(getUsersRepo())
@@ -63,4 +72,5 @@ object DependenciesManager {
 
     @JvmStatic
     fun <T> getLogger(clazz: Class<T>): Logger = LogManager.getLogger(clazz)
+
 }
