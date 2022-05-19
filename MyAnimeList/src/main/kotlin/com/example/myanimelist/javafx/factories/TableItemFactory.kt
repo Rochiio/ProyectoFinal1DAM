@@ -1,9 +1,6 @@
 package com.example.myanimelist.factories
 
-import com.example.myanimelist.managers.DependenciesManager
-import com.example.myanimelist.service.img.ImgStorage
 import com.example.myanimelist.views.models.Presentation
-import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
@@ -32,7 +29,7 @@ class TableItemFactory {
         return vbox
     }
 
-    fun getMenu(): VBox{
+    fun getMenu(): VBox {
         val vBox = VBox()
         TODO("un monton de codigo pa hacer el menu to wapo")
         return vBox

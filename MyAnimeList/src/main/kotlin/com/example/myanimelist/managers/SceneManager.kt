@@ -24,10 +24,10 @@ object SceneManager {
     //Si se usa mas de una vez dejar openStageAbout aqui o en un utils
     fun openStageAbout() =
         Stage().loadScene(ABOUT, ABOUT_WIDTH, ABOUT_HEIGHT) {
-            it.title = "About"
-            it.isResizable = false
-            it.initModality(Modality.APPLICATION_MODAL)
-            addIconStage(it)
+            title = "About"
+            isResizable = false
+            initModality(Modality.APPLICATION_MODAL)
+            addIconStage(this)
         }.show()
 
     @Throws(IOException::class, InterruptedException::class)
@@ -47,10 +47,10 @@ object SceneManager {
     fun initMain() {
         Platform.setImplicitExit(true)
         mainStage = Stage().loadScene(LOGIN, WIDTH, HEIGHT) {
-            it.isResizable = false
-            it.title = "Login"
-            it.initStyle(StageStyle.DECORATED)
-            addIconStage(it)
+            isResizable = false
+            title = "Login"
+            initStyle(StageStyle.DECORATED)
+            addIconStage(this)
         }
         println("Inicio listo")
         mainStage?.show()
