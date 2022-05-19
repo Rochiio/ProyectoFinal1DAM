@@ -12,9 +12,9 @@
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="577.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.inicio.LoginController">
     <children>
-        <ImageView fitHeight="151.0" fitWidth="316.0" layoutX="154.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="199.0" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="154.5555419921875" AnchorPane.topAnchor="0.0">
+        <ImageView fitHeight="151.0" fitWidth="316.0" layoutX="154.0" layoutY="14.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="154.5555419921875" AnchorPane.topAnchor="14.0">
             <image>
-                <Image url="@../images/splash1.png" />
+                <Image url="@../images/logo/Login.png" />
             </image>
         </ImageView>
         <VBox layoutX="150.0" layoutY="161.0" spacing="10.0" AnchorPane.bottomAnchor="109.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="161.0">
