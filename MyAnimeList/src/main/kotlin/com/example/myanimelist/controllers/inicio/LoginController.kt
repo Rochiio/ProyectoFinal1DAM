@@ -34,10 +34,18 @@ class LoginController : InicioController() {
         DependenciesManager.globalUser =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
         val stage = txtUsername.scene.window as Stage
-        stage.loadScene(MAIN) {
-            title = "Animes"
-            isResizable = false
-        }.show()
+
+        if(DependenciesManager.globalUser.admin==false) {
+            stage.loadScene(MAIN) {
+                title = "Animes"
+                isResizable = false
+            }.show()
+        }else{
+            stage.loadScene(MAIN) {
+                title = "Animes"
+                isResizable = false
+            }.show()
+        }
     }
 
 
@@ -55,9 +63,14 @@ class LoginController : InicioController() {
 
 
     private fun validateFields(errorMessage: StringBuilder): Boolean {
-        if (!loginFilters.checkUserCorrect(txtUsername.text, txtPassword.text))
-            errorMessage.appendLine("Usuario no existe")
-
-        return errorMessage.isEmpty()
+        if(!loginFilters.checkUserCorrect(txtUsername.text)) {
+            errorMessage.appendLine("Usuario ${txtUsername.text} incorrecto")
+            return false
+        }
+        if(!loginFilters.checkPasswordCorrect(txtUsername.text,txtPassword.text)){
+            errorMessage.appendLine("Contraseña incorrecta")
+            return false
+        }
+        return true
     }
 }
