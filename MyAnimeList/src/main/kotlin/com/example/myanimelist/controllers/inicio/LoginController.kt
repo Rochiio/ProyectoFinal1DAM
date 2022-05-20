@@ -9,6 +9,8 @@ import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
+import com.example.myanimelist.repositories.animes.IAnimeRepository
+import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import javafx.scene.control.Alert
@@ -36,15 +38,18 @@ class LoginController : InicioController() {
     private fun changeSceneToMain() {
         DependenciesManager.globalUser =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
+
         val stage = txtUsername.scene.window as Stage
 
+
         if(!DependenciesManager.globalUser.admin) {
-            stage.loadScene(MAIN_USER_MYLIST) {
+            stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
             }.show()
         }else{
-            stage.loadScene(MAIN_USER_MYLIST) {
+            //TODO cambiar vista a lista de admin
+            stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
             }.show()
