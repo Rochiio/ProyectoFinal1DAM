@@ -1,7 +1,8 @@
 package com.example.myanimelist.managers
 
 import com.example.myanimelist.adapters.LocalDateTypeAdapter
-import com.example.myanimelist.controllers.AnimeController
+import com.example.myanimelist.controllers.anime.AnimeController
+import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.filters.login.RegisterFilters
 import com.example.myanimelist.manager.DataBaseManager
@@ -14,6 +15,8 @@ import com.example.myanimelist.repositories.reviews.IRepositoryReview
 import com.example.myanimelist.repositories.reviews.ReviewsRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.repositories.users.UsersRepository
+import com.example.myanimelist.service.anime.AnimeStorage
+import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.service.backup.BackupStorage
 import com.example.myanimelist.service.backup.IBackupStorage
 import com.example.myanimelist.views.models.AnimeView
@@ -59,6 +62,12 @@ object DependenciesManager {
     fun getAnimeListRepo(): IRepositoryAnimeList =animeListRepository
     @JvmStatic
     fun getLoginFilter(): LoginFilters = LoginFilters(getUsersRepo())
+
+    @JvmStatic
+    fun getAnimeStorage(): IAnimeStorage = AnimeStorage()
+
+    @JvmStatic
+    fun getEditFilter(): EditFilters = EditFilters()
 
     @JvmStatic
     fun getAnimeController(): AnimeController = AnimeController()

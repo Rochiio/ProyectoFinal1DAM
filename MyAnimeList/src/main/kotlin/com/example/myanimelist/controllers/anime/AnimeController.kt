@@ -1,10 +1,13 @@
-package com.example.myanimelist.controllers
+package com.example.myanimelist.controllers.anime
 
+import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.managers.ResourcesManager
-import com.example.myanimelist.models.Anime
+import com.example.myanimelist.utils.ANIME_DATA_EDIT
+import com.example.myanimelist.utils.HEIGHT
+import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.AnimeView
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
@@ -12,7 +15,6 @@ import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
-import java.time.LocalDate
 
 
 class AnimeController {
@@ -32,15 +34,15 @@ class AnimeController {
     lateinit var btnAdd: Button
 
 
+
     private var logger = DependenciesManager.getLogger(AnimeController::class.java)
     private var user = DependenciesManager.globalUser
     private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
     private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
-    lateinit var anime: AnimeView
+    private var anime: AnimeView = DependenciesManager.animeSelection
 
     @FXML
     fun initialize(){
-        this.anime = DependenciesManager.animeSelection
         showAnime()
     }
 
@@ -74,13 +76,22 @@ class AnimeController {
      * Asignar a cada label su información
      */
     private fun showAnime(){
-        logger.info("Cargando los datos")
-        txtTittle.text=anime.presentation.title
-        txtEpisodes.text=anime.episodes.toString()
-        txtStatus.text=anime.status
-        txtDate.text=anime.date.toString()
-        txtGenre.text=anime.genres
-        imageAnime.image=Image(ResourcesManager.getCoverOf(anime.presentation.img))
+        if(anime!=null) {
+            logger.info("Cargando los datos")
+            txtTittle.text = anime.presentation.title
+            txtEpisodes.text = anime.episodes.toString()
+            txtStatus.text = anime.status
+            txtDate.text = anime.date.toString()
+            txtGenre.text = anime.genres
+            imageAnime.image = Image(ResourcesManager.getCoverOf(anime.presentation.img))
+        }else{
+            txtTittle.text = " "
+            txtEpisodes.text = " "
+            txtStatus.text = " "
+            txtDate.text = " "
+            txtGenre.text = " "
+            imageAnime.image = Image(ResourcesManager.getIconOf("image.png"))
+        }
     }
 
 
@@ -89,16 +100,12 @@ class AnimeController {
      * Editar el anime
      */
     fun editAnime(actionEvent: ActionEvent) {
-        val animeUpdate = Anime(txtTittle.text," ",anime.types,Integer.parseInt(txtEpisodes.text),
-            txtStatus.text, LocalDate.parse(txtDate.text),anime.rating,listOf(txtGenre.text),anime.presentation.img,
-            anime.id)
 
-        animeRepository.update(animeUpdate)
-
-            val alerta= Alert(Alert.AlertType.INFORMATION)
-            alerta.title="Anime actualizado correctamente"
-            val stage = txtTittle.scene.window as Stage
-            stage.close()
+        val stage = txtTittle.scene.window as Stage
+        stage.loadScene(ANIME_DATA_EDIT,WIDTH, HEIGHT){
+            title="Editor"
+            isResizable = false
+        }.show()
     }
 
 

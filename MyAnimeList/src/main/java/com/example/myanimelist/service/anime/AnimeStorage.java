@@ -51,12 +51,12 @@ public class AnimeStorage implements IAnimeStorage {
 
     @Override
     public Optional<List<AnimeDTO>> load() {
-        try (var list = Files.lines(Path.of(Properties.ANIME_LOAD)).skip(1)) {
+        try (var list = Files.lines(Path.of(Properties.ANIME_CSV)).skip(1)) {
             return Optional.of(list
                     .map(this::parse)
                     .toList());
         } catch (Exception e) {
-            System.out.println("Error reading th file");
+            System.out.println("Error reading the file");
         }
         return Optional.empty();
     }
@@ -67,13 +67,12 @@ public class AnimeStorage implements IAnimeStorage {
         String title = fields[1];
         String titleEnglish = fields[2];
         String types = fields[3];
-        Integer episodes = Integer.parseInt(fields[4]);
+        int episodes = Integer.parseInt(fields[4]);
         String status = fields[5];
-        String date = fields[6];
-        String rating = fields[7];
+        String rating = fields[6];
         String genres = fields[8];
-        String img = fields[9];
-        return new AnimeDTO(id, title, titleEnglish, types, episodes, status, date, rating, genres, img);
+        String date = fields[9];
+        return new AnimeDTO(id, title, titleEnglish, types, episodes, status, date, rating, genres, id.toString());
     }
 
     private String toCSV(AnimeDTO animeDTO) {
