@@ -46,6 +46,7 @@ class RegisterController : InicioController() {
         }
 
         Alert(Alert.AlertType.INFORMATION).show("Register completed", "Bienvenido ${txtUsername.text}")
+        changeSceneToLogin()
     }
 
     private fun validateFields(errorMessage: StringBuilder): Boolean {
