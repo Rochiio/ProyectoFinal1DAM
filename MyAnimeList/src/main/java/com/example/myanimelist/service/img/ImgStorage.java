@@ -34,10 +34,10 @@ public class ImgStorage implements IImgStorage {
 
     @Override
     public Image loadImg(User user) {
-        if (!Objects.requireNonNull(user.getImg()).isBlank() && ResourcesManager.INSTANCE.getImageOf(user.getImg()) != null) {
+        /*if (!Objects.requireNonNull(user.getImg()).isBlank() && ResourcesManager.INSTANCE.getImageOf(user.getImg()) != null) {
             logger.info("loading img");
             return new Image(Objects.requireNonNull(ResourcesManager.INSTANCE.getImageOf(user.getImg())));
-        }
+        }*/
         logger.info("loading default img");
         return new Image(Objects.requireNonNull(ResourcesManager.INSTANCE.getIconOf(Properties.DEFAULT_USER_ICON)));
     }

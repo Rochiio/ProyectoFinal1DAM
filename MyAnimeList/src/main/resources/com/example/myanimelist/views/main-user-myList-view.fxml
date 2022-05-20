@@ -34,9 +34,9 @@
                </GridPane.margin>
             </TextField>
             <Button fx:id="searchMyListButton1" mnemonicParsing="false" onAction="#filterMyListByText" text="Buscar" GridPane.columnIndex="1" />
-            <MenuButton fx:id="menuButton1" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+            <MenuButton fx:id="menuButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#changeSceneToAcercaDe" text="Acerca de">
+                  <MenuItem mnemonicParsing="false" onAction="#openAcercaDe" text="Acerca de">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -45,7 +45,7 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#changeSceneToProfileUser" text="Editar perfil" />
+                  <MenuItem fx:id="menuProfileOpt" mnemonicParsing="false" onAction="#changeSceneToProfileUser" text="Editar perfil" />
                   <MenuItem mnemonicParsing="false" onAction="#changeMainTheme" text="Modo noche">
                      <graphic>
                         <RadioButton fx:id="radioNoche1" mnemonicParsing="false" onAction="#changeMainTheme" />
@@ -64,7 +64,7 @@
                   <Insets right="3.0" />
                </GridPane.margin>
             </MenuButton>
-            <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeSceneToAddAnime" text="Añadir" GridPane.columnIndex="2" />
+            <Button fx:id="addAnimeButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeSceneToAddAnime" text="Añadir" GridPane.columnIndex="2" />
          </children>
       </GridPane>
       <TableView layoutY="56.0" onMouseClicked="#changeSceneToAnimeView" prefHeight="344.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
