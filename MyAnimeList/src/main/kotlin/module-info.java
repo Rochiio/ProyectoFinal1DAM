@@ -10,6 +10,7 @@ module com.example.myanimelist {
     opens com.example.myanimelist.controllers.profiles to javafx.fxml;
 
 
+
     requires javafx.controls;
     requires javafx.fxml;
     requires kotlin.stdlib;
@@ -30,9 +31,11 @@ module com.example.myanimelist {
     exports com.example.myanimelist.controllers;
     exports com.example.myanimelist.controllers.inicio;
     exports com.example.myanimelist.controllers.main;
+    exports com.example.myanimelist.controllers.anime;
+    exports com.example.myanimelist.controllers.main.user;
     exports com.example.myanimelist.repositories;
     exports com.example.myanimelist.manager;
     exports com.example.myanimelist.filters.login;
-    exports com.example.myanimelist.controllers.main.user;
+    exports com.example.myanimelist.filters.edition;
     exports com.example.myanimelist.controllers.profiles;
 }
