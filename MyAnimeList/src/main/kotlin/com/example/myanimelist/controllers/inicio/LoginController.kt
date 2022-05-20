@@ -46,7 +46,7 @@ class LoginController : InicioController() {
                 isResizable = false
             }.show()
         }else{
-            stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
+            stage.loadScene(MAIN_AD,WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
             }.show()
