@@ -6,6 +6,9 @@ module com.example.myanimelist {
     opens com.example.myanimelist.filters.login to javafx.fxml;
     opens com.example.myanimelist.dto to com.google.gson;
     opens com.example.myanimelist.models to com.google.gson;
+    opens com.example.myanimelist.controllers.main.user to javafx.fxml;
+    opens com.example.myanimelist.controllers.profiles to javafx.fxml;
+
 
 
     requires javafx.controls;
@@ -34,4 +37,5 @@ module com.example.myanimelist {
     exports com.example.myanimelist.manager;
     exports com.example.myanimelist.filters.login;
     exports com.example.myanimelist.filters.edition;
+    exports com.example.myanimelist.controllers.profiles;
 }
