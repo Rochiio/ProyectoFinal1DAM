@@ -1,26 +1,26 @@
 package com.example.myanimelist.repositories.users
 
-//import com.example.myanimelist.modules.repositoryModule
-
+import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
+import com.example.myanimelist.managers.DependenciesManager.getDatabaseManager
 import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
-import com.example.myanimelist.utilities.DataDB
-import com.example.myanimelist.utilities.DataDB.getTestingAnime
-import com.example.myanimelist.utilities.DataDB.getTestingUser
-import org.junit.jupiter.api.AfterEach
+import com.example.myanimelist.utilities.getTestingAnime
+import com.example.myanimelist.utilities.getTestingUser
+import com.example.myanimelist.utils.Properties
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.util.*
 
 class UsersRepositoryTest {
-
     private val usersRepository = getUsersRepo()
     private val animeRepository = getAnimesRepo()
 
-    @AfterEach
+    @BeforeEach
     fun deleteAll() {
-        DataDB.deleteAll("usuarios")
-        DataDB.deleteAll("animeLists")
+        getDatabaseManager().execute {
+            initData(Properties.SCRIPT_FILE_DATABASE, true)
+        }
     }
 
 
@@ -28,7 +28,6 @@ class UsersRepositoryTest {
     fun findById() {
         val user = getTestingUser()
 
-        usersRepository.add(user)
         val insertedUser = usersRepository.findById(user.id)
 
         assert(user == insertedUser)

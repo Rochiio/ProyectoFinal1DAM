@@ -1,13 +1,13 @@
 package com.example.myanimelist.repositories.animes
 
-//import com.example.myanimelist.modules.repositoryModule
-
+import com.example.myanimelist.extensions.execute
+import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
-import com.example.myanimelist.utilities.DataDB
-import com.example.myanimelist.utilities.DataDB.getTestingAnime
-import org.junit.jupiter.api.AfterEach
+import com.example.myanimelist.utilities.getTestingAnime
+import com.example.myanimelist.utils.Properties
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.util.*
 
@@ -16,8 +16,12 @@ internal class AnimeRepositoryTest {
 
     private val repo = getAnimesRepo()
 
-    @AfterEach
-    internal fun deleteAll() = DataDB.deleteAll("Animes")
+    @BeforeEach
+    fun deleteAll() {
+        DependenciesManager.getDatabaseManager().execute {
+            initData(Properties.SCRIPT_FILE_DATABASE, true)
+        }
+    }
 
 
     @Test

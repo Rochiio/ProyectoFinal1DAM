@@ -1,9 +1,7 @@
 package com.example.myanimelist.manager;
 
-
-import org.apache.ibatis.jdbc.ScriptRunner;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -21,25 +19,16 @@ public class DataBaseManager implements AutoCloseable {
     private String dataBaseName;
     private String user;
     private String password;
-    /*
-        Tipos de Driver
-        SQLite: "org.sqlite.JDBC";
-        MySQL: "com.mysql.jdbc.Driver"
-        MariaDB: "com.mysql.cj.jdbc.Driver"
-        PostgreSQL: "org.postgresql.Driver"
-        H2: "org.h2.Driver"
-        */
     private String jdbcDriver;
     // Para manejar las conexiones y respuestas de las mismas
     private Connection connection;
 
-
-    public DataBaseManager() {
+    public DataBaseManager(String databaseName) {
         if (fromProperties) {
             // initConfigFromProperties();
             System.out.println("Comentado el método de leer de propiedades");
         } else {
-            initConfig();
+            initConfig(databaseName);
         }
     }
 
@@ -47,34 +36,17 @@ public class DataBaseManager implements AutoCloseable {
      * Carga la configuración de acceso al servidor de Base de Datos
      * Puede ser directa "hardcodeada" o asignada dinámicamente a traves de ficheros .env o properties
      */
-    private void initConfig() {
+    private void initConfig(String db) {
         String APP_PATH = System.getProperty("user.dir");
         String DB_DIR = APP_PATH + File.separator + "db";
-        String DB_FILE = DB_DIR + File.separator + "anime.db";
+        String DB_FILE = DB_DIR + File.separator + db;
 
         // Para SQLite solo necesito el driver...
         serverUrl = "localhost"; // No es necesario
         serverPort = "3306"; // No es necesario
         dataBaseName = DB_FILE; //
         jdbcDriver = "org.sqlite.JDBC"; // SQLite
-//        user = "dam"; // No es necesario
-//        password = "dam1234"; // No es necesario
-
-
     }
-
-    /**
-     * Carga la configuración de acceso al servidor de Base de Datos desde properties
-     */
-    /*private void initConfigFromProperties() {
-        ApplicationProperties properties = new ApplicationProperties();
-        serverUrl = properties.readProperty("database.server.url");
-        serverPort = properties.readProperty("database.server.port");
-        dataBaseName = properties.readProperty("database.name");
-        jdbcDriver = properties.readProperty("database.jdbc.driver");
-        user = properties.readProperty("database.user");
-        password = properties.readProperty("database.password");
-    }*/
 
     /**
      * Abre la conexión con el servidor  de base de datos
@@ -83,11 +55,6 @@ public class DataBaseManager implements AutoCloseable {
      */
     public void open() throws SQLException {
         String url = "jdbc:sqlite:" + dataBaseName;
-        // MySQL jdbc:mysql://localhost/prueba", "root", "1dam"
-        //String url = "jdbc:mariadb://" + this.serverUrl + ":" + this.serverPort + "/" + this.dataBaseName;
-        // System.out.println(url);
-        // Obtenemos la conexión
-        // connection = DriverManager.getConnection(url, user, password);
         if (connection == null || !connection.isValid(1))
             connection = DriverManager.getConnection(url);
     }
@@ -226,10 +193,6 @@ public class DataBaseManager implements AutoCloseable {
      * Carga los datos desde un fichero externo
      */
     public void initData(String sqlFile, boolean logWriter) throws FileNotFoundException {
-        ScriptRunner sr = new ScriptRunner(connection);
-        Reader reader = new BufferedReader(new FileReader(sqlFile));
-        sr.setLogWriter(logWriter ? new PrintWriter(System.out) : null);
-        sr.runScript(reader);
     }
 
     /**

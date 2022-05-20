@@ -1,21 +1,3 @@
-drop table if  exists admins;
-create table admins
-(
-    id         varchar(50)  not null
-        constraint admins_pk
-            primary key,
-    name       varchar(100) not null,
-    email      varchar(50),
-    password   varchar(50)  not null,
-    createDate Date         not null,
-    birthDate  Date         not null
-);
-
-create unique index admins_id_uindex
-    on admins (id);
-
-
-drop table if exists animes;
 create table animes
 (
     id            varchar(50)
@@ -32,7 +14,6 @@ create table animes
     type          varchar(20)
 );
 
-drop table if exists sqlite_master;
 create table sqlite_master
 (
     type     text,
@@ -42,15 +23,6 @@ create table sqlite_master
     sql      text
 );
 
-drop table if exists sqlite_sequence;
-create table sqlite_sequence
-(
-    name,
-    seq
-);
-
-
-drop table if exists usuarios;
 create table usuarios
 (
     id              varchar(50)  not null
@@ -61,10 +33,10 @@ create table usuarios
     password        varchar(50)  not null,
     imageurl        text,
     email           varchar(100) not null,
-    date_nacimiento Date
+    date_nacimiento Date,
+    admin           boolean default false
 );
 
-drop table if exists animeLists;
 create table animeLists
 (
     idUser  varhcar(50)
@@ -75,7 +47,6 @@ create table animeLists
         primary key (idUser, idAnime)
 );
 
-drop table if exists reviews;
 create table reviews
 (
     idUser  varchar(50) not null
@@ -92,5 +63,7 @@ create table reviews
 create unique index reviews_idAnime_uindex
     on reviews (idAnime);
 
-INSERT INTO reviews VALUES('af8ed5f2-2e3e-4b4e-83bb-72174f8e71b4','853b2cea-997b-4bff-adce-05eeb1924916'
-,5,'3942cf52-a330-4918-ba89-0c7bc6fc171b','Me ha gustado');
+create unique index usuarios_nombre_uindex
+    on usuarios (nombre);
+
+

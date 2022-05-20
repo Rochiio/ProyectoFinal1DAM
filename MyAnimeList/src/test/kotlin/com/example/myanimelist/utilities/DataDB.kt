@@ -11,43 +11,67 @@ import com.example.myanimelist.models.enums.Type
 import java.time.LocalDate
 import java.util.*
 
-object DataDB {
 
-    private val dataBaseManager = getDatabaseManager()
+private val dataBaseManager = getDatabaseManager()
 
-    fun deleteAll(table: String) {
-        val animeQuery = "DELETE FROM $table"
-        dataBaseManager.execute {
-            dataBaseManager.delete(animeQuery)
-        }
+fun deleteAll(table: String) {
+    val animeQuery = "DELETE FROM $table"
+    dataBaseManager.execute {
+        dataBaseManager.delete(animeQuery)
     }
+}
 
-    fun getTestingUser() =
-        User(
-            "Pepe",
-            "asdasd@gmail.com",
-            "123",
-            LocalDate.now(),
-            LocalDate.now(),
-            "img",
-            emptyList(),
-            UUID.randomUUID(),
-            false
-        )
-
-    fun getTestingAnime() = Anime(
-        title = "example",
-        titleEnglish = "example_english",
-        status = Status.CURRENTLY_AIRING.value,
-        genres = listOf(Genre.FANTASY.value),
-        date = LocalDate.now(),
-        img = "/example/example.png",
-        episodes = 24,
-        rating = "PG 12",
-        types = Type.TV.value
+fun getTestingUser() =
+    User(
+        "pepe",
+        "pepe@gmail.com",
+        "123",
+        LocalDate.parse("17/12/2015"),
+        LocalDate.parse("'17/12/2015'"),
+        null,
+        emptyList(),
+        UUID.fromString("f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454"),
+        false
     )
 
+fun getNewTestingUser() =
+    User(
+        "pepe",
+        "pepe@gmail.com",
+        "123",
+        LocalDate.parse("17/12/2015"),
+        LocalDate.parse("'17/12/2015'"),
+        null,
+        emptyList(),
+        UUID.randomUUID(),
+        false
+    )
 
-    fun getTestingReview() = Review(getTestingAnime(), getTestingUser(), 0, "", UUID.randomUUID())
+fun getTestingAnime() = Anime(
+    title = "title",
+    titleEnglish = "title",
+    status = Status.FINISHED_AIRING.value,
+    genres = listOf(Genre.ADVENTURE.value),
+    date = LocalDate.parse("17/12/2015"),
+    img = "img",
+    episodes = 5,
+    rating = "rating",
+    types = Type.TV.value,
+    id = UUID.fromString("f8c3de3d-1fea-4d7c-a8b0-29f63c4c3455")
+)
 
-}
+fun getNewTestingAnime() = Anime(
+    title = "title",
+    titleEnglish = "title",
+    status = Status.FINISHED_AIRING.value,
+    genres = listOf(Genre.ADVENTURE.value),
+    date = LocalDate.parse("17/12/2015"),
+    img = "img",
+    episodes = 5,
+    rating = "rating",
+    types = Type.TV.value,
+    id = UUID.randomUUID()
+)
+
+
+fun getTestingReview() = Review(getTestingAnime(), getTestingUser(), 0, "", UUID.randomUUID())

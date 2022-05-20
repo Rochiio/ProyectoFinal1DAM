@@ -14,7 +14,6 @@ module com.example.myanimelist {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
-    requires org.mybatis;
     requires java.base;
     requires com.google.gson;
     requires org.apache.logging.log4j;

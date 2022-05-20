@@ -20,5 +20,5 @@ public class Properties {
     public static final String RESOURCES_DIR = PATH + File.separator + "resources";
     public static final String ICONS_DIR = RESOURCES_DIR + File.separator + "icons";
     public static final String DEFAULT_USER_ICON = ICONS_DIR + File.separator + "default.png";
-    public static final String SCRIPT_FILE_DATABASE = DB_DIR + File.separator + "script.sql";
+    public static final String SCRIPT_FILE_DATABASE = DB_DIR + File.separator + "testsData.sql";
 }

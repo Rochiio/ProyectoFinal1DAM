@@ -23,13 +23,23 @@ import org.apache.logging.log4j.Logger
 import java.time.LocalDate
 
 object DependenciesManager {
+    //If its testing put to true
+    private const val isTesting: Boolean = false
+
     //Singleton instances
-    lateinit var globalUser : User
-    private val dataBaseManager: DataBaseManager = DataBaseManager()
+    lateinit var globalUser: User
+    private val dataBaseManager: DataBaseManager by lazy {
+        if (isTesting)
+            DataBaseManager("animeDev.db")
+        else
+            DataBaseManager("anime.db")
+    }
+
     private val gson: Gson = GsonBuilder().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
     private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
     private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager(), getLogger<AnimeRepository>())
-    private val animeListRepository: IRepositoryAnimeList = AnimeListRepository(getDatabaseManager(),getLogger<AnimeListRepository>())
+    private val animeListRepository: IRepositoryAnimeList =
+        AnimeListRepository(getDatabaseManager(), getLogger<AnimeListRepository>(), getUsersRepo())
     private val reviewsRepository: IRepositoryReview = ReviewsRepository(
         getDatabaseManager(), getAnimesRepo(),
         getUsersRepo(),
@@ -39,7 +49,6 @@ object DependenciesManager {
     //Factories
     @JvmStatic
     fun getDatabaseManager(): DataBaseManager = dataBaseManager
-
 
     @JvmStatic
     fun getUsersRepo(): IUsersRepository = usersRepository
@@ -51,7 +60,8 @@ object DependenciesManager {
     fun getReviewsRepo(): IRepositoryReview = reviewsRepository
 
     @JvmStatic
-    fun getAnimeListRepo(): IRepositoryAnimeList =animeListRepository
+    fun getAnimeListRepo(): IRepositoryAnimeList = animeListRepository
+
     @JvmStatic
     fun getLoginFilter(): LoginFilters = LoginFilters(getUsersRepo())
 

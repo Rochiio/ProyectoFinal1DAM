@@ -1,49 +1,47 @@
 package com.example.myanimelist.repositories.animeList
 
+import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DependenciesManager
-import com.example.myanimelist.utilities.DataDB
-import com.example.myanimelist.utilities.DataDB.getTestingAnime
-import com.example.myanimelist.utilities.DataDB.getTestingUser
-import org.junit.jupiter.api.AfterEach
+import com.example.myanimelist.utilities.getTestingAnime
+import com.example.myanimelist.utilities.getTestingUser
+import com.example.myanimelist.utils.Properties
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Assertions.*
-
 internal class AnimeListRepositoryTest {
-
     private val user = getTestingUser()
     private val anime = getTestingAnime()
-    private var animeListRepository : AnimeListRepository = AnimeListRepository(DependenciesManager.getDatabaseManager(),DependenciesManager.getLogger(AnimeListRepository::class.java))
+    private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
 
-    @AfterEach
+    @BeforeEach
     fun deleteAll() {
-        DataDB.deleteAll("usuarios")
-        DataDB.deleteAll("animeLists")
+        DependenciesManager.getDatabaseManager().execute {
+            initData(Properties.SCRIPT_FILE_DATABASE, true)
+        }
     }
+
     @Test
     fun add() {
-
-        val animeAdded = animeListRepository.add(anime, user)
+        animeListRepository.add(anime, user)
         val list = animeListRepository.findByUserId(user)
 
-        assertTrue(list!!.contains(anime.id))
+        assertTrue(list.map { it.id }.contains(anime.id))
     }
 
     @Test
     fun delete() {
-
-        animeListRepository.add(anime,user)
+        animeListRepository.add(anime, user)
         animeListRepository.delete(anime, user)
         val list = animeListRepository.findByUserId(user)
 
-        assertTrue(list!!.isEmpty())
+        assertTrue(list.isEmpty())
     }
 
     @Test
-    fun findByUserId(){
+    fun findByUserId() {
         animeListRepository.add(anime, user)
         val list = animeListRepository.findByUserId(user)
-        assertTrue(list!!.contains(anime.id))
-
+        assertTrue(list.map { it.id }.contains(anime.id))
     }
 }
