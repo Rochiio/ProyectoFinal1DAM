@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 public interface IImgStorage {
 
     void mkdir();
-    void save(User user);
     Image loadImg(User user);
     Image loadImg(Presentation present);
 }
