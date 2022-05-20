@@ -48,6 +48,9 @@ class MainUserMyListController {
     private lateinit var myListStatusCol: TableColumn<AnimeView, String>
 
     @FXML
+    private lateinit var myListTable: TableView<AnimeView>
+
+    @FXML
     private lateinit var menuButton: MenuButton
 
     @FXML
@@ -108,7 +111,20 @@ class MainUserMyListController {
     }
 
     fun changeSceneToAnimeView(mouseEvent: MouseEvent) {
-
+        DependenciesManager.animeSelection = myListTable.selectionModel.selectedItem
+        if (DependenciesManager.globalUser.admin){
+            Stage().loadScene(ANIME_DATA_ADMIN,WIDTH, HEIGHT){
+                title="Anime-Data-Admin"
+                isResizable= false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+            }
+        }else{
+            Stage().loadScene(ANIME_DATA,WIDTH, HEIGHT){
+                title="Anime-Data"
+                isResizable= false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+            }
+        }
     }
 
     fun changeSceneToProfileUser(actionEvent: ActionEvent) {

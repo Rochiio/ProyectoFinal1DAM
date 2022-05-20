@@ -39,9 +39,6 @@ class LoginController : InicioController() {
 
         val stage = txtUsername.scene.window as Stage
 
-        DependenciesManager.animeSelection=AnimeView("prueba","test",Type.OVA.value,8,Status.NOT_YET_AIRED.value,
-        LocalDate.now(),"Ma gustao", listOf(Genre.ACTION.value,Genre.DRAMA.value),"0e59b442-46a2-49bb-840e-9f35b6356053.jpg",
-        UUID.randomUUID())
 
         if(!DependenciesManager.globalUser.admin) {
             stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
@@ -49,6 +46,7 @@ class LoginController : InicioController() {
                 isResizable = false
             }.show()
         }else{
+            //TODO cambiar vista a lista de admin
             stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
