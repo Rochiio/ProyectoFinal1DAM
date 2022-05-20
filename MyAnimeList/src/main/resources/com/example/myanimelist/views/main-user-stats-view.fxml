@@ -4,16 +4,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Anime más gustado:" />
-            <Label text="Anime menos gustado:" />
-            <Label text="Total de animes vistos:" />
-            <Label text="Género favorito: " />
-            <Label text="Tipo preferido: " />
+            <Label styleClass="animeDataText" stylesheets="@../styles/claro.css" text="Anime más gustado:" />
+            <Label styleClass="animeDataText" stylesheets="@../styles/claro.css" text="Anime menos gustado:" />
+            <Label styleClass="animeDataText" stylesheets="@../styles/claro.css" text="Total de animes vistos:" />
+            <Label styleClass="animeDataText" stylesheets="@../styles/claro.css" text="Género favorito: " />
+            <Label styleClass="animeDataText" stylesheets="@../styles/claro.css" text="Tipo preferido: " />
          </children>
       </VBox>
    </children>
