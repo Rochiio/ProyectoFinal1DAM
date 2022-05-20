@@ -43,7 +43,7 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="450.0" spacing="80.0">
                <children>
-                  <ImageView fitHeight="280.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageAnime" fitHeight="280.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" />
                   <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#addToList" text="Añadir a Mi Lista" />
                </children>
             </VBox>
