@@ -39,12 +39,12 @@ class LoginController : InicioController() {
         val stage = txtUsername.scene.window as Stage
 
         if(!DependenciesManager.globalUser.admin) {
-            stage.loadScene(ANIME_DATA) {
+            stage.loadScene(MAIN_USER_MYLIST) {
                 title = "Animes"
                 isResizable = false
             }.show()
         }else{
-            stage.loadScene(MAIN) {
+            stage.loadScene(MAIN_USER_MYLIST) {
                 title = "Animes"
                 isResizable = false
             }.show()

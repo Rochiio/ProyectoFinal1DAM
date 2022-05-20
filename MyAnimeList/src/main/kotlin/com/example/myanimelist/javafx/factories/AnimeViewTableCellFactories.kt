@@ -1,10 +1,14 @@
 package com.example.myanimelist.javafx.factories
 
+import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.views.models.AnimeView
-import com.example.myanimelist.views.models.Presentation
 import javafx.collections.ObservableList
+import javafx.geometry.Pos
+import javafx.scene.control.Button
 import javafx.scene.control.ChoiceBox
 import javafx.scene.control.TableCell
+import javafx.scene.image.Image
+import javafx.scene.image.ImageView
 
 class AnimeViewTableCell(private val enumSet: ObservableList<*>) : TableCell<AnimeView, String>() {
     override fun updateItem(item: String?, empty: Boolean) {
@@ -16,11 +20,5 @@ class AnimeViewTableCell(private val enumSet: ObservableList<*>) : TableCell<Ani
             anime.enumParser(selection)
         }
         graphic = choiceBox
-    }
-}
-
-class AnimeViewTableCellPresentation : TableCell<AnimeView, Presentation>() {
-    override fun updateItem(item: Presentation, empty: Boolean) {
-        graphic = TableItemFactory().getAnimePresentation(item)
     }
 }
