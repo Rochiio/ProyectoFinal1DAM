@@ -33,10 +33,10 @@ class AnimeController {
 
 
     private var logger = DependenciesManager.getLogger(AnimeController::class.java)
-    lateinit var anime: AnimeView
     private var user = DependenciesManager.globalUser
     private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
     private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
+    lateinit var anime: AnimeView
 
     @FXML
     fun initialize(){
@@ -44,6 +44,11 @@ class AnimeController {
         showAnime()
     }
 
+
+    /**
+     *  Usuario Normal
+     *  Añadir anime a su lista de animes.
+     */
     fun addToList() {
         val alert = Alert(Alert.AlertType.CONFIRMATION)
         alert.title = "Confirmación"
@@ -65,6 +70,9 @@ class AnimeController {
     }
 
 
+    /**
+     * Asignar a cada label su información
+     */
     private fun showAnime(){
         logger.info("Cargando los datos")
         txtTittle.text=anime.presentation.title
@@ -75,18 +83,49 @@ class AnimeController {
         imageAnime.image=Image(ResourcesManager.getCoverOf(anime.presentation.img))
     }
 
+
+    /**
+     * Usuario administrador
+     * Editar el anime
+     */
     fun editAnime(actionEvent: ActionEvent) {
         val animeUpdate = Anime(txtTittle.text," ",anime.types,Integer.parseInt(txtEpisodes.text),
             txtStatus.text, LocalDate.parse(txtDate.text),anime.rating,listOf(txtGenre.text),anime.presentation.img,
             anime.id)
-        val animeAux= animeRepository.update(animeUpdate)
-        val alerta= Alert(Alert.AlertType.INFORMATION)
-        alerta.title="Anime actualizado correctamente"
-        val stage = txtTittle.scene.window as Stage
-        stage.close()
+
+        animeRepository.update(animeUpdate)
+
+            val alerta= Alert(Alert.AlertType.INFORMATION)
+            alerta.title="Anime actualizado correctamente"
+            val stage = txtTittle.scene.window as Stage
+            stage.close()
     }
 
+
+    /**
+     * Usuario administrador
+     * Eliminar el anime
+     */
     fun deleteAnime(actionEvent: ActionEvent) {
+        val alerta = Alert(Alert.AlertType.CONFIRMATION)
+        alerta.title = "Confirmación"
+        alerta.contentText = "Desea eliminar el anime ${txtTittle.text}"
+        val action = alerta.showAndWait()
 
+        if (action.get() == ButtonType.OK) {
+            animeRepository.delete(anime.id)
+            val result = Alert(Alert.AlertType.CONFIRMATION)
+            result.title = "Anime Eliminado"
+        }
+
+            val stage = txtTittle.scene.window as Stage
+            stage.close()
     }
+
+
+
 }
+
+
+
+
