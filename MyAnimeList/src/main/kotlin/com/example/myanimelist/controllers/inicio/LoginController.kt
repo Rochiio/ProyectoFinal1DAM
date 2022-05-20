@@ -44,7 +44,7 @@ class LoginController : InicioController() {
         UUID.randomUUID())
 
         if(!DependenciesManager.globalUser.admin) {
-            stage.loadScene(ANIME_DATA_ADMIN,WIDTH, HEIGHT) {
+            stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
             }.show()
