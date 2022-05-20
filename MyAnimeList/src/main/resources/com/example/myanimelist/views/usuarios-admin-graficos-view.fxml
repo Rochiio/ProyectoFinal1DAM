@@ -15,17 +15,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="fondo" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="600.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css">
          <children>
-            <TabPane prefHeight="385.0" prefWidth="583.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="385.0" prefWidth="583.0" styleClass="fondo" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Usuarios">
+                <Tab styleClass="fondo" text="Usuarios">
                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fondo">
                            <children>
-                              <TableView prefHeight="358.0" prefWidth="585.0">
+                              <TableView prefHeight="358.0" prefWidth="585.0" styleClass="fondo">
                                 <columns>
                                   <TableColumn prefWidth="93.3333410024643" text="Id" />
                                   <TableColumn prefWidth="217.33328247070312" text="Nombre">
@@ -43,11 +43,11 @@
                         </AnchorPane>
                      </content>
                 </Tab>
-                  <Tab text="Animes">
+                  <Tab styleClass="fondo" text="Animes">
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TableView prefHeight="358.0" prefWidth="585.0">
+                              <TableView prefHeight="358.0" prefWidth="585.0" styleClass="fondo">
                                  <columns>
                                     <TableColumn prefWidth="93.3333410024643" text="Ranking" />
                                     <TableColumn prefWidth="140.6667251586914" text="Imágen" />
@@ -63,7 +63,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Gráficos y estadísticas">
+                  <Tab styleClass="fondo" text="Gráficos y estadísticas">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
