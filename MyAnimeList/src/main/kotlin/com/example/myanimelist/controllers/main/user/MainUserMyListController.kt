@@ -1,6 +1,6 @@
 package com.example.myanimelist.controllers.main.user
 
-import com.example.myanimelist.controllers.AnimeController
+import com.example.myanimelist.controllers.anime.AnimeController
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getAnimeController
