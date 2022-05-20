@@ -37,15 +37,14 @@ class LoginController : InicioController() {
         DependenciesManager.globalUser =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
         val stage = txtUsername.scene.window as Stage
-        DependenciesManager.animeSelection = AnimeView("Prueba","Test",Type.OVA.value,8,Status.NOT_YET_AIRED.value,
-        LocalDate.now(),"Ma gustao",listOf(Genre.ADVENTURE.value,Genre.ACTION.value),"20.jpg", UUID.randomUUID())
+
         if(!DependenciesManager.globalUser.admin) {
-            stage.loadScene(ANIME_DATA) {
+            stage.loadScene(MAIN_USER_MYLIST) {
                 title = "Animes"
                 isResizable = false
             }.show()
         }else{
-            stage.loadScene(MAIN) {
+            stage.loadScene(MAIN_USER_MYLIST) {
                 title = "Animes"
                 isResizable = false
             }.show()

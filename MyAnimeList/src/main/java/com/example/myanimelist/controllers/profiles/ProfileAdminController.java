@@ -2,7 +2,7 @@ package com.example.myanimelist.controllers.profiles;
 
 import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
-import com.example.myanimelist.service.img.ImgStorage;
+import com.example.myanimelist.service.img.IImgStorage;
 import com.example.myanimelist.utils.Filters;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -22,7 +22,7 @@ public class ProfileAdminController {
 
     private final User user= DependenciesManager.globalUser;
 
-    ImgStorage imgStorage = new ImgStorage();
+    IImgStorage imgStorage = DependenciesManager.getImgStorage();
 
     public void onSave(ActionEvent actionEvent) {
         StringBuilder errorLog = new StringBuilder();

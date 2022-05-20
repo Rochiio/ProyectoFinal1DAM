@@ -17,6 +17,8 @@ import com.example.myanimelist.repositories.users.UsersRepository
 import com.example.myanimelist.service.backup.BackupStorage
 import com.example.myanimelist.service.backup.IBackupStorage
 import com.example.myanimelist.views.models.AnimeView
+import com.example.myanimelist.service.img.IImgStorage
+import com.example.myanimelist.service.img.ImgStorage
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.apache.logging.log4j.LogManager
@@ -32,6 +34,7 @@ object DependenciesManager {
     private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
     private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager(), getLogger<AnimeRepository>())
     private val animeListRepository: IRepositoryAnimeList = AnimeListRepository(getDatabaseManager(),getLogger<AnimeListRepository>())
+    private val imgStorage: IImgStorage = ImgStorage(getLogger<ImgStorage>())
     private val reviewsRepository: IRepositoryReview = ReviewsRepository(
         getDatabaseManager(), getAnimesRepo(),
         getUsersRepo(),
@@ -68,6 +71,9 @@ object DependenciesManager {
 
     @JvmStatic
     fun getGson(): Gson = gson
+
+    @JvmStatic
+    fun getImgStorage(): IImgStorage = imgStorage
 
     inline fun <reified T> getLogger(): Logger =
         LogManager.getLogger(T::class.java)

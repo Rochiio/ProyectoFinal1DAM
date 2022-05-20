@@ -1,12 +1,10 @@
 package com.example.myanimelist.controllers
 
-import com.example.myanimelist.MyAnimeListApplication
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.repositories.animes.IAnimeRepository
-import com.example.myanimelist.utils.ResourcesManager
+import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.views.models.AnimeView
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.image.Image
@@ -43,7 +41,7 @@ class AnimeController {
         showAnime()
     }
 
-    fun addToList(actionEvent: ActionEvent) {
+    fun addToList() {
         val alert = Alert(Alert.AlertType.CONFIRMATION)
         alert.title = "Confirmación"
         alert.contentText = "Quiere añadir el anime ${txtTittle.text} a su lista"
