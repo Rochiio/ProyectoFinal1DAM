@@ -1,9 +1,9 @@
 package com.example.myanimelist.controllers.main.user
 
-import com.example.myanimelist.controllers.main.MainUserController
+import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.repositories.animes.IAnimeRepository
-import com.example.myanimelist.utils.Properties
+import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
 import com.example.myanimelist.views.tableextensions.PresentationCellFactory
@@ -20,12 +20,13 @@ import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
+import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
 
 class MainUserAnimeController {
 
     //Generics
-    val logger: Logger = DependenciesManager.getLogger<MainUserController>()
+    val logger: Logger = DependenciesManager.getLogger<MainUserAnimeController>()
     val user = DependenciesManager.globalUser
 
     //FXML
@@ -81,7 +82,11 @@ class MainUserAnimeController {
                     but.graphic = img
                     but.setOnAction {
                         val anime: AnimeView = animeTable.selectionModel.selectedItem
-                        TODO("cambiar de scene a la vista de añadir $anime")
+                        DependenciesManager.animeSelection = anime
+                        Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
+                            title = anime.presentation.title
+                            isResizable = false
+                        }.show()
                     }
                     graphic = but
                 }
@@ -94,7 +99,11 @@ class MainUserAnimeController {
     fun changeSceneToAnimeDataView(mouseEvent: MouseEvent) {
         if (mouseEvent.button === MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
             val anime: AnimeView = animeTable.selectionModel.selectedItem
-            TODO("cambiar de scene a la vista de el $anime detallada")
+            DependenciesManager.animeSelection = anime
+            Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
+                title = anime.presentation.title
+                isResizable = false
+            }.show()
         }
     }
 }
