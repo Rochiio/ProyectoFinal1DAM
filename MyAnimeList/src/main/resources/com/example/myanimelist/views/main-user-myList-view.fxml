@@ -15,9 +15,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.main.MainUserMyListController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.main.user.MainUserMyListController">
+
    <children>
-      <GridPane layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="241.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="215.0" />
@@ -34,27 +36,31 @@
                </GridPane.margin>
             </TextField>
             <Button fx:id="searchMyListButton1" mnemonicParsing="false" onAction="#filterMyListByText" text="Buscar" GridPane.columnIndex="1" />
-            <MenuButton fx:id="menuButton1" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+
+            <MenuButton fx:id="menuButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#changeSceneToAcercaDe" text="Acerca de">
+                  <MenuItem mnemonicParsing="false" onAction="#openAcercaDe" text="Acerca de">
+
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="fondo">
                            <image>
                               <Image url="@../icons/acercaDe.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#changeSceneToProfileUser" text="Editar perfil" />
+
+                  <MenuItem fx:id="menuProfileOpt" mnemonicParsing="false" onAction="#changeSceneToProfileUser" text="Editar perfil" />
                   <MenuItem mnemonicParsing="false" onAction="#changeMainTheme" text="Modo noche">
+
                      <graphic>
-                        <RadioButton fx:id="radioNoche1" mnemonicParsing="false" onAction="#changeMainTheme" />
+                        <RadioButton fx:id="radioNoche1" mnemonicParsing="false" onAction="#changeMainTheme" styleClass="fondo" />
                      </graphic>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#logout" text="Cerrar sesión" />
+                  <MenuItem mnemonicParsing="false" onAction="#logout" styleClass="fondo" text="Cerrar sesión" />
                </items>
                <graphic>
-                  <ImageView fitHeight="71.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="71.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" styleClass="fondo">
                      <image>
                         <Image url="@../icons/default.png" />
                      </image>
@@ -64,10 +70,11 @@
                   <Insets right="3.0" />
                </GridPane.margin>
             </MenuButton>
-            <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeSceneToAddAnime" text="Añadir" GridPane.columnIndex="2" />
+
+            <Button fx:id="addAnimeButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeSceneToAddAnime" text="Añadir" GridPane.columnIndex="2" />
          </children>
       </GridPane>
-      <TableView layoutY="56.0" onMouseClicked="#changeSceneToAnimeView" prefHeight="344.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <TableView layoutY="56.0" onMouseClicked="#changeSceneToAnimeView" prefHeight="344.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <columns>
             <TableColumn fx:id="myListRankingCol" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Ranking" />
             <TableColumn fx:id="myListTitleCol" prefWidth="281.0" text="Anime" />

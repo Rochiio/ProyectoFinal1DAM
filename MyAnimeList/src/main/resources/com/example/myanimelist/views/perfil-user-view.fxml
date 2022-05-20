@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.profiles.ProfileUserController">
-   <VBox layoutX="38.0" layoutY="33.0" prefHeight="148.0" prefWidth="149.0">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.profiles.ProfileUserController">
+   <VBox layoutX="38.0" layoutY="33.0" prefHeight="148.0" prefWidth="149.0" stylesheets="@../styles/claro.css">
       <TextField fx:id="emailLabel" promptText="Email" />
       <TextField fx:id="nameLabel" layoutY="15.0" promptText="Username">
          <VBox.margin>
@@ -28,7 +28,8 @@
       </TextField>
    </VBox>
       <Button fx:id="saveBut" layoutX="162.0" layoutY="254.0" mnemonicParsing="false" onAction="#onSave" prefHeight="25.0" prefWidth="177.0" text="Save" />
-   <ImageView fx:id="img" fitHeight="125.0" fitWidth="121.0" layoutX="268.0" layoutY="32.0" onMouseClicked="#changeImg" pickOnBounds="true" preserveRatio="true">
+
+   <ImageView fx:id="img" fitHeight="125.0" fitWidth="121.0" layoutX="268.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../icons/default.png" />
       </image></ImageView>

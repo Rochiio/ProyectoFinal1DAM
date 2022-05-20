@@ -6,15 +6,9 @@ import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLoginFilter
 import com.example.myanimelist.managers.SceneManager
-import com.example.myanimelist.models.enums.Genre
-import com.example.myanimelist.models.enums.Status
-import com.example.myanimelist.models.enums.Type
 import com.example.myanimelist.utils.*
-import com.example.myanimelist.views.models.AnimeView
 import javafx.scene.control.Alert
 import javafx.stage.Stage
-import java.time.LocalDate
-import java.util.*
 
 
 class LoginController : InicioController() {
@@ -36,16 +30,18 @@ class LoginController : InicioController() {
     private fun changeSceneToMain() {
         DependenciesManager.globalUser =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
+
         val stage = txtUsername.scene.window as Stage
-        DependenciesManager.animeSelection = AnimeView("Prueba","Test",Type.OVA.value,8,Status.NOT_YET_AIRED.value,
-        LocalDate.now(),"Ma gustao",listOf(Genre.ADVENTURE.value,Genre.ACTION.value),"20.jpg", UUID.randomUUID())
+
+
         if(!DependenciesManager.globalUser.admin) {
-            stage.loadScene(ANIME_DATA) {
+            stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
             }.show()
         }else{
-            stage.loadScene(MAIN) {
+            //TODO cambiar vista a lista de admin
+            stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
             }.show()
