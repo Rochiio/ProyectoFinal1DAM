@@ -37,8 +37,7 @@ class LoginController : InicioController() {
         DependenciesManager.globalUser =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
         val stage = txtUsername.scene.window as Stage
-        DependenciesManager.animeSelection = AnimeView("Prueba","Test",Type.OVA.value,8,Status.NOT_YET_AIRED.value,
-        LocalDate.now(),"Ma gustao",listOf(Genre.ADVENTURE.value,Genre.ACTION.value),"2103.jpg", UUID.randomUUID())
+
         if(!DependenciesManager.globalUser.admin) {
             stage.loadScene(ANIME_DATA) {
                 title = "Animes"
