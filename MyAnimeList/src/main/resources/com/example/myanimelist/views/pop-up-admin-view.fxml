@@ -10,36 +10,36 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane>
+      <Pane styleClass="fondo" stylesheets="@../styles/claro.css">
          <children>
-            <ScrollPane>
+            <ScrollPane styleClass="fondo" stylesheets="@../styles/claro.css">
                <content>
-                  <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="610.0" styleClass="fondo" stylesheets="@../styles/claro.css" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                      <Tab text="Usuarios">
+                      <Tab styleClass="fondo" text="Usuarios">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fondo" stylesheets="@../styles/claro.css" />
                         </content>
                       </Tab>
-                      <Tab text="Animes">
+                      <Tab styleClass="fondo" text="Animes">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" />
                         </content>
                       </Tab>
-                        <Tab text="Gráficos y estadísticas">
+                        <Tab styleClass="fondo" text="Gráficos y estadísticas">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fondo" stylesheets="@../styles/claro.css" />
                           </content>
                         </Tab>
                     </tabs>
                   </TabPane>
                </content>
             </ScrollPane>
-            <MenuBar layoutX="506.0" layoutY="4.0" prefHeight="25.0" prefWidth="81.0">
+            <MenuBar layoutX="506.0" layoutY="4.0" prefHeight="25.0" prefWidth="81.0" styleClass="fondo" stylesheets="@../styles/claro.css">
               <menus>
-                <Menu mnemonicParsing="false" text="Opciones">
+                <Menu mnemonicParsing="false" styleClass="fondo" text="Opciones">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Editar Perfil">
                            <graphic>
