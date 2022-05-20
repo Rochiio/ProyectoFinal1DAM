@@ -1,43 +1,46 @@
-anime_id;img;title;title_english;type;episodes;status;rating;rank;genre;A
-e32a8d61-78fb-40a2-926a-cd8e1193c04f;12365;Bakuman. 3rd Season;Bakuman.;TV;25.0;Finished Airing;PG-13 - Teens 13 or older;50.0;Comedy, Drama, Romance, Shounen;Oct 6 2012 
-ed33874c-eb4b-453b-908f-8632d4e1b403;21;One Piece;One Piece;TV;0.0;Currently Airing;PG-13 - Teens 13 or older;91.0;Action, Adventure, Comedy, Super Power, Drama, Fantasy, Shounen;Oct 20 1999 
-5b2cfa99-05e5-4d70-a404-1929da500589;36838;Gintama.: Shirogane no Tamashii-hen;;TV;12.0;Finished Airing;PG-13 - Teens 13 or older;25.0;Action, Sci-Fi, Comedy, Historical, Parody, Samurai, Shounen;Jan 8 2018 
-5fc1ee93-d678-4ce7-b687-d60dc9c02328;33095;Shouwa Genroku Rakugo Shinjuu: Sukeroku Futatabi-hen;Descending Stories: Showa Genroku Rakugo Shinju;TV;12.0;Finished Airing;PG-13 - Teens 13 or older;24.0;Drama, Historical, Josei;Jan 7 2017 
-9ccece76-cb77-496b-bebb-f9d0584022d8;11061;Hunter x Hunter (2011);Hunter x Hunter;TV;148.0;Finished Airing;PG-13 - Teens 13 or older;8.0;Action, Adventure, Super Power, Shounen;Oct 2 2011 
-18c55521-f174-45d9-884e-e653e13a9abf;32983;Natsume Yuujinchou Go;"Natsume&#039;s Book of Friends Season 5";TV;11.0;Finished Airing;PG-13 - Teens 13 or older;63.0;Slice of Life, Supernatural, Drama, Fantasy, Shoujo;Oct 5 2016 
-82965ed2-41c7-4ad3-934e-8a477e66d5df;33255;Saiki Kusuo no Ψ-nan (TV);The Disastrous Life of Saiki K.;TV;120.0;Finished Airing;PG-13 - Teens 13 or older;79.0;Slice of Life, Comedy, Supernatural, School, Shounen;Jul 4 2016 
-0b34ac72-f57d-416b-a0b3-4ee06568c7a7;34612;Saiki Kusuo no Ψ-nan (TV) 2;The Disastrous Life of Saiki K. 2;TV;24.0;Currently Airing;PG-13 - Teens 13 or older;52.0;Slice of Life, Comedy, Supernatural, School, Shounen;Jan 17 2018 
-f0f0f5e2-84a0-40fb-b2a9-c1185176862f;801;Ghost in the Shell: Stand Alone Complex 2nd GIG;Ghost in the Shell: Stand Alone Complex 2nd GIG;TV;26.0;Finished Airing;R - 17+ (violence & profanity);82.0;Action, Military, Sci-Fi, Mystery, Police, Mecha, Seinen;Jan 1 2004 
-a1a3b1ab-c912-4239-b0a6-24ba7ace1d3b;28891;Haikyuu!! Second Season;Haikyu!! 2nd Season;TV;25.0;Finished Airing;PG-13 - Teens 13 or older;22.0;Comedy, Sports, Drama, School, Shounen;Oct 4 2015 
-91f13434-2918-4ae3-9bfc-3485c9d45af0;32281;Kimi no Na wa.;Your Name.;Movie;1.0;Finished Airing;PG-13 - Teens 13 or older;2.0;Supernatural, Drama, Romance, School;Aug 26 2016
-822b7bb5-ed7f-40e8-9fec-7c425fe558c1;7311;Suzumiya Haruhi no Shoushitsu;The Disappearance of Haruhi Suzumiya;Movie;1.0;Finished Airing;PG-13 - Teens 13 or older;45.0;Comedy, Mystery, Romance, School, Sci-Fi, Supernatural;Feb 6 2010
-6f650fa4-9459-44cc-8413-45ef32018bbc;21899;Gintama: Yorinuki Gintama-san on Theater 2D;;Movie;2.0;Finished Airing;PG-13 - Teens 13 or older;93.0;Action, Sci-Fi, Comedy, Historical, Parody, Samurai, Shounen;Aug 26 2012
-85815419-4590-4be3-b2e1-1f64197ef7bd;28735;Shouwa Genroku Rakugo Shinjuu;Showa Genroku Rakugo Shinju;TV;13.0;Finished Airing;PG-13 - Teens 13 or older;66.0;Drama, Historical, Josei;Jan 9 2016 
-1757b8df-e469-490d-8107-49e702268b54;28977;Gintama°;Gintama Season 4;TV;51.0;Finished Airing;R - 17+ (violence & profanity);3.0;Action, Comedy, Historical, Parody, Samurai, Sci-Fi, Shounen;Apr 8 2015 
-93ae51f4-add3-4798-b65a-69ca2dc3ec10;35180;3-gatsu no Lion 2nd Season;March Comes In Like A Lion 2nd Season;TV;22.0;Finished Airing;PG-13 - Teens 13 or older;9.0;Drama, Game, Seinen, Slice of Life;Oct 14 2017 
-a0f344bd-0787-4f5e-9f67-07d2b867f8de;35839;Sora yori mo Tooi Basho;A Place Further Than The Universe;TV;13.0;Finished Airing;PG-13 - Teens 13 or older;60.0;Slice of Life, Adventure;Jan 2 2018 
-1537f958-b541-40c0-a744-db963785103a;7785;Yojouhan Shinwa Taikei;The Tatami Galaxy;TV;11.0;Finished Airing;R - 17+ (violence & profanity);61.0;Mystery, Comedy, Psychological, Romance;Apr 23 2010 
-e7b53227-1842-485c-b8fe-ea3183300276;164;Mononoke Hime;Princess Mononoke;Movie;1.0;Finished Airing;PG-13 - Teens 13 or older;29.0;Action, Adventure, Fantasy;Jul 12 1997
-ca9c3651-48dc-4565-9c20-68247cd3bc04;431;Howl no Ugoku Shiro;"Howl&#039;s Moving Castle";Movie;1.0;Finished Airing;G - All Ages;43.0;Adventure, Drama, Fantasy, Romance;Nov 20 2004
-80e51b41-d725-4098-89aa-fe5b90f676e1;26055;JoJo no Kimyou na Bouken: Stardust Crusaders 2nd Season;"JoJo&#039;s Bizarre Adventure: Stardust Crusaders - Battle in Egypt";TV;24.0;Finished Airing;R - 17+ (violence & profanity);78.0;Action, Adventure, Drama, Shounen, Supernatural;Jan 10 2015 
-5dfd2457-e0d3-4911-8427-9969e090ffdd;5114;Fullmetal Alchemist: Brotherhood;Fullmetal Alchemist: Brotherhood;TV;64.0;Finished Airing;R - 17+ (violence & profanity);1.0;Action, Military, Adventure, Comedy, Drama, Magic, Fantasy, Shounen;Apr 5 2009 
-5bd1ffa1-0c43-4f2b-a54a-c8f4f489e1d2;4181;Clannad: After Story;Clannad ~After Story~;TV;24.0;Finished Airing;PG-13 - Teens 13 or older;14.0;Slice of Life, Comedy, Supernatural, Drama, Romance;Oct 3 2008 
-20307fb6-d561-49b2-a6c9-73fd71ff6694;31933;JoJo no Kimyou na Bouken: Diamond wa Kudakenai;"JoJo&#039;s Bizarre Adventure: Diamond is Unbreakable";TV;39.0;Finished Airing;R - 17+ (violence & profanity);64.0;Action, Adventure, Comedy, Supernatural, Drama, Shounen;Apr 2 2016 
-bf76e7b1-b1af-4748-b260-9e9a6ee7dde0;12355;Ookami Kodomo no Ame to Yuki;Wolf Children;Movie;1.0;Finished Airing;PG - Children;34.0;Slice of Life, Fantasy;Jul 21 2012
-dee00805-0158-49f8-936c-c43fb2f1dcec;5028;Major S5;;TV;25.0;Finished Airing;PG-13 - Teens 13 or older;90.0;Comedy, Drama, Romance, Sports;Jan 10 2009 
-f5be599e-ed62-4d1f-b993-95a4b0663076;9253;"Steins;Gate";"Steins;Gate";TV;24.0;Finished Airing;PG-13 - Teens 13 or older;5.0;Thriller, Sci-Fi;Apr 6 2011 
-39169f83-48ec-4b93-b7ba-8b865cf856ff;11741;Fate/Zero 2nd Season;Fate/Zero Season 2;TV;12.0;Finished Airing;R - 17+ (violence & profanity);54.0;Action, Supernatural, Magic, Fantasy;Apr 8 2012 
-1cbb805c-3b5c-420b-b4eb-906a5b3aab74;24701;Mushishi Zoku Shou 2nd Season;;TV;10.0;Finished Airing;PG-13 - Teens 13 or older;26.0;Adventure, Fantasy, Historical, Mystery, Seinen, Slice of Life, Supernatural;Oct 19 2014 
-05edf230-57b6-4f85-b617-d6c0089af629;31812;Kuroshitsuji Movie: Book of the Atlantic;Black Butler: Book of the Atlantic;Movie;1.0;Finished Airing;R - 17+ (violence & profanity);89.0;Action, Comedy, Historical, Demons, Supernatural, Fantasy;Jan 21 2017
-f7948a4b-0709-4fd0-9251-1b7053a14fcd;21939;Mushishi Zoku Shou;MUSHI-SHI -Next Passage-;TV;10.0;Finished Airing;PG-13 - Teens 13 or older;33.0;Adventure, Slice of Life, Mystery, Historical, Supernatural, Fantasy, Seinen;Apr 5 2014 
-48806f1b-4692-4c47-a0ff-883d80024531;33486;Boku no Hero Academia 2nd Season;My Hero Academia 2;TV;25.0;Finished Airing;PG-13 - Teens 13 or older;35.0;Action, Comedy, Super Power, School, Shounen;Apr 1 2017 
-6ff4dd50-a886-4091-8713-5707622450ca;28957;Mushishi Zoku Shou: Suzu no Shizuku;;Movie;1.0;Finished Airing;PG-13 - Teens 13 or older;47.0;Adventure, Fantasy, Historical, Mystery, Seinen, Slice of Life, Supernatural;May 16 2015
-58b4444c-9aa6-4e29-80e6-aeb651d4e401;10162;Usagi Drop;Bunny Drop;TV;11.0;Finished Airing;PG-13 - Teens 13 or older;97.0;Josei, Slice of Life;Jul 8 2011 
-6eeb7c36-153f-4438-9091-8688a86d60b8;9989;Ano Hi Mita Hana no Namae wo Bokutachi wa Mada Shiranai.;anohana: The Flower We Saw That Day;TV;11.0;Finished Airing;PG-13 - Teens 13 or older;81.0;Slice of Life, Supernatural, Drama;Apr 15 2011 
-24f72204-e4b8-407d-bc6c-7340170e697f;777;Hellsing Ultimate;Hellsing Ultimate;OVA;10.0;Finished Airing;R - 17+ (violence & profanity);92.0;Action, Military, Horror, Supernatural, Vampire, Seinen;Feb 10 2006 
-4df8b2e5-1176-499a-878b-47f5dc683464;34599;Made in Abyss;Made in Abyss;TV;13.0;Finished Airing;R - 17+ (violence & profanity);20.0;Sci-Fi, Adventure, Mystery, Drama, Fantasy;Jul 7 2017 
-3d089cca-a57b-4720-96c1-40fcebe9d44a;32182;Mob Psycho 100;Mob Psycho 100;TV;12.0;Finished Airing;PG-13 - Teens 13 or older;100.0;Action, Slice of Life, Comedy, Supernatural;Jul 11 2016 
-6cfa1909-bc74-48f5-85be-2d6a5fb1a8fb;170;Slam Dunk;Slam Dunk;TV;101.0;Finished Airing;PG-13 - Teens 13 or older;86.0;Comedy, Sports, Drama, School, Shounen;Oct 16 1993 
-05966629-aabc-4306-aa4c-eae574ce257f;31758;Kizumonogatari III: Reiketsu-hen;;Movie;1.0;Finished Airing;R - 17+ (violence & profanity);23.0;Action, Mystery, Supernatural, Vampire;Jan 6 2017
-3ce42723-e0d5-4379-9c81-b0a24fafac44;36949;Shokugeki no Souma: San no Sara - Toutsuki Ressha-hen;;TV;0.0;Currently Airing;PG-13 - Teens 13 or older;74.0;Ecchi, School, Shounen;Apr 9 2018 
-b2cb0c60-a4be-4bb3-bab3-eccb505a34fc;2103;Violet Evergarden;;TV;14.0;Finished Airing;PG-13 - Teens 13 or older;99.0;Drama,Fantasy;Jul 4 2018
+anime_id;title;title_english;type;episodes;status;rating;rank;genre;release;
+ca08097b-385c-476a-8483-021a42c29f5d;Bakuman. 3rd Season;Bakuman.;TV;25.0;Finished Airing;PG-13 - Teens 13 or older;50.0;Comedy, Drama, Romance, Shounen;Oct 6 2012 ;
+8e935716-6952-4313-a483-8396785028a8;One Piece;One Piece;TV;0.0;Currently Airing;PG-13 - Teens 13 or older;91.0;Action, Adventure, Comedy, Super Power, Drama, Fantasy, Shounen;Oct 20 1999 ;
+e98e1854-96e0-4033-9334-795553c98094;Gintama.: Shirogane no Tamashii-hen;;TV;12.0;Finished Airing;PG-13 - Teens 13 or older;25.0;Action, Sci-Fi, Comedy, Historical, Parody, Samurai, Shounen;Jan 8 2018 ;
+bdf20729-5c31-4707-a364-d2a09be4a326;Shouwa Genroku Rakugo Shinjuu: Sukeroku Futatabi-hen;Descending Stories: Showa Genroku Rakugo Shinju;TV;12.0;Finished Airing;PG-13 - Teens 13 or older;24.0;Drama, Historical, Josei;Jan 7 2017 ;
+da0d786f-6723-4ef5-86b6-3375fc0b79ae;Hunter x Hunter (2011);Hunter x Hunter;TV;148.0;Finished Airing;PG-13 - Teens 13 or older;8.0;Action, Adventure, Super Power, Shounen;Oct 2 2011;
+487e5c6d-f11e-4bdb-8529-1244e4d05c36;Natsume Yuujinchou Go;"Natsume&#039;s Book of Friends Season 5";TV;11.0;Finished Airing;PG-13 - Teens 13 or older;63.0;Slice of Life, Supernatural, Drama, Fantasy, Shoujo;Oct 5 2016 ;
+54d599cb-4674-4e49-84a1-b0073e56bd89;Saiki Kusuo no Ψ-nan (TV);The Disastrous Life of Saiki K.;TV;120.0;Finished Airing;PG-13 - Teens 13 or older;79.0;Slice of Life, Comedy, Supernatural, School, Shounen;Jul 4 2016 ;
+f884a297-a822-44f7-972c-e98bbc9c2788;Saiki Kusuo no Ψ-nan (TV) 2;The Disastrous Life of Saiki K. 2;TV;24.0;Currently Airing;PG-13 - Teens 13 or older;52.0;Slice of Life, Comedy, Supernatural, School, Shounen;Jan 17 2018 ;
+07eefce1-5ac9-428a-972f-66676e212fff;Ghost in the Shell: Stand Alone Complex 2nd GIG;Ghost in the Shell: Stand Alone Complex 2nd GIG;TV;26.0;Finished Airing;R - 17+ (violence & profanity);82.0;Action, Military, Sci-Fi, Mystery, Police, Mecha, Seinen;Jan 1 2004 ;
+d42db243-f160-4915-bb2f-2698dfc95f25;Haikyuu!! Second Season;Haikyu!! 2nd Season;TV;25.0;Finished Airing;PG-13 - Teens 13 or older;22.0;Comedy, Sports, Drama, School, Shounen;Oct 4 2015 ;
+27709bf0-5566-4e9c-9684-e91a14d43e27;Kimi no Na wa.;Your Name.;Movie;1.0;Finished Airing;PG-13 - Teens 13 or older;2.0;Supernatural, Drama, Romance, School;Aug 26 2016;
+952dd6e1-7aa4-4530-b010-fede9aa87abc;Suzumiya Haruhi no Shoushitsu;The Disappearance of Haruhi Suzumiya;Movie;1.0;Finished Airing;PG-13 - Teens 13 or older;45.0;Comedy, Mystery, Romance, School, Sci-Fi, Supernatural;Feb 6 2010;
+5788a213-bec0-4e3b-8ad2-e29567558340;Gintama: Yorinuki Gintama-san on Theater 2D;;Movie;2.0;Finished Airing;PG-13 - Teens 13 or older;93.0;Action, Sci-Fi, Comedy, Historical, Parody, Samurai, Shounen;Aug 26 2012;
+8093883d-3f4b-4e49-a6e8-f45ae4f04b87;Shouwa Genroku Rakugo Shinjuu;Showa Genroku Rakugo Shinju;TV;13.0;Finished Airing;PG-13 - Teens 13 or older;66.0;Drama, Historical, Josei;Jan 9 2016 ;
+a90e530c-b980-406e-9556-9095161f3ad2;Gintama°;Gintama Season 4;TV;51.0;Finished Airing;R - 17+ (violence & profanity);3.0;Action, Comedy, Historical, Parody, Samurai, Sci-Fi, Shounen;Apr 8 2015 ;
+72c02016-a961-4885-b848-7febdaf46548;3-gatsu no Lion 2nd Season;March Comes In Like A Lion 2nd Season;TV;22.0;Finished Airing;PG-13 - Teens 13 or older;9.0;Drama, Game, Seinen, Slice of Life;Oct 14 2017 ;
+dbe324ae-cff3-4f2a-aeda-d576369eaabb;Sora yori mo Tooi Basho;A Place Further Than The Universe;TV;13.0;Finished Airing;PG-13 - Teens 13 or older;60.0;Slice of Life, Adventure;Jan 2 2018 ;
+ab600a1e-a823-4a53-9403-8f28ff93ceac;Yojouhan Shinwa Taikei;The Tatami Galaxy;TV;11.0;Finished Airing;R - 17+ (violence & profanity);61.0;Mystery, Comedy, Psychological, Romance;Apr 23 2010 ;
+acc0e701-6ab8-493e-88fd-ba929fed2057;Mononoke Hime;Princess Mononoke;Movie;1.0;Finished Airing;PG-13 - Teens 13 or older;29.0;Action, Adventure, Fantasy;Jul 12 1997;
+72851ed3-1cd6-4429-a08e-f2f3cbf0ddf2;Howl no Ugoku Shiro;"Howl&#039;s Moving Castle";Movie;1.0;Finished Airing;G - All Ages;43.0;Adventure, Drama, Fantasy, Romance;Nov 20 2004;
+92d6b181-51be-4842-9c8f-281a8c74d3c8;JoJo no Kimyou na Bouken: Stardust Crusaders 2nd Season;"JoJo&#039;s Bizarre Adventure: Stardust Crusaders - Battle in Egypt";TV;24.0;Finished Airing;R - 17+ (violence & profanity);78.0;Action, Adventure, Drama, Shounen, Supernatural;Jan 10 2015 ;
+a776a6b9-ac47-4c36-b128-b076a2633f94;Fullmetal Alchemist: Brotherhood;Fullmetal Alchemist: Brotherhood;TV;64.0;Finished Airing;R - 17+ (violence & profanity);1.0;Action, Military, Adventure, Comedy, Drama, Magic, Fantasy, Shounen;Apr 5 2009 ;
+3e5a6c28-404a-4afa-9f02-695774b6c23c;Clannad: After Story;Clannad ~After Story~;TV;24.0;Finished Airing;PG-13 - Teens 13 or older;14.0;Slice of Life, Comedy, Supernatural, Drama, Romance;Oct 3 2008 ;
+f72532e6-6cee-4db0-bf93-9519447dd26d;JoJo no Kimyou na Bouken: Diamond wa Kudakenai;"JoJo&#039;s Bizarre Adventure: Diamond is Unbreakable";TV;39.0;Finished Airing;R - 17+ (violence & profanity);64.0;Action, Adventure, Comedy, Supernatural, Drama, Shounen;Apr 2 2016 ;
+04944e1f-0bda-4c9c-9fd7-927c1d0c6094;Ookami Kodomo no Ame to Yuki;Wolf Children;Movie;1.0;Finished Airing;PG - Children;34.0;Slice of Life, Fantasy;Jul 21 2012;
+b15bb8f3-4c09-4588-94e7-4a8bf2b01b2a;Major S5;;TV;25.0;Finished Airing;PG-13 - Teens 13 or older;90.0;Comedy, Drama, Romance, Sports;Jan 10 2009 ;
+6b83667e-6dba-42b1-9c8c-56e53276fd08;"Steins;Gate";"Steins;Gate";TV;24.0;Finished Airing;PG-13 - Teens 13 or older;5.0;Thriller, Sci-Fi;Apr 6 2011 ;
+3dd172e7-6c95-47f1-a0f3-9cd3c5fb8bc2;Fate/Zero 2nd Season;Fate/Zero Season 2;TV;12.0;Finished Airing;R - 17+ (violence & profanity);54.0;Action, Supernatural, Magic, Fantasy;Apr 8 2012 ;
+cae021de-1900-4608-8931-99de5e6876dd;Mushishi Zoku Shou 2nd Season;;TV;10.0;Finished Airing;PG-13 - Teens 13 or older;26.0;Adventure, Fantasy, Historical, Mystery, Seinen, Slice of Life, Supernatural;Oct 19 2014 ;
+1d8c0ebf-fbc8-4729-b397-b09d05a3a072;Kuroshitsuji Movie: Book of the Atlantic;Black Butler: Book of the Atlantic;Movie;1.0;Finished Airing;R - 17+ (violence & profanity);89.0;Action, Comedy, Historical, Demons, Supernatural, Fantasy;Jan 21 2017;
+7df7185f-0c5f-4a5f-96b7-86ba8762ef43;Mushishi Zoku Shou;MUSHI-SHI -Next Passage-;TV;10.0;Finished Airing;PG-13 - Teens 13 or older;33.0;Adventure, Slice of Life, Mystery, Historical, Supernatural, Fantasy, Seinen;Apr 5 2014 ;
+627c7da4-f006-4217-9d07-3e781e1c55d8;Boku no Hero Academia 2nd Season;My Hero Academia 2;TV;25.0;Finished Airing;PG-13 - Teens 13 or older;35.0;Action, Comedy, Super Power, School, Shounen;Apr 1 2017 ;
+16a82b7b-10ba-404f-a1f9-ecd8469735d6;Mushishi Zoku Shou: Suzu no Shizuku;;Movie;1.0;Finished Airing;PG-13 - Teens 13 or older;47.0;Adventure, Fantasy, Historical, Mystery, Seinen, Slice of Life, Supernatural;May 16 2015;
+59595929-6f6e-42ef-b129-8bec40062fc9;Usagi Drop;Bunny Drop;TV;11.0;Finished Airing;PG-13 - Teens 13 or older;97.0;Josei, Slice of Life;Jul 8 2011 ;
+1ca4f958-b2a2-4105-b7c5-28636ebc79f0;Ano Hi Mita Hana no Namae wo Bokutachi wa Mada Shiranai.;anohana: The Flower We Saw That Day;TV;11.0;Finished Airing;PG-13 - Teens 13 or older;81.0;Slice of Life, Supernatural, Drama;Apr 15 2011 ;
+7df925b5-c9a0-4927-afbb-0dfc68f1cc5f;Hellsing Ultimate;Hellsing Ultimate;OVA;10.0;Finished Airing;R - 17+ (violence & profanity);92.0;Action, Military, Horror, Supernatural, Vampire, Seinen;Feb 10 2006 ;
+e76f4fc6-b62b-4705-9181-370b9fa38c78;Made in Abyss;Made in Abyss;TV;13.0;Finished Airing;R - 17+ (violence & profanity);20.0;Sci-Fi, Adventure, Mystery, Drama, Fantasy;Jul 7 2017 ;
+0259df24-c121-4276-acc5-6a0260659a35;Mob Psycho 100;Mob Psycho 100;TV;12.0;Finished Airing;PG-13 - Teens 13 or older;100.0;Action, Slice of Life, Comedy, Supernatural;Jul 11 2016;
+4b9a290c-0795-4286-96f2-af32f6bb1f9f;Slam Dunk;Slam Dunk;TV;101.0;Finished Airing;PG-13 - Teens 13 or older;86.0;Comedy, Sports, Drama, School, Shounen;Oct 16 1993 ;
+bf6788ea-9dfd-42c5-a930-7fa1d38a854c;Kizumonogatari III: Reiketsu-hen;;Movie;1.0;Finished Airing;R - 17+ (violence & profanity);23.0;Action, Mystery, Supernatural, Vampire;Jan 6 2017;
+0e59b442-46a2-49bb-840e-9f35b6356053;Shokugeki no Souma: San no Sara - Toutsuki Ressha-hen;;TV;0.0;Currently Airing;PG-13 - Teens 13 or older;74.0;Ecchi, School, Shounen;Apr 9 2018 ;
+887865e7-2e86-4c82-8a75-4d04f7b40052;Dragon Ball Z;Dragon Ball Z;TV;291.0;Finished Airing;PG-13 - Teens 13 or older;228.0;Action, Adventure, Comedy, Fantasy, Martial Arts, Shounen, Super Power;Apr 26 1989;
+39e9913f-1f9f-4ede-8665-689ac65cca1a;Dragon Ball;Dragon Ball;TV;153.0;Finished Airing;PG-13 - Teens 13 or older;369.0;Adventure, Comedy, Fantasy, Martial Arts, Shounen, Super Power;Feb 26 1986;
+648a9b6c-0c5c-40f9-9f9c-6375ad0aefea;Naruto;Naruto;TV;220.0;Finished Airing;PG-13 - Teens 13 or older;745.0;Action, Adventure, Comedy, Super Power, Martial Arts, Shounen;Oct 03 2002;
+830b23cc-5b16-4928-86ef-f6878135e2cf;Violet Evergarden;Violet Evergarden;TV;13;Finished Airing;PG-13 - Teens 13 or older;58.0;Drama, Fantasy, Slice of Life;Jan 11 2018;
