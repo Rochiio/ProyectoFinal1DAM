@@ -38,6 +38,7 @@ public class ImgStorage implements IImgStorage {
             logger.info("loading img");
             return new Image(Objects.requireNonNull(ResourcesManager.INSTANCE.getImageOf(user.getImg())));
         }*/
+
         logger.info("loading default img");
         return new Image(Objects.requireNonNull(ResourcesManager.INSTANCE.getIconOf(Properties.DEFAULT_USER_ICON)));
     }
