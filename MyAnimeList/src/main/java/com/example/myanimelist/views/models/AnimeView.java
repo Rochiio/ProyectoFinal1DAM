@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class AnimeView {
 
-    IntegerProperty ranking;
+    IntegerProperty ranking = new SimpleIntegerProperty(0);
     final ObjectProperty<Presentation> presentation;
     final StringProperty types;
     final IntegerProperty episodes;
