@@ -1,19 +1,15 @@
 package com.example.myanimelist.controllers.main.user
 
-import com.example.myanimelist.controllers.anime.AnimeController
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.managers.DependenciesManager
-import com.example.myanimelist.managers.DependenciesManager.getAnimeController
 import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
 import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
+import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
-import com.example.myanimelist.utils.LOGIN
-import com.example.myanimelist.utils.MAIN_USER_ANIME
-import com.example.myanimelist.utils.PERFIL_VIEW
-import com.example.myanimelist.utils.PERFIL_VIEW_ADMIN
+import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
 import com.example.myanimelist.views.models.ReviewView
@@ -25,6 +21,8 @@ import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.MenuButton
 import javafx.scene.control.TableColumn
+import javafx.scene.control.TableView
+import javafx.scene.image.Image
 import javafx.scene.input.MouseEvent
 import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
@@ -39,7 +37,6 @@ class MainUserMyListController {
 
     private var animeRepository: IAnimeRepository = getAnimesRepo()
     private var usersRepository: IUsersRepository = getUsersRepo()
-    private var animeController: AnimeController = getAnimeController()
 
 
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
@@ -64,6 +61,9 @@ class MainUserMyListController {
     private lateinit var myListStatusCol: TableColumn<AnimeView, String>
 
     @FXML
+    private lateinit var myListTable: TableView<AnimeView>
+
+    @FXML
     private lateinit var menuButton: MenuButton
 
     @FXML
@@ -73,13 +73,17 @@ class MainUserMyListController {
     @FXML
     fun initialize() {
         loadData()
+        initCells()
     }
 
     private fun loadData() {
         logger.info("cargando datos a memoria")
+
         animeList.addAll(animeRepository.findAll().map { AnimeView(it) }.toList())
         animeList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }
             .forEach { it.ranking = animeList.indexOf(it) }
+
+        //myListTable.items(animeList)
     }
 
     private fun initCells() {
@@ -118,7 +122,20 @@ class MainUserMyListController {
     }
 
     fun changeSceneToAnimeView(mouseEvent: MouseEvent) {
-
+        DependenciesManager.animeSelection = myListTable.selectionModel.selectedItem
+        if (DependenciesManager.globalUser.admin){
+            Stage().loadScene(ANIME_DATA_ADMIN,WIDTH, HEIGHT){
+                title="Anime-Data-Admin"
+                isResizable= false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+            }
+        }else{
+            Stage().loadScene(ANIME_DATA,WIDTH, HEIGHT){
+                title="Anime-Data"
+                isResizable= false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+            }
+        }
     }
 
     fun changeSceneToProfileUser(actionEvent: ActionEvent) {
