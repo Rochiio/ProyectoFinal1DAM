@@ -4,6 +4,7 @@ import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
 import com.example.myanimelist.service.utils.Utils;
 import com.example.myanimelist.utils.Properties;
+import com.example.myanimelist.views.models.Presentation;
 import javafx.scene.image.Image;
 import org.apache.logging.log4j.Logger;
 
@@ -51,6 +52,17 @@ public class ImgStorage implements IImgStorage {
         }
         logger.info("loading default img");
         user.setImg(Properties.DEFAULT_USER_ICON);
+        return new Image(Properties.DEFAULT_USER_ICON);
+    }
+
+    @Override
+    public Image loadImg(Presentation presentation) {
+        if (!Objects.requireNonNull(presentation.getImg()).isBlank() && Files.exists(Paths.get(presentation.getImg()))) {
+            logger.info("loading img");
+            return new Image(new File(presentation.getImg()).toURI().toString());
+        }
+        logger.info("loading default img");
+        presentation.setImg(Properties.DEFAULT_USER_ICON);
         return new Image(Properties.DEFAULT_USER_ICON);
     }
 }
