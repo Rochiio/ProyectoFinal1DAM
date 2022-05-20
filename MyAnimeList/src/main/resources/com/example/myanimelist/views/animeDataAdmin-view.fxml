@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="com.example.myanimelist.controllers.AnimeController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -43,11 +44,11 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="450.0" spacing="80.0">
                <children>
-                  <ImageView fitHeight="280.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageAnime" fitHeight="280.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="70.0" text="Editar" />
-                        <Button mnemonicParsing="false" prefWidth="70.0" text="Eliminar" />
+                        <Button mnemonicParsing="false" onAction="#editAnime" prefHeight="27.0" prefWidth="70.0" text="Editar" />
+                        <Button mnemonicParsing="false" onAction="#deleteAnime" prefWidth="70.0" text="Eliminar" />
                      </children>
                   </HBox>
                </children>
