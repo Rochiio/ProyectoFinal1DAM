@@ -15,6 +15,8 @@ import com.example.myanimelist.repositories.reviews.IRepositoryReview
 import com.example.myanimelist.repositories.reviews.ReviewsRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.repositories.users.UsersRepository
+import com.example.myanimelist.service.anime.AnimeStorage
+import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.service.backup.BackupStorage
 import com.example.myanimelist.service.backup.IBackupStorage
 import com.example.myanimelist.views.models.AnimeView
@@ -60,6 +62,9 @@ object DependenciesManager {
     fun getAnimeListRepo(): IRepositoryAnimeList =animeListRepository
     @JvmStatic
     fun getLoginFilter(): LoginFilters = LoginFilters(getUsersRepo())
+
+    @JvmStatic
+    fun getAnimeStorage(): IAnimeStorage = AnimeStorage()
 
     @JvmStatic
     fun getEditFilter(): EditFilters = EditFilters()

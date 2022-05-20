@@ -3,11 +3,9 @@ package com.example.myanimelist.controllers.main.user
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLogger
+import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.managers.SceneManager
-import com.example.myanimelist.utils.LOGIN
-import com.example.myanimelist.utils.MAIN_USER_ANIME
-import com.example.myanimelist.utils.PERFIL_VIEW
-import com.example.myanimelist.utils.PERFIL_VIEW_ADMIN
+import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
 import com.example.myanimelist.views.models.ReviewView
@@ -20,6 +18,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.MenuButton
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
+import javafx.scene.image.Image
 import javafx.scene.input.MouseEvent
 import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
@@ -56,8 +55,6 @@ class MainUserMyListController {
     @FXML
     private lateinit var addAnimeButton: Button
 
-    @FXML
-    private lateinit var myListTable: TableView<AnimeView>
 
     @FXML
     fun initialize() {

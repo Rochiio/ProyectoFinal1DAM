@@ -1,6 +1,8 @@
 package com.example.myanimelist.controllers
 
+import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.SceneManager
+import com.example.myanimelist.service.anime.AnimeStorage
 import javafx.animation.FadeTransition
 import javafx.event.EventHandler
 import javafx.fxml.FXML
@@ -29,6 +31,7 @@ class SplashController : Initializable {
         transition.fromValue = 1.0
         transition.toValue = 1.0
         transition.play()
+
 
         transition.onFinished = EventHandler {
             // Nos cerramos

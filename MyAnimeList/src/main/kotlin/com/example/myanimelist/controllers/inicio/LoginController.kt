@@ -9,6 +9,8 @@ import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
+import com.example.myanimelist.repositories.animes.IAnimeRepository
+import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import javafx.scene.control.Alert
