@@ -96,7 +96,11 @@ class MainUserMyListController {
     }
 
     fun changeMainTheme(actionEvent: ActionEvent) {
-
+        val currentStyle = menuButton.scene.root.stylesheets.toString()
+        if (currentStyle.endsWith("claro.css]"))
+            ThemesManager.switchMode(this.menuButton, Themes.OSCURO)
+        else if (currentStyle.endsWith("oscuro.css]"))
+        ThemesManager.switchMode(this.menuButton, Themes.CLARO)
     }
 
     fun logout(actionEvent: ActionEvent) {
@@ -109,16 +113,16 @@ class MainUserMyListController {
 
     fun changeSceneToAnimeView(mouseEvent: MouseEvent) {
         DependenciesManager.animeSelection = myListTable.selectionModel.selectedItem
-        if (DependenciesManager.globalUser.admin){
-            Stage().loadScene(ANIME_DATA_ADMIN,WIDTH, HEIGHT){
-                title="Anime-Data-Admin"
-                isResizable= false
+        if (DependenciesManager.globalUser.admin) {
+            Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
+                title = "Anime-Data-Admin"
+                isResizable = false
                 icons.add(Image(ResourcesManager.getIconOf("icono.png")))
             }
-        }else{
-            Stage().loadScene(ANIME_DATA,WIDTH, HEIGHT){
-                title="Anime-Data"
-                isResizable= false
+        } else {
+            Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
+                title = "Anime-Data"
+                isResizable = false
                 icons.add(Image(ResourcesManager.getIconOf("icono.png")))
             }
         }
