@@ -129,14 +129,13 @@ class MainUserMyListController {
     }
 
     fun changeSceneToProfileUser(actionEvent: ActionEvent) {
-        val stage = menuButton.scene.window as Stage
         if (!user.admin) {
-            stage.loadScene(PERFIL_VIEW) {
+            Stage().loadScene(PERFIL_VIEW) {
                 title = "Perfil usuario"
                 isResizable = false
             }.show()
         } else {
-            stage.loadScene(PERFIL_VIEW_ADMIN) {
+            Stage().loadScene(PERFIL_VIEW_ADMIN) {
                 title = "Perfil usuario admin"
                 isResizable = false
             }.show()
