@@ -3,17 +3,11 @@ package com.example.myanimelist.controllers.main.user
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
-import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.reviews.IRepositoryReview
 import com.example.myanimelist.repositories.users.IUsersRepository
-import com.example.myanimelist.views.models.AnimeView
-import javafx.collections.FXCollections
-import javafx.collections.ObservableList
-import javafx.collections.transformation.FilteredList
 import javafx.fxml.FXML
 import javafx.scene.control.Label
 import org.apache.logging.log4j.Logger
-import java.util.stream.Collectors
 
 
 class MainUserStatsController {
@@ -41,8 +35,8 @@ class MainUserStatsController {
     //Specific
     private var userRepository: IUsersRepository = DependenciesManager.getUsersRepo()
     private var reviewRepository: IRepositoryReview = DependenciesManager.getReviewsRepo()
-    lateinit private var myList: List<Anime>
-    lateinit private var myReviews: List<Review>
+    private var myList: List<Anime> = emptyList()
+    private var myReviews: List<Review> = emptyList()
 
     @FXML
     fun initialize(){
@@ -50,18 +44,38 @@ class MainUserStatsController {
         myReviews = reviewRepository.findAll().toList().filter { it.user.id == user.id }
 
         animeCount.text = myList.count().toString()
-        val list: ArrayList<String>
         topGenreCount.text = getTopGenre()
+        topTypeCount.text = getTopType()
+        topRatedAnime.text = myReviews.first{ it -> it.score == myReviews.maxOf { it.score } }.anime.title
+        botRatedAnime .text = myReviews.first{ it -> it.score == myReviews.minOf { it.score } }.anime.title
+    }
+
+    private fun getTopType(): String? {
+        val list = myList.map { it.types }.toList()
+        val hm: HashMap<String, Int> = HashMap()
+        for (type: String in list){
+            if(hm.containsKey(type)){
+                hm[type] = hm[type]!!+1
+            } else {
+                hm[type] = 1
+            }
+        }
+        return hm.filter { it.value == hm.maxOf { it.value } }.keys.first()
     }
 
     private fun getTopGenre(): String? {
-        var list: ArrayList<String> = ArrayList()
+        val list: ArrayList<String> = ArrayList()
         for(anime:Anime in myList){
             anime.types.split(",").toCollection(list)
         }
-        list.sort()
-        list.groupBy { it }
-        TODO("seguir con la logica que coñazo macho")
-        return ""
+        val hm: HashMap<String, Int> = HashMap()
+        for (genre: String in list){
+            if(hm.containsKey(genre)){
+                hm[genre] = hm[genre]!!+1
+            } else {
+                hm[genre] = 1
+            }
+        }
+        return hm.filter { it.value == hm.maxOf { it.value } }.keys.first()
     }
 }
