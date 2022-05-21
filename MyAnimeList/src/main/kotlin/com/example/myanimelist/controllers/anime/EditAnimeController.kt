@@ -1,14 +1,19 @@
 package com.example.myanimelist.controllers.anime
 
 import com.example.myanimelist.animeRepository
+import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.utils.HEIGHT
+import com.example.myanimelist.utils.MAIN_USER_MYLIST
+import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.AnimeView
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.TextField
+import javafx.stage.Stage
 import java.time.LocalDate
 
 class EditAnimeController {
@@ -47,6 +52,16 @@ class EditAnimeController {
         val animeUpdate = creationUpdateAnime()
         animeRepository.update(animeUpdate.toPOJO())
         Alert(Alert.AlertType.INFORMATION).show("Edition correct","fields changed successfully")
+        changeSceneAdmin()
+    }
+
+    private fun changeSceneAdmin() {
+        val stage = fieldTitle.scene.window as Stage
+        //TODO cambiar escena y que te lleve a la vista principal de administrador
+        stage.loadScene(MAIN_USER_MYLIST, WIDTH, HEIGHT) {
+            title = "Animes"
+            isResizable = false
+        }.show()
     }
 
 

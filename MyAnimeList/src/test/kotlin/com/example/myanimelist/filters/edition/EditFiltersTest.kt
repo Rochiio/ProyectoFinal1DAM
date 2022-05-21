@@ -87,6 +87,6 @@ internal class EditFiltersTest {
             {assertFalse(editFilters.checkDateCorrect(bad))}
         )
     }
-    
+
 
 }
