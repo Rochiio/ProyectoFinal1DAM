@@ -1,15 +1,15 @@
 package com.example.myanimelist.controllers.anime
 
+import com.example.myanimelist.animeRepository
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.managers.DependenciesManager
-import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.views.models.AnimeView
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.TextField
+import java.time.LocalDate
 
 class EditAnimeController {
     @FXML
@@ -30,23 +30,48 @@ class EditAnimeController {
 
 
 
-    fun saveChanges(actionEvent: ActionEvent) {
+    fun saveChanges() {
         val message = StringBuilder()
         if (!editionFilters(message)) {
             Alert(Alert.AlertType.ERROR).show("Edition invalid", message.toString())
         }else{
-            println("correcto")
+            editionSave()
         }
     }
 
+
+    /**
+     * Guardar la acutalizacion del anime
+     */
     private fun editionSave() {
-        TODO("Not yet implemented")
+        val animeUpdate = creationUpdateAnime()
+        animeRepository.update(animeUpdate.toPOJO())
+        Alert(Alert.AlertType.INFORMATION).show("Edition correct","fields changed successfully")
+    }
+
+
+    /**
+     * anime parámetros actualizados
+     */
+    private fun creationUpdateAnime():AnimeView{
+        return AnimeView(
+            if (fieldTitle.text.equals(" ")) anime.presentation.title else fieldTitle.text,
+            anime.presentation.titleEnglish,
+            anime.types,
+            if(fieldEpisodes.text.equals(" ")) anime.episodes else fieldEpisodes.text.toInt(),
+            if(fieldStatus.text.equals(" ")) anime.status else fieldStatus.text,
+            if(fieldDate.text.equals(" ")) anime.date else LocalDate.parse(fieldDate.text),
+            anime.rating,
+            (if(fieldGenre.text.equals(" ")) anime.genres else listOf(fieldGenre.text.split(",").toString())) as List<String>,
+            anime.id.toString(),
+            anime.id
+        )
     }
 
 
     /**
      * Filtrado de datos
-     * @param errorMessage mensaje de error qye va a mostrar si hay campos incorrectos
+     * @param errorMessage mensaje de error que va a mostrar si hay campos incorrectos
      * @return boolean
      */
     private fun editionFilters(errorMessage: StringBuilder):Boolean {
@@ -66,9 +91,7 @@ class EditAnimeController {
             errorMessage.appendLine("wrong genre field")
             return false
         }
-
         return true
-
     }
 
 }
