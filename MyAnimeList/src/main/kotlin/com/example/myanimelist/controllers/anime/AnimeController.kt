@@ -76,22 +76,13 @@ class AnimeController {
      * Asignar a cada label su información
      */
     private fun showAnime(){
-        if(anime!=null) {
-            logger.info("Cargando los datos")
-            txtTittle.text = anime.presentation.title
-            txtEpisodes.text = anime.episodes.toString()
-            txtStatus.text = anime.status
-            txtDate.text = anime.date.toString()
-            txtGenre.text = anime.genres
-            imageAnime.image = Image(ResourcesManager.getCoverOf(anime.presentation.img))
-        }else{
-            txtTittle.text = " "
-            txtEpisodes.text = " "
-            txtStatus.text = " "
-            txtDate.text = " "
-            txtGenre.text = " "
-            imageAnime.image = Image(ResourcesManager.getIconOf("image.png"))
-        }
+        logger.info("Cargando los datos")
+        txtTittle.text = anime.presentation.title
+        txtEpisodes.text = anime.episodes.toString()
+        txtStatus.text = anime.status
+        txtDate.text = anime.date.toString()
+        txtGenre.text = anime.genres
+        imageAnime.image = Image(ResourcesManager.getCoverOf(anime.presentation.img))
     }
 
 
