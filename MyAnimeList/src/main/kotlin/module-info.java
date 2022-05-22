@@ -10,7 +10,6 @@ module com.example.myanimelist {
     opens com.example.myanimelist.controllers.profiles to javafx.fxml;
 
 
-
     requires javafx.controls;
     requires javafx.fxml;
     requires kotlin.stdlib;
@@ -25,7 +24,6 @@ module com.example.myanimelist {
 
     requires java.compiler;
     requires java.desktop;
-    requires kotlinx.html.jvm;
 
 
     exports com.example.myanimelist;
