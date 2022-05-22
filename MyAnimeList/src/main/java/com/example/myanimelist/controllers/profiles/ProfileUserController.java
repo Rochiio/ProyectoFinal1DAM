@@ -93,7 +93,7 @@ public class ProfileUserController {
             error.append("Fecha de nacimiento incorrecta");
             return false;
         }
-        if (!Filters.checkEmail(txtEmail.getText())){
+        if (Filters.checkEmail(txtEmail.getText())){
             error.append("Correo incorrecto");
             return false;
         }
