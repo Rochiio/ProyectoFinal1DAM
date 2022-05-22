@@ -36,6 +36,7 @@ class AnimeController {
 
 
     private var logger = DependenciesManager.getLogger(AnimeController::class.java)
+    private val imgStorage = DependenciesManager.getImgStorage()
     private var user = DependenciesManager.globalUser
     private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
     private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
@@ -82,7 +83,7 @@ class AnimeController {
         txtStatus.text = anime.status
         txtDate.text = anime.date.toString()
         txtGenre.text = anime.genres
-        imageAnime.image = Image(ResourcesManager.getCoverOf(anime.presentation.img))
+        imageAnime.image = imgStorage.loadImg(anime.presentation)
     }
 
 

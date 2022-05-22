@@ -87,7 +87,7 @@ class MainUserMyListController {
     }
 
     fun changeSceneToAddAnime(actionEvent: ActionEvent) {
-        val stage = addAnimeButton.scene.window as Stage
+        val stage = Stage()
         stage.loadScene(MAIN_USER_ANIME) {
             title = "Añadir anime"
             isResizable = false

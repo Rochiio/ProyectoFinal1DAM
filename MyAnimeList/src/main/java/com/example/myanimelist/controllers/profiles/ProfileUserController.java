@@ -42,10 +42,10 @@ public class ProfileUserController {
     public AnchorPane root;
 
 
-    private IUsersRepository userRepository= DependenciesManager.getUsersRepo();
+    private final IUsersRepository userRepository= DependenciesManager.getUsersRepo();
     private final User user= DependenciesManager.globalUser;
-    private EditFilters editionFilters= DependenciesManager.getEditFilter();
-    private Logger logger = LogManager.getLogger(ProfileUserController.class);
+    private final EditFilters editionFilters= DependenciesManager.getEditFilter();
+    private final Logger logger = LogManager.getLogger(ProfileUserController.class);
     IImgStorage imgStorage = DependenciesManager.getImgStorage();
 
     @FXML
@@ -59,7 +59,7 @@ public class ProfileUserController {
         root.getStylesheets().add(MyAnimeListApplication.class.getResource(ThemesManager.INSTANCE.getCurretnTheme().getValue()).toString());
     }
 
-    public void onSave(ActionEvent actionEvent) throws IOException {
+    public void onSave(ActionEvent actionEvent)  {
         StringBuilder errorLog = new StringBuilder();
         if (!validate(errorLog)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -93,7 +93,7 @@ public class ProfileUserController {
             error.append("Fecha de nacimiento incorrecta");
             return false;
         }
-        if (Filters.checkEmail(txtEmail.getText())){
+        if (!Filters.checkEmail(txtEmail.getText())){
             error.append("Correo incorrecto");
             return false;
         }

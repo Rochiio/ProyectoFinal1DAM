@@ -27,7 +27,7 @@ fun main() {
 }
 
 fun initAnimes() {
-     val listAnimes = animeStorage.load()
+    val listAnimes = animeStorage.load()
     if(listAnimes.isPresent){
         for(item in listAnimes.get()){
             animeRepository.add(item.fromDTO())
