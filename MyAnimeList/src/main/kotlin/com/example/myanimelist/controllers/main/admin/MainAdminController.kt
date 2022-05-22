@@ -1,4 +1,4 @@
-package com.example.myanimelist.controllers.main
+package com.example.myanimelist.controllers.main.admin
 
 import javafx.event.ActionEvent
 import javafx.fxml.FXML

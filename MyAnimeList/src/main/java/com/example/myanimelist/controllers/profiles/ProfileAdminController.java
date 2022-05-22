@@ -20,7 +20,7 @@ public class ProfileAdminController {
     public Button deleteBut;
     public ImageView img;
 
-    private final User user= DependenciesManager.globalUser;
+    private final User user = DependenciesManager.globalUser;
 
     IImgStorage imgStorage = DependenciesManager.getImgStorage();
 
@@ -35,6 +35,7 @@ public class ProfileAdminController {
         this.user.setName(nameLabel.getText());
         this.user.setPassword(passLabel.getText());
     }
+
     private boolean validate(StringBuilder error) {
 
         boolean validation = true;
