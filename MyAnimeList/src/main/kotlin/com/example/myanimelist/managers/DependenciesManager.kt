@@ -43,7 +43,7 @@ object DependenciesManager {
     }
     lateinit var animeSelection: AnimeView
     lateinit var userSelectionAdmin: UserView
-    private val gson: Gson = GsonBuilder().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
+    private val gson: Gson = GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
     private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
     private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager(), getLogger<AnimeRepository>())
     private val imgStorage: IImgStorage = ImgStorage(getLogger<ImgStorage>())
