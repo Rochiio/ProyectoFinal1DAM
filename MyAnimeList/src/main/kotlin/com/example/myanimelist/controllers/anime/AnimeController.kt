@@ -61,6 +61,7 @@ class AnimeController {
         if (action.get() == ButtonType.OK) {
             val animeAux= animeRepository.findById(anime.id)
             animeListRepository.add(animeAux!!,user)
+            user.myList.add(animeAux)
             logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
 
         } else {
