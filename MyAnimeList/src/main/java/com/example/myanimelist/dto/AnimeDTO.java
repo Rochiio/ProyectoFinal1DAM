@@ -48,7 +48,7 @@ public class AnimeDTO {
         try {
              newDate = Utils.parseLocalDate(this.date);
         } catch (DateTimeParseException e) {
-            System.out.println("el puto roberto con el localdate");
+            System.out.println("Error de fecha");
             newDate = LocalDate.now();
         }
         return new Anime(title, titleEnglish, types, episodes, status, newDate, rating,
