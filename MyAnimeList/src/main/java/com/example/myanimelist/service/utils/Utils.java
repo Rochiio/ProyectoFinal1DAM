@@ -8,6 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 import java.util.Optional;
 
 public class Utils {
@@ -30,7 +35,7 @@ public class Utils {
             Files.copy(initial, Paths.get(to), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             logger.warn("Error copying");
-            System.out.println("");
+            System.out.println();
             return false;
         }
         return true;
@@ -50,5 +55,29 @@ public class Utils {
             return false;
         }
         return true;
+    }
+
+    public static LocalDate parseLocalDate(String date){
+        var fecha = date.split(" ");
+       return LocalDate.of(Integer.parseInt(fecha[2]),getMonth(fecha[0]),Integer.parseInt(fecha[1]));
+    }
+
+    private static Month getMonth(String value) {
+        Month result = null;
+        switch (value) {
+            case "Jan" -> result = Month.JANUARY;
+            case "Feb" -> result = Month.FEBRUARY;
+            case "Mar" -> result = Month.MARCH;
+            case "Apr" -> result = Month.APRIL;
+            case "May" -> result = Month.MAY;
+            case "Jun" -> result = Month.JUNE;
+            case "Jul" -> result = Month.JULY;
+            case "Aug" -> result = Month.AUGUST;
+            case "Sep" -> result = Month.SEPTEMBER;
+            case "Oct" -> result = Month.OCTOBER;
+            case "Nov" -> result = Month.NOVEMBER;
+            case "Dec" -> result = Month.DECEMBER;
+        }
+        return result;
     }
 }

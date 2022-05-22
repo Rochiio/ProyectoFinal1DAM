@@ -1,6 +1,7 @@
 package com.example.myanimelist.dto;
 
 import com.example.myanimelist.models.Anime;
+import com.example.myanimelist.service.utils.Utils;
 
 
 import java.time.LocalDate;
@@ -43,9 +44,9 @@ public class AnimeDTO {
     }
 
     public Anime fromDTO() {
-        var newDate = LocalDate.now();
+        LocalDate newDate;
         try {
-            newDate = LocalDate.parse(date);
+             newDate = Utils.parseLocalDate(this.date);
         } catch (DateTimeParseException e) {
             System.out.println("el puto roberto con el localdate");
             newDate = LocalDate.now();
