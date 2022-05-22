@@ -45,7 +45,6 @@ public class AnimeDTO {
         try {
             newDate = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            e.printStackTrace();
             System.out.println("el puto roberto con el localdate");
             newDate = LocalDate.now();
         }

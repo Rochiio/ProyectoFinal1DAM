@@ -16,6 +16,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.TableCell
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
+import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
@@ -31,7 +32,7 @@ class MainUserAnimeController {
 
     //FXML
     @FXML
-    private lateinit var animeButtonCol: TableColumn<Any, Any>
+    private lateinit var animeButtonCol: TableColumn<AnimeView, Button>
 
     @FXML
     private lateinit var animeRatingCol: TableColumn<AnimeView, String>
@@ -43,17 +44,17 @@ class MainUserAnimeController {
     private lateinit var animeRankingCol: TableColumn<AnimeView, Int>
 
     @FXML
-    private lateinit var animeTable: TableView<AnimeView>
+    private var animeTable: TableView<AnimeView> = TableView()
 
     //Specific
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
-    private var flAnime: FilteredList<AnimeView> = FilteredList(FXCollections.observableArrayList())
     private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
 
     @FXML
     fun initialize() {
 
         loadData()
+
         initCells()
 
     }
@@ -67,13 +68,13 @@ class MainUserAnimeController {
 
     private fun initCells() {
         animeRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
-        animeRatingCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
         animeTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
         animeTitleCol.setCellFactory { PresentationCellFactory() }
+        animeRatingCol.setCellValueFactory { cellData -> cellData.value.ratingProperty() }
         animeButtonCol.setCellFactory {
-            object : TableCell<Any, Any>() {
-                override fun updateItem(item: Any?, empty: Boolean) {
-                    var but = Button()
+            object : TableCell<AnimeView, Button>() {
+                override fun updateItem(item: Button?, empty: Boolean) {
+                    val but = Button()
                     but.alignment = Pos.CENTER
                     val img = ImageView()
                     img.image = Image(Properties.ADD_ICON)
@@ -92,8 +93,8 @@ class MainUserAnimeController {
                 }
             }
         }
-        flAnime = FilteredList(animeList)
-        animeTable.items = flAnime
+        animeTable.items = animeList
+        animeTable.columns.addAll(animeRankingCol, animeTitleCol, animeRatingCol, animeButtonCol)
     }
 
     fun changeSceneToAnimeDataView(mouseEvent: MouseEvent) {
