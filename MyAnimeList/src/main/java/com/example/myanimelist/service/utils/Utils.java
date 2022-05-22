@@ -57,6 +57,7 @@ public class Utils {
         return true;
     }
 
+
     public static LocalDate parseLocalDate(String date){
         var fecha = date.split(" ");
        return LocalDate.of(Integer.parseInt(fecha[2]),getMonth(fecha[0]),Integer.parseInt(fecha[1]));
