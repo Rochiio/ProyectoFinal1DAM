@@ -104,8 +104,8 @@ class MainUserAnimeController {
                 but.maxWidth(10.0)
                 val img = ImageView()
                 img.image = Image(ResourcesManager.getIconOf(Properties.ADD_ICON))
-                img.fitHeight = but.height
-                img.fitWidth = but.width
+                img.fitHeight = 10.0
+                img.fitWidth = 10.0
                 but.graphic = img
                 but.setOnAction {
                     DependenciesManager.animeSelection = item
