@@ -10,6 +10,7 @@ module com.example.myanimelist {
     opens com.example.myanimelist.controllers.profiles to javafx.fxml;
 
 
+
     requires javafx.controls;
     requires javafx.fxml;
     requires kotlin.stdlib;
@@ -17,13 +18,13 @@ module com.example.myanimelist {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
-    requires org.mybatis;
     requires java.base;
     requires com.google.gson;
     requires org.apache.logging.log4j;
 
     requires java.compiler;
     requires java.desktop;
+    requires org.mybatis;
 
 
     exports com.example.myanimelist;
