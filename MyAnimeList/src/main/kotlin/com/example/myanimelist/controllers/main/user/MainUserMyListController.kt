@@ -96,11 +96,8 @@ class MainUserMyListController {
     }
 
     fun changeMainTheme(actionEvent: ActionEvent) {
-        val currentStyle = menuButton.scene.root.stylesheets.toString()
-        if (currentStyle.endsWith("claro.css]"))
-            ThemesManager.switchMode(this.menuButton, Themes.OSCURO)
-        else if (currentStyle.endsWith("oscuro.css]"))
-        ThemesManager.switchMode(this.menuButton, Themes.CLARO)
+        ThemesManager.changeTheme()
+        ThemesManager.setTheme(menuButton)
     }
 
     fun logout(actionEvent: ActionEvent) {
@@ -129,6 +126,7 @@ class MainUserMyListController {
     }
 
     fun changeSceneToProfileUser(actionEvent: ActionEvent) {
+
         if (!user.admin) {
             Stage().loadScene(PERFIL_VIEW) {
                 title = "Perfil usuario"
