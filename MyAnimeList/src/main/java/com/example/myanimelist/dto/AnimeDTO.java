@@ -50,7 +50,7 @@ public class AnimeDTO {
             System.out.println("el puto roberto con el localdate");
             newDate = LocalDate.now();
         }
-        return new Anime(title, titleEnglish, types, episodes, status, LocalDate.parse(date), rating,
+        return new Anime(title, titleEnglish, types, episodes, status, newDate, rating,
                 Arrays.stream(genres.split(",")).toList(), img, id);
     }
 
