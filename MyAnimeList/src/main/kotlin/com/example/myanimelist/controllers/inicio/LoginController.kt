@@ -40,8 +40,7 @@ class LoginController : InicioController() {
                 isResizable = false
             }.show()
         }else{
-            //TODO cambiar vista a lista de admin
-            stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
+            stage.loadScene(MAIN_ADMIN,WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
             }.show()
