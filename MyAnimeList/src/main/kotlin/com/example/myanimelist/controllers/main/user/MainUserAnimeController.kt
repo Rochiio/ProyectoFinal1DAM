@@ -46,6 +46,12 @@ class MainUserAnimeController {
 
         initCells()
 
+        initData()
+
+    }
+
+    private fun initData() {
+        animeListView.items = animeList
     }
 
     private fun loadData() {
@@ -56,9 +62,8 @@ class MainUserAnimeController {
     }
 
     private fun initCells() {
-        animeListView.items = animeList
         animeListView.setCellFactory {object:ListCell<AnimeView>(){
-            override fun updateItem(item: AnimeView?, empty: Boolean) {
+            public override fun updateItem(item: AnimeView?, empty: Boolean) {
                 super.updateItem(item, empty)
                 if (empty) {
                     text = null
@@ -68,7 +73,7 @@ class MainUserAnimeController {
 
                 //Iniciamos la base
                 val root = HBox()
-                root.spacing = 30.0
+                root.spacing = 10.0
 
                 //Iniciamos los componentes
 
@@ -76,18 +81,18 @@ class MainUserAnimeController {
                 val ranking = Label(item!!.ranking.toString())
 
                 //Presentacion (Imagen + titulos)
-                val presentationRoot = VBox()
-                presentationRoot.spacing = 20.0
+                val presentationRoot = HBox()
+                presentationRoot.spacing = 5.0
                 presentationRoot.alignment = Pos.CENTER_LEFT
-                val hbox = HBox()
-                hbox.spacing = 10.0
-                hbox.children.add(Label(item.presentation.title))
-                hbox.children.add(Label(item.presentation.titleEnglish))
+                val vBox = VBox()
+                vBox.spacing = 5.0
+                vBox.children.add(Label(item.presentation.title))
+                vBox.children.add(Label(item.presentation.titleEnglish))
                 val imageview = ImageView()
-                imageview.fitHeight = 40.0
-                imageview.fitWidth = 40.0
+                imageview.fitHeight = 20.0
+                imageview.fitWidth = 20.0
                 imageview.image = imgStorage.loadImg(item.presentation)
-                presentationRoot.children.addAll(imageview, hbox)
+                presentationRoot.children.addAll(imageview, vBox)
 
                 //Rating
                 val rating = Label(item.rating)
@@ -95,6 +100,8 @@ class MainUserAnimeController {
                 //Boton De Añadir
                 val but = Button()
                 but.alignment = Pos.CENTER
+                but.maxHeight(10.0)
+                but.maxWidth(10.0)
                 val img = ImageView()
                 img.image = Image(ResourcesManager.getIconOf(Properties.ADD_ICON))
                 img.fitHeight = but.height
@@ -110,6 +117,9 @@ class MainUserAnimeController {
 
                 //Añadimos todos los campos
                 root.children.addAll(ranking, presentationRoot, rating, but)
+
+                graphic = root
+
                 }
             }
         }
