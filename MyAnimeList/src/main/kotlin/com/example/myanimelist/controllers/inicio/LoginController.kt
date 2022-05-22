@@ -6,10 +6,7 @@ import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLoginFilter
 import com.example.myanimelist.managers.SceneManager
-import com.example.myanimelist.utils.HEIGHT
-import com.example.myanimelist.utils.MAIN
-import com.example.myanimelist.utils.REGISTER
-import com.example.myanimelist.utils.WIDTH
+import com.example.myanimelist.utils.*
 import javafx.scene.control.Alert
 import javafx.stage.Stage
 
@@ -33,11 +30,21 @@ class LoginController : InicioController() {
     private fun changeSceneToMain() {
         DependenciesManager.globalUser =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
+
         val stage = txtUsername.scene.window as Stage
-        stage.loadScene(MAIN) {
-            title = "Animes"
-            isResizable = false
-        }.show()
+
+
+        if(!DependenciesManager.globalUser.admin) {
+            stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
+                title = "Animes"
+                isResizable = false
+            }.show()
+        }else{
+            stage.loadScene(MAIN_ADMIN,WIDTH, HEIGHT) {
+                title = "Animes"
+                isResizable = false
+            }.show()
+        }
     }
 
 
@@ -55,9 +62,14 @@ class LoginController : InicioController() {
 
 
     private fun validateFields(errorMessage: StringBuilder): Boolean {
-        if (!loginFilters.checkUserCorrect(txtUsername.text, txtPassword.text))
-            errorMessage.appendLine("Usuario no existe")
-
-        return errorMessage.isEmpty()
+        if(!loginFilters.checkUserCorrect(txtUsername.text)) {
+            errorMessage.appendLine("Usuario ${txtUsername.text} incorrecto")
+            return false
+        }
+        if(!loginFilters.checkPasswordCorrect(txtUsername.text,txtPassword.text)){
+            errorMessage.appendLine("Contraseña incorrecta")
+            return false
+        }
+        return true
     }
 }
