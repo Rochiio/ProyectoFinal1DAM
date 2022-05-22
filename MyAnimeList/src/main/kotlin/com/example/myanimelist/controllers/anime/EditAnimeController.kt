@@ -6,6 +6,7 @@ import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.utils.HEIGHT
+import com.example.myanimelist.utils.MAIN_ADMIN
 import com.example.myanimelist.utils.MAIN_USER_MYLIST
 import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.AnimeView
@@ -58,7 +59,7 @@ class EditAnimeController {
     private fun changeSceneAdmin() {
         val stage = fieldTitle.scene.window as Stage
         //TODO cambiar escena y que te lleve a la vista principal de administrador
-        stage.loadScene(MAIN_USER_MYLIST, WIDTH, HEIGHT) {
+        stage.loadScene(MAIN_ADMIN, WIDTH, HEIGHT) {
             title = "Animes"
             isResizable = false
         }.show()
