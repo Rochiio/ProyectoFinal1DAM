@@ -103,7 +103,7 @@ class MainUserAnimeController {
                 but.maxHeight(10.0)
                 but.maxWidth(10.0)
                 val img = ImageView()
-                img.image = Image(ResourcesManager.getIconOf(Properties.ADD_ICON))
+                img.image = imgStorage.loadImg(item.presentation)
                 img.fitHeight = 10.0
                 img.fitWidth = 10.0
                 but.graphic = img

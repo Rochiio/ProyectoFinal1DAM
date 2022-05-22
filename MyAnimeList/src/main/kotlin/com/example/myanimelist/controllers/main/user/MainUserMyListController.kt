@@ -19,6 +19,7 @@ import javafx.scene.control.MenuButton
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
 import javafx.scene.image.Image
+import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
@@ -109,18 +110,20 @@ class MainUserMyListController {
     }
 
     fun changeSceneToAnimeView(mouseEvent: MouseEvent) {
-        DependenciesManager.animeSelection = myListTable.selectionModel.selectedItem
-        if (DependenciesManager.globalUser.admin) {
-            Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
-                title = "Anime-Data-Admin"
-                isResizable = false
-                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-            }
-        } else {
-            Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
-                title = "Anime-Data"
-                isResizable = false
-                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+        if(mouseEvent.button == MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
+            DependenciesManager.animeSelection = myListTable.selectionModel.selectedItem
+            if (DependenciesManager.globalUser.admin) {
+                Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
+                    title = "Anime-Data-Admin"
+                    isResizable = false
+                    icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+                }
+            } else {
+                Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
+                    title = "Anime-Data"
+                    isResizable = false
+                    icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+                }
             }
         }
     }

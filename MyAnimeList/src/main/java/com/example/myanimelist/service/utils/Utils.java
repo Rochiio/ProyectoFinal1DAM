@@ -57,27 +57,10 @@ public class Utils {
         return true;
     }
 
+
     public static LocalDate parseLocalDate(String date){
-        var fecha = date.split(" ");
-       return LocalDate.of(Integer.parseInt(fecha[2]),getMonth(fecha[0]),Integer.parseInt(fecha[1]));
+        var fecha = date.split("/");
+       return LocalDate.of(Integer.parseInt(fecha[2]),Integer.parseInt(fecha[1]),Integer.parseInt(fecha[0]));
     }
 
-    private static Month getMonth(String value) {
-        Month result = null;
-        switch (value) {
-            case "Jan" -> result = Month.JANUARY;
-            case "Feb" -> result = Month.FEBRUARY;
-            case "Mar" -> result = Month.MARCH;
-            case "Apr" -> result = Month.APRIL;
-            case "May" -> result = Month.MAY;
-            case "Jun" -> result = Month.JUNE;
-            case "Jul" -> result = Month.JULY;
-            case "Aug" -> result = Month.AUGUST;
-            case "Sep" -> result = Month.SEPTEMBER;
-            case "Oct" -> result = Month.OCTOBER;
-            case "Nov" -> result = Month.NOVEMBER;
-            case "Dec" -> result = Month.DECEMBER;
-        }
-        return result;
-    }
 }

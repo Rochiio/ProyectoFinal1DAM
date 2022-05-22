@@ -61,6 +61,7 @@ class AnimeController {
         if (action.get() == ButtonType.OK) {
             val animeAux= animeRepository.findById(anime.id)
             animeListRepository.add(animeAux!!,user)
+            user.myList.add(animeAux)
             logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
 
         } else {
@@ -83,7 +84,7 @@ class AnimeController {
         txtStatus.text = anime.status
         txtDate.text = anime.date.toString()
         txtGenre.text = anime.genres
-        imageAnime.image = (Image(ResourcesManager.getCoverOf(anime.id.toString())))
+        imageAnime.image = imgStorage.loadImg(anime.presentation)
     }
 
 
