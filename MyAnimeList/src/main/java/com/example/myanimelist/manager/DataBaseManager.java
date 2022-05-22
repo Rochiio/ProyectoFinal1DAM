@@ -1,7 +1,8 @@
 package com.example.myanimelist.manager;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import org.apache.ibatis.jdbc.ScriptRunner;
+
+import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -193,6 +194,11 @@ public class DataBaseManager implements AutoCloseable {
      * Carga los datos desde un fichero externo
      */
     public void initData(String sqlFile, boolean logWriter) throws FileNotFoundException {
+        ScriptRunner sr = new ScriptRunner(connection);
+        sr.setEscapeProcessing(false);
+        Reader reader = new BufferedReader(new FileReader(sqlFile));
+        sr.setLogWriter(logWriter ? new PrintWriter(System.out) : null);
+        sr.runScript(reader);
     }
 
     /**

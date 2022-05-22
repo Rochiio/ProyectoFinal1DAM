@@ -4,7 +4,9 @@ import com.example.myanimelist.dto.BackupDTO
 import com.example.myanimelist.managers.DependenciesManager.getBackupStorage
 import com.example.myanimelist.managers.DependenciesManager.getGson
 import com.example.myanimelist.service.backup.IBackupStorage
-import com.example.myanimelist.utilities.DataDB
+import com.example.myanimelist.utilities.getTestingAnime
+import com.example.myanimelist.utilities.getTestingReview
+import com.example.myanimelist.utilities.getTestingUser
 import com.example.myanimelist.utils.Properties
 import com.google.gson.Gson
 import org.junit.jupiter.api.BeforeEach
@@ -27,9 +29,9 @@ class BackupStorageTest {
     @Test
     fun save() {
         val dto = BackupDTO(
-            arrayListOf(DataDB.getTestingUser()),
-            arrayListOf(DataDB.getTestingReview()),
-            arrayListOf(DataDB.getTestingAnime()),
+            arrayListOf(getTestingUser()),
+            arrayListOf(getTestingReview()),
+            arrayListOf(getTestingAnime()),
         )
         storage.save(dto)
 
@@ -48,9 +50,9 @@ class BackupStorageTest {
     @Test
     fun load() {
         val dto = BackupDTO(
-            arrayListOf(DataDB.getTestingUser()),
-            arrayListOf(DataDB.getTestingReview()),
-            arrayListOf(DataDB.getTestingAnime())
+            arrayListOf(getTestingUser()),
+            arrayListOf(getTestingReview()),
+            arrayListOf(getTestingAnime())
         )
 
         FileWriter(Properties.JSON_FILE).use {

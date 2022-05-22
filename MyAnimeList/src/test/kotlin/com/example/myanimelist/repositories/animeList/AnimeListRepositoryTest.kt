@@ -1,47 +1,41 @@
 package com.example.myanimelist.repositories.animeList
 
-import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.repositories.RepoTest
 import com.example.myanimelist.utilities.getTestingAnime
+import com.example.myanimelist.utilities.getTestingAnimeUpdate
 import com.example.myanimelist.utilities.getTestingUser
-import com.example.myanimelist.utils.Properties
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.BeforeEach
+import com.example.myanimelist.utilities.getTestingUserUpdate
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 
-internal class AnimeListRepositoryTest {
-    private val user = getTestingUser()
-    private val anime = getTestingAnime()
+internal class AnimeListRepositoryTest : RepoTest() {
+
     private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
 
-    @BeforeEach
-    fun deleteAll() {
-        DependenciesManager.getDatabaseManager().execute {
-            initData(Properties.SCRIPT_FILE_DATABASE, true)
-        }
-    }
 
     @Test
     fun add() {
-        animeListRepository.add(anime, user)
-        val list = animeListRepository.findByUserId(user)
-
-        assertTrue(list.map { it.id }.contains(anime.id))
+        val user = getTestingUser()
+        val anime = getTestingAnime()
+        val animeAdded = animeListRepository.add(anime, user)
+        assertNotNull(animeAdded)
     }
 
     @Test
     fun delete() {
-        animeListRepository.add(anime, user)
+        val user = getTestingUser()
+        val anime = getTestingAnime()
         animeListRepository.delete(anime, user)
         val list = animeListRepository.findByUserId(user)
-
-        assertTrue(list.isEmpty())
+        assert(!list.map { it.id }.contains(anime.id))
     }
 
     @Test
     fun findByUserId() {
-        animeListRepository.add(anime, user)
+        val user = getTestingUserUpdate()
+        val anime = getTestingAnimeUpdate()
         val list = animeListRepository.findByUserId(user)
-        assertTrue(list.map { it.id }.contains(anime.id))
+        assert(list.map { it.id }.contains(anime.id))
     }
 }

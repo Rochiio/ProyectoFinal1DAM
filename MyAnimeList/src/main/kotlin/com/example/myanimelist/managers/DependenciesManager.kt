@@ -24,7 +24,7 @@ import java.time.LocalDate
 
 object DependenciesManager {
     //If its testing put to true
-    private const val isTesting: Boolean = false
+    var isTesting: Boolean = false
 
     //Singleton instances
     lateinit var globalUser: User

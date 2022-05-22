@@ -20,7 +20,7 @@ module com.example.myanimelist {
 
     requires java.compiler;
     requires java.desktop;
-    requires kotlinx.html.jvm;
+    requires org.mybatis;
 
 
     exports com.example.myanimelist;
