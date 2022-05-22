@@ -22,6 +22,7 @@ import com.example.myanimelist.service.backup.IBackupStorage
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.service.img.ImgStorage
 import com.example.myanimelist.views.models.AnimeView
+import com.example.myanimelist.views.models.UserView
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.apache.logging.log4j.LogManager
@@ -41,6 +42,7 @@ object DependenciesManager {
             DataBaseManager("anime.db")
     }
     lateinit var animeSelection: AnimeView
+    lateinit var userSelectionAdmin: UserView
     private val gson: Gson = GsonBuilder().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
     private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
     private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager(), getLogger<AnimeRepository>())

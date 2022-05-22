@@ -72,13 +72,13 @@ class MainUserMyListController {
     }
 
     private fun initCells() {
+        myListTable=TableView(animeList)
+        myListTable.items=animeList
         myListRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
         myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
         myListScoreCol.setCellValueFactory { cellData -> cellData.value.scoreProperty().asObject() }
         myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
         myListStatusCol.setCellValueFactory { cellData -> cellData.value.statusProperty() }
-        myListTable = TableView(FilteredList(animeList))
-
     }
 
     fun openAcercaDe() = SceneManager.openStageAbout()
