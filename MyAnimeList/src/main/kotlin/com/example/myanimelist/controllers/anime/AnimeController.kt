@@ -67,7 +67,6 @@ class AnimeController {
             Alert(Alert.AlertType.INFORMATION).show("Anime Añadido", "${anime.presentation.title} añadido a tu lista")
             logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
             stage.close()
-
         } else {
             Alert(Alert.AlertType.INFORMATION).show("Saliendo", "Saliendo de Anime-Data")
             stage.close()
@@ -119,7 +118,6 @@ class AnimeController {
             val result = Alert(Alert.AlertType.CONFIRMATION)
             result.title = "Anime Eliminado"
         }
-
             val stage = txtTittle.scene.window as Stage
             stage.close()
     }

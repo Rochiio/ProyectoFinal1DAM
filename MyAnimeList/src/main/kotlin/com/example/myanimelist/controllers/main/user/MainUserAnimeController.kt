@@ -109,11 +109,19 @@ class MainUserAnimeController {
                 but.graphic = img
                 but.setOnAction {
                     DependenciesManager.animeSelection = item
-                    Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
-                        title = item.presentation.title
-                        isResizable = false
-                        icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                    }.show()
+                    if(DependenciesManager.globalUser.admin){
+                        Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
+                            title = item.presentation.title
+                            isResizable = false
+                            icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+                        }.show()
+                    }else {
+                        Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
+                            title = item.presentation.title
+                            isResizable = false
+                            icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+                        }.show()
+                    }
                 }
 
                 //Añadimos todos los campos
@@ -130,11 +138,19 @@ class MainUserAnimeController {
         if (mouseEvent.button === MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
             val anime: AnimeView = animeListView.selectionModel.selectedItem
             DependenciesManager.animeSelection = anime
-            Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT){
-                title = anime.presentation.title
-                isResizable = false
-                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-            }.show()
+            if (DependenciesManager.globalUser.admin) {
+                Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
+                    title = anime.presentation.title
+                    isResizable = false
+                    icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+                }.show()
+            } else {
+                Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
+                    title = anime.presentation.title
+                    isResizable = false
+                    icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+                }.show()
+            }
         }
     }
 }
