@@ -2,7 +2,7 @@ package com.example.myanimelist.controllers.profiles;
 
 import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
-import com.example.myanimelist.service.img.ImgStorage;
+import com.example.myanimelist.service.img.IImgStorage;
 import com.example.myanimelist.utils.Filters;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -20,9 +20,9 @@ public class ProfileAdminController {
     public Button deleteBut;
     public ImageView img;
 
-    private final User user= DependenciesManager.globalUser;
+    private final User user = DependenciesManager.globalUser;
 
-    ImgStorage imgStorage = new ImgStorage();
+    IImgStorage imgStorage = DependenciesManager.getImgStorage();
 
     public void onSave(ActionEvent actionEvent) {
         StringBuilder errorLog = new StringBuilder();
@@ -35,6 +35,7 @@ public class ProfileAdminController {
         this.user.setName(nameLabel.getText());
         this.user.setPassword(passLabel.getText());
     }
+
     private boolean validate(StringBuilder error) {
 
         boolean validation = true;
@@ -59,7 +60,7 @@ public class ProfileAdminController {
             error.append("La confirmación no se corresponde.").append("\n");
         }
 
-        if (!Filters.checkEmail(emailLabel.getText())) {
+        if (Filters.checkEmail(emailLabel.getText())) {
             validation = false;
             error.append("Email no válido");
         }

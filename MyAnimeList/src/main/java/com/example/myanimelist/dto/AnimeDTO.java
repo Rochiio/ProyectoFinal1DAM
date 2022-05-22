@@ -1,9 +1,11 @@
 package com.example.myanimelist.dto;
 
 import com.example.myanimelist.models.Anime;
+import com.example.myanimelist.service.utils.Utils;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -23,10 +25,12 @@ public class AnimeDTO {
     public String img;
 
     public AnimeDTO(Anime anime) {
-        this(anime.getId(), anime.getTitle(), anime.getTitleEnglish(), anime.getTypes(), anime.getEpisodes(), anime.getStatus(), anime.getDate().toString(), anime.getRating(), String.join(",", anime.getGenres()), anime.getImg());
+        this(anime.getId(), anime.getTitle(), anime.getTitleEnglish(), anime.getTypes(), anime.getEpisodes(),
+                anime.getStatus(), anime.getDate().toString(), anime.getRating(), String.join(",", anime.getGenres()), anime.getImg());
     }
 
-    public AnimeDTO(UUID id, String title, String titleEnglish, String types, int episodes, String status, String date, String rating, String genres, String img) {
+    public AnimeDTO(UUID id, String title, String titleEnglish, String types, int episodes, String status,
+                    String date, String rating, String genres, String img) {
         setId(id);
         setTitle(title);
         setTitleEnglish(titleEnglish);
@@ -40,7 +44,15 @@ public class AnimeDTO {
     }
 
     public Anime fromDTO() {
-        return new Anime(title, titleEnglish, types, episodes, status, LocalDate.parse(date), rating, Arrays.stream(genres.split(",")).toList(), img, id);
+        LocalDate newDate;
+        try {
+             newDate = Utils.parseLocalDate(this.date);
+        } catch (DateTimeParseException e) {
+            System.out.println("Error de fecha");
+            newDate = LocalDate.now();
+        }
+        return new Anime(title, titleEnglish, types, episodes, status, newDate, rating,
+                Arrays.stream(genres.split(",")).toList(), img, id);
     }
 
     public UUID getId() {

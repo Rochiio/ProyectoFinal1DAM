@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import java.util.*
 
-//TODO add more rows to db because we have a delete XD
 
 class UsersRepositoryTest : RepoTest() {
     private val usersRepository = getUsersRepo()
