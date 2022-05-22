@@ -83,7 +83,7 @@ class AnimeController {
         txtStatus.text = anime.status
         txtDate.text = anime.date.toString()
         txtGenre.text = anime.genres
-        imageAnime.image = (Image(ResourcesManager.getCoverOf(anime.id.toString())))
+        imageAnime.image = imgStorage.loadImg(anime.presentation)
     }
 
 
