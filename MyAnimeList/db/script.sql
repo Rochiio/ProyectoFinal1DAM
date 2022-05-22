@@ -14,15 +14,6 @@ create table animes
     type          varchar(20)
 );
 
-create table sqlite_master
-(
-    type     text,
-    name     text,
-    tbl_name text,
-    rootpage int,
-    sql      text
-);
-
 create table usuarios
 (
     id              varchar(50)  not null
@@ -50,8 +41,12 @@ create table animeLists
 create table reviews
 (
     idUser  varchar(50) not null
+        constraint reviews_pk_2
+            unique
         references usuarios,
     idAnime varchar(50) not null
+        constraint reviews_pk_3
+            unique
         references animes,
     score   integer,
     id      varchar(50)
@@ -60,6 +55,4 @@ create table reviews
     review  varchar(500)
 );
 
-create unique index reviews_idAnime_uindex
-    on reviews (idAnime);
 

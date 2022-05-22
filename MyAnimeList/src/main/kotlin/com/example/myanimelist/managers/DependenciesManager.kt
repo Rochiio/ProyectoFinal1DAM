@@ -19,9 +19,9 @@ import com.example.myanimelist.service.anime.AnimeStorage
 import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.service.backup.BackupStorage
 import com.example.myanimelist.service.backup.IBackupStorage
-import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.service.img.ImgStorage
+import com.example.myanimelist.views.models.AnimeView
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.apache.logging.log4j.LogManager
@@ -29,15 +29,24 @@ import org.apache.logging.log4j.Logger
 import java.time.LocalDate
 
 object DependenciesManager {
+    //If its testing put to true
+    var isTesting: Boolean = false
+
     //Singleton instances
-    lateinit var globalUser : User
-    lateinit var animeSelection : AnimeView
-    private val dataBaseManager: DataBaseManager = DataBaseManager()
+    lateinit var globalUser: User
+    private val dataBaseManager: DataBaseManager by lazy {
+        if (isTesting)
+            DataBaseManager("animeDev.db")
+        else
+            DataBaseManager("anime.db")
+    }
+    lateinit var animeSelection: AnimeView
     private val gson: Gson = GsonBuilder().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
     private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
     private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager(), getLogger<AnimeRepository>())
-    private val animeListRepository: IRepositoryAnimeList = AnimeListRepository(getDatabaseManager(),getLogger<AnimeListRepository>())
     private val imgStorage: IImgStorage = ImgStorage(getLogger<ImgStorage>())
+    private val animeListRepository: IRepositoryAnimeList =
+        AnimeListRepository(getDatabaseManager(), getLogger<AnimeListRepository>(), getUsersRepo())
     private val reviewsRepository: IRepositoryReview = ReviewsRepository(
         getDatabaseManager(), getAnimesRepo(),
         getUsersRepo(),
@@ -59,7 +68,8 @@ object DependenciesManager {
     fun getReviewsRepo(): IRepositoryReview = reviewsRepository
 
     @JvmStatic
-    fun getAnimeListRepo(): IRepositoryAnimeList =animeListRepository
+    fun getAnimeListRepo(): IRepositoryAnimeList = animeListRepository
+
     @JvmStatic
     fun getLoginFilter(): LoginFilters = LoginFilters(getUsersRepo())
 
@@ -79,10 +89,10 @@ object DependenciesManager {
     fun getBackupStorage(): IBackupStorage = BackupStorage(getGson())
 
     @JvmStatic
-    fun getGson(): Gson = gson
+    fun getImgStorage(): IImgStorage = ImgStorage(getLogger<ImgStorage>())
 
     @JvmStatic
-    fun getImgStorage(): IImgStorage = imgStorage
+    fun getGson(): Gson = gson
 
     inline fun <reified T> getLogger(): Logger =
         LogManager.getLogger(T::class.java)
