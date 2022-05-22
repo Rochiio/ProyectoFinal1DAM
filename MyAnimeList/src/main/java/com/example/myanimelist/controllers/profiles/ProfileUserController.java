@@ -46,7 +46,6 @@ public class ProfileUserController {
     private final User user= DependenciesManager.globalUser;
     private final EditFilters editionFilters= DependenciesManager.getEditFilter();
     private final Logger logger = LogManager.getLogger(ProfileUserController.class);
-    IImgStorage imgStorage = DependenciesManager.getImgStorage();
 
     @FXML
     public void initialize() {
@@ -54,7 +53,6 @@ public class ProfileUserController {
         txtName.setText(user.getName());
         txtPassword.setText(user.getPassword());
         txtBirthday.setText(user.getBirthDate().toString());
-        img.setImage(imgStorage.loadImg(user));
         root.getStylesheets().clear();
         root.getStylesheets().add(MyAnimeListApplication.class.getResource(ThemesManager.INSTANCE.getCurretnTheme().getValue()).toString());
     }

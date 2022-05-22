@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger
 
 //TODO add logger to log all db errors
 
-inline fun DataBaseManager.execute(logger: Logger? = null, action: () -> Unit) {
+inline fun DataBaseManager.execute(logger: Logger? = null, action: DataBaseManager.() -> Unit) {
     try {
         this.open()
         action()

@@ -3,6 +3,7 @@ package com.example.myanimelist.service.backup;
 import com.example.myanimelist.dto.BackupDTO;
 import com.example.myanimelist.utils.Properties;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.FileReader;
 import java.io.FileWriter;

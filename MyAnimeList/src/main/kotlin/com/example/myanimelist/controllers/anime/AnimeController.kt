@@ -1,6 +1,7 @@
 package com.example.myanimelist.controllers.anime
 
 import com.example.myanimelist.extensions.loadScene
+import com.example.myanimelist.extensions.show
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.repositories.animes.IAnimeRepository
@@ -53,6 +54,7 @@ class AnimeController {
      *  Añadir anime a su lista de animes.
      */
     fun addToList() {
+        val stage = txtTittle.scene.window as Stage
         val alert = Alert(Alert.AlertType.CONFIRMATION)
         alert.title = "Confirmación"
         alert.contentText = "Quiere añadir el anime ${txtTittle.text} a su lista"
@@ -61,12 +63,12 @@ class AnimeController {
         if (action.get() == ButtonType.OK) {
             val animeAux= animeRepository.findById(anime.id)
             animeListRepository.add(animeAux!!,user)
+            user.myList.add(animeAux)
+            Alert(Alert.AlertType.INFORMATION).show("Anime Añadido", "${anime.presentation.title} añadido a tu lista")
             logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
-
+            stage.close()
         } else {
-            val alerta= Alert(Alert.AlertType.INFORMATION)
-            alerta.title="Saliendo del anime"
-            val stage = txtTittle.scene.window as Stage
+            Alert(Alert.AlertType.INFORMATION).show("Saliendo", "Saliendo de Anime-Data")
             stage.close()
         }
 
@@ -83,7 +85,7 @@ class AnimeController {
         txtStatus.text = anime.status
         txtDate.text = anime.date.toString()
         txtGenre.text = anime.genres
-        imageAnime.image = (Image(ResourcesManager.getCoverOf(anime.id.toString())))
+        imageAnime.image = imgStorage.loadImg(anime.presentation)
     }
 
 
@@ -116,7 +118,6 @@ class AnimeController {
             val result = Alert(Alert.AlertType.CONFIRMATION)
             result.title = "Anime Eliminado"
         }
-
             val stage = txtTittle.scene.window as Stage
             stage.close()
     }
