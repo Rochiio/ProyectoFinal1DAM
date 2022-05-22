@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="110.0" layoutY="120.0" prefHeight="161.0" prefWidth="362.0" spacing="100.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="userAdminButton" contentDisplay="CENTER" mnemonicParsing="false"  prefHeight="150.0" prefWidth="178.0">
+                  <Button fx:id="userAdminButton" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="150.0" prefWidth="178.0">
                      <padding>
                         <Insets right="20.0" />
                      </padding>
@@ -37,14 +32,14 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="adminAnimeButton" contentDisplay="CENTER" mnemonicParsing="false"  prefHeight="174.0" prefWidth="177.0">
+                  <Button fx:id="adminAnimeButton" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="174.0" prefWidth="177.0">
                      <padding>
                         <Insets right="20.0" />
                      </padding>
                      <graphic>
                         <ImageView fitHeight="136.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/file.png" />
+                              <Image url="@../icons/add.png" />
                            </image>
                         </ImageView>
                      </graphic>
