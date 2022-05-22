@@ -1,17 +1,25 @@
 package com.example.myanimelist.controllers.profiles;
 
+import com.example.myanimelist.MyAnimeListApplication;
 import com.example.myanimelist.filters.edition.EditFilters;
 import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
 import com.example.myanimelist.repositories.users.IUsersRepository;
 import com.example.myanimelist.service.img.IImgStorage;
 import com.example.myanimelist.utils.Filters;
+import com.example.myanimelist.utils.ThemesManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.swing.text.html.StyleSheet;
+import java.io.IOException;
 import java.time.LocalDate;
 
 
@@ -30,6 +38,8 @@ public class ProfileUserController {
     public Button btnSave;
     @FXML
     public ImageView img;
+    @FXML
+    public AnchorPane root;
 
 
     private final IUsersRepository userRepository= DependenciesManager.getUsersRepo();
@@ -38,6 +48,16 @@ public class ProfileUserController {
     private final Logger logger = LogManager.getLogger(ProfileUserController.class);
     IImgStorage imgStorage = DependenciesManager.getImgStorage();
 
+    @FXML
+    public void initialize() {
+        txtEmail.setText(user.getEmail());
+        txtName.setText(user.getName());
+        txtPassword.setText(user.getPassword());
+        txtBirthday.setText(user.getBirthDate().toString());
+        img.setImage(imgStorage.loadImg(user));
+        root.getStylesheets().clear();
+        root.getStylesheets().add(MyAnimeListApplication.class.getResource(ThemesManager.INSTANCE.getCurretnTheme().getValue()).toString());
+    }
 
     public void onSave(ActionEvent actionEvent)  {
         StringBuilder errorLog = new StringBuilder();
@@ -62,14 +82,6 @@ public class ProfileUserController {
         DependenciesManager.globalUser= userUpdate;
     }
 
-    @FXML
-    public void initialize() {
-        txtEmail.setText(user.getEmail());
-        txtName.setText(user.getName());
-        txtPassword.setText(user.getPassword());
-        txtBirthday.setText(user.getBirthDate().toString());
-        img.setImage(imgStorage.loadImg(user));
-    }
 
 
     private boolean validate(StringBuilder error) {

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.profiles.ProfileUserController">
+<AnchorPane fx:id="root" minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.profiles.ProfileUserController">
    <VBox layoutX="65.0" layoutY="26.0" prefHeight="206.0" prefWidth="149.0" spacing="20.0" stylesheets="@../styles/claro.css" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="26.0">
       <TextField fx:id="txtEmail" promptText="Email" styleClass="text-input" />
       <TextField fx:id="txtName" layoutY="15.0" promptText="Username" styleClass="text-input">
