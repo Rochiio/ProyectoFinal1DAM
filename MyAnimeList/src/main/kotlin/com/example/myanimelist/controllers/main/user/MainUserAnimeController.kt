@@ -2,6 +2,7 @@ package com.example.myanimelist.controllers.main.user
 
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.*
@@ -55,6 +56,7 @@ class MainUserAnimeController {
     }
 
     private fun initCells() {
+        animeListView.items = animeList
         animeListView.setCellFactory {object:ListCell<AnimeView>(){
             override fun updateItem(item: AnimeView?, empty: Boolean) {
                 super.updateItem(item, empty)
@@ -85,8 +87,7 @@ class MainUserAnimeController {
                 imageview.fitHeight = 40.0
                 imageview.fitWidth = 40.0
                 imageview.image = imgStorage.loadImg(item.presentation)
-                presentationRoot.children.add(imageview)
-                presentationRoot.children.add(hbox)
+                presentationRoot.children.addAll(imageview, hbox)
 
                 //Rating
                 val rating = Label(item.rating)
@@ -95,7 +96,7 @@ class MainUserAnimeController {
                 val but = Button()
                 but.alignment = Pos.CENTER
                 val img = ImageView()
-                img.image = Image(Properties.ADD_ICON)
+                img.image = Image(ResourcesManager.getIconOf(Properties.ADD_ICON))
                 img.fitHeight = but.height
                 img.fitWidth = but.width
                 but.graphic = img
@@ -106,11 +107,9 @@ class MainUserAnimeController {
                         isResizable = false
                     }.show()
                 }
-                //Hacemos el setGraphic
 
+                //Añadimos todos los campos
                 root.children.addAll(ranking, presentationRoot, rating, but)
-
-                graphic = root
                 }
             }
         }
