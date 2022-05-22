@@ -7,7 +7,10 @@ import org.apache.logging.log4j.Logger
 
 object ThemesManager {
     val logger : Logger = LogManager.getLogger(ThemesManager::class)
+    private var currentTheme : Themes = Themes.CLARO
 
+
+    fun getCurretnTheme() : Themes { return currentTheme }
     /**
      * Cambia el modo entre oscuro y claro
      * @param Node un nodo de la interfaz
@@ -21,4 +24,18 @@ object ThemesManager {
         logger.info("Cambio exitoso. Modo noche activado.")
     }
 
+    fun setTheme(node : Node){
+        val sc = node.scene
+        val r = sc.root
+        node.scene.root.stylesheets.clear()
+        val theme : String = MyAnimeListApplication::class.java.getResource(currentTheme.value)!!.toString()
+        node.scene.root.stylesheets.add(theme)
+
+    }
+    fun changeTheme(){
+        currentTheme = if (currentTheme == Themes.CLARO)
+            Themes.OSCURO
+        else
+            Themes.CLARO
+    }
 }
