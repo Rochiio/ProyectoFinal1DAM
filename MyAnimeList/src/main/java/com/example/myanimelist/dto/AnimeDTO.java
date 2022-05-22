@@ -4,6 +4,7 @@ import com.example.myanimelist.models.Anime;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -42,7 +43,14 @@ public class AnimeDTO {
     }
 
     public Anime fromDTO() {
-        return new Anime(title, titleEnglish, types, episodes, status, LocalDate.parse(date), rating,
+        var newDate = LocalDate.now();
+        try {
+            newDate = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            System.out.println("el puto roberto con el localdate");
+            newDate = LocalDate.now();
+        }
+        return new Anime(title, titleEnglish, types, episodes, status, newDate, rating,
                 Arrays.stream(genres.split(",")).toList(), img, id);
     }
 
