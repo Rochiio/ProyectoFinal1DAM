@@ -59,7 +59,7 @@ public class ProfileAdminController {
             error.append("La confirmación no se corresponde.").append("\n");
         }
 
-        if (!Filters.checkEmail(emailLabel.getText())) {
+        if (Filters.checkEmail(emailLabel.getText())) {
             validation = false;
             error.append("Email no válido");
         }

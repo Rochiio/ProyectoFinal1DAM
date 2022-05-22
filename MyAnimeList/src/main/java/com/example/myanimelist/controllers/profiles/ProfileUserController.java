@@ -12,8 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.IOException;
 import java.time.LocalDate;
 
 
@@ -34,14 +32,14 @@ public class ProfileUserController {
     public ImageView img;
 
 
-    private IUsersRepository userRepository= DependenciesManager.getUsersRepo();
+    private final IUsersRepository userRepository= DependenciesManager.getUsersRepo();
     private final User user= DependenciesManager.globalUser;
-    private EditFilters editionFilters= DependenciesManager.getEditFilter();
-    private Logger logger = LogManager.getLogger(ProfileUserController.class);
+    private final EditFilters editionFilters= DependenciesManager.getEditFilter();
+    private final Logger logger = LogManager.getLogger(ProfileUserController.class);
     IImgStorage imgStorage = DependenciesManager.getImgStorage();
 
 
-    public void onSave(ActionEvent actionEvent) throws IOException {
+    public void onSave(ActionEvent actionEvent)  {
         StringBuilder errorLog = new StringBuilder();
         if (!validate(errorLog)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -73,17 +71,7 @@ public class ProfileUserController {
         img.setImage(imgStorage.loadImg(user));
     }
 
-    /*private void changeSceneToMain() throws IOException {
-        Stage stage = (Stage) saveBut.getScene().getWindow();
-        SceneManager sceneManager = SceneManager.INSTANCE;
-        sceneManager.changeScene(saveBut, ViewPathsKt.MAIN_USER_MYLIST);
-        *//*val stage = menuButton.scene.window as Stage
-        stage.loadScene(LOGIN){
-            title = "Log in"
-            isResizable = false
-        }.show()*//*
 
-    }*/
     private boolean validate(StringBuilder error) {
         if(!txtPassword.getText().equals(txtPasswordConfirm.getText())){
             error.append("Las contraseñas no coinciden");
