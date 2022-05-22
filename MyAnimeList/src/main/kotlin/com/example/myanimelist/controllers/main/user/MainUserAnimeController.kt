@@ -112,6 +112,7 @@ class MainUserAnimeController {
                     Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
                         title = item.presentation.title
                         isResizable = false
+                        icons.add(Image(ResourcesManager.getIconOf("icono.png")))
                     }.show()
                 }
 
@@ -132,6 +133,7 @@ class MainUserAnimeController {
             Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT){
                 title = anime.presentation.title
                 isResizable = false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
             }.show()
         }
     }

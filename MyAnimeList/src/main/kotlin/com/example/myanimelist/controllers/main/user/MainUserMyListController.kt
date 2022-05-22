@@ -92,6 +92,7 @@ class MainUserMyListController {
         stage.loadScene(MAIN_USER_ANIME) {
             title = "Añadir anime"
             isResizable = false
+            icons.add(Image(ResourcesManager.getIconOf("icono.png")))
         }.show()
 
     }
@@ -106,6 +107,7 @@ class MainUserMyListController {
         stage.loadScene(LOGIN) {
             title = "Log in"
             isResizable = false
+            icons.add(Image(ResourcesManager.getIconOf("icono.png")))
         }.show()
     }
 
