@@ -4,10 +4,10 @@ import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.repositories.users.IUsersRepository
-import com.example.myanimelist.utils.*
+import com.example.myanimelist.utils.HEIGHT
+import com.example.myanimelist.utils.PERFIL_VIEW_ADMIN
+import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.UserView
-import javafx.beans.value.ChangeListener
-import javafx.beans.value.ObservableValue
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.fxml.FXML
@@ -20,15 +20,18 @@ import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
 
 class UserAdminController {
-    private var logger : Logger = DependenciesManager.getLogger(UserAdminController::class.java)
+    private var logger: Logger = DependenciesManager.getLogger(UserAdminController::class.java)
     private var usersRepository: IUsersRepository = DependenciesManager.getUsersRepo()
     private var listUser: ObservableList<UserView> = FXCollections.observableArrayList()
+
     @FXML
     lateinit var tabla: TableView<UserView>
+
     @FXML
-    lateinit var columnName: TableColumn<UserView,String>
+    lateinit var columnName: TableColumn<UserView, String>
+
     @FXML
-    lateinit var columnEmail: TableColumn<UserView,String>
+    lateinit var columnEmail: TableColumn<UserView, String>
 
     @FXML
     fun initialize() {
@@ -43,8 +46,8 @@ class UserAdminController {
     }
 
     private fun initCells() {
-        tabla.items=listUser
-        columnName.setCellValueFactory { cellData -> cellData.value.nameProperty()}
+        tabla.items = listUser
+        columnName.setCellValueFactory { cellData -> cellData.value.nameProperty() }
         columnEmail.setCellValueFactory { cellData -> cellData.value.emailProperty() }
     }
 
@@ -53,11 +56,11 @@ class UserAdminController {
         if (mouseEvent.button === MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
             val user: UserView = tabla.selectionModel.selectedItem
             DependenciesManager.userSelectionAdmin = user
-                Stage().loadScene(PERFIL_VIEW_ADMIN, WIDTH, HEIGHT) {
-                    title = "User profile"
-                    isResizable = false
-                    icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                }.show()
+            Stage().loadScene(PERFIL_VIEW_ADMIN, WIDTH, HEIGHT) {
+                title = "User profile"
+                isResizable = false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+            }.show()
 
         }
     }

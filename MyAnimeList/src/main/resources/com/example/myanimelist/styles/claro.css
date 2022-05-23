@@ -1,26 +1,27 @@
-.fondo{
+.fondo {
     -fx-background-color: #99E2B4;
 }
 
-.acercaDeTexto{
+.acercaDeTexto {
     -fx-background-color: #88D4AB;
-    -fx-border-radius:  6px;
+    -fx-border-radius: 6px;
     -fx-background-radius: 6px;
 }
-.button{
-    -fx-border-radius:10;
+
+.button {
+    -fx-border-radius: 10;
     -fx-padding: 5;
     -fx-background-color: #67B99A;
-    -fx-text-fill:black;
+    -fx-text-fill: black;
 }
 
-.linkBasic{
-    -fx-text-fill:black;
-    -fx-font-weight:bold;
+.linkBasic {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
 }
 
-.tittle{
-    -fx-text-fill:black;
+.tittle {
+    -fx-text-fill: black;
     -fx-font-weight: normal;
     -fx-font-size: 40px;
     -fx-font-family: Arial;
@@ -28,12 +29,12 @@
 }
 
 
-.text-input:focused{
-    -fx-border-color:#036666;
+.text-input:focused {
+    -fx-border-color: #036666;
 }
 
-.animeDataText{
-    -fx-text-fill:black;
+.animeDataText {
+    -fx-text-fill: black;
     -fx-background-color: #88D4AB;
     -fx-font-weight: normal;
     -fx-font-size: 20px;

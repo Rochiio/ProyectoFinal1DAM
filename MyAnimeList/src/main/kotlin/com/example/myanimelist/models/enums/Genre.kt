@@ -17,7 +17,8 @@ enum class Genre(val value: String = "Unknown") {
     PSYCHOLOGICAL("Psychological"),
     SCI_FI("Sci-Fi"),
     ROMANCE("Romance");
+
     companion object {
-        val sample = FXCollections.observableArrayList(Genre.values().map{it.value}.toList())
+        val sample = FXCollections.observableArrayList(Genre.values().map { it.value }.toList())
     }
 }

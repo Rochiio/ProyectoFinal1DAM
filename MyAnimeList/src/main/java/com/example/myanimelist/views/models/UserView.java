@@ -50,72 +50,72 @@ public class UserView {
         return name.get();
     }
 
-    public StringProperty nameProperty() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name.set(name);
+    }
+
+    public StringProperty nameProperty() {
+        return name;
     }
 
     public String getEmail() {
         return email.get();
     }
 
-    public StringProperty emailProperty() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email.set(email);
+    }
+
+    public StringProperty emailProperty() {
+        return email;
     }
 
     public String getPassword() {
         return password.get();
     }
 
-    public StringProperty passwordProperty() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password.set(password);
+    }
+
+    public StringProperty passwordProperty() {
+        return password;
     }
 
     public LocalDate getCreateDate() {
         return createDate.get();
     }
 
-    public ObjectProperty<LocalDate> createDateProperty() {
-        return createDate;
-    }
-
     public void setCreateDate(LocalDate createDate) {
         this.createDate.set(createDate);
+    }
+
+    public ObjectProperty<LocalDate> createDateProperty() {
+        return createDate;
     }
 
     public LocalDate getBirthDate() {
         return birthDate.get();
     }
 
-    public ObjectProperty<LocalDate> birthDateProperty() {
-        return birthDate;
-    }
-
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate.set(birthDate);
+    }
+
+    public ObjectProperty<LocalDate> birthDateProperty() {
+        return birthDate;
     }
 
     public String getImg() {
         return img.get();
     }
 
-    public StringProperty imgProperty() {
-        return img;
-    }
-
     public void setImg(String img) {
         this.img.set(img);
+    }
+
+    public StringProperty imgProperty() {
+        return img;
     }
 
     public UUID getId() {
