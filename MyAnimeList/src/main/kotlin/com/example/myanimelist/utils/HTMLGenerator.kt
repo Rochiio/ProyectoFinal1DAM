@@ -14,12 +14,12 @@ class HTMLGenerator {
     """
 
 
-   private val BODY = """
+    private val BODY = """
       <body>
        <h1>Gráficos y Estadísticas</h1>
    """
 
-   private val BODY_CLOSE = """</body>
+    private val BODY_CLOSE = """</body>
        </html>
    """
 }

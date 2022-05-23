@@ -66,12 +66,11 @@ public class AnimeStorage implements IAnimeStorage {
         String title = fields[1];
         String titleEnglish = fields[2];
         String types = fields[3];
-        int episodes = (int)Double.parseDouble(fields[4]);
+        int episodes = (int) Double.parseDouble(fields[4]);
         String status = fields[5];
         String rating = fields[6];
         String genres = fields[8];
         String date = fields[9];
-        System.out.println(id);
         return new AnimeDTO(id, title, titleEnglish, types, episodes, status, date, rating, genres, id.toString());
     }
 

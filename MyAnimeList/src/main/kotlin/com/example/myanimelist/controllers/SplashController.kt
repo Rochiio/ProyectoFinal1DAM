@@ -1,8 +1,6 @@
 package com.example.myanimelist.controllers
 
-import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.SceneManager
-import com.example.myanimelist.service.anime.AnimeStorage
 import javafx.animation.FadeTransition
 import javafx.event.EventHandler
 import javafx.fxml.FXML
@@ -41,8 +39,7 @@ class SplashController : Initializable {
             val sceneManager = SceneManager
             try {
                 sceneManager.initMain()
-            }
-            catch (e: IOException) {
+            } catch (e: IOException) {
                 logger.error(e)
             }
         }

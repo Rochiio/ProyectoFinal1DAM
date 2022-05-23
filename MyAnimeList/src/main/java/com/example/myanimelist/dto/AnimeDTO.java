@@ -3,7 +3,6 @@ package com.example.myanimelist.dto;
 import com.example.myanimelist.models.Anime;
 import com.example.myanimelist.service.utils.Utils;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -46,7 +45,7 @@ public class AnimeDTO {
     public Anime fromDTO() {
         LocalDate newDate;
         try {
-             newDate = Utils.parseLocalDate(this.date);
+            newDate = Utils.parseLocalDate(this.date);
         } catch (DateTimeParseException e) {
             System.out.println("Error de fecha");
             newDate = LocalDate.now();

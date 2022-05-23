@@ -34,7 +34,7 @@ data class User(
         birthDate: LocalDate,
         img: String?,
         id: UUID = UUID.randomUUID(),
-        ) : this(name, email, password, createDate, birthDate, img, emptyList<Anime>().toMutableList(), id, false)
+    ) : this(name, email, password, createDate, birthDate, img, emptyList<Anime>().toMutableList(), id, false)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
