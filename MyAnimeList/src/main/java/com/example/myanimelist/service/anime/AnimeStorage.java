@@ -36,7 +36,7 @@ public class AnimeStorage implements IAnimeStorage {
 
     @Override
     public void save(List<AnimeDTO> dtoList) {
-        String header = "id,title,titleEnglish,types,episodes,status,date,rating,genres,img";
+        String header = "id,title,titleEnglish,types,episodes,status,date,rating,genres,img".replace(',', Properties.CSV_SEPARATOR);
         StringBuilder csv = new StringBuilder(header);
         var csvList = dtoList.stream().map(this::toCSV).toList();
         for (String s : csvList) {
@@ -61,7 +61,7 @@ public class AnimeStorage implements IAnimeStorage {
     }
 
     private AnimeDTO parse(String line) {
-        String[] fields = line.split(Properties.CSV_SEPARATOR);
+        String[] fields = line.split(String.valueOf(Properties.CSV_SEPARATOR));
         UUID id = UUID.fromString(fields[0]);
         String title = fields[1];
         String titleEnglish = fields[2];
@@ -77,15 +77,15 @@ public class AnimeStorage implements IAnimeStorage {
     private String toCSV(AnimeDTO animeDTO) {
 
         return "\n" +
-                animeDTO.getId() +
-                animeDTO.getTitle() +
-                animeDTO.getTitleEnglish() +
-                animeDTO.getTypes() +
-                animeDTO.getEpisodes() +
-                animeDTO.getStatus() +
-                animeDTO.getDate() +
-                animeDTO.getRating() +
-                animeDTO.getGenres() +
+                animeDTO.getId() + Properties.CSV_SEPARATOR +
+                animeDTO.getTitle() + Properties.CSV_SEPARATOR +
+                animeDTO.getTitleEnglish() + Properties.CSV_SEPARATOR +
+                animeDTO.getTypes() + Properties.CSV_SEPARATOR +
+                animeDTO.getEpisodes() + Properties.CSV_SEPARATOR +
+                animeDTO.getStatus() + Properties.CSV_SEPARATOR +
+                animeDTO.getDate() + Properties.CSV_SEPARATOR +
+                animeDTO.getRating() + Properties.CSV_SEPARATOR +
+                animeDTO.getGenres() + Properties.CSV_SEPARATOR +
                 animeDTO.getImg();
     }
 }
