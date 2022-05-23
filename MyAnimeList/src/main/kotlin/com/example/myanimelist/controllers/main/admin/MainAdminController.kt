@@ -15,10 +15,6 @@ class MainAdminController {
     @FXML
     private lateinit var nameSearch1: TextField
 
-    fun sortBy(actionEvent: ActionEvent) {
-
-    }
-
     fun generateHTML(actionEvent: ActionEvent) {
 
     }
