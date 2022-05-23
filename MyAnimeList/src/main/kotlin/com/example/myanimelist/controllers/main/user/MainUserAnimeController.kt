@@ -113,7 +113,7 @@ class MainUserAnimeController {
                         Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
                             title = item.presentation.title
                             isResizable = false
-                            icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+                            icons.add(Image(ResourcesManager.getIconOf("editar.png")))
                         }.show()
                     }else {
                         Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
