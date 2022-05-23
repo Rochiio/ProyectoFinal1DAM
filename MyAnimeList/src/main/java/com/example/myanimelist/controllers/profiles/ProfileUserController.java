@@ -21,6 +21,10 @@ import java.time.LocalDate;
 
 
 public class ProfileUserController {
+    private final IUsersRepository userRepository = DependenciesManager.getUsersRepo();
+    private final User user = DependenciesManager.globalUser;
+    private final EditFilters editionFilters = DependenciesManager.getEditFilter();
+    private final Logger logger = LogManager.getLogger(ProfileUserController.class);
     @FXML
     public TextField txtEmail;
     @FXML
@@ -38,12 +42,10 @@ public class ProfileUserController {
     @FXML
     public AnchorPane root;
 
-
     private final IUsersRepository userRepository = DependenciesManager.getUsersRepo();
     private final User user = DependenciesManager.globalUser;
     private final EditFilters editionFilters = DependenciesManager.getEditFilter();
     private final Logger logger = DependenciesManager.getLogger(ProfileUserController.class);
-
     @FXML
     public void initialize() {
         txtEmail.setText(user.getEmail());

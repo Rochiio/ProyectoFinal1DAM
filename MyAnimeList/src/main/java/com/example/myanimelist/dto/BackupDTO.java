@@ -11,16 +11,14 @@ import java.util.ArrayList;
  */
 
 public class BackupDTO {
+    public ArrayList<User> users;
+    public ArrayList<Review> reviews;
+    public ArrayList<Anime> animes;
     public BackupDTO(ArrayList<User> users, ArrayList<Review> reviews, ArrayList<Anime> animes) {
         this.users = users;
         this.reviews = reviews;
         this.animes = animes;
     }
-
     public BackupDTO() {
     }
-
-    public ArrayList<User> users;
-    public ArrayList<Review> reviews;
-    public ArrayList<Anime> animes;
 }

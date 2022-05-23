@@ -71,7 +71,6 @@ public class AnimeStorage implements IAnimeStorage {
         String rating = fields[6];
         String genres = fields[8];
         String date = fields[9];
-        System.out.println(id);
         return new AnimeDTO(id, title, titleEnglish, types, episodes, status, date, rating, genres, id.toString());
     }
 
