@@ -7,7 +7,6 @@ import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
 import com.example.myanimelist.repositories.users.IUsersRepository;
 import com.example.myanimelist.utils.ThemesManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -21,10 +20,6 @@ import java.time.LocalDate;
 
 
 public class ProfileUserController {
-    private final IUsersRepository userRepository = DependenciesManager.getUsersRepo();
-    private final User user = DependenciesManager.globalUser;
-    private final EditFilters editionFilters = DependenciesManager.getEditFilter();
-    private final Logger logger = LogManager.getLogger(ProfileUserController.class);
     @FXML
     public TextField txtEmail;
     @FXML
@@ -46,6 +41,7 @@ public class ProfileUserController {
     private final User user = DependenciesManager.globalUser;
     private final EditFilters editionFilters = DependenciesManager.getEditFilter();
     private final Logger logger = DependenciesManager.getLogger(ProfileUserController.class);
+
     @FXML
     public void initialize() {
         txtEmail.setText(user.getEmail());
@@ -56,7 +52,7 @@ public class ProfileUserController {
         root.getStylesheets().add(MyAnimeListApplication.class.getResource(ThemesManager.INSTANCE.getCurretnTheme().getValue()).toString());
     }
 
-    public void onSave(ActionEvent actionEvent) {
+    public void onSave() {
         StringBuilder errorLog = new StringBuilder();
         if (!validate(errorLog)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

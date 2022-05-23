@@ -12,8 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 public class ProfileAdminController {
-
-    private final User user = DependenciesManager.globalUser;
     public TextField emailLabel;
     public TextField nameLabel;
     public TextField passLabel;
