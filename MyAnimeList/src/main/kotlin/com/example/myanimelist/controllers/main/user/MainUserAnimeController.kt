@@ -105,8 +105,8 @@ class MainUserAnimeController {
                 val img = ImageView()
                 if(user.admin) img.image = Image(ResourcesManager.getIconOf(Properties.ADD_ICON))
                 else img.image = Image(ResourcesManager.getIconOf(Properties.EDIT_ICON))
-                img.fitHeight = 10.0
-                img.fitWidth = 10.0
+                img.fitHeight = 20.0
+                img.fitWidth = 20.0
                 but.graphic = img
                 but.setOnAction {
                     DependenciesManager.animeSelection = item
