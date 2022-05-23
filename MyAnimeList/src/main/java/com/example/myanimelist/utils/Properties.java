@@ -23,5 +23,6 @@ public class Properties {
     public static final String DEFAULT_USER_ICON = ICONS_DIR + File.separator + "default.png";
     public static final String SCRIPT_FILE_DATABASE = DB_DIR + File.separator + "testsData.sql";
     public static final String ADD_ICON = "add.png";
+    public static final String EDIT_ICON = "add.png";
     public static final String DEFAULT_IMAGE = "image.png";
 }
