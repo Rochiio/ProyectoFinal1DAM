@@ -17,7 +17,7 @@
             <Insets />
          </VBox.margin>
       </TextField>
-      <TextField fx:id="txtBirthday" promptText="Birthday" />
+      <TextField fx:id="txtBirthday" promptText="aaaa-mm-dd" styleClass="text-input" />
       <PasswordField fx:id="txtPassword" promptText="Password" styleClass="text-input" />
       <PasswordField fx:id="txtPasswordConfirm" promptText="Confirm Password" styleClass="text-input" />
    </VBox>
