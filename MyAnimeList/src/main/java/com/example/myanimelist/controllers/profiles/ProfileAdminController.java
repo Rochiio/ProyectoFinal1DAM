@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 
 public class ProfileAdminController {
 
+    private final User user = DependenciesManager.globalUser;
     public TextField emailLabel;
     public TextField nameLabel;
     public TextField passLabel;
@@ -19,9 +20,6 @@ public class ProfileAdminController {
     public Button saveBut;
     public Button deleteBut;
     public ImageView img;
-
-    private final User user = DependenciesManager.globalUser;
-
     IImgStorage imgStorage = DependenciesManager.getImgStorage();
 
     public void onSave(ActionEvent actionEvent) {
