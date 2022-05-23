@@ -9,11 +9,9 @@ inline fun DataBaseManager.execute(logger: Logger? = null, action: DataBaseManag
     try {
         this.open()
         action()
-    }
-    catch (ex: Exception) {
+    } catch (ex: Exception) {
         logger?.error(ex) ?: println(ex)
-    }
-    finally {
+    } finally {
         this.close()
     }
 }

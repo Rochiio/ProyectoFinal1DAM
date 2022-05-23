@@ -5,6 +5,7 @@ import com.example.myanimelist.models.enums.Genre;
 import com.example.myanimelist.models.enums.Status;
 import com.example.myanimelist.models.enums.Type;
 import javafx.beans.property.*;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.UUID;
 
 public class AnimeView {
 
-    IntegerProperty ranking = new SimpleIntegerProperty(0);
     final ObjectProperty<Presentation> presentation;
     final StringProperty types;
     final IntegerProperty episodes;
@@ -22,6 +22,7 @@ public class AnimeView {
     final StringProperty rating;
     final StringProperty genres;
     final UUID id;
+    IntegerProperty ranking = new SimpleIntegerProperty(0);
 
     public AnimeView(String title, String titleEnglish, String types, int episodes, String status, LocalDate date, String rating, List<String> genres, String img, UUID id) {
         this.presentation = new SimpleObjectProperty<>(new Presentation(title, titleEnglish, id.toString()));
@@ -45,7 +46,7 @@ public class AnimeView {
         this.id = anime.getId();
     }
 
-    public Anime toPOJO(){
+    public Anime toPOJO() {
         return new Anime(this.presentation.get().getTitle(),
                 this.presentation.get().getTitleEnglish(),
                 this.getTypes(),
@@ -56,105 +57,104 @@ public class AnimeView {
                 Arrays.stream(this.getGenres().split(",")).toList(),
                 this.presentation.get().getImg(),
                 this.getId()
-                );
+        );
     }
 
     public int getRanking() {
         return ranking.get();
     }
 
-    public IntegerProperty rankingProperty() {
-        return ranking;
-    }
-
     public void setRanking(int ranking) {
         this.ranking.set(ranking);
+    }
+
+    public IntegerProperty rankingProperty() {
+        return ranking;
     }
 
     public Presentation getPresentation() {
         return presentation.get();
     }
 
-    public ObjectProperty<Presentation> presentationProperty() {
-        return presentation;
-    }
-
     public void setPresentation(Presentation presentation) {
         this.presentation.set(presentation);
+    }
+
+    public ObjectProperty<Presentation> presentationProperty() {
+        return presentation;
     }
 
     public String getTypes() {
         return types.get();
     }
 
-    public StringProperty typesProperty() {
-        return types;
-    }
-
     public void setTypes(String types) {
         this.types.set(types);
+    }
+
+    public StringProperty typesProperty() {
+        return types;
     }
 
     public int getEpisodes() {
         return episodes.get();
     }
 
-    public IntegerProperty episodesProperty() {
-        return episodes;
-    }
-
     public void setEpisodes(int episodes) {
         this.episodes.set(episodes);
+    }
+
+    public IntegerProperty episodesProperty() {
+        return episodes;
     }
 
     public String getStatus() {
         return status.get();
     }
 
-    public StringProperty statusProperty() {
-        return status;
-    }
-
     public void setStatus(String status) {
         this.status.set(status);
+    }
+
+    public StringProperty statusProperty() {
+        return status;
     }
 
     public LocalDate getDate() {
         return date.get();
     }
 
-    public ObjectProperty<LocalDate> dateProperty() {
-        return date;
-    }
-
     public void setDate(LocalDate date) {
         this.date.set(date);
+    }
+
+    public ObjectProperty<LocalDate> dateProperty() {
+        return date;
     }
 
     public String getRating() {
         return rating.get();
     }
 
-    public StringProperty ratingProperty() {
-        return rating;
-    }
-
     public void setRating(String rating) {
         this.rating.set(rating);
+    }
+
+    public StringProperty ratingProperty() {
+        return rating;
     }
 
     public String getGenres() {
         return genres.get();
     }
 
-    public StringProperty genresProperty() {
-        return genres;
-    }
-
     public void setGenres(String genres) {
         this.genres.set(genres);
     }
 
+    public StringProperty genresProperty() {
+        return genres;
+    }
 
     public UUID getId() {
         return id;
@@ -177,17 +177,17 @@ public class AnimeView {
     }
 
     public void enumParser(String selection) {
-        for(String sample :Genre.Companion.getSample()){
+        for (String sample : Genre.Companion.getSample()) {
             if (Objects.equals(selection, sample.split(",")[0])) setGenres(selection);
             return;
         }
 
-        for(String sample : Status.Companion.getSample()){
+        for (String sample : Status.Companion.getSample()) {
             if (Objects.equals(selection, sample)) setStatus(selection);
             return;
         }
 
-        for(String sample : Type.Companion.getSample()){
+        for (String sample : Type.Companion.getSample()) {
             if (Objects.equals(selection, sample)) setTypes(selection);
         }
     }

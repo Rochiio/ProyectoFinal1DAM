@@ -11,7 +11,6 @@ import com.example.myanimelist.views.models.Presentation
 import com.example.myanimelist.views.models.ReviewView
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
-import javafx.collections.transformation.FilteredList
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.Button
@@ -72,8 +71,8 @@ class MainUserMyListController {
     }
 
     private fun initCells() {
-        myListTable=TableView(animeList)
-        myListTable.items=animeList
+        myListTable = TableView(animeList)
+        myListTable.items = animeList
         myListRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
         myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
         myListScoreCol.setCellValueFactory { cellData -> cellData.value.scoreProperty().asObject() }
@@ -112,7 +111,7 @@ class MainUserMyListController {
     }
 
     fun changeSceneToAnimeView(mouseEvent: MouseEvent) {
-        if(mouseEvent.button == MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
+        if (mouseEvent.button == MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
             DependenciesManager.animeSelection = myListTable.selectionModel.selectedItem
             if (DependenciesManager.globalUser.admin) {
                 Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {

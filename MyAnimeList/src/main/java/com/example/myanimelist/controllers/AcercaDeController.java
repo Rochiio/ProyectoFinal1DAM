@@ -22,11 +22,13 @@ public class AcercaDeController {
 
     @FXML
     public Pane root;
+
     @FXML
-    public void initialize(){
+    public void initialize() {
         root.getStylesheets().clear();
         root.getStylesheets().add(MyAnimeListApplication.class.getResource(ThemesManager.INSTANCE.getCurretnTheme().getValue()).toString());
     }
+
     @FXML
     private void linkGitHub(ActionEvent event) {
         var node = (Node) event.getSource();

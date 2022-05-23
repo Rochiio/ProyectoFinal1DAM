@@ -38,14 +38,14 @@ class LoginController : InicioController() {
         val stage = txtUsername.scene.window as Stage
 
 
-        if(!DependenciesManager.globalUser.admin) {
-            stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
+        if (!DependenciesManager.globalUser.admin) {
+            stage.loadScene(MAIN_USER_MYLIST, WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
                 icons.add(Image(ResourcesManager.getIconOf("icono.png")))
             }.show()
-        }else{
-            stage.loadScene(MAIN_ADMIN,WIDTH, HEIGHT) {
+        } else {
+            stage.loadScene(MAIN_ADMIN, WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
                 icons.add(Image(ResourcesManager.getIconOf("icono.png")))
@@ -68,11 +68,11 @@ class LoginController : InicioController() {
 
 
     private fun validateFields(errorMessage: StringBuilder): Boolean {
-        if(!loginFilters.checkUserCorrect(txtUsername.text)) {
+        if (!loginFilters.checkUserCorrect(txtUsername.text)) {
             errorMessage.appendLine("Usuario ${txtUsername.text} incorrecto")
             return false
         }
-        if(!loginFilters.checkPasswordCorrect(txtUsername.text,txtPassword.text)){
+        if (!loginFilters.checkPasswordCorrect(txtUsername.text, txtPassword.text)) {
             errorMessage.appendLine("Contraseña incorrecta")
             return false
         }
