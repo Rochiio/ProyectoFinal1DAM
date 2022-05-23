@@ -1,17 +1,20 @@
 package com.example.myanimelist.repositories.users
 
 import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
-import com.example.myanimelist.repositories.RepoTest
 import com.example.myanimelist.utilities.*
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import java.util.*
 
 
-class UsersRepositoryTest : RepoTest() {
+class UsersRepositoryTest {
     private val usersRepository = getUsersRepo()
+
+    @BeforeEach
+    fun setUp() = resetDb()
 
     @Test
     fun findById() {

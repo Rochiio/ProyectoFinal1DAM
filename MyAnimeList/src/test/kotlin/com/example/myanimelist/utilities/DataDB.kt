@@ -1,11 +1,14 @@
 package com.example.myanimelist.utilities
 
+import com.example.myanimelist.extensions.execute
+import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.models.User
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
+import com.example.myanimelist.utils.Properties
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -123,9 +126,15 @@ fun getNewTestingAnime() = Anime(
     id = UUID.randomUUID()
 )
 
-
 fun getTestingReview() =
     Review(getTestingAnime(), getTestingUser(), 10, "ta guapo", UUID.fromString("f8c3de3d-1fea-4d7c-a8b0-29f63c4c3456"))
 
 fun getNewTestingReview() =
     Review(getTestingAnimeUpdate(), getTestingUserUpdate(), 10, "ta guapo", UUID.randomUUID())
+
+fun resetDb() {
+    DependenciesManager.isTesting = true
+    DependenciesManager.getDatabaseManager().execute {
+        initData(Properties.SCRIPT_FILE_DATABASE, false)
+    }
+}
