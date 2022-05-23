@@ -23,7 +23,7 @@ fun getTestingUser() =
         LocalDate.parse("2015-12-17", datetimeFormatter),
         LocalDate.parse("2015-12-17", datetimeFormatter),
         null,
-        emptyList(),
+        emptyList<Anime>().toMutableList(),
         UUID.fromString("f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454"),
         false
     )
@@ -36,7 +36,7 @@ fun getTestingUserDelete() =
         LocalDate.parse("2015-12-17", datetimeFormatter),
         LocalDate.parse("2015-12-17", datetimeFormatter),
         null,
-        emptyList(),
+        emptyList<Anime>().toMutableList(),
         UUID.fromString("f8c3de3d-1fea-4d7c-a8b0-29f63c4c3444"),
         false
     )
@@ -49,7 +49,7 @@ fun getTestingUserUpdate() =
         LocalDate.parse("2015-12-17", datetimeFormatter),
         LocalDate.parse("2015-12-17", datetimeFormatter),
         null,
-        emptyList(),
+        emptyList<Anime>().toMutableList(),
         UUID.fromString("f8c3de3d-1fea-4d7c-a8b0-29f63c4c3434"),
         false
     )
@@ -66,7 +66,7 @@ fun getNewTestingUser() =
         LocalDate.parse("2015-12-17", datetimeFormatter),
         LocalDate.parse("2015-12-17", datetimeFormatter),
         null,
-        emptyList(),
+        emptyList<Anime>().toMutableList(),
         UUID.randomUUID(),
         false
     )

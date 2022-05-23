@@ -1,4 +1,4 @@
-package com.example.myanimelist.controllers.main
+package com.example.myanimelist.controllers.main.admin
 
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
@@ -14,10 +14,6 @@ class MainAdminController {
 
     @FXML
     private lateinit var nameSearch1: TextField
-
-    fun sortBy(actionEvent: ActionEvent) {
-
-    }
 
     fun generateHTML(actionEvent: ActionEvent) {
 

@@ -5,9 +5,11 @@ import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLoginFilter
+import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.utils.*
 import javafx.scene.control.Alert
+import javafx.scene.image.Image
 import javafx.stage.Stage
 
 
@@ -23,6 +25,7 @@ class LoginController : InicioController() {
         stage.loadScene(REGISTER, WIDTH, HEIGHT) {
             title = "Registro"
             isResizable = false
+            icons.add(Image(ResourcesManager.getIconOf("icono.png")))
         }.show()
     }
 
@@ -30,6 +33,7 @@ class LoginController : InicioController() {
     private fun changeSceneToMain() {
         DependenciesManager.globalUser =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
+        DependenciesManager.globalUser.myList.addAll(animesUserList.findByUserId(DependenciesManager.globalUser))
 
         val stage = txtUsername.scene.window as Stage
 
@@ -38,11 +42,13 @@ class LoginController : InicioController() {
             stage.loadScene(MAIN_USER_MYLIST,WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
             }.show()
         }else{
             stage.loadScene(MAIN_ADMIN,WIDTH, HEIGHT) {
                 title = "Animes"
                 isResizable = false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
             }.show()
         }
     }

@@ -1,53 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="600.0" styleClass="fondo">
-         <children>
-            <TabPane prefHeight="385.0" prefWidth="583.0" styleClass="fondo" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab styleClass="fondo" text="Usuarios">
-                     <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fondo">
-                           <children>
-                              <TableView prefHeight="358.0" prefWidth="585.0" styleClass="fondo">
-                                <columns>
-                                  <TableColumn prefWidth="93.3333410024643" text="Id" />
-                                  <TableColumn prefWidth="217.33328247070312" text="Nombre">
-                                       <graphic>
-                                          <TextField prefHeight="25.0" prefWidth="101.0" />
-                                       </graphic></TableColumn>
-                                    <TableColumn prefWidth="272.66668701171875" text="Correo">
-                                       <graphic>
-                                          <TextField alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="126.0" />
-                                       </graphic>
-                                    </TableColumn>
-                                </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                </Tab>
-                <Tab styleClass="fondo" text="Animes">
-                     <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                     </content>
-                </Tab>
-                  <Tab styleClass="fondo" text="Gráficos y estadísticas">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="fondo" />
-                    </content>
-                  </Tab>
-              </tabs>
-            </TabPane>
-         </children></AnchorPane>
-  </content>
-</ScrollPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.main.admin.UserAdminController">
+   <children>
+      <TableView fx:id="tabla" onMouseClicked="#changeSceneToProfileUser" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="columnName" prefWidth="300.0" resizable="false" text="Nombre" />
+          <TableColumn fx:id="columnEmail" prefWidth="300.0" text="Email" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
