@@ -64,6 +64,7 @@ public class ProfileUserController {
             creationUpdateUser();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Actualización correcta");
+            alert.setHeaderText("Has actualizado tu perfil");
             alert.show();
         }
 
