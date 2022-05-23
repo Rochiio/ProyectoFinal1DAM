@@ -1,18 +1,17 @@
 package com.example.myanimelist.controllers.profiles;
 
+import com.example.myanimelist.extensions.AlertExtensionsKt;
+import com.example.myanimelist.filters.FiltersUtilsKt;
+import com.example.myanimelist.filters.login.RegisterFilters;
 import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
 import com.example.myanimelist.service.img.IImgStorage;
-import com.example.myanimelist.utils.Filters;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 public class ProfileAdminController {
-
-    private final User user = DependenciesManager.globalUser;
     public TextField emailLabel;
     public TextField nameLabel;
     public TextField passLabel;
@@ -20,13 +19,19 @@ public class ProfileAdminController {
     public Button saveBut;
     public Button deleteBut;
     public ImageView img;
+
+    private final User user = DependenciesManager.globalUser;
+    private final RegisterFilters registerFilter = DependenciesManager.getRegisterFilter();
+
     IImgStorage imgStorage = DependenciesManager.getImgStorage();
 
-    public void onSave(ActionEvent actionEvent) {
+    public void onSave() {
         StringBuilder errorLog = new StringBuilder();
         if (!validate(errorLog)) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Registro inválido" + errorLog);
+            AlertExtensionsKt.show(
+                    new Alert(Alert.AlertType.WARNING),
+                    "Registro invalido",
+                    errorLog.toString());
             return;
         }
         this.user.setEmail(emailLabel.getText());
@@ -36,33 +41,21 @@ public class ProfileAdminController {
 
     private boolean validate(StringBuilder error) {
 
-        boolean validation = true;
-
-        if (nameLabel.getText().isBlank()) {
-            validation = false;
+        if (nameLabel.getText().isBlank())
             error.append("El nombre no puede estar vacío.").append("\n");
-        }
 
-        if (emailLabel.getText().isBlank()) {
-            validation = false;
-            error.append("El email no puede estar vacío.").append("\n");
-        }
+        if (registerFilter.checkUserCorrect(nameLabel.getText()))
+            error.append("El nombre ya existe.").append("\n");
 
-        if (passLabel.getText().isBlank()) {
-            validation = false;
+        if (!registerFilter.checkPass(passLabel.getText()))
             error.append("La contraseña no puede estar vacía.").append("\n");
-        }
 
-        if (!(passLabel.getText().equals(confirmLabel.getText()))) {
-            validation = false;
+        if (!passLabel.getText().equals(confirmLabel.getText()))
             error.append("La confirmación no se corresponde.").append("\n");
-        }
 
-        if (Filters.checkEmail(emailLabel.getText())) {
-            validation = false;
+        if (FiltersUtilsKt.checkEmail(emailLabel.getText()))
             error.append("Email no válido");
-        }
 
-        return validation;
+        return error.isEmpty();
     }
 }
