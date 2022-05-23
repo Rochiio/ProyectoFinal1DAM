@@ -5,7 +5,7 @@ import java.io.File;
 public class Properties {
 
     //Misc
-    public static final String CSV_SEPARATOR = ";";
+    public static final char CSV_SEPARATOR = ';';
 
     //Directories
     public static final String PATH = System.getProperty("user.dir");
@@ -15,7 +15,6 @@ public class Properties {
     public static final String JSON_DIR = DATA_DIR + File.separator + "json";
     public static final String IMG_DIR = DATA_DIR + File.separator + "img";
     public static final String ANIME_SAVE = CSV_DIR + File.separator + "anime_save.csv";
-    public static final String ANIME_LOAD = CSV_DIR + File.separator + "anime_load.csv";
     public static final String ANIME_CSV = CSV_DIR + File.separator + "animeCSVSmall.csv";
     public static final String JSON_FILE = JSON_DIR + File.separator + "backup.json";
     public static final String RESOURCES_DIR = PATH + File.separator + "resources";
