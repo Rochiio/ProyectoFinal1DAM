@@ -1,12 +1,12 @@
 package com.example.myanimelist.controllers.profiles;
 
 import com.example.myanimelist.MyAnimeListApplication;
+import com.example.myanimelist.filters.FiltersUtilsKt;
 import com.example.myanimelist.filters.edition.EditFilters;
 import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
 import com.example.myanimelist.repositories.users.IUsersRepository;
 import com.example.myanimelist.service.img.IImgStorage;
-import com.example.myanimelist.utils.Filters;
 import com.example.myanimelist.utils.ThemesManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
