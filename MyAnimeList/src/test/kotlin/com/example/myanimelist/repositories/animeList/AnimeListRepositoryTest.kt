@@ -1,18 +1,17 @@
 package com.example.myanimelist.repositories.animeList
 
 import com.example.myanimelist.managers.DependenciesManager
-import com.example.myanimelist.repositories.RepoTest
-import com.example.myanimelist.utilities.getTestingAnime
-import com.example.myanimelist.utilities.getTestingAnimeUpdate
-import com.example.myanimelist.utilities.getTestingUser
-import com.example.myanimelist.utilities.getTestingUserUpdate
+import com.example.myanimelist.utilities.*
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-internal class AnimeListRepositoryTest : RepoTest() {
+internal class AnimeListRepositoryTest {
 
     private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
 
+    @BeforeEach
+    fun setUp() = resetDb()
 
     @Test
     fun add() {
