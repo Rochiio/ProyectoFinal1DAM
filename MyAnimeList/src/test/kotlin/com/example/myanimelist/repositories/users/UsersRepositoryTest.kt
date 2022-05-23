@@ -1,34 +1,22 @@
 package com.example.myanimelist.repositories.users
 
-//import com.example.myanimelist.modules.repositoryModule
-
-import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
 import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
-import com.example.myanimelist.utilities.DataDB
-import com.example.myanimelist.utilities.DataDB.getTestingAnime
-import com.example.myanimelist.utilities.DataDB.getTestingUser
-import org.junit.jupiter.api.AfterEach
+import com.example.myanimelist.repositories.RepoTest
+import com.example.myanimelist.utilities.*
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import java.util.*
 
-class UsersRepositoryTest {
 
+class UsersRepositoryTest : RepoTest() {
     private val usersRepository = getUsersRepo()
-    private val animeRepository = getAnimesRepo()
-
-    @AfterEach
-    fun deleteAll() {
-        DataDB.deleteAll("usuarios")
-        DataDB.deleteAll("animeLists")
-    }
-
 
     @Test
     fun findById() {
         val user = getTestingUser()
 
-        usersRepository.add(user)
         val insertedUser = usersRepository.findById(user.id)
 
         assert(user == insertedUser)
@@ -44,7 +32,6 @@ class UsersRepositoryTest {
     @Test
     fun findByName() {
         val user = getTestingUser()
-        usersRepository.add(user)
         val users = usersRepository.findByName("Pep")
 
         assert(users.contains(user))
@@ -53,41 +40,32 @@ class UsersRepositoryTest {
     @Test
     fun findByNameShouldReturnEmpty() {
         val users = usersRepository.findByName("asdsadad")
-
         assert(!users.any())
     }
 
     @Test
     fun findAll() {
-        val user1 = usersRepository.add(
-            getTestingUser()
-        )
-        val user2 = usersRepository.add(
-            getTestingUser()
-        )
+        val user = getTestingUser()
         val users = usersRepository.findAll().toList()
 
-        assert(users.containsAll(listOf(user1, user2)))
+        assert(users.containsAll(listOf(user)))
     }
 
     @Test
     fun update() {
-        val userTest = getTestingUser()
+        val userTest = getTestingUserUpdate()
 
-        usersRepository.add(userTest)
         val userUpdated = usersRepository.update(
             userTest.also { it.name = "PepeUpdated" }
         )
 
-        val user = usersRepository.findById(userTest.id)
-
-        assert(user?.name == userUpdated?.name)
+        assertNotNull(userUpdated?.name)
     }
 
     @Test
     fun updateShouldReturnNull() {
         val user = usersRepository.update(
-            getTestingUser().also { it.name = "PepeUpdated" }
+            getNewTestingUser().also { it.name = "PepeUpdated" }
         )
 
         assert(user == null)
@@ -95,53 +73,45 @@ class UsersRepositoryTest {
 
     @Test
     fun add() {
-        val userTest = getTestingUser()
-
+        val userTest = getNewTestingUser()
         val userCreated = usersRepository.add(userTest)
-
-        val user = usersRepository.findById(userTest.id)
-        assert(user == userCreated)
+        assertNotNull(userCreated)
     }
 
     @Test
+    @Order(0)
     fun addToList() {
-        val userCreated = usersRepository.add(getTestingUser()) ?: throw Exception()
-        val animeCreated = animeRepository.add(getTestingAnime()) ?: throw Exception()
+        val user = getTestingUser()
+        val anime = getTestingAnime()
 
-        val user = usersRepository.addToList(userCreated, animeCreated)
-        assert(user?.myList?.first() == animeCreated)
+        val userWithList = usersRepository.addToList(user, anime)
+        assertNotNull(userWithList)
     }
 
     @Test
+    @Order(1)
     fun removeFromList() {
-        val userCreated = usersRepository.add(getTestingUser()) ?: throw Exception()
-        val animeCreated = animeRepository.add(getTestingAnime()) ?: throw Exception()
+        val user = getTestingUser()
+        val anime = getTestingAnime()
 
-        val list = usersRepository.addToList(userCreated, animeCreated)?.myList?.toList()
-        val listEmpty = usersRepository.removeFromList(userCreated, animeCreated)?.myList?.toList()
+        val userWithList = usersRepository.removeFromList(user, anime)
 
-        assert(list?.any()!! && !listEmpty?.any()!!)
+        assertNotNull(userWithList)
     }
 
     @Test
     fun addShouldReturnNull() {
         val user = getTestingUser()
-        usersRepository.add(user)
 
         val userCreatedNull = usersRepository.add(user)
 
-        assert(userCreatedNull == null)
+        assertNull(userCreatedNull)
     }
 
     @Test
     fun delete() {
-        val userTest = getTestingUser()
-        usersRepository.add(userTest)
-
-        val user = usersRepository.findById(userTest.id)
-        usersRepository.delete(userTest.id)
-        val notUser = usersRepository.findById(userTest.id)
-
-        assert(user != null && notUser == null)
+        val user = getTestingUserDelete()
+        usersRepository.delete(user.id)
+        assertNull(usersRepository.findById(user.id))
     }
 }

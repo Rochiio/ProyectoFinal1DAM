@@ -9,11 +9,27 @@ open class EditFilters {
     }
 
     fun checkStatusCorrect(value: String): Boolean{
-        return Status.values().equals(value) || value.isEmpty()
+            for (item in Status.values()){
+                if (item.value == value){
+                    return true
+                }
+            }
+            if(value.isEmpty()){
+                return true
+            }
+        return false
     }
 
     fun checkGenreCorrect(value: String): Boolean {
-        return Genre.values().equals(value) || value.isEmpty()
+            for (item in Genre.values()){
+                if (item.value == value){
+                    return true
+                }
+            }
+            if(value.isEmpty()){
+                return true
+            }
+        return false
     }
 
     fun checkDateCorrect(value: String): Boolean{

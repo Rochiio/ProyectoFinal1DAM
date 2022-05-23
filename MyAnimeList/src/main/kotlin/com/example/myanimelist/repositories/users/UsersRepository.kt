@@ -181,7 +181,7 @@ class UsersRepository(
             user.createDate,
             user.birthDate,
             user.img,
-            getAnimeLists(user.id),
+            getAnimeLists(user.id) as MutableList<Anime>,
             user.id,
             user.admin
         )

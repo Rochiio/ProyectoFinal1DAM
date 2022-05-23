@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -15,11 +14,10 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.main.user.MainUserMyListController">
 
    <children>
-      <GridPane layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="241.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="215.0" />
@@ -30,7 +28,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField prefHeight="24.0" prefWidth="205.0">
+            <TextField prefHeight="24.0" prefWidth="205.0" styleClass="text-input">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
@@ -51,12 +49,7 @@
                   </MenuItem>
 
                   <MenuItem fx:id="menuProfileOpt" mnemonicParsing="false" onAction="#changeSceneToProfileUser" text="Editar perfil" />
-                  <MenuItem mnemonicParsing="false" onAction="#changeMainTheme" text="Modo noche">
-
-                     <graphic>
-                        <RadioButton fx:id="radioNoche1" mnemonicParsing="false" onAction="#changeMainTheme" styleClass="fondo" />
-                     </graphic>
-                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#changeMainTheme" text="Modo noche" />
                   <MenuItem mnemonicParsing="false" onAction="#logout" styleClass="fondo" text="Cerrar sesión" />
                </items>
                <graphic>
@@ -74,7 +67,7 @@
             <Button fx:id="addAnimeButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeSceneToAddAnime" text="Añadir" GridPane.columnIndex="2" />
          </children>
       </GridPane>
-      <TableView layoutY="56.0" onMouseClicked="#changeSceneToAnimeView" prefHeight="344.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <TableView layoutY="56.0" onMouseClicked="#changeSceneToAnimeView" prefHeight="344.0" prefWidth="600.0" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <columns>
             <TableColumn fx:id="myListRankingCol" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Ranking" />
             <TableColumn fx:id="myListTitleCol" prefWidth="281.0" text="Anime" />

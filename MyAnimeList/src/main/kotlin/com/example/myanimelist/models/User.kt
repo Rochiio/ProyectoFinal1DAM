@@ -4,15 +4,15 @@ import java.time.LocalDate
 import java.util.*
 
 data class User(
-     var name: String,
-     var email: String,
-     var password: String,
-     val createDate: LocalDate,
-     val birthDate: LocalDate,
-     var img: String?,
-     val myList: List<Anime>,
-     val id: UUID = UUID.randomUUID(),
-     val admin: Boolean
+    var name: String,
+    var email: String,
+    var password: String,
+    val createDate: LocalDate,
+    val birthDate: LocalDate,
+    var img: String?,
+    val myList: MutableList<Anime>,
+    val id: UUID = UUID.randomUUID(),
+    val admin: Boolean
 ) {
 
     constructor(
@@ -24,7 +24,7 @@ data class User(
         img: String?,
         admin: Boolean,
         id: UUID = UUID.randomUUID()
-    ) : this(name, email, password, createDate, birthDate, img, emptyList<Anime>(), id, admin)
+    ) : this(name, email, password, createDate, birthDate, img, emptyList<Anime>().toMutableList(), id, admin)
 
     constructor(
         name: String,
@@ -34,8 +34,7 @@ data class User(
         birthDate: LocalDate,
         img: String?,
         id: UUID = UUID.randomUUID(),
-        ) : this(name, email, password, createDate, birthDate, img, emptyList<Anime>(), id, false)
-
+        ) : this(name, email, password, createDate, birthDate, img, emptyList<Anime>().toMutableList(), id, false)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

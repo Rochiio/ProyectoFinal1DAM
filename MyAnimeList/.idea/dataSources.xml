@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="anime" uuid="cd2b2d91-d7d9-4509-9e82-20cf218654c0">
+    <data-source source="LOCAL" name="anime" uuid="e9705066-15cf-4042-ae91-b0cc07a72eac">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\joaqu\Desktop\Programming\Projects\ProyectoFinal1DAM\MyAnimeList\db\anime.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\rpala\Documents\ProyectoFinal1DAM\MyAnimeList\db\anime.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.36.0.3/sqlite-jdbc-3.36.0.3.jar</url>
-        </library>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.36.0.3/sqlite-jdbc-3.36.0.3.jar</url>
         </library>

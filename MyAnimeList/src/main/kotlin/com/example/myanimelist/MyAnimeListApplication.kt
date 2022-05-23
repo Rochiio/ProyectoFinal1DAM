@@ -1,5 +1,6 @@
 package com.example.myanimelist
 
+import com.example.myanimelist.dto.AnimeDTO
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.repositories.animes.IAnimeRepository
@@ -17,6 +18,7 @@ class MyAnimeListApplication : Application() {
     }
 
 }
+
 var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
 var animeStorage: IAnimeStorage = DependenciesManager.getAnimeStorage()
 
@@ -27,11 +29,9 @@ fun main() {
 }
 
 fun initAnimes() {
-     val listAnimes = animeStorage.load()
-    if(listAnimes.isPresent){
-        for(item in listAnimes.get()){
-            animeRepository.add(item.fromDTO())
-        }
+    val listAnimes: MutableList<AnimeDTO> = animeStorage.load().orElse(null) ?: throw Exception("listanimes is null")
+    for (item in listAnimes) {
+        animeRepository.add(item.fromDTO())
     }
 
 }

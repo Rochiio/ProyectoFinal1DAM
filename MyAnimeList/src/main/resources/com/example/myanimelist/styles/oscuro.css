@@ -1,5 +1,6 @@
 .fondo{
     -fx-background-color: #469D89;
+    -fx-text-fill:white;
 }
 
 .acercaDeTexto{
@@ -33,13 +34,13 @@
 }
 
 .animeDataText{
-    -fx-text-fill:black;
-    -fx-background-color: #88D4AB;
+    -fx-text-fill:white;
+    -fx-background-color: #67B99A;
     -fx-font-weight: normal;
     -fx-font-size: 20px;
     -fx-alignment: left;
     -fx-font-family: Arial;
-    -fx-border-color: #469D89;
+    -fx-border-color: #78C6A3;
     -fx-border-style: solid;
     -fx-border-width: 1px;
 }

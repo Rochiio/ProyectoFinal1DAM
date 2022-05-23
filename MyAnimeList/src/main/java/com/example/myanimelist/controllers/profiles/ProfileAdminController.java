@@ -20,7 +20,7 @@ public class ProfileAdminController {
     public Button deleteBut;
     public ImageView img;
 
-    private final User user= DependenciesManager.globalUser;
+    private final User user = DependenciesManager.globalUser;
 
     IImgStorage imgStorage = DependenciesManager.getImgStorage();
 
@@ -35,6 +35,7 @@ public class ProfileAdminController {
         this.user.setName(nameLabel.getText());
         this.user.setPassword(passLabel.getText());
     }
+
     private boolean validate(StringBuilder error) {
 
         boolean validation = true;
@@ -59,7 +60,7 @@ public class ProfileAdminController {
             error.append("La confirmación no se corresponde.").append("\n");
         }
 
-        if (!Filters.checkEmail(emailLabel.getText())) {
+        if (Filters.checkEmail(emailLabel.getText())) {
             validation = false;
             error.append("Email no válido");
         }

@@ -1,109 +1,103 @@
 package com.example.myanimelist.controllers.profiles;
 
+import com.example.myanimelist.MyAnimeListApplication;
+import com.example.myanimelist.filters.edition.EditFilters;
 import com.example.myanimelist.managers.DependenciesManager;
-import com.example.myanimelist.managers.SceneManager;
 import com.example.myanimelist.models.User;
+import com.example.myanimelist.repositories.users.IUsersRepository;
 import com.example.myanimelist.service.img.IImgStorage;
 import com.example.myanimelist.utils.Filters;
-import com.example.myanimelist.utils.ViewPathsKt;
+import com.example.myanimelist.utils.ThemesManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.text.html.StyleSheet;
 import java.io.IOException;
+import java.time.LocalDate;
 
 
 public class ProfileUserController {
-    Logger logger = LogManager.getLogger();
     @FXML
-    public TextField emailLabel;
+    public TextField txtEmail;
     @FXML
-    public TextField nameLabel;
+    public TextField txtName;
     @FXML
-    public TextField passLabel;
+    public PasswordField txtPassword;
     @FXML
-    public TextField confirmLabel;
+    public PasswordField txtPasswordConfirm;
     @FXML
-    public Button saveBut;
+    public TextField txtBirthday;
+    @FXML
+    public Button btnSave;
     @FXML
     public ImageView img;
     @FXML
-    public Label imgLabel;
+    public AnchorPane root;
 
+
+    private final IUsersRepository userRepository= DependenciesManager.getUsersRepo();
     private final User user= DependenciesManager.globalUser;
-    IImgStorage imgStorage = DependenciesManager.getImgStorage();
-
-
-    public void onSave(ActionEvent actionEvent) throws IOException {
-        StringBuilder errorLog = new StringBuilder();
-        if (!validate(errorLog)) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Registro inválido" + errorLog);
-            return;
-        }
-        this.user.setEmail(emailLabel.getText());
-        this.user.setName(nameLabel.getText());
-        this.user.setPassword(passLabel.getText());
-        //changeSceneToMain();
-        //todo incorporar la img
-    }
+    private final EditFilters editionFilters= DependenciesManager.getEditFilter();
+    private final Logger logger = LogManager.getLogger(ProfileUserController.class);
 
     @FXML
     public void initialize() {
-        emailLabel.setText(user.getEmail());
-        nameLabel.setText(user.getName());
-        img.setImage(imgStorage.loadImg(user));
+        txtEmail.setText(user.getEmail());
+        txtName.setText(user.getName());
+        txtPassword.setText(user.getPassword());
+        txtBirthday.setText(user.getBirthDate().toString());
+        root.getStylesheets().clear();
+        root.getStylesheets().add(MyAnimeListApplication.class.getResource(ThemesManager.INSTANCE.getCurretnTheme().getValue()).toString());
     }
 
-    /*private void changeSceneToMain() throws IOException {
-        Stage stage = (Stage) saveBut.getScene().getWindow();
-        SceneManager sceneManager = SceneManager.INSTANCE;
-        sceneManager.changeScene(saveBut, ViewPathsKt.MAIN_USER_MYLIST);
-        *//*val stage = menuButton.scene.window as Stage
-        stage.loadScene(LOGIN){
-            title = "Log in"
-            isResizable = false
-        }.show()*//*
+    public void onSave(ActionEvent actionEvent)  {
+        StringBuilder errorLog = new StringBuilder();
+        if (!validate(errorLog)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Actualización inválida");
+            alert.setHeaderText(errorLog.toString());
+            alert.show();
+        }else{
+            creationUpdateUser();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Actualización correcta");
+            alert.show();
+        }
 
-    }*/
+    }
+
+    private void creationUpdateUser() {
+        User userUpdate = new User(txtName.getText(),txtEmail.getText(),txtPassword.getText(),user.getCreateDate(),
+                LocalDate.parse(txtBirthday.getText()),user.getImg(),user.getMyList(),user.getId(),user.getAdmin());
+        userRepository.update(userUpdate);
+        DependenciesManager.globalUser= userUpdate;
+    }
+
+
+
     private boolean validate(StringBuilder error) {
-
-        boolean validation = true;
-
-        if (nameLabel.getText().isBlank()) {
-            validation = false;
-            error.append("El nombre no puede estar vacío.").append("\n");
+        if(!txtPassword.getText().equals(txtPasswordConfirm.getText())){
+            error.append("Las contraseñas no coinciden");
+            return false;
         }
-
-        if (emailLabel.getText().isBlank()) {
-            validation = false;
-            error.append("El email no puede estar vacío.").append("\n");
+        if(!editionFilters.checkDateCorrect(txtBirthday.getText())){
+            error.append("Fecha de nacimiento incorrecta");
+            return false;
         }
-
-        if (passLabel.getText().isBlank()) {
-            validation = false;
-            error.append("La contraseña no puede estar vacía.").append("\n");
-        }
-
-        if (!(passLabel.getText().equals(confirmLabel.getText()))) {
-            validation = false;
-            error.append("La confirmación no se corresponde.").append("\n");
-        }
-
-        if (!Filters.checkEmail(emailLabel.getText())) {
-            validation = false;
-            error.append("Email no válido");
+        if (!Filters.checkEmail(txtEmail.getText())){
+            error.append("Correo incorrecto");
+            return false;
         }
 
 
-        return validation;
+        return true;
     }
 }
 
