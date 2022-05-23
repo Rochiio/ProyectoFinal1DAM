@@ -1,7 +1,10 @@
 package com.example.myanimelist.views.models;
 
 import com.example.myanimelist.models.Review;
-import javafx.beans.property.*;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.util.UUID;
 
@@ -21,7 +24,7 @@ public class ReviewView {
         this.userId = userId;
     }
 
-    public ReviewView(Review review){
+    public ReviewView(Review review) {
         this.id = review.getId();
         this.score = new SimpleIntegerProperty(review.getScore());
         this.comment = new SimpleStringProperty(review.getComment());
@@ -41,24 +44,24 @@ public class ReviewView {
         return score.get();
     }
 
-    public IntegerProperty scoreProperty() {
-        return score;
-    }
-
     public void setScore(int score) {
         this.score.set(score);
+    }
+
+    public IntegerProperty scoreProperty() {
+        return score;
     }
 
     public String getComment() {
         return comment.get();
     }
 
-    public StringProperty commentProperty() {
-        return comment;
-    }
-
     public void setComment(String comment) {
         this.comment.set(comment);
+    }
+
+    public StringProperty commentProperty() {
+        return comment;
     }
 
     public UUID getId() {

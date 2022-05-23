@@ -5,10 +5,15 @@ import java.io.InputStream
 
 object ResourcesManager {
 
-    fun getCoverOf(value: String): InputStream? = MyAnimeListApplication::class.java.getResourceAsStream("covers/$value.jpg")
+    fun getCoverOf(value: String): InputStream? =
+        MyAnimeListApplication::class.java.getResourceAsStream("covers/$value.jpg")
+
     fun getIconOf(value: String): InputStream? = MyAnimeListApplication::class.java.getResourceAsStream("icons/$value")
-    fun getStyleOf(value: String): InputStream? = MyAnimeListApplication::class.java.getResourceAsStream("styles/$value")
+    fun getStyleOf(value: String): InputStream? =
+        MyAnimeListApplication::class.java.getResourceAsStream("styles/$value")
+
     fun getViewsOf(value: String): InputStream? = MyAnimeListApplication::class.java.getResourceAsStream("views/$value")
-    fun getImageOf(value: String): InputStream? = MyAnimeListApplication::class.java.getResourceAsStream("images/$value")
+    fun getImageOf(value: String): InputStream? =
+        MyAnimeListApplication::class.java.getResourceAsStream("images/$value")
 
 }

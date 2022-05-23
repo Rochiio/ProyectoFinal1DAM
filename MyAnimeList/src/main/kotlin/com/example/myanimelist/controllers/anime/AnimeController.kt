@@ -5,15 +5,16 @@ import com.example.myanimelist.extensions.show
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.repositories.animes.IAnimeRepository
-import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.utils.ANIME_DATA_EDIT
 import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.AnimeView
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.scene.control.*
-import javafx.scene.image.Image
+import javafx.scene.control.Alert
+import javafx.scene.control.Button
+import javafx.scene.control.ButtonType
+import javafx.scene.control.Label
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
 
@@ -21,19 +22,24 @@ import javafx.stage.Stage
 class AnimeController {
     @FXML
     lateinit var txtTittle: Label
+
     @FXML
     lateinit var txtEpisodes: Label
+
     @FXML
     lateinit var txtStatus: Label
+
     @FXML
     lateinit var txtDate: Label
+
     @FXML
     lateinit var txtGenre: Label
+
     @FXML
     lateinit var imageAnime: ImageView
+
     @FXML
     lateinit var btnAdd: Button
-
 
 
     private var logger = DependenciesManager.getLogger(AnimeController::class.java)
@@ -44,7 +50,7 @@ class AnimeController {
     private var anime: AnimeView = DependenciesManager.animeSelection
 
     @FXML
-    fun initialize(){
+    fun initialize() {
         showAnime()
     }
 
@@ -61,8 +67,8 @@ class AnimeController {
         val action = alert.showAndWait()
 
         if (action.get() == ButtonType.OK) {
-            val animeAux= animeRepository.findById(anime.id)
-            animeListRepository.add(animeAux!!,user)
+            val animeAux = animeRepository.findById(anime.id)
+            animeListRepository.add(animeAux!!, user)
             user.myList.add(animeAux)
             Alert(Alert.AlertType.INFORMATION).show("Anime Añadido", "${anime.presentation.title} añadido a tu lista")
             logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
@@ -78,7 +84,7 @@ class AnimeController {
     /**
      * Asignar a cada label su información
      */
-    private fun showAnime(){
+    private fun showAnime() {
         logger.info("Cargando los datos")
         txtTittle.text = anime.presentation.title
         txtEpisodes.text = anime.episodes.toString()
@@ -96,8 +102,8 @@ class AnimeController {
     fun editAnime(actionEvent: ActionEvent) {
 
         val stage = txtTittle.scene.window as Stage
-        stage.loadScene(ANIME_DATA_EDIT,WIDTH, HEIGHT){
-            title="Editor"
+        stage.loadScene(ANIME_DATA_EDIT, WIDTH, HEIGHT) {
+            title = "Editor"
             isResizable = false
         }.show()
     }
@@ -118,10 +124,9 @@ class AnimeController {
             val result = Alert(Alert.AlertType.CONFIRMATION)
             result.title = "Anime Eliminado"
         }
-            val stage = txtTittle.scene.window as Stage
-            stage.close()
+        val stage = txtTittle.scene.window as Stage
+        stage.close()
     }
-
 
 
 }

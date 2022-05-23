@@ -19,35 +19,35 @@ public class Presentation {
         return title.get();
     }
 
-    public StringProperty titleProperty() {
-        return title;
-    }
-
     public void setTitle(String title) {
         this.title.set(title);
+    }
+
+    public StringProperty titleProperty() {
+        return title;
     }
 
     public String getTitleEnglish() {
         return titleEnglish.get();
     }
 
-    public StringProperty titleEnglishProperty() {
-        return titleEnglish;
-    }
-
     public void setTitleEnglish(String titleEnglish) {
         this.titleEnglish.set(titleEnglish);
+    }
+
+    public StringProperty titleEnglishProperty() {
+        return titleEnglish;
     }
 
     public String getImg() {
         return img.get();
     }
 
-    public StringProperty imgProperty() {
-        return img;
-    }
-
     public void setImg(String img) {
         this.img.set(img);
+    }
+
+    public StringProperty imgProperty() {
+        return img;
     }
 }

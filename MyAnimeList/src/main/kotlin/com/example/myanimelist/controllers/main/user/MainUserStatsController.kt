@@ -39,23 +39,23 @@ class MainUserStatsController {
     private var myReviews: List<Review> = emptyList()
 
     @FXML
-    fun initialize(){
+    fun initialize() {
         myList = userRepository.getAnimeLists(user.id)
         myReviews = reviewRepository.findAll().toList().filter { it.user.id == user.id }
 
         animeCount.text = myList.count().toString()
         topGenreCount.text = getTopGenre()
         topTypeCount.text = getTopType()
-        topRatedAnime.text = myReviews.first{ it -> it.score == myReviews.maxOf { it.score } }.anime.title
-        botRatedAnime .text = myReviews.first{ it -> it.score == myReviews.minOf { it.score } }.anime.title
+        topRatedAnime.text = myReviews.first { it -> it.score == myReviews.maxOf { it.score } }.anime.title
+        botRatedAnime.text = myReviews.first { it -> it.score == myReviews.minOf { it.score } }.anime.title
     }
 
     private fun getTopType(): String? {
         val list = myList.map { it.types }.toList()
         val hm: HashMap<String, Int> = HashMap()
-        for (type: String in list){
-            if(hm.containsKey(type)){
-                hm[type] = hm[type]!!+1
+        for (type: String in list) {
+            if (hm.containsKey(type)) {
+                hm[type] = hm[type]!! + 1
             } else {
                 hm[type] = 1
             }
@@ -65,13 +65,13 @@ class MainUserStatsController {
 
     private fun getTopGenre(): String? {
         val list: ArrayList<String> = ArrayList()
-        for(anime:Anime in myList){
+        for (anime: Anime in myList) {
             anime.types.split(",").toCollection(list)
         }
         val hm: HashMap<String, Int> = HashMap()
-        for (genre: String in list){
-            if(hm.containsKey(genre)){
-                hm[genre] = hm[genre]!!+1
+        for (genre: String in list) {
+            if (hm.containsKey(genre)) {
+                hm[genre] = hm[genre]!! + 1
             } else {
                 hm[genre] = 1
             }

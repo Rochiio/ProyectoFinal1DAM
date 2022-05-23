@@ -9,15 +9,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Locale;
 import java.util.Optional;
 
 public class Utils {
 
     static Logger logger = DependenciesManager.getLogger(Utils.class);
+
     public static Optional<String> getFileExtension(String filename) {
         return Optional.ofNullable(filename)
                 .filter(f -> f.contains("."))
@@ -41,6 +38,11 @@ public class Utils {
         return true;
     }
 
+    public static LocalDate parseLocalDate(String date) {
+        var fecha = date.split("/");
+        return LocalDate.of(Integer.parseInt(fecha[2]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[0]));
+    }
+
     public boolean deleteFile(String file) {
         logger.info("Deleting " + file);
         Path path = Path.of(file);
@@ -55,12 +57,6 @@ public class Utils {
             return false;
         }
         return true;
-    }
-
-
-    public static LocalDate parseLocalDate(String date){
-        var fecha = date.split("/");
-       return LocalDate.of(Integer.parseInt(fecha[2]),Integer.parseInt(fecha[1]),Integer.parseInt(fecha[0]));
     }
 
 }
