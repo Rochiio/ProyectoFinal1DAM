@@ -84,21 +84,16 @@ public class ProfileUserController {
 
 
     private boolean validate(StringBuilder error) {
-        if(!txtPassword.getText().equals(txtPasswordConfirm.getText())){
+        if (!txtPassword.getText().equals(txtPasswordConfirm.getText()))
             error.append("Las contraseñas no coinciden");
-            return false;
-        }
-        if(!editionFilters.checkDateCorrect(txtBirthday.getValue().toString())){
+
+        if (!editionFilters.checkDateCorrect(txtBirthday.getText()))
             error.append("Fecha de nacimiento incorrecta");
-            return false;
-        }
-        if (!Filters.checkEmail(txtEmail.getText())){
+
+        if (!FiltersUtilsKt.isValidEmail(txtEmail.getText()))
             error.append("Correo incorrecto");
-            return false;
-        }
 
-
-        return true;
+        return error.isEmpty();
     }
 }
 

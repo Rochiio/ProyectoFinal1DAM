@@ -1,15 +1,19 @@
 package com.example.myanimelist.repositories.reviews
 
 import com.example.myanimelist.managers.DependenciesManager.getReviewsRepo
-import com.example.myanimelist.repositories.RepoTest
 import com.example.myanimelist.utilities.getNewTestingReview
 import com.example.myanimelist.utilities.getTestingReview
+import com.example.myanimelist.utilities.resetDb
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 
-internal class ReviewsRepositoryTest : RepoTest() {
+internal class ReviewsRepositoryTest {
     private val reviewsRepository = getReviewsRepo()
+
+    @BeforeEach
+    fun setUp() = resetDb()
 
     @Test
     fun addReview() {

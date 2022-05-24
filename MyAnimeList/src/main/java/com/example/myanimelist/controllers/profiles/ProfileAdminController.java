@@ -53,7 +53,7 @@ public class ProfileAdminController {
         if (!passLabel.getText().equals(confirmLabel.getText()))
             error.append("La confirmación no se corresponde.").append("\n");
 
-        if (FiltersUtilsKt.checkEmail(emailLabel.getText()))
+        if (FiltersUtilsKt.isValidEmail(emailLabel.getText()))
             error.append("Email no válido");
 
         return error.isEmpty();
