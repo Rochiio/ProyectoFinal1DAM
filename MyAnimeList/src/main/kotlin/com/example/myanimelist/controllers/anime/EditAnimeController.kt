@@ -12,9 +12,9 @@ import com.example.myanimelist.views.models.AnimeView
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
+import javafx.scene.control.DatePicker
 import javafx.scene.control.TextField
 import javafx.stage.Stage
-import java.time.LocalDate
 
 class EditAnimeController {
     @FXML
@@ -27,7 +27,7 @@ class EditAnimeController {
     lateinit var fieldStatus: TextField
 
     @FXML
-    lateinit var fieldDate: TextField
+    lateinit var fieldDate: DatePicker
 
     @FXML
     lateinit var fieldGenre: TextField
@@ -79,7 +79,7 @@ class EditAnimeController {
             anime.types,
             if (fieldEpisodes.text.equals(" ")) anime.episodes else fieldEpisodes.text.toInt(),
             if (fieldStatus.text.equals(" ")) anime.status else fieldStatus.text,
-            if (fieldDate.text.equals(" ")) anime.date else LocalDate.parse(fieldDate.text),
+            if (fieldDate.value == null) anime.date else fieldDate.value,
             anime.rating,
             (if (fieldGenre.text.equals(" ")) anime.genres else listOf(
                 fieldGenre.text.split(",").toString()
@@ -96,13 +96,16 @@ class EditAnimeController {
      * @return boolean
      */
     private fun editionFilters(errorMessage: StringBuilder): Boolean {
+        if (!editFilters.checkTitleCorrect(fieldTitle.text)) {
+            errorMessage.appendLine("wrong title field")
+        }
         if (!editFilters.checkEpisodesCorrect(fieldEpisodes.text)) {
             errorMessage.appendLine("wrong episodes field")
         }
         if (!editFilters.checkStatusCorrect(fieldStatus.text)) {
             errorMessage.appendLine("wrong status field")
         }
-        if (!editFilters.checkDateCorrect(LocalDate.parse(fieldDate.text))) {
+        if (!editFilters.checkDateCorrect(fieldDate.value)) {
             errorMessage.appendLine("wrong date field")
         }
         if (!editFilters.checkGenreCorrect(fieldGenre.text)) {

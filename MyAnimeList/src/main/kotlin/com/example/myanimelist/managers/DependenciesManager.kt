@@ -41,8 +41,8 @@ object DependenciesManager {
         else
             DataBaseManager("anime.db")
     }
-    lateinit var animeSelection: AnimeView
     lateinit var userSelectionAdmin: UserView
+    lateinit var animeSelection: AnimeView
     private val gson: Gson =
         GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
     private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
