@@ -2,6 +2,7 @@ package com.example.myanimelist.filters.edition
 
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
+import java.time.LocalDate
 
 open class EditFilters {
     fun checkEpisodesCorrect(number: String): Boolean {
@@ -13,8 +14,6 @@ open class EditFilters {
 
     fun checkGenreCorrect(value: String): Boolean = Genre.values().any { value == it.value } || value.isEmpty()
 
-    fun checkDateCorrect(value: String): Boolean {
-        return value.matches(Regex("^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12]\\d|3[01])\$"))
-                || value.isEmpty()
-    }
+    fun checkDateCorrect(value: LocalDate): Boolean = LocalDate.now().isAfter(value)
+
 }

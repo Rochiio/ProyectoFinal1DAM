@@ -3,6 +3,7 @@ package com.example.myanimelist.filters.edition
 import com.example.myanimelist.managers.DependenciesManager
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
 
 internal class EditFiltersTest {
     private var editFilters: EditFilters = DependenciesManager.getEditFilter()
@@ -73,17 +74,13 @@ internal class EditFiltersTest {
 
     @Test
     fun checkDateCorrect() {
-        val correct = "2022-03-20"
-        val correctTwo = "2022-05-21"
-        val correctThree = "2012-06-14"
-        val correctFour = ""
-        val bad = "bad"
+        val correct = LocalDate.of(2002, 10, 10)
+        val wrong = LocalDate.now()
+        val wrong2 = LocalDate.of(9999, 10, 10)
         assertAll(
             { assertTrue(editFilters.checkDateCorrect(correct)) },
-            { assertTrue(editFilters.checkDateCorrect(correctTwo)) },
-            { assertTrue(editFilters.checkDateCorrect(correctThree)) },
-            { assertTrue(editFilters.checkDateCorrect(correctFour)) },
-            { assertFalse(editFilters.checkDateCorrect(bad)) }
+            { assertFalse(editFilters.checkDateCorrect(wrong)) },
+            { assertFalse(editFilters.checkDateCorrect(wrong2)) }
         )
     }
 

@@ -98,21 +98,17 @@ class EditAnimeController {
     private fun editionFilters(errorMessage: StringBuilder): Boolean {
         if (!editFilters.checkEpisodesCorrect(fieldEpisodes.text)) {
             errorMessage.appendLine("wrong episodes field")
-            return false
         }
         if (!editFilters.checkStatusCorrect(fieldStatus.text)) {
             errorMessage.appendLine("wrong status field")
-            return false
         }
-        if (!editFilters.checkDateCorrect(fieldDate.text)) {
+        if (!editFilters.checkDateCorrect(LocalDate.parse(fieldDate.text))) {
             errorMessage.appendLine("wrong date field")
-            return false
         }
         if (!editFilters.checkGenreCorrect(fieldGenre.text)) {
             errorMessage.appendLine("wrong genre field")
-            return false
         }
-        return true
+        return errorMessage.isEmpty()
     }
 
 }
