@@ -36,7 +36,7 @@ public class AnimeStorage implements IAnimeStorage {
 
     @Override
     public void save(List<AnimeDTO> dtoList) {
-        String header = "id,title,titleEnglish,types,episodes,status,date,rating,genres,img";
+        String header = "id,title,titleEnglish,types,episodes,status,date,rating,genres,img".replace(',', Properties.CSV_SEPARATOR);
         StringBuilder csv = new StringBuilder(header);
         var csvList = dtoList.stream().map(this::toCSV).toList();
         for (String s : csvList) {
@@ -61,32 +61,31 @@ public class AnimeStorage implements IAnimeStorage {
     }
 
     private AnimeDTO parse(String line) {
-        String[] fields = line.split(Properties.CSV_SEPARATOR);
+        String[] fields = line.split(String.valueOf(Properties.CSV_SEPARATOR));
         UUID id = UUID.fromString(fields[0]);
         String title = fields[1];
         String titleEnglish = fields[2];
         String types = fields[3];
-        int episodes = (int)Double.parseDouble(fields[4]);
+        int episodes = (int) Double.parseDouble(fields[4]);
         String status = fields[5];
         String rating = fields[6];
         String genres = fields[8];
         String date = fields[9];
-        System.out.println(id);
         return new AnimeDTO(id, title, titleEnglish, types, episodes, status, date, rating, genres, id.toString());
     }
 
     private String toCSV(AnimeDTO animeDTO) {
 
         return "\n" +
-                animeDTO.getId() +
-                animeDTO.getTitle() +
-                animeDTO.getTitleEnglish() +
-                animeDTO.getTypes() +
-                animeDTO.getEpisodes() +
-                animeDTO.getStatus() +
-                animeDTO.getDate() +
-                animeDTO.getRating() +
-                animeDTO.getGenres() +
+                animeDTO.getId() + Properties.CSV_SEPARATOR +
+                animeDTO.getTitle() + Properties.CSV_SEPARATOR +
+                animeDTO.getTitleEnglish() + Properties.CSV_SEPARATOR +
+                animeDTO.getTypes() + Properties.CSV_SEPARATOR +
+                animeDTO.getEpisodes() + Properties.CSV_SEPARATOR +
+                animeDTO.getStatus() + Properties.CSV_SEPARATOR +
+                animeDTO.getDate() + Properties.CSV_SEPARATOR +
+                animeDTO.getRating() + Properties.CSV_SEPARATOR +
+                animeDTO.getGenres() + Properties.CSV_SEPARATOR +
                 animeDTO.getImg();
     }
 }

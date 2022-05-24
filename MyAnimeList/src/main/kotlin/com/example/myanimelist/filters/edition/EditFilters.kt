@@ -8,31 +8,12 @@ open class EditFilters {
         return number.matches(Regex("\\d*")) || number.isEmpty()
     }
 
-    fun checkStatusCorrect(value: String): Boolean{
-            for (item in Status.values()){
-                if (item.value == value){
-                    return true
-                }
-            }
-            if(value.isEmpty()){
-                return true
-            }
-        return false
-    }
+    fun checkStatusCorrect(value: String): Boolean = Status.values().any { value == it.value } || value.isEmpty()
 
-    fun checkGenreCorrect(value: String): Boolean {
-            for (item in Genre.values()){
-                if (item.value == value){
-                    return true
-                }
-            }
-            if(value.isEmpty()){
-                return true
-            }
-        return false
-    }
 
-    fun checkDateCorrect(value: String): Boolean{
+    fun checkGenreCorrect(value: String): Boolean = Genre.values().any { value == it.value } || value.isEmpty()
+
+    fun checkDateCorrect(value: String): Boolean {
         return value.matches(Regex("^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12]\\d|3[01])\$"))
                 || value.isEmpty()
     }

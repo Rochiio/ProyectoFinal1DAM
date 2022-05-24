@@ -9,7 +9,8 @@ enum class Type(val value: String = "Unknown") {
     OVA("OVA"),
     ONA("ONA"),
     SPECIAL("Special");
+
     companion object {
-        val sample = FXCollections.observableArrayList(Type.values().map{it.value}.toList())
+        val sample = FXCollections.observableArrayList(Type.values().map { it.value }.toList())
     }
 }

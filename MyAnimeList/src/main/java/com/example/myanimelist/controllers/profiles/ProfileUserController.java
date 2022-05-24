@@ -1,12 +1,12 @@
 package com.example.myanimelist.controllers.profiles;
 
 import com.example.myanimelist.MyAnimeListApplication;
+import com.example.myanimelist.filters.FiltersUtilsKt;
 import com.example.myanimelist.filters.edition.EditFilters;
 import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
 import com.example.myanimelist.repositories.users.IUsersRepository;
 import com.example.myanimelist.service.img.IImgStorage;
-import com.example.myanimelist.utils.Filters;
 import com.example.myanimelist.utils.ThemesManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,7 +33,7 @@ public class ProfileUserController {
     @FXML
     public PasswordField txtPasswordConfirm;
     @FXML
-    public TextField txtBirthday;
+    public DatePicker txtBirthday;
     @FXML
     public Button btnSave;
     @FXML
@@ -52,7 +52,7 @@ public class ProfileUserController {
         txtEmail.setText(user.getEmail());
         txtName.setText(user.getName());
         txtPassword.setText(user.getPassword());
-        txtBirthday.setText(user.getBirthDate().toString());
+        txtBirthday.setValue(user.getBirthDate());
         root.getStylesheets().clear();
         root.getStylesheets().add(MyAnimeListApplication.class.getResource(ThemesManager.INSTANCE.getCurretnTheme().getValue()).toString());
     }
@@ -68,6 +68,7 @@ public class ProfileUserController {
             creationUpdateUser();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Actualización correcta");
+            alert.setHeaderText("Has actualizado tu perfil");
             alert.show();
         }
 
@@ -75,7 +76,7 @@ public class ProfileUserController {
 
     private void creationUpdateUser() {
         User userUpdate = new User(txtName.getText(),txtEmail.getText(),txtPassword.getText(),user.getCreateDate(),
-                LocalDate.parse(txtBirthday.getText()),user.getImg(),user.getMyList(),user.getId(),user.getAdmin());
+                LocalDate.parse(txtBirthday.getValue().toString()),user.getImg(),user.getMyList(),user.getId(),user.getAdmin());
         userRepository.update(userUpdate);
         DependenciesManager.globalUser= userUpdate;
     }
@@ -83,21 +84,16 @@ public class ProfileUserController {
 
 
     private boolean validate(StringBuilder error) {
-        if(!txtPassword.getText().equals(txtPasswordConfirm.getText())){
+        if (!txtPassword.getText().equals(txtPasswordConfirm.getText()))
             error.append("Las contraseñas no coinciden");
-            return false;
-        }
-        if(!editionFilters.checkDateCorrect(txtBirthday.getText())){
+
+        if (!editionFilters.checkDateCorrect(txtBirthday.getValue().toString()))
             error.append("Fecha de nacimiento incorrecta");
-            return false;
-        }
-        if (!Filters.checkEmail(txtEmail.getText())){
+
+        if (!FiltersUtilsKt.isValidEmail(txtEmail.getText()))
             error.append("Correo incorrecto");
-            return false;
-        }
 
-
-        return true;
+        return error.isEmpty();
     }
 }
 

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -17,7 +18,7 @@
             <Insets />
          </VBox.margin>
       </TextField>
-      <TextField fx:id="txtBirthday" promptText="Birthday" />
+      <DatePicker fx:id="txtBirthday" />
       <PasswordField fx:id="txtPassword" promptText="Password" styleClass="text-input" />
       <PasswordField fx:id="txtPasswordConfirm" promptText="Confirm Password" styleClass="text-input" />
    </VBox>

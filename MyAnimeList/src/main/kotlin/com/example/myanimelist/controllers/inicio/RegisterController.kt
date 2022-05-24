@@ -62,7 +62,7 @@ class RegisterController : InicioController() {
         if (!registerFilters.checkEmail(txtEmail.text))
             errorMessage.appendLine("Email incorrecto")
 
-        if (registerFilters.checkUserNameExists(txtUsername.text))
+        if (registerFilters.checkUserCorrect(txtUsername.text))
             errorMessage.appendLine("Username ya existe")
 
         return errorMessage.isEmpty()
