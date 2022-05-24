@@ -82,7 +82,7 @@ public class ProfileUserController {
         if (!editionFilters.checkDateCorrect(txtBirthday.getText()))
             error.append("Fecha de nacimiento incorrecta");
 
-        if (!FiltersUtilsKt.checkEmail(txtEmail.getText()))
+        if (!FiltersUtilsKt.isValidEmail(txtEmail.getText()))
             error.append("Correo incorrecto");
 
         return error.isEmpty();
