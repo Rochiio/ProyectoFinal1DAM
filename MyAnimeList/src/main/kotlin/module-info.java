@@ -24,6 +24,8 @@ module com.example.myanimelist {
     requires java.compiler;
     requires java.desktop;
     requires org.mybatis;
+    requires javax.inject;
+    requires dagger;
 
 
     exports com.example.myanimelist;

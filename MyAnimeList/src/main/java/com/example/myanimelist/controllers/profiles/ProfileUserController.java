@@ -87,7 +87,7 @@ public class ProfileUserController {
         if (!txtPassword.getText().equals(txtPasswordConfirm.getText()))
             error.append("Las contraseñas no coinciden");
 
-        if (!editionFilters.checkDateCorrect(txtBirthday.getText()))
+        if (!editionFilters.checkDateCorrect(txtBirthday.getValue().toString()))
             error.append("Fecha de nacimiento incorrecta");
 
         if (!FiltersUtilsKt.isValidEmail(txtEmail.getText()))
