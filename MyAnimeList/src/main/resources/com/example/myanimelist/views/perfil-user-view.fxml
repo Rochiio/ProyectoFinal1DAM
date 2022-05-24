@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0"
-            styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18"
-            fx:controller="com.example.myanimelist.controllers.profiles.ProfileUserController">
-    <VBox layoutX="65.0" layoutY="26.0" prefHeight="206.0" prefWidth="149.0" spacing="20.0"
-          stylesheets="@../styles/claro.css" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="65.0"
-          AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="26.0">
-        <TextField fx:id="txtEmail" promptText="Email" styleClass="text-input"/>
-        <TextField fx:id="txtName" layoutY="15.0" promptText="Username" styleClass="text-input">
-            <VBox.margin>
-                <Insets/>
-            </VBox.margin>
-        </TextField>
-        <TextField fx:id="txtBirthday" promptText="Birthday"/>
-        <PasswordField fx:id="txtPassword" promptText="Password" styleClass="text-input"/>
-        <PasswordField fx:id="txtPasswordConfirm" promptText="Confirm Password" styleClass="text-input"/>
-    </VBox>
-    <Button fx:id="btnSave" layoutX="139.0" layoutY="273.0" mnemonicParsing="false" onAction="#onSave" prefHeight="25.0"
-            prefWidth="177.0" text="Save" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="139.0"
-            AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="273.0"/>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
 <AnchorPane fx:id="root" minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.profiles.ProfileUserController">
    <VBox layoutX="65.0" layoutY="26.0" prefHeight="206.0" prefWidth="149.0" spacing="20.0" stylesheets="@../styles/claro.css" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="26.0">
       <TextField fx:id="txtEmail" promptText="Email" styleClass="text-input" />
@@ -32,7 +18,7 @@
             <Insets />
          </VBox.margin>
       </TextField>
-      <TextField fx:id="txtBirthday" promptText="aaaa-mm-dd" styleClass="text-input" />
+      <DatePicker fx:id="txtBirthday" />
       <PasswordField fx:id="txtPassword" promptText="Password" styleClass="text-input" />
       <PasswordField fx:id="txtPasswordConfirm" promptText="Confirm Password" styleClass="text-input" />
    </VBox>
