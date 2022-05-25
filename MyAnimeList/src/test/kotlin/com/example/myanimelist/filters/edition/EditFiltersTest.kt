@@ -11,13 +11,9 @@ internal class EditFiltersTest {
     @Test
     fun checkEpisodesCorrect() {
         val correct = "8"
-        val correctTwo = ""
         val bad = "bad"
-        assertAll(
-            { assertTrue(editFilters.checkEpisodesCorrect(correct)) },
-            { assertTrue(editFilters.checkEpisodesCorrect(correctTwo)) },
-            { assertFalse(editFilters.checkEpisodesCorrect(bad)) }
-        )
+        assertTrue(editFilters.checkEpisodesCorrect(correct))
+        assertFalse(editFilters.checkEpisodesCorrect(bad))
     }
 
     @Test
@@ -25,13 +21,11 @@ internal class EditFiltersTest {
         val correct = "Finished Airing"
         val correctTwo = "Currently Airing"
         val correctThree = "Not yet aired"
-        val correctFour = ""
         val bad = "bad"
         assertAll(
             { assertTrue(editFilters.checkStatusCorrect(correct)) },
             { assertTrue(editFilters.checkStatusCorrect(correctTwo)) },
             { assertTrue(editFilters.checkStatusCorrect(correctThree)) },
-            { assertTrue(editFilters.checkStatusCorrect(correctFour)) },
             { assertFalse(editFilters.checkStatusCorrect(bad)) }
         )
     }
@@ -51,7 +45,6 @@ internal class EditFiltersTest {
         val correctEleven = "Psychological"
         val correctTwelve = "Sci-Fi"
         val correcttThirteen = "Romance"
-        val correctFourteen = ""
         val bad = "bad"
         assertAll(
             { assertTrue(editFilters.checkGenreCorrect(correct)) },
@@ -67,7 +60,6 @@ internal class EditFiltersTest {
             { assertTrue(editFilters.checkGenreCorrect(correctEleven)) },
             { assertTrue(editFilters.checkGenreCorrect(correctTwelve)) },
             { assertTrue(editFilters.checkGenreCorrect(correcttThirteen)) },
-            { assertTrue(editFilters.checkGenreCorrect(correctFourteen)) },
             { assertFalse(editFilters.checkGenreCorrect(bad)) }
         )
     }
