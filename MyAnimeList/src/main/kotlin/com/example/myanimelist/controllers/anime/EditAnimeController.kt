@@ -102,7 +102,7 @@ class EditAnimeController {
             if (fieldDate.value == null) anime.date else fieldDate.value,
             anime.rating,
             if (fieldGenre.text.equals(" ")) anime.genres else fieldGenre.text,
-            anime.id.toString(),
+            anime.presentation.img,
             anime.id
         )
     }
