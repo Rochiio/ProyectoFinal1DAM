@@ -9,6 +9,12 @@
     -fx-background-radius: 6px;
 }
 
+.textoNormal{
+    -fx-text-fill: white;
+    -fx-font-weight: normal;
+    -fx-font-size: 20px;
+}
+
 .button {
     -fx-border-radius: 10;
     -fx-padding: 5;
