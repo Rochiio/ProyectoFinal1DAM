@@ -6,7 +6,6 @@ import com.example.myanimelist.utils.ADMIN_USERS_LIST
 import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.MAIN_USER_ANIME
 import com.example.myanimelist.utils.WIDTH
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.image.Image
@@ -19,7 +18,7 @@ class AdminController {
     @FXML
     lateinit var userAdminButton: Button
 
-    fun changeStageToAnimes(actionEvent: ActionEvent) {
+    fun changeStageToAnimes() {
         Stage().loadScene(MAIN_USER_ANIME, WIDTH, HEIGHT) {
             title = "Animes"
             isResizable = false
