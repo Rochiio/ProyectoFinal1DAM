@@ -8,9 +8,13 @@ import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.PERFIL_VIEW_ADMIN
 import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.UserView
+import javafx.beans.value.ChangeListener
+import javafx.beans.value.ObservableValue
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
+import javafx.event.ActionEvent
 import javafx.fxml.FXML
+import javafx.scene.control.Label
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
 import javafx.scene.image.Image
@@ -32,11 +36,50 @@ class UserAdminController {
 
     @FXML
     lateinit var columnEmail: TableColumn<UserView, String>
+    
+    @FXML
+    lateinit var txtName: Label
+    
+    @FXML
+    lateinit var txtEmail: Label
+    
+    @FXML
+    lateinit var txtBirthDay: Label
 
     @FXML
     fun initialize() {
         loadData()
         initCells()
+        initListener()
+        clearUser()
+        tabla.selectionModel.selectFirst()
+    }
+
+    private fun clearUser() {
+        txtName.text=" "
+        txtEmail.text=" "
+        txtBirthDay.text=" "
+    }
+
+    private fun setUser(user: UserView){
+        txtName.text=user.name
+        txtEmail.text=user.email
+        txtBirthDay.text=user.birthDate.toString()
+    }
+
+
+    private fun initListener() {
+        tabla.selectionModel.selectedItemProperty().addListener { _: ObservableValue<out UserView?>, _: UserView?, newValue: UserView? ->
+            selectUser(newValue)
+        }
+    }
+
+    private fun selectUser(newValue: UserView?) {
+        if (newValue==null){
+            clearUser()
+        }else {
+            setUser(newValue)
+        }
     }
 
     private fun loadData() {
@@ -63,6 +106,18 @@ class UserAdminController {
             }.show()
 
         }
+    }
+
+    fun addUser(actionEvent: ActionEvent) {
+
+    }
+
+    fun editUser(actionEvent: ActionEvent) {
+
+    }
+
+    fun deleteUser(actionEvent: ActionEvent) {
+
     }
 
 }

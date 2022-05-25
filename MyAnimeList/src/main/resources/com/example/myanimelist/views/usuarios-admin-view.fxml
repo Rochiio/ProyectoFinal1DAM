@@ -29,7 +29,7 @@
                   <Insets top="30.0" />
                </padding>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="202.0" spacing="35.0">
+            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="202.0" spacing="45.0">
                <children>
                   <Label fx:id="txtName" styleClass="textoNormal" text="Label" />
                   <Label fx:id="txtEmail" styleClass="textoNormal" text="Label" />
