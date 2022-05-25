@@ -43,7 +43,7 @@ public class Utils {
         return LocalDate.of(Integer.parseInt(fecha[2]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[0]));
     }
 
-    public boolean deleteFile(String file) {
+    public static boolean deleteFile(String file) {
         logger.info("Deleting " + file);
         Path path = Path.of(file);
         if (!Files.exists(path)) {
