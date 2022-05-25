@@ -36,16 +36,16 @@ class RegisterController : InicioController() {
         val message = StringBuilder()
 
         if (!validateFields(message)) {
-            Alert(Alert.AlertType.WARNING).show("Register invalid", message.toString())
+            Alert(Alert.AlertType.WARNING).show("Registro incorrecto", message.toString())
             return
         }
 
         if (createUser() == null) {
-            Alert(Alert.AlertType.ERROR).show("Register error", "Error al crear usuario")
+            Alert(Alert.AlertType.ERROR).show("Error al registrarse", "Error al crear usuario")
             return
         }
 
-        Alert(Alert.AlertType.INFORMATION).show("Register completed", "Bienvenido ${txtUsername.text}")
+        Alert(Alert.AlertType.INFORMATION).show("Registro completado", "Bienvenido ${txtUsername.text}")
         changeSceneToLogin()
     }
 
