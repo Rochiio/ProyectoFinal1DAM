@@ -50,7 +50,7 @@ public class ImgStorage implements IImgStorage {
     @Override
     public Image loadImg(User user) {
         InputStream userImage = null;
-        
+
         if (user.getImg() != null)
             userImage = ResourcesManager.INSTANCE.getUserImageOf(user.getImg());
 
@@ -65,10 +65,16 @@ public class ImgStorage implements IImgStorage {
 
     @Override
     public Image loadImg(Presentation present) {
-        if (!Objects.requireNonNull(present.getImg()).isBlank() && ResourcesManager.INSTANCE.getCoverOf(present.getImg()) != null) {
+        InputStream animeImage = null;
+
+        if (present.getImg() != null)
+            animeImage = ResourcesManager.INSTANCE.getCoverOf(present.getImg());
+
+        if (animeImage != null) {
             logger.info("loading img");
-            return new Image(Objects.requireNonNull(ResourcesManager.INSTANCE.getCoverOf(present.getImg())));
+            return new Image(animeImage);
         }
+
         logger.info("loading default img");
         return new Image(Objects.requireNonNull(ResourcesManager.INSTANCE.getCoverOf(Properties.DEFAULT_IMAGE)));
     }

@@ -101,7 +101,7 @@ class AnimeController {
     fun editAnime() {
 
         val stage = txtTittle.scene.window as Stage
-        stage.loadScene(ANIME_DATA_EDIT, WIDTH, HEIGHT, EditAnimeController()) {
+        stage.loadScene(ANIME_DATA_EDIT, WIDTH, HEIGHT) {
             title = "Editor"
             isResizable = false
         }.show()
