@@ -1,17 +1,13 @@
 package com.example.myanimelist.controllers.anime
 
 import com.example.myanimelist.animeRepository
-import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.service.img.IImgStorage
-import com.example.myanimelist.utils.HEIGHT
-import com.example.myanimelist.utils.MAIN_ADMIN
 import com.example.myanimelist.utils.Properties
-import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.AnimeView
 import javafx.fxml.FXML
 import javafx.scene.control.*
@@ -19,6 +15,7 @@ import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.FileChooser
 import javafx.stage.Stage
+import javafx.stage.WindowEvent
 import org.controlsfx.control.CheckComboBox
 
 class EditAnimeController {
@@ -78,26 +75,19 @@ class EditAnimeController {
      * Guardar la acutalizacion del anime
      */
     private fun editionSave() {
-        val animeUpdate = creationUpdateAnime()
+        val animeUpdate = getAnimeView()
         animeRepository.update(animeUpdate.toPOJO())
         Alert(Alert.AlertType.INFORMATION).show("Edition correct", "fields changed successfully")
-        changeSceneAdmin()
-    }
-
-    private fun changeSceneAdmin() {
-        val stage = fieldTitle.scene.window as Stage
-        //TODO cambiar escena y que te lleve a la vista principal de administrador
-        stage.loadScene(MAIN_ADMIN, WIDTH, HEIGHT) {
-            title = "Animes"
-            isResizable = false
-        }.show()
+        val stage = fieldDate.scene.window as Stage
+        stage.fireEvent(WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST))
+        stage.close()
     }
 
 
     /**
      * anime parámetros actualizados
      */
-    private fun creationUpdateAnime(): AnimeView {
+    private fun getAnimeView(): AnimeView {
         return AnimeView(
             if (fieldTitle.text.equals(" ")) anime.presentation.title else fieldTitle.text,
             anime.presentation.titleEnglish,
