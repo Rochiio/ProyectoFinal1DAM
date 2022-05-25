@@ -7,15 +7,20 @@ import com.example.myanimelist.filters.edition.EditFilters;
 import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.models.User;
 import com.example.myanimelist.repositories.users.IUsersRepository;
+import com.example.myanimelist.service.img.IImgStorage;
+import com.example.myanimelist.utils.Properties;
 import com.example.myanimelist.utils.ThemesManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import java.io.File;
+import java.time.LocalDate;
+import java.util.Objects;
 
 public class ProfileUserController {
     @FXML
@@ -38,6 +43,7 @@ public class ProfileUserController {
 
     private final IUsersRepository userRepository = DependenciesManager.getUsersRepo();
     private final User user = DependenciesManager.globalUser;
+    private final IImgStorage imgStorage = DependenciesManager.getImgStorage();
     private final EditFilters editionFilters = DependenciesManager.getEditFilter();
     private final Logger logger = LogManager.getLogger(ProfileUserController.class);
 
@@ -47,8 +53,9 @@ public class ProfileUserController {
         txtName.setText(user.getName());
         txtPassword.setText(user.getPassword());
         txtBirthday.setValue(user.getBirthDate());
+        img.setImage(imgStorage.loadImg(user));
         root.getStylesheets().clear();
-        root.getStylesheets().add(MyAnimeListApplication.class.getResource(ThemesManager.INSTANCE.getCurretnTheme().getValue()).toString());
+        root.getStylesheets().add(Objects.requireNonNull(MyAnimeListApplication.class.getResource(ThemesManager.INSTANCE.getCurretnTheme().getValue())).toString());
     }
 
     public void onSave(ActionEvent actionEvent) {
@@ -90,6 +97,20 @@ public class ProfileUserController {
             error.append("Correo incorrecto");
 
         return error.isEmpty();
+    }
+
+    public void changeUserImg() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Selecciona una nueva imagen");
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", ".jpg", ".png"));
+        File file = fc.showOpenDialog(img.getScene().getWindow());
+
+        if (file != null) {
+            logger.info(file.getAbsolutePath());
+            img.setImage(new Image(file.toURI().toString()));
+            user.setImg(file.getName());
+            imgStorage.cpFile(file, Properties.USER_IMG_DIR);
+        }
     }
 }
 

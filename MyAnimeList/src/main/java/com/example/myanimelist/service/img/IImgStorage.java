@@ -4,9 +4,13 @@ import com.example.myanimelist.models.User;
 import com.example.myanimelist.views.models.Presentation;
 import javafx.scene.image.Image;
 
+import java.io.File;
+
 public interface IImgStorage {
 
     void mkdir();
+
+    boolean cpFile(File file, String savePath);
 
     Image loadImg(User user);
 
