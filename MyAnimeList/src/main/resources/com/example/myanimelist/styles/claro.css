@@ -52,11 +52,9 @@
 
 /*tamaño, bordes y color de fondo de los titulos*/
 .table-view .column-header, .table-view .filler {
-       -fx-background-color: #88D4AB;
-       -fx-size: 45;
-       -fx-border-color: -fx-box-border;
-       -fx-border-width: 0 1 3 0;
-       -fx-border-insets: 0;
+    -fx-background-color: #88D4AB;
+    -fx-size: 45;
+    -fx-border-insets: 0;
    }
 
 .table-row-cell:empty, .table-cell:empty:hover {
