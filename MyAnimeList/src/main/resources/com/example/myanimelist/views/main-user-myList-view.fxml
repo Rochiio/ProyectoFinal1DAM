@@ -55,7 +55,7 @@
                         <ImageView fitHeight="71.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true"
                                    styleClass="fondo">
                             <image>
-                                <Image url="@../icons/default.png"/>
+                                <Image url="@../images/user/default.png"/>
                             </image>
                         </ImageView>
                     </graphic>
