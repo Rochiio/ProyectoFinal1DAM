@@ -24,19 +24,19 @@ public class AnimeView {
     final UUID id;
     IntegerProperty ranking = new SimpleIntegerProperty(0);
 
-    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, LocalDate date, String rating, List<String> genres, String img, UUID id) {
-        this.presentation = new SimpleObjectProperty<>(new Presentation(title, titleEnglish, id.toString()));
+    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, LocalDate date, String rating, String genres, String img, UUID id) {
+        this.presentation = new SimpleObjectProperty<>(new Presentation(title, titleEnglish, img));
         this.types = new SimpleStringProperty(types);
         this.episodes = new SimpleIntegerProperty(episodes);
         this.status = new SimpleStringProperty(status);
         this.date = new SimpleObjectProperty<>(date);
         this.rating = new SimpleStringProperty(rating);
-        this.genres = new SimpleStringProperty(String.join(",", genres));
+        this.genres = new SimpleStringProperty(genres);
         this.id = id;
     }
 
     public AnimeView(Anime anime) {
-        this.presentation = new SimpleObjectProperty<>(new Presentation(anime.getTitle(), anime.getTitleEnglish(), anime.getId().toString()));
+        this.presentation = new SimpleObjectProperty<>(new Presentation(anime.getTitle(), anime.getTitleEnglish(), anime.getImg()));
         this.types = new SimpleStringProperty(anime.getTypes());
         this.episodes = new SimpleIntegerProperty(anime.getEpisodes());
         this.status = new SimpleStringProperty(anime.getStatus());

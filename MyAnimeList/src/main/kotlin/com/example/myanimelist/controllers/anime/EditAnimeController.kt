@@ -5,18 +5,27 @@ import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.MAIN_ADMIN
+import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.AnimeView
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
+import javafx.scene.control.DatePicker
 import javafx.scene.control.TextField
+import javafx.scene.image.Image
+import javafx.scene.image.ImageView
+import javafx.stage.FileChooser
 import javafx.stage.Stage
-import java.time.LocalDate
 
 class EditAnimeController {
+
+    @FXML
+    lateinit var imgViewAnime: ImageView
+
     @FXML
     lateinit var fieldTitle: TextField
 
@@ -27,7 +36,7 @@ class EditAnimeController {
     lateinit var fieldStatus: TextField
 
     @FXML
-    lateinit var fieldDate: TextField
+    lateinit var fieldDate: DatePicker
 
     @FXML
     lateinit var fieldGenre: TextField
@@ -35,17 +44,28 @@ class EditAnimeController {
     @FXML
     lateinit var btnSave: Button
 
+    private val imgStorage: IImgStorage = DependenciesManager.getImgStorage()
     private var anime: AnimeView = DependenciesManager.animeSelection
     private var editFilters: EditFilters = DependenciesManager.getEditFilter()
 
+    @FXML
+    fun initialize() {
+        fieldTitle.text = anime.presentation.title
+        fieldEpisodes.text = anime.episodes.toString()
+        fieldStatus.text = anime.status
+        fieldDate.value = anime.date
+        fieldGenre.text = anime.genres
+        imgViewAnime.image = imgStorage.loadImg(anime.presentation)
+    }
 
     fun saveChanges() {
         val message = StringBuilder()
         if (!editionFilters(message)) {
             Alert(Alert.AlertType.ERROR).show("Edition invalid", message.toString())
-        } else {
-            editionSave()
+            return
         }
+
+        editionSave()
     }
 
 
@@ -79,11 +99,9 @@ class EditAnimeController {
             anime.types,
             if (fieldEpisodes.text.equals(" ")) anime.episodes else fieldEpisodes.text.toInt(),
             if (fieldStatus.text.equals(" ")) anime.status else fieldStatus.text,
-            if (fieldDate.text.equals(" ")) anime.date else LocalDate.parse(fieldDate.text),
+            if (fieldDate.value == null) anime.date else fieldDate.value,
             anime.rating,
-            (if (fieldGenre.text.equals(" ")) anime.genres else listOf(
-                fieldGenre.text.split(",").toString()
-            )) as List<String>,
+            if (fieldGenre.text.equals(" ")) anime.genres else fieldGenre.text,
             anime.id.toString(),
             anime.id
         )
@@ -96,23 +114,35 @@ class EditAnimeController {
      * @return boolean
      */
     private fun editionFilters(errorMessage: StringBuilder): Boolean {
+        if (!editFilters.checkTitleCorrect(fieldTitle.text)) {
+            errorMessage.appendLine("wrong title field")
+        }
         if (!editFilters.checkEpisodesCorrect(fieldEpisodes.text)) {
             errorMessage.appendLine("wrong episodes field")
-            return false
         }
         if (!editFilters.checkStatusCorrect(fieldStatus.text)) {
             errorMessage.appendLine("wrong status field")
-            return false
         }
-        if (!editFilters.checkDateCorrect(fieldDate.text)) {
+        if (!editFilters.checkDateCorrect(fieldDate.value)) {
             errorMessage.appendLine("wrong date field")
-            return false
         }
         if (!editFilters.checkGenreCorrect(fieldGenre.text)) {
             errorMessage.appendLine("wrong genre field")
-            return false
         }
-        return true
+        return errorMessage.isEmpty()
+    }
+
+    fun changeAnimeImg() {
+        val fc = FileChooser()
+        fc.title = "Selecciona una nueva imagen"
+        fc.extensionFilters.add(FileChooser.ExtensionFilter("Imagenes", ".jpg", ".png"))
+        val file = fc.showOpenDialog(imgViewAnime.getScene().getWindow())
+
+        if (file != null) {
+            imgViewAnime.image = Image(file.toURI().toString())
+            anime.presentation.img = file.name
+            imgStorage.cpFile(file, Properties.COVERS_DIR)
+        }
     }
 
 }

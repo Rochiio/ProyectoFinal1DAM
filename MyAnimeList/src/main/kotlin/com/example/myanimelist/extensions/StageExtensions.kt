@@ -9,9 +9,13 @@ fun Stage.loadScene(
     scene: String,
     width: Double? = null,
     height: Double? = null,
+    controller: Any? = null,
     action: Stage.() -> Unit
 ): Stage {
     val fxmlLoader = FXMLLoader(MyAnimeListApplication::class.java.getResource(scene))
+
+    if (controller != null)
+        fxmlLoader.setController(controller)
 
     val newScene: Scene = if (width != null && height != null)
         Scene(fxmlLoader.load(), width, height)
