@@ -29,7 +29,7 @@
                   <Insets top="30.0" />
                </padding>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="202.0" spacing="35.0">
+            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="202.0" spacing="45.0">
                <children>
                   <Label fx:id="txtName" styleClass="textoNormal" text="Label" />
                   <Label fx:id="txtEmail" styleClass="textoNormal" text="Label" />
@@ -41,7 +41,7 @@
             </VBox>
          </children>
          <padding>
-            <Insets top="50.0" />
+            <Insets left="10.0" top="50.0" />
          </padding>
       </HBox>
       <HBox alignment="CENTER" layoutX="301.0" layoutY="318.0" prefHeight="82.0" prefWidth="299.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="301.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="318.0">
@@ -50,6 +50,9 @@
             <Button mnemonicParsing="false" onAction="#editUser" text="Editar" />
             <Button mnemonicParsing="false" onAction="#deleteUser" text="Eliminar" />
          </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
       </HBox>
     </children>
 </AnchorPane>

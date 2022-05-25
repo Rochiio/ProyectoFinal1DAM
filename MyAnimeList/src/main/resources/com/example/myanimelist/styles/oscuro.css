@@ -12,7 +12,7 @@
 .textoNormal{
     -fx-text-fill: white;
     -fx-font-weight: normal;
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
 }
 
 .button {

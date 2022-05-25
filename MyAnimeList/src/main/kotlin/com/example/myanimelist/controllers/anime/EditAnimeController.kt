@@ -140,7 +140,10 @@ class EditAnimeController {
     fun changeAnimeImg() {
         val fc = FileChooser()
         fc.title = "Selecciona una nueva imagen"
-        fc.extensionFilters.add(FileChooser.ExtensionFilter("Imagenes", ".jpg", ".png"))
+        fc.extensionFilters.addAll(
+            FileChooser.ExtensionFilter("Imagenes png", "*.png"),
+            FileChooser.ExtensionFilter("Imagenes jpg", "*.jpg")
+        )
         val file = fc.showOpenDialog(imgViewAnime.getScene().getWindow())
 
         if (file != null) {
