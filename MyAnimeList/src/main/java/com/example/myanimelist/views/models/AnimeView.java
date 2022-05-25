@@ -1,15 +1,10 @@
 package com.example.myanimelist.views.models;
 
 import com.example.myanimelist.models.Anime;
-import com.example.myanimelist.models.enums.Genre;
-import com.example.myanimelist.models.enums.Status;
-import com.example.myanimelist.models.enums.Type;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 public class AnimeView {
@@ -24,19 +19,19 @@ public class AnimeView {
     final UUID id;
     IntegerProperty ranking = new SimpleIntegerProperty(0);
 
-    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, LocalDate date, String rating, List<String> genres, String img, UUID id) {
-        this.presentation = new SimpleObjectProperty<>(new Presentation(title, titleEnglish, id.toString()));
+    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, LocalDate date, String rating, String genres, UUID id) {
+        this.presentation = new SimpleObjectProperty<>(new Presentation(title, titleEnglish, id + ".jpg"));
         this.types = new SimpleStringProperty(types);
         this.episodes = new SimpleIntegerProperty(episodes);
         this.status = new SimpleStringProperty(status);
         this.date = new SimpleObjectProperty<>(date);
         this.rating = new SimpleStringProperty(rating);
-        this.genres = new SimpleStringProperty(String.join(",", genres));
+        this.genres = new SimpleStringProperty(genres);
         this.id = id;
     }
 
     public AnimeView(Anime anime) {
-        this.presentation = new SimpleObjectProperty<>(new Presentation(anime.getTitle(), anime.getTitleEnglish(), anime.getId().toString()));
+        this.presentation = new SimpleObjectProperty<>(new Presentation(anime.getTitle(), anime.getTitleEnglish(), anime.getImg()));
         this.types = new SimpleStringProperty(anime.getTypes());
         this.episodes = new SimpleIntegerProperty(anime.getEpisodes());
         this.status = new SimpleStringProperty(anime.getStatus());
@@ -174,21 +169,5 @@ public class AnimeView {
                 ", img=" + presentation.get().getImg() +
                 ", id=" + id +
                 '}';
-    }
-
-    public void enumParser(String selection) {
-        for (String sample : Genre.Companion.getSample()) {
-            if (Objects.equals(selection, sample.split(",")[0])) setGenres(selection);
-            return;
-        }
-
-        for (String sample : Status.Companion.getSample()) {
-            if (Objects.equals(selection, sample)) setStatus(selection);
-            return;
-        }
-
-        for (String sample : Type.Companion.getSample()) {
-            if (Objects.equals(selection, sample)) setTypes(selection);
-        }
     }
 }

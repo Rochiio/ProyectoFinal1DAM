@@ -3,6 +3,7 @@ package com.example.myanimelist.filters.edition
 import com.example.myanimelist.managers.DependenciesManager
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
 
 internal class EditFiltersTest {
     private var editFilters: EditFilters = DependenciesManager.getEditFilter()
@@ -10,13 +11,9 @@ internal class EditFiltersTest {
     @Test
     fun checkEpisodesCorrect() {
         val correct = "8"
-        val correctTwo = ""
         val bad = "bad"
-        assertAll(
-            { assertTrue(editFilters.checkEpisodesCorrect(correct)) },
-            { assertTrue(editFilters.checkEpisodesCorrect(correctTwo)) },
-            { assertFalse(editFilters.checkEpisodesCorrect(bad)) }
-        )
+        assertTrue(editFilters.checkEpisodesCorrect(correct))
+        assertFalse(editFilters.checkEpisodesCorrect(bad))
     }
 
     @Test
@@ -24,13 +21,11 @@ internal class EditFiltersTest {
         val correct = "Finished Airing"
         val correctTwo = "Currently Airing"
         val correctThree = "Not yet aired"
-        val correctFour = ""
         val bad = "bad"
         assertAll(
             { assertTrue(editFilters.checkStatusCorrect(correct)) },
             { assertTrue(editFilters.checkStatusCorrect(correctTwo)) },
             { assertTrue(editFilters.checkStatusCorrect(correctThree)) },
-            { assertTrue(editFilters.checkStatusCorrect(correctFour)) },
             { assertFalse(editFilters.checkStatusCorrect(bad)) }
         )
     }
@@ -50,7 +45,6 @@ internal class EditFiltersTest {
         val correctEleven = "Psychological"
         val correctTwelve = "Sci-Fi"
         val correcttThirteen = "Romance"
-        val correctFourteen = ""
         val bad = "bad"
         assertAll(
             { assertTrue(editFilters.checkGenreCorrect(correct)) },
@@ -66,24 +60,19 @@ internal class EditFiltersTest {
             { assertTrue(editFilters.checkGenreCorrect(correctEleven)) },
             { assertTrue(editFilters.checkGenreCorrect(correctTwelve)) },
             { assertTrue(editFilters.checkGenreCorrect(correcttThirteen)) },
-            { assertTrue(editFilters.checkGenreCorrect(correctFourteen)) },
             { assertFalse(editFilters.checkGenreCorrect(bad)) }
         )
     }
 
     @Test
     fun checkDateCorrect() {
-        val correct = "2022-03-20"
-        val correctTwo = "2022-05-21"
-        val correctThree = "2012-06-14"
-        val correctFour = ""
-        val bad = "bad"
+        val correct = LocalDate.of(2002, 10, 10)
+        val wrong = LocalDate.now()
+        val wrong2 = LocalDate.of(9999, 10, 10)
         assertAll(
             { assertTrue(editFilters.checkDateCorrect(correct)) },
-            { assertTrue(editFilters.checkDateCorrect(correctTwo)) },
-            { assertTrue(editFilters.checkDateCorrect(correctThree)) },
-            { assertTrue(editFilters.checkDateCorrect(correctFour)) },
-            { assertFalse(editFilters.checkDateCorrect(bad)) }
+            { assertFalse(editFilters.checkDateCorrect(wrong)) },
+            { assertFalse(editFilters.checkDateCorrect(wrong2)) }
         )
     }
 

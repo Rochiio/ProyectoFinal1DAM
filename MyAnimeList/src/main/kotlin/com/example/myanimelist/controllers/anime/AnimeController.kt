@@ -9,7 +9,6 @@ import com.example.myanimelist.utils.ANIME_DATA_EDIT
 import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.AnimeView
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
@@ -99,7 +98,7 @@ class AnimeController {
      * Usuario administrador
      * Editar el anime
      */
-    fun editAnime(actionEvent: ActionEvent) {
+    fun editAnime() {
 
         val stage = txtTittle.scene.window as Stage
         stage.loadScene(ANIME_DATA_EDIT, WIDTH, HEIGHT) {
@@ -113,7 +112,7 @@ class AnimeController {
      * Usuario administrador
      * Eliminar el anime
      */
-    fun deleteAnime(actionEvent: ActionEvent) {
+    fun deleteAnime() {
         val alerta = Alert(Alert.AlertType.CONFIRMATION)
         alerta.title = "Confirmación"
         alerta.contentText = "Desea eliminar el anime ${txtTittle.text}"
