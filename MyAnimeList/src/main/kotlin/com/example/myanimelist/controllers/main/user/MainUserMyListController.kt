@@ -1,10 +1,12 @@
 package com.example.myanimelist.controllers.main.user
 
+import com.example.myanimelist.dto.LoadDTO
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.managers.SceneManager
+import com.example.myanimelist.service.txt.TxtBackup
 import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
@@ -52,9 +54,6 @@ class MainUserMyListController {
     @FXML
     private lateinit var menuButton: MenuButton
 
-    @FXML
-    private lateinit var addAnimeButton: Button
-
 
     @FXML
     fun initialize() {
@@ -96,13 +95,20 @@ class MainUserMyListController {
 
     }
 
-    fun changeMainTheme(actionEvent: ActionEvent) {
+    fun changeMainTheme() {
         ThemesManager.changeTheme()
         ThemesManager.setTheme(menuButton)
     }
 
-    fun logout(actionEvent: ActionEvent) {
+    fun logout() {
         val stage = menuButton.scene.window as Stage
+        if(!animeList.isEmpty()){
+            val loadDTO = LoadDTO(
+                true,
+                (ThemesManager.currentTheme == Themes.OSCURO)
+            )
+            TxtBackup().save(loadDTO)
+        }
         stage.loadScene(LOGIN) {
             title = "Log in"
             isResizable = false
@@ -142,5 +148,12 @@ class MainUserMyListController {
                 isResizable = false
             }.show()
         }
+    }
+
+    fun changeSceneToStatsUser() {
+        Stage().loadScene(MAIN_USER_STATS) {
+            title = "Estadisticas"
+            isResizable = false
+        }.show()
     }
 }
