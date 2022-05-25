@@ -6,6 +6,7 @@ import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.enums.Genre
+import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.MAIN_ADMIN
@@ -13,10 +14,7 @@ import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.AnimeView
 import javafx.fxml.FXML
-import javafx.scene.control.Alert
-import javafx.scene.control.Button
-import javafx.scene.control.DatePicker
-import javafx.scene.control.TextField
+import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.FileChooser
@@ -38,7 +36,7 @@ class EditAnimeController {
     lateinit var fieldEpisodes: TextField
 
     @FXML
-    lateinit var fieldStatus: TextField
+    lateinit var fieldStatus: ChoiceBox<String>
 
     @FXML
     lateinit var fieldDate: DatePicker
@@ -54,7 +52,8 @@ class EditAnimeController {
     fun initialize() {
         fieldTitle.text = anime.presentation.title
         fieldEpisodes.text = anime.episodes.toString()
-        fieldStatus.text = anime.status
+        fieldStatus.items = Status.sample
+        fieldStatus.value = anime.status
         fieldDate.value = anime.date
         imgViewAnime.image = imgStorage.loadImg(anime.presentation)
         fieldGenres.items.addAll(Genre.observableValues)
@@ -104,7 +103,7 @@ class EditAnimeController {
             anime.presentation.titleEnglish,
             anime.types,
             if (fieldEpisodes.text.equals(" ")) anime.episodes else fieldEpisodes.text.toInt(),
-            if (fieldStatus.text.equals(" ")) anime.status else fieldStatus.text,
+            fieldStatus.selectionModel.selectedItem,
             if (fieldDate.value == null) anime.date else fieldDate.value,
             anime.rating,
             fieldGenres.checkModel.checkedItems.joinToString(","),
@@ -125,7 +124,7 @@ class EditAnimeController {
         if (!editFilters.checkEpisodesCorrect(fieldEpisodes.text)) {
             errorMessage.appendLine("wrong episodes field")
         }
-        if (!editFilters.checkStatusCorrect(fieldStatus.text)) {
+        if (!editFilters.checkStatusCorrect(fieldStatus.value)) {
             errorMessage.appendLine("wrong status field")
         }
         if (!editFilters.checkDateCorrect(fieldDate.value)) {
@@ -144,7 +143,7 @@ class EditAnimeController {
             FileChooser.ExtensionFilter("Imagenes png", "*.png"),
             FileChooser.ExtensionFilter("Imagenes jpg", "*.jpg")
         )
-        val file = fc.showOpenDialog(imgViewAnime.getScene().getWindow())
+        val file = fc.showOpenDialog(imgViewAnime.scene.window)
 
         if (file != null) {
             imgViewAnime.image = Image(file.toURI().toString())
