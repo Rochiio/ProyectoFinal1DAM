@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -74,8 +75,8 @@ public class ProfileUserController {
                 "Actualización correcta",
                 "Has actualizado tu perfil"
         );
-
-
+        Stage stage = (Stage) btnSave.getScene().getWindow();
+        stage.close();
     }
 
     private void creationUpdateUser() {
@@ -102,7 +103,10 @@ public class ProfileUserController {
     public void changeUserImg() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Selecciona una nueva imagen");
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", ".jpg", ".png"));
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Imagenes png", "*.png"),
+                new FileChooser.ExtensionFilter("Imagenes jpg", "*.jpg")
+        );
         File file = fc.showOpenDialog(img.getScene().getWindow());
 
         if (file != null) {
