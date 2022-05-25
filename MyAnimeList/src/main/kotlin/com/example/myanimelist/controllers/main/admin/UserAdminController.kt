@@ -36,13 +36,13 @@ class UserAdminController {
 
     @FXML
     lateinit var columnEmail: TableColumn<UserView, String>
-    
+
     @FXML
     lateinit var txtName: Label
-    
+
     @FXML
     lateinit var txtEmail: Label
-    
+
     @FXML
     lateinit var txtBirthDay: Label
 
@@ -56,28 +56,29 @@ class UserAdminController {
     }
 
     private fun clearUser() {
-        txtName.text=" "
-        txtEmail.text=" "
-        txtBirthDay.text=" "
+        txtName.text = " "
+        txtEmail.text = " "
+        txtBirthDay.text = " "
     }
 
-    private fun setUser(user: UserView){
-        txtName.text=user.name
-        txtEmail.text=user.email
-        txtBirthDay.text=user.birthDate.toString()
+    private fun setUser(user: UserView) {
+        txtName.text = user.name
+        txtEmail.text = user.email
+        txtBirthDay.text = user.birthDate.toString()
     }
 
 
     private fun initListener() {
-        tabla.selectionModel.selectedItemProperty().addListener { _: ObservableValue<out UserView?>, _: UserView?, newValue: UserView? ->
-            selectUser(newValue)
-        }
+        tabla.selectionModel.selectedItemProperty()
+            .addListener { _: ObservableValue<out UserView?>, _: UserView?, newValue: UserView? ->
+                selectUser(newValue)
+            }
     }
 
     private fun selectUser(newValue: UserView?) {
-        if (newValue==null){
+        if (newValue == null) {
             clearUser()
-        }else {
+        } else {
             setUser(newValue)
         }
     }
@@ -108,16 +109,16 @@ class UserAdminController {
         }
     }
 
-    fun addUser(actionEvent: ActionEvent) {
 
-    }
+        fun addUser(actionEvent: ActionEvent) {
 
-    fun editUser(actionEvent: ActionEvent) {
+        }
 
-    }
+        fun editUser(actionEvent: ActionEvent) {
 
-    fun deleteUser(actionEvent: ActionEvent) {
+        }
 
-    }
+        fun deleteUser(actionEvent: ActionEvent) {}
+
 
 }
