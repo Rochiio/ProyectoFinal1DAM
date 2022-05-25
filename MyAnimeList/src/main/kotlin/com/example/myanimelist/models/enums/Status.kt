@@ -1,6 +1,7 @@
 package com.example.myanimelist.models.enums
 
 import javafx.collections.FXCollections
+import javafx.collections.ObservableList
 
 enum class Status(val value: String = "Unknown") {
     FINISHED_AIRING("Finished Airing"),
@@ -8,6 +9,7 @@ enum class Status(val value: String = "Unknown") {
     NOT_YET_AIRED("Not yet aired");
 
     companion object {
-        val sample = FXCollections.observableArrayList(Status.values().map { it.value }.toList())
+        val sample: ObservableList<String> =
+            FXCollections.observableArrayList(Status.values().map { it.value }.toList())
     }
 }
