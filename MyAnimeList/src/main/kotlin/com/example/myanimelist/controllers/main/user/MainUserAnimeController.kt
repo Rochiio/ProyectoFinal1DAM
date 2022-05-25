@@ -38,8 +38,8 @@ class MainUserAnimeController {
 
 
     //Specific
-    private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
+    private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
 
     @FXML
     fun initialize() {
@@ -48,17 +48,17 @@ class MainUserAnimeController {
 
         initCells()
 
-        initData()
+        updateData()
 
     }
 
-    private fun initData() {
+    private fun updateData() {
         animeListView.items = animeList
     }
 
     private fun loadData() {
         logger.info("cargando datos a memoria")
-        animeList.addAll(animeRepository.findAll().map { AnimeView(it) }.toList())
+        animeList.setAll(animeRepository.findAll().map { AnimeView(it) }.toList())
         animeList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }
             .forEach { it.ranking = animeList.indexOf(it) }
     }
@@ -111,22 +111,7 @@ class MainUserAnimeController {
                     img.fitHeight = 20.0
                     img.fitWidth = 20.0
                     but.graphic = img
-                    but.setOnAction {
-                        DependenciesManager.animeSelection = item
-                        if (DependenciesManager.globalUser.admin) {
-                            Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
-                                title = item.presentation.title
-                                isResizable = false
-                                icons.add(Image(ResourcesManager.getIconOf("editar.png")))
-                            }.show()
-                        } else {
-                            Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
-                                title = item.presentation.title
-                                isResizable = false
-                                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                            }.show()
-                        }
-                    }
+                    but.setOnAction { changeToAnime(item) }
 
                     //Añadimos todos los campos
                     root.children.addAll(ranking, presentationRoot, rating, but)
@@ -139,22 +124,28 @@ class MainUserAnimeController {
     }
 
     fun changeSceneToAnimeDataView(mouseEvent: MouseEvent) {
-        if (mouseEvent.button === MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
-            val anime: AnimeView = animeListView.selectionModel.selectedItem
-            DependenciesManager.animeSelection = anime
-            if (DependenciesManager.globalUser.admin) {
-                Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
-                    title = anime.presentation.title
-                    isResizable = false
-                    icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                }.show()
-            } else {
-                Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
-                    title = anime.presentation.title
-                    isResizable = false
-                    icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                }.show()
-            }
+        if (mouseEvent.button !== MouseButton.PRIMARY || mouseEvent.clickCount != 2) return
+
+        changeToAnime(animeListView.selectionModel.selectedItem)
+    }
+
+    private fun changeToAnime(anime: AnimeView) {
+        DependenciesManager.animeSelection = anime
+
+        if (DependenciesManager.globalUser.admin) {
+            Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
+                title = anime.presentation.title
+                isResizable = false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+                setOnCloseRequest { initialize() }
+            }.show()
+            return
         }
+
+        Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
+            title = anime.presentation.title
+            isResizable = false
+            icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+        }.show()
     }
 }
