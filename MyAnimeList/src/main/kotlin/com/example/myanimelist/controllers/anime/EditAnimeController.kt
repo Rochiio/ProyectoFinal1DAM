@@ -43,9 +43,10 @@ class EditAnimeController {
         val message = StringBuilder()
         if (!editionFilters(message)) {
             Alert(Alert.AlertType.ERROR).show("Edition invalid", message.toString())
-        } else {
-            editionSave()
+            return
         }
+
+        editionSave()
     }
 
 
