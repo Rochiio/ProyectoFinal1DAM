@@ -23,8 +23,8 @@ public class AnimeView {
     final UUID id;
     IntegerProperty ranking = new SimpleIntegerProperty(0);
 
-    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, LocalDate date, String rating, String genres, String img, UUID id) {
-        this.presentation = new SimpleObjectProperty<>(new Presentation(title, titleEnglish, img));
+    public AnimeView(String title, String titleEnglish, String types, int episodes, String status, LocalDate date, String rating, String genres, UUID id) {
+        this.presentation = new SimpleObjectProperty<>(new Presentation(title, titleEnglish, id + ".jpg"));
         this.types = new SimpleStringProperty(types);
         this.episodes = new SimpleIntegerProperty(episodes);
         this.status = new SimpleStringProperty(status);

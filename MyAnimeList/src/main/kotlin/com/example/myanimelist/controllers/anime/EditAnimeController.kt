@@ -58,7 +58,9 @@ class EditAnimeController {
         fieldDate.value = anime.date
         imgViewAnime.image = imgStorage.loadImg(anime.presentation)
         fieldGenres.items.addAll(Genre.observableValues)
-        for (genre in fieldGenres.items.filter { anime.genres.split(",").contains(it) })
+        val genres = anime.genres.split(",")
+        val genresSelected = fieldGenres.items.filter { genres.any { genre -> it.equals(genre.trim()) } }
+        for (genre in genresSelected)
             fieldGenres.checkModel.check(genre)
     }
 
@@ -105,11 +107,7 @@ class EditAnimeController {
             if (fieldStatus.text.equals(" ")) anime.status else fieldStatus.text,
             if (fieldDate.value == null) anime.date else fieldDate.value,
             anime.rating,
-            if (!Genre.values().any { fieldGenres.items.contains(it.value) })
-                anime.genres
-            else
-                fieldGenres.checkModel.checkedItems.joinToString(","),
-            anime.id.toString(),
+            fieldGenres.checkModel.checkedItems.joinToString(","),
             anime.id
         )
     }
