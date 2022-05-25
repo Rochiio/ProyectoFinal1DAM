@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
@@ -36,8 +37,7 @@ public class ImgStorage implements IImgStorage {
     }
 
     /**
-     *
-     * @param file file to copy
+     * @param file     file to copy
      * @param savePath path from where you want to save the file
      * @return the name of the file copied ready to be saved into the model
      */
@@ -49,9 +49,14 @@ public class ImgStorage implements IImgStorage {
 
     @Override
     public Image loadImg(User user) {
-        if (!Objects.requireNonNull(user.getImg()).isBlank() && ResourcesManager.INSTANCE.getUserImageOf(user.getImg()) != null) {
+        InputStream userImage = null;
+        
+        if (user.getImg() != null)
+            userImage = ResourcesManager.INSTANCE.getUserImageOf(user.getImg());
+
+        if (userImage != null) {
             logger.info("loading img");
-            return new Image(Objects.requireNonNull(ResourcesManager.INSTANCE.getUserImageOf(user.getImg())));
+            return new Image(userImage);
         }
 
         logger.info("loading default img");

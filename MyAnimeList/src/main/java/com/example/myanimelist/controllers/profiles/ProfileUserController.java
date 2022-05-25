@@ -18,8 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.io.File;
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class ProfileUserController {
@@ -58,7 +58,7 @@ public class ProfileUserController {
         root.getStylesheets().add(Objects.requireNonNull(MyAnimeListApplication.class.getResource(ThemesManager.INSTANCE.getCurretnTheme().getValue())).toString());
     }
 
-    public void onSave(ActionEvent actionEvent) {
+    public void onSave() {
         StringBuilder invalidMessage = new StringBuilder();
         if (!validate(invalidMessage)) {
             AlertExtensionsKt.show(

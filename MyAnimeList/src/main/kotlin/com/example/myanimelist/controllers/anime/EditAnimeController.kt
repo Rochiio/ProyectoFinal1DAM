@@ -49,14 +49,15 @@ class EditAnimeController {
     private var editFilters: EditFilters = DependenciesManager.getEditFilter()
 
     @FXML
-    fun initialize(){
+    fun initialize() {
         fieldTitle.text = anime.presentation.title
         fieldEpisodes.text = anime.episodes.toString()
         fieldStatus.text = anime.status
-        fieldDate.text = anime.date.toString()
+        fieldDate.value = anime.date
         fieldGenre.text = anime.genres
         imgViewAnime.image = imgStorage.loadImg(anime.presentation)
     }
+
     fun saveChanges() {
         val message = StringBuilder()
         if (!editionFilters(message)) {
