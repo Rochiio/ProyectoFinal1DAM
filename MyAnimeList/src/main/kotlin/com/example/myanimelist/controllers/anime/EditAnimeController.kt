@@ -5,6 +5,7 @@ import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.MAIN_ADMIN
@@ -20,8 +21,12 @@ import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.FileChooser
 import javafx.stage.Stage
+import org.controlsfx.control.CheckComboBox
 
 class EditAnimeController {
+
+    @FXML
+    lateinit var fieldGenres: CheckComboBox<String>
 
     @FXML
     lateinit var imgViewAnime: ImageView
@@ -39,9 +44,6 @@ class EditAnimeController {
     lateinit var fieldDate: DatePicker
 
     @FXML
-    lateinit var fieldGenre: TextField
-
-    @FXML
     lateinit var btnSave: Button
 
     private val imgStorage: IImgStorage = DependenciesManager.getImgStorage()
@@ -54,8 +56,10 @@ class EditAnimeController {
         fieldEpisodes.text = anime.episodes.toString()
         fieldStatus.text = anime.status
         fieldDate.value = anime.date
-        fieldGenre.text = anime.genres
         imgViewAnime.image = imgStorage.loadImg(anime.presentation)
+        fieldGenres.items.addAll(Genre.observableValues)
+        for (genre in fieldGenres.items.filter { anime.genres.split(",").contains(it) })
+            fieldGenres.checkModel.check(genre)
     }
 
     fun saveChanges() {
@@ -101,7 +105,10 @@ class EditAnimeController {
             if (fieldStatus.text.equals(" ")) anime.status else fieldStatus.text,
             if (fieldDate.value == null) anime.date else fieldDate.value,
             anime.rating,
-            if (fieldGenre.text.equals(" ")) anime.genres else fieldGenre.text,
+            if (!Genre.values().any { fieldGenres.items.contains(it.value) })
+                anime.genres
+            else
+                fieldGenres.checkModel.checkedItems.joinToString(","),
             anime.id.toString(),
             anime.id
         )
@@ -126,7 +133,7 @@ class EditAnimeController {
         if (!editFilters.checkDateCorrect(fieldDate.value)) {
             errorMessage.appendLine("wrong date field")
         }
-        if (!editFilters.checkGenreCorrect(fieldGenre.text)) {
+        if (!(fieldGenres.items.all { editFilters.checkGenreCorrect(it.toString()) })) {
             errorMessage.appendLine("wrong genre field")
         }
         return errorMessage.isEmpty()

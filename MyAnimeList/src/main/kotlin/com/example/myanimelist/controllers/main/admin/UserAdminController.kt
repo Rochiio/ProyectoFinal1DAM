@@ -70,4 +70,16 @@ class UserAdminController {
 
     }
 
+    fun addUser(actionEvent: ActionEvent) {
+
+    }
+
+    fun editUser(actionEvent: ActionEvent) {
+
+    }
+
+    fun deleteUser(actionEvent: ActionEvent) {
+
+    }
+
 }

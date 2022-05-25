@@ -27,7 +27,7 @@ class AdminController {
         }.show()
     }
 
-    fun changeStageToUsers(actionEvent: ActionEvent) {
+    fun changeStageToUsers() {
         Stage().loadScene(ADMIN_USERS_LIST, WIDTH, HEIGHT) {
             title = "Users"
             isResizable = false

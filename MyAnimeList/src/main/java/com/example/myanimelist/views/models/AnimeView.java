@@ -8,7 +8,6 @@ import javafx.beans.property.*;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -177,7 +176,7 @@ public class AnimeView {
     }
 
     public void enumParser(String selection) {
-        for (String sample : Genre.Companion.getSample()) {
+        for (String sample : Genre.Companion.getObservableValues()) {
             if (Objects.equals(selection, sample.split(",")[0])) setGenres(selection);
             return;
         }
