@@ -57,11 +57,9 @@ class LoginController : InicioController() {
     fun login() {
         val message = StringBuilder()
         if (!validateFields(message)) {
-            Alert(Alert.AlertType.WARNING).show("Login invalid", message.toString())
+            Alert(Alert.AlertType.WARNING).show("Loggeo invalido", message.toString())
             return
         }
-
-        Alert(Alert.AlertType.INFORMATION).show("Login completed", "You will go to the main page")
 
         changeSceneToMain()
     }

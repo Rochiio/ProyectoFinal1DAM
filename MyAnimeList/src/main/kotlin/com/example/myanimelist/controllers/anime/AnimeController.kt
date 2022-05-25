@@ -66,8 +66,8 @@ class AnimeController {
         val action = alert.showAndWait()
 
         if (action.get() == ButtonType.OK) {
-            val animeAux = animeRepository.findById(anime.id)
-            animeListRepository.add(animeAux!!, user)
+            val animeAux = anime.toPOJO()
+            animeListRepository.add(animeAux, user)
             user.myList.add(animeAux)
             Alert(Alert.AlertType.INFORMATION).show("Anime Añadido", "${anime.presentation.title} añadido a tu lista")
             logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
@@ -99,7 +99,6 @@ class AnimeController {
      * Editar el anime
      */
     fun editAnime() {
-
         val stage = txtTittle.scene.window as Stage
         stage.loadScene(ANIME_DATA_EDIT, WIDTH, HEIGHT) {
             title = "Editor"
