@@ -45,9 +45,27 @@
     -fx-background-color: #67B99A;
     -fx-font-weight: normal;
     -fx-font-size: 20px;
-    -fx-alignment: left;
     -fx-font-family: Arial;
     -fx-border-color: #78C6A3;
     -fx-border-style: solid;
     -fx-border-width: 1px;
+}
+
+
+
+/*tamaño, bordes y color de fondo de los titulos*/
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: #248277;
+    -fx-text-fill: white;
+    -fx-size: 45;
+    -fx-border-insets: 0;
+}
+
+.table-row-cell:empty, .table-cell:empty:hover {
+    -fx-background-color: #67B99A;
+}
+
+/*color de una fila que esta seleccionada*/
+.table-view:row-selection .table-row-cell:filled:selected {
+    -fx-background-color: #469D89;
 }
