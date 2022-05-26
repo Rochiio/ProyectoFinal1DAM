@@ -5,6 +5,7 @@ import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.managers.SceneManager
+import com.example.myanimelist.service.txt.TxtBackup
 import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
@@ -53,6 +54,7 @@ class MainUserMyListController {
 
     @FXML
     fun initialize() {
+        //TODO("que se establezca el tema a ThemesManager.currentTheme")
         loadData()
         initCells()
     }
@@ -94,6 +96,7 @@ class MainUserMyListController {
     fun changeMainTheme() {
         ThemesManager.changeTheme()
         ThemesManager.setTheme(menuButton)
+        TxtBackup.changeNightMode(ThemesManager.currentTheme)
     }
 
     fun logout() {

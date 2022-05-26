@@ -3,13 +3,13 @@ package com.example.myanimelist.service.txt;
 import com.example.myanimelist.dto.LoadDTO;
 import com.example.myanimelist.managers.DependenciesManager;
 import com.example.myanimelist.utils.Properties;
+import com.example.myanimelist.utils.Themes;
 import com.google.gson.Gson;
+import org.controlsfx.control.PropertySheet;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.Optional;
 
 public class TxtBackup implements ITxtStorage {
@@ -50,18 +50,19 @@ public class TxtBackup implements ITxtStorage {
         return Optional.empty();
     }
 
-    public void changeNightMode(){
+    public static void changeNightMode(Themes theme){
         String path = Properties.LOAD_FILE;
         String content = "";
+
         try{
             content = Files.readString(Path.of(path));
         } catch (IOException e){
             System.out.println("Error file cant be opened");
         }
 
-        if(content.contains("\"nightMode\": false")){
+        if(theme == Themes.OSCURO){
             content = content.replace("\"nightMode\": false", "\"nightMode\": true");
-        } else if(content.contains("\"nightMode\": true")) {
+        } else if(theme == Themes.CLARO) {
             content = content.replace("\"nightMode\": true", "\"nightMode\": false");
         }
 
