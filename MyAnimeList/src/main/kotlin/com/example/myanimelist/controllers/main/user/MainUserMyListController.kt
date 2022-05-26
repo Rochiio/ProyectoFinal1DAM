@@ -1,21 +1,17 @@
 package com.example.myanimelist.controllers.main.user
 
-import com.example.myanimelist.dto.LoadDTO
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.managers.SceneManager
-import com.example.myanimelist.service.txt.TxtBackup
 import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
 import com.example.myanimelist.views.models.ReviewView
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.scene.control.Button
 import javafx.scene.control.MenuButton
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
@@ -81,11 +77,11 @@ class MainUserMyListController {
 
     fun openAcercaDe() = SceneManager.openStageAbout()
 
-    fun filterMyListByText(actionEvent: ActionEvent) {
+    fun filterMyListByText() {
 
     }
 
-    fun changeSceneToAddAnime(actionEvent: ActionEvent) {
+    fun changeSceneToAddAnime() {
         val stage = Stage()
         stage.loadScene(MAIN_USER_ANIME) {
             title = "Añadir anime"
@@ -102,13 +98,6 @@ class MainUserMyListController {
 
     fun logout() {
         val stage = menuButton.scene.window as Stage
-        if(!animeList.isEmpty()){
-            val loadDTO = LoadDTO(
-                true,
-                (ThemesManager.currentTheme == Themes.OSCURO)
-            )
-            TxtBackup().save(loadDTO)
-        }
         stage.loadScene(LOGIN) {
             title = "Log in"
             isResizable = false
@@ -135,7 +124,7 @@ class MainUserMyListController {
         }
     }
 
-    fun changeSceneToProfileUser(actionEvent: ActionEvent) {
+    fun changeSceneToProfileUser() {
 
         if (!user.admin) {
             Stage().loadScene(PERFIL_VIEW) {

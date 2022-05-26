@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.Optional;
 
 public class TxtBackup implements ITxtStorage {
@@ -46,5 +48,27 @@ public class TxtBackup implements ITxtStorage {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    public void changeNightMode(){
+        String path = Properties.LOAD_FILE;
+        String content = "";
+        try{
+            content = Files.readString(Path.of(path));
+        } catch (IOException e){
+            System.out.println("Error file cant be opened");
+        }
+
+        if(content.contains("\"nightMode\": false")){
+            content = content.replace("\"nightMode\": false", "\"nightMode\": true");
+        } else if(content.contains("\"nightMode\": true")) {
+            content = content.replace("\"nightMode\": true", "\"nightMode\": false");
+        }
+
+        try(FileWriter fw = new FileWriter(path)){
+            fw.write(content);
+        } catch (IOException e){
+            System.out.println("Error file cant be edited");
+        }
     }
 }

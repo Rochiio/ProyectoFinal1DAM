@@ -41,5 +41,7 @@ object ThemesManager {
             Themes.OSCURO
         else
             Themes.CLARO
+
+
     }
 }
