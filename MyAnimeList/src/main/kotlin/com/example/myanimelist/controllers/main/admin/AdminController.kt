@@ -1,11 +1,10 @@
 package com.example.myanimelist.controllers.main.admin
 
+import com.example.myanimelist.dto.LoadDTO
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.managers.ResourcesManager
-import com.example.myanimelist.utils.ADMIN_USERS_LIST
-import com.example.myanimelist.utils.HEIGHT
-import com.example.myanimelist.utils.MAIN_USER_ANIME
-import com.example.myanimelist.utils.WIDTH
+import com.example.myanimelist.service.txt.TxtBackup
+import com.example.myanimelist.utils.*
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.image.Image
@@ -18,6 +17,16 @@ class AdminController {
     @FXML
     lateinit var userAdminButton: Button
 
+    @FXML
+    fun initialize(){
+
+        val loadDTO = LoadDTO(
+            true,
+            (ThemesManager.currentTheme == Themes.OSCURO)
+        )
+        TxtBackup().save(loadDTO)
+
+    }
     fun changeStageToAnimes() {
         Stage().loadScene(MAIN_USER_ANIME, WIDTH, HEIGHT) {
             title = "Animes"
