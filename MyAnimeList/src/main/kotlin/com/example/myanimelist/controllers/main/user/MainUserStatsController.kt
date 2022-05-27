@@ -8,11 +8,8 @@ import com.example.myanimelist.repositories.users.IUsersRepository
 import javafx.fxml.FXML
 import javafx.scene.control.Label
 import org.apache.logging.log4j.Logger
-import java.util.function.Function
-import java.util.stream.Collectors
-
-
-
+import java.util.stream.Collectors.toMap
+import java.util.stream.Stream
 
 
 class MainUserStatsController {
@@ -37,7 +34,6 @@ class MainUserStatsController {
     @FXML
     private lateinit var topRatedAnime: Label
 
-    //Specific
     private var userRepository: IUsersRepository = DependenciesManager.getUsersRepo()
     private var reviewRepository: IRepositoryReview = DependenciesManager.getReviewsRepo()
     private var myList: List<Anime> = emptyList()
@@ -45,52 +41,42 @@ class MainUserStatsController {
 
     @FXML
     fun initialize() {
+
         myList = userRepository.getAnimeLists(user.id)
-        myReviews = reviewRepository.findAll().toList().filter { it.user.id == user.id }
+        myReviews = reviewRepository.findAll().filter { it.user.id == user.id }.toList()
+
+        if(myList.isEmpty() || myReviews.isEmpty()){
+            val emptyMessage = "No hay animes y/o calificaciones suficientes..."
+            animeCount.text = emptyMessage
+            topGenreCount.text = emptyMessage
+            topTypeCount.text = emptyMessage
+            topRatedAnime.text = emptyMessage
+            botRatedAnime.text = emptyMessage
+        }
 
         animeCount.text = myList.count().toString()
         topGenreCount.text = getTopGenre()
-        topTypeCount.text = getTopType()
+        topTypeCount.text = getMaxOccurences(myList.map { it.types }.toList())
         topRatedAnime.text = myReviews.first { it -> it.score == myReviews.maxOf { it.score } }.anime.title
         botRatedAnime.text = myReviews.first { it -> it.score == myReviews.minOf { it.score } }.anime.title
     }
 
-    private fun getTopType(): String? {
-        val list = myList.map { it.types }.toList()
-        val hm: HashMap<String, Int> = HashMap()
-        for (type: String in list) {
-            if (hm.containsKey(type)) {
-                hm[type] = hm[type]!! + 1
-            } else {
-                hm[type] = 1
-            }
-        }
-        val topType: Map<String, String> = records.stream()
-            .collect(Collectors.groupingBy(
-                Record::getZip,
-                Collectors.collectingAndThen(
-                    Collectors.groupingBy(Record::getCity, Collectors.counting()),
-                    Function<R, RR> { map: R ->
-                        map.entrySet().stream().max(java.util.Map.Entry.comparingByValue()).get().getKey()
-                    }
-                )
-            ))
-        return hm.filter { it.value == hm.maxOf { it.value } }.keys.first()
+    private fun getMaxOccurences(list: List<String>): String {
+        val map = Stream.of(list)
+            .collect(toMap({ w -> w }, { w -> 1 }) { a: Int, b: Int -> Integer.sum(a, b) })
+
+        val max: Int = map.values.stream()
+            .mapToInt { n -> n }
+            .max().orElse(0)
+
+        return map.filter { e -> max == e.value }.keys.first().first()
     }
 
-    private fun getTopGenre(): String? {
+    private fun getTopGenre(): String {
         val list: ArrayList<String> = ArrayList()
         for (anime: Anime in myList) {
-            anime.types.split(",").toCollection(list)
+            anime.genres.toCollection(list)
         }
-        val hm: HashMap<String, Int> = HashMap()
-        for (genre: String in list) {
-            if (hm.containsKey(genre)) {
-                hm[genre] = hm[genre]!! + 1
-            } else {
-                hm[genre] = 1
-            }
-        }
-        return hm.filter { it.value == hm.maxOf { it.value } }.keys.first()
+        return getMaxOccurences(list)
     }
 }
