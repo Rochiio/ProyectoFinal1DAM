@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger
 
 object ThemesManager {
     val logger: Logger = LogManager.getLogger(ThemesManager::class)
-    private var currentTheme: Themes = Themes.CLARO
+    var currentTheme: Themes = Themes.CLARO
 
 
     fun getCurretnTheme(): Themes {
@@ -41,5 +41,7 @@ object ThemesManager {
             Themes.OSCURO
         else
             Themes.CLARO
+
+
     }
 }
