@@ -17,6 +17,7 @@ public class Properties {
     public static final String ANIME_CSV = CSV_DIR + File.separator + "animeCSVSmall.csv";
     public static final String JSON_DIR = DATA_DIR + File.separator + "json";
     public static final String JSON_FILE = JSON_DIR + File.separator + "backup.json";
+    public static final String LOAD_FILE = JSON_DIR + File.separator + "load.json";
     public static final String IMG_DIR = DATA_DIR + File.separator + "img";
     public static final String SRC_DIR = PATH + File.separator + "src" + File.separator + "main";
     public static final String RESOURCES_DIR = SRC_DIR + File.separator + "resources";

@@ -1,6 +1,7 @@
 package com.example.myanimelist.controllers.main.admin
 
 import com.example.myanimelist.extensions.loadScene
+import com.example.myanimelist.extensions.show
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.repositories.users.IUsersRepository
@@ -14,9 +15,7 @@ import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.scene.control.Label
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableView
+import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
@@ -96,29 +95,32 @@ class UserAdminController {
     }
 
 
-    fun changeSceneToProfileUser(mouseEvent: MouseEvent) {
-        if (mouseEvent.button === MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
-            val user: UserView = tabla.selectionModel.selectedItem
-            DependenciesManager.userSelectionAdmin = user
-            Stage().loadScene(PERFIL_VIEW_ADMIN, WIDTH, HEIGHT) {
-                title = "User profile"
-                isResizable = false
-                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-            }.show()
+//    fun changeSceneToProfileUser(mouseEvent: MouseEvent) {
+//        if (mouseEvent.button === MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
+//            val user: UserView = tabla.selectionModel.selectedItem
+//            DependenciesManager.userSelectionAdmin = user
+//            Stage().loadScene(PERFIL_VIEW_ADMIN, WIDTH, HEIGHT) {
+//                title = "User profile"
+//                isResizable = false
+//                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+//            }.show()
+//
+//        }
+//    }
 
-        }
+
+    fun deleteUser(actionEvent: ActionEvent) {
+        val item = tabla.selectionModel.selectedItem
+            val alert = Alert(Alert.AlertType.CONFIRMATION)
+            alert.headerText="Eliminar"
+            alert.contentText="Desea eliminar al usuario ${item.name}"
+            val result = alert.showAndWait()
+                if (result.get() == ButtonType.OK){
+                    usersRepository.delete(item.id)
+                    listUser.remove(item)
+                    Alert(Alert.AlertType.INFORMATION).show("Eliminar","Usuario eliminado correctamente")
+                }
     }
-
-
-        fun addUser(actionEvent: ActionEvent) {
-
-        }
-
-        fun editUser(actionEvent: ActionEvent) {
-
-        }
-
-        fun deleteUser(actionEvent: ActionEvent) {}
 
 
 }

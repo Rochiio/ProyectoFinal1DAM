@@ -44,8 +44,8 @@ class MainUserStatsController {
         myReviews = reviewRepository.findAll().toList().filter { it.user.id == user.id }
 
         animeCount.text = myList.count().toString()
-        topGenreCount.text = getTopGenre()
-        topTypeCount.text = getTopType()
+        //topGenreCount.text = getTopGenre()
+        //topTypeCount.text = getTopType()
         topRatedAnime.text = myReviews.first { it -> it.score == myReviews.maxOf { it.score } }.anime.title
         botRatedAnime.text = myReviews.first { it -> it.score == myReviews.minOf { it.score } }.anime.title
     }
