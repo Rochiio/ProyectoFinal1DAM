@@ -16,6 +16,7 @@ import javafx.scene.control.ButtonType
 import javafx.scene.control.Label
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
+import javafx.stage.WindowEvent
 
 
 class AnimeController {
@@ -123,6 +124,7 @@ class AnimeController {
             result.title = "Anime Eliminado"
         }
         val stage = txtTittle.scene.window as Stage
+        stage.fireEvent(WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST))
         stage.close()
     }
 
