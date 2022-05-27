@@ -8,6 +8,11 @@ import com.example.myanimelist.repositories.users.IUsersRepository
 import javafx.fxml.FXML
 import javafx.scene.control.Label
 import org.apache.logging.log4j.Logger
+import java.util.function.Function
+import java.util.stream.Collectors
+
+
+
 
 
 class MainUserStatsController {
@@ -44,8 +49,8 @@ class MainUserStatsController {
         myReviews = reviewRepository.findAll().toList().filter { it.user.id == user.id }
 
         animeCount.text = myList.count().toString()
-        //topGenreCount.text = getTopGenre()
-        //topTypeCount.text = getTopType()
+        topGenreCount.text = getTopGenre()
+        topTypeCount.text = getTopType()
         topRatedAnime.text = myReviews.first { it -> it.score == myReviews.maxOf { it.score } }.anime.title
         botRatedAnime.text = myReviews.first { it -> it.score == myReviews.minOf { it.score } }.anime.title
     }
@@ -60,6 +65,16 @@ class MainUserStatsController {
                 hm[type] = 1
             }
         }
+        val topType: Map<String, String> = records.stream()
+            .collect(Collectors.groupingBy(
+                Record::getZip,
+                Collectors.collectingAndThen(
+                    Collectors.groupingBy(Record::getCity, Collectors.counting()),
+                    Function<R, RR> { map: R ->
+                        map.entrySet().stream().max(java.util.Map.Entry.comparingByValue()).get().getKey()
+                    }
+                )
+            ))
         return hm.filter { it.value == hm.maxOf { it.value } }.keys.first()
     }
 
