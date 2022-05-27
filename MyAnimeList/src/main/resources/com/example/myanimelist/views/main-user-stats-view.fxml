@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -11,32 +12,62 @@
             <children>
                 <HBox prefHeight="100.0" prefWidth="200.0" styleClass="fondo" stylesheets="@../styles/claro.css">
                     <children>
-                        <Label text="Anime más gustado: " />
-                        <Label fx:id="topRatedAnime" />
+                        <Label styleClass="animeDataText" text="Anime más gustado:">
+                     <HBox.margin>
+                        <Insets left="30.0" top="10.0" />
+                     </HBox.margin></Label>
+                        <Label fx:id="topRatedAnime" prefHeight="17.0" prefWidth="0.0">
+                     <HBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </HBox.margin></Label>
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Label text="Anime menos gustado: " />
-                        <Label fx:id="botRatedAnime" />
+                        <Label styleClass="animeDataText" text="Anime menos gustado:">
+                     <HBox.margin>
+                        <Insets left="30.0" top="10.0" />
+                     </HBox.margin></Label>
+                        <Label fx:id="botRatedAnime">
+                     <HBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </HBox.margin></Label>
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Label text="Total de animes vistos: " />
-                        <Label fx:id="animeCount" />
+                        <Label styleClass="animeDataText" text="Total de animes vistos:">
+                     <HBox.margin>
+                        <Insets left="30.0" top="10.0" />
+                     </HBox.margin></Label>
+                        <Label fx:id="animeCount">
+                     <HBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </HBox.margin></Label>
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Label text="Género favorito:  " />
-                        <Label fx:id="topGenreCount" />
+                        <Label styleClass="animeDataText" text="Género favorito: ">
+                     <HBox.margin>
+                        <Insets left="30.0" top="10.0" />
+                     </HBox.margin></Label>
+                        <Label fx:id="topGenreCount">
+                     <HBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </HBox.margin></Label>
                     </children>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Label text="Tipo preferido:  " />
-                        <Label fx:id="topTypeCount" />
+                        <Label styleClass="animeDataText" text="Tipo preferido: ">
+                     <HBox.margin>
+                        <Insets left="30.0" top="10.0" />
+                     </HBox.margin></Label>
+                        <Label fx:id="topTypeCount">
+                     <HBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </HBox.margin></Label>
                     </children>
                 </HBox>
 
