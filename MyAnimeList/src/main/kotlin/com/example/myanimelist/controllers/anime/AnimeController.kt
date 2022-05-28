@@ -72,7 +72,7 @@ class AnimeController {
             user.myList.add(animeAux)
             Alert(Alert.AlertType.INFORMATION).show(
                 "Anime Añadido",
-                "${anime.presentation.get().title} añadido a tu lista"
+                "${anime.presentation.get().getTitle()} añadido a tu lista"
             )
             logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
             stage.close()
