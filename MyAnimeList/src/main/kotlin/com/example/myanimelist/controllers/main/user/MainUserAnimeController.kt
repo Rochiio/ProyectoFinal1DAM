@@ -170,7 +170,12 @@ class MainUserAnimeController {
     }
 
     fun changeViewToAnimeAddView() {
-
+        val stage = addAnimeBtn.scene.window as Stage
+        stage.loadScene(ADD_ANIME, WIDTH, HEIGHT) {
+            title = "Añadir Anime"
+            isResizable = false
+            icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+        }.show()
     }
 
 }

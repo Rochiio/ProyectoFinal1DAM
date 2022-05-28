@@ -20,7 +20,7 @@ enum class Genre(val value: String = "Unknown") {
     ROMANCE("Romance");
 
     companion object {
-        val observableValues: ObservableList<String> =
+        val sample: ObservableList<String> =
             FXCollections.observableArrayList(Genre.values().map { it.value }.toList())
     }
 }

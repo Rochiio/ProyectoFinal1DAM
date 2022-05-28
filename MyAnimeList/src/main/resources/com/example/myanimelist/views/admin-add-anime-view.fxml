@@ -11,31 +11,32 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import org.controlsfx.control.CheckComboBox?>
+<?import javafx.scene.control.TextField?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.anime.AnimeAddController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" prefHeight="400.0" prefWidth="550.0" spacing="30.0">
                <children>
-                  <Label fx:id="txtTittle" ellipsisString="" prefHeight="25.0" prefWidth="341.0" styleClass="animeDataText" text="Titulo">
+                  <TextField fx:id="txtTitle" styleClass="text-input" promptText="título">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </VBox.margin>
-                  </Label>
-                  <Label fx:id="txtTitleEnglish" prefHeight="25.0" prefWidth="337.0" styleClass="animeDataText" text="Titulo en ingles">
+                  </TextField>
+                  <TextField fx:id="txtTitleEnglish" styleClass="text-input" promptText="título en inglés">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </VBox.margin>
-                  </Label>
-                  <Label fx:id="txtEpisodes" prefHeight="25.0" prefWidth="332.0" styleClass="animeDataText" text="nº de capítulos">
+                  </TextField>
+                  <TextField fx:id="txtEpisodes" styleClass="text-input" promptText="nº de episodios">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </VBox.margin>
-                  </Label>
+                  </TextField>
                   <DatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="332.0" />
                   <ChoiceBox fx:id="statusCB" prefHeight="25.0" prefWidth="329.0" />
                   <ChoiceBox fx:id="typeCB" prefHeight="25.0" prefWidth="329.0" />
-                  <CheckComboBox fx:id="GenreCB" prefWidth="326.0" />
+                  <CheckComboBox fx:id="genreCB" prefWidth="326.0" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="430.0" prefWidth="190.0" spacing="30.0">
