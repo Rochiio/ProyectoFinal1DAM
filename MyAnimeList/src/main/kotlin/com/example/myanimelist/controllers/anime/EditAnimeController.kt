@@ -1,11 +1,11 @@
 package com.example.myanimelist.controllers.anime
 
-import com.example.myanimelist.animeRepository
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
+import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.views.models.AnimeView
@@ -44,6 +44,7 @@ class EditAnimeController {
     private val imgStorage: IImgStorage = DependenciesManager.getImgStorage()
     private var anime: AnimeView = DependenciesManager.animeSelection
     private var editFilters: EditFilters = DependenciesManager.getEditFilter()
+    private val animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
 
     @FXML
     fun initialize() {
@@ -97,7 +98,6 @@ class EditAnimeController {
             if (fieldDate.value == null) anime.date.get() else fieldDate.value,
             anime.rating.get(),
             fieldGenres.checkModel.checkedItems.joinToString(","),
-            "${anime.id}.jpg",
             anime.id
         )
     }
@@ -139,6 +139,7 @@ class EditAnimeController {
         if (file != null) {
             imgViewAnime.image = Image(file.toURI().toString())
             anime.presentation.get().setImg(file.name)
+            animeRepository.update(anime.toPOJO())
             imgStorage.cpFile(file, Properties.COVERS_DIR)
         }
     }
