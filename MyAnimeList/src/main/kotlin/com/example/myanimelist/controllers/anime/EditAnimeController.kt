@@ -6,6 +6,7 @@ import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
+import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.views.models.AnimeView
@@ -17,6 +18,7 @@ import javafx.stage.FileChooser
 import javafx.stage.Stage
 import javafx.stage.WindowEvent
 import org.controlsfx.control.CheckComboBox
+import java.io.File
 
 class EditAnimeController {
 
@@ -44,6 +46,7 @@ class EditAnimeController {
     private val imgStorage: IImgStorage = DependenciesManager.getImgStorage()
     private var anime: AnimeView = DependenciesManager.animeSelection
     private var editFilters: EditFilters = DependenciesManager.getEditFilter()
+    private val animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
 
     @FXML
     fun initialize() {
@@ -138,8 +141,10 @@ class EditAnimeController {
         if (file != null) {
             imgViewAnime.image = Image(file.toURI().toString())
             anime.presentation.img = file.name
+            animeRepository.update(anime.toPOJO())
             imgStorage.cpFile(file, Properties.COVERS_DIR)
         }
     }
+
 
 }
