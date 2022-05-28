@@ -10,6 +10,7 @@ import com.example.myanimelist.models.enums.Type
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.views.models.AnimeView
+import javafx.beans.property.SimpleStringProperty
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.ChoiceBox
@@ -101,8 +102,8 @@ class AnimeAddController {
             UUID.randomUUID()
         )
         if(imgFile != null) {
-            imgStorage.cpFile(imgFile, Properties.COVERS_DIR)
-            anime.presentation.img = imgFile!!.name
+            imgStorage.cpFile(imgFile!!, Properties.COVERS_DIR)
+            anime.presentation.get().img = SimpleStringProperty(imgFile!!.name)
         }
 
         return anime

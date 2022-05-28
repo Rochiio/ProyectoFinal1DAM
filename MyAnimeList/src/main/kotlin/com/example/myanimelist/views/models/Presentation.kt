@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty
 class Presentation(title: String?, titleEnglish: String?, img: String?) {
     val title: StringProperty
     val titleEnglish: StringProperty
-    val img: StringProperty
+    var img: StringProperty
 
     init {
         this.img = SimpleStringProperty(img)

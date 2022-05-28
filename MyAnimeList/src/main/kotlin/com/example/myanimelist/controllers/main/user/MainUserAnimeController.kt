@@ -161,7 +161,7 @@ class MainUserAnimeController {
     fun filterByName() {
         if(searchName.text.isEmpty() || searchName.text.isBlank()) return
 
-        animefl.setPredicate { it.presentation.title.uppercase(Locale.getDefault()).contains(searchName.text.uppercase(
+        animefl.setPredicate { it.presentation.get().title.get().uppercase(Locale.getDefault()).contains(searchName.text.uppercase(
             Locale.getDefault()
         )) }
         animeListView.items = animefl
