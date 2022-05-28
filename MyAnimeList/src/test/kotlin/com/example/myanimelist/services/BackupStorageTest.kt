@@ -59,7 +59,7 @@ class BackupStorageTest {
             gson.toJson(dto, it)
         }
 
-        val savedDto: BackupDTO? = storage.load().orElse(null)
+        val savedDto: BackupDTO? = storage.load()
 
         assertAll(
             { assert(dto.animes == savedDto?.animes) },

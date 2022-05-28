@@ -1,6 +1,5 @@
 package com.example.myanimelist
 
-import com.example.myanimelist.dto.AnimeDTO
 import com.example.myanimelist.dto.LoadDTO
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.SceneManager
@@ -34,15 +33,15 @@ fun main() {
 
 fun initAnimes() {
     val loadData = TxtBackup().load()
-    if(loadData.get().isLoaded) {
-        ThemesManager.currentTheme = if (loadData.get().isNightMode)
+    if (loadData?.isLoaded == true) {
+        ThemesManager.currentTheme = if (loadData.isNightMode)
             Themes.OSCURO
         else
             Themes.CLARO
         return
     }
-    val listAnimes: MutableList<AnimeDTO> =
-        animeStorage.load().orElse(null) ?: throw Exception("listanimes is null")
+    val listAnimes =
+        animeStorage.load() ?: throw Exception("listanimes is null")
     for (item in listAnimes) {
         animeRepository.add(item.fromDTO())
     }

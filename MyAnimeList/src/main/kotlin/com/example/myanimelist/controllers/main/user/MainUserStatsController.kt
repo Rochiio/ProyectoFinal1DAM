@@ -8,8 +8,6 @@ import com.example.myanimelist.repositories.users.IUsersRepository
 import javafx.fxml.FXML
 import javafx.scene.control.Label
 import org.apache.logging.log4j.Logger
-import java.util.stream.Collectors.toMap
-import java.util.stream.Stream
 
 
 class MainUserStatsController {
@@ -45,38 +43,31 @@ class MainUserStatsController {
         myList = userRepository.getAnimeLists(user.id)
         myReviews = reviewRepository.findAll().filter { it.user.id == user.id }.toList()
 
-        if(myList.isEmpty() || myReviews.isEmpty()){
+        if (myList.isEmpty() || myReviews.isEmpty()) {
             val emptyMessage = "No hay animes y/o calificaciones suficientes..."
             animeCount.text = emptyMessage
             topGenreCount.text = emptyMessage
             topTypeCount.text = emptyMessage
             topRatedAnime.text = emptyMessage
             botRatedAnime.text = emptyMessage
+            return
         }
 
         animeCount.text = myList.count().toString()
         topGenreCount.text = getTopGenre()
         topTypeCount.text = getMaxOccurences(myList.map { it.types }.toList())
-        topRatedAnime.text = myReviews.first { it -> it.score == myReviews.maxOf { it.score } }.anime.title
-        botRatedAnime.text = myReviews.first { it -> it.score == myReviews.minOf { it.score } }.anime.title
+        topRatedAnime.text = myReviews.maxByOrNull { it.score }?.anime?.title
+        botRatedAnime.text = myReviews.minByOrNull { it.score }?.anime?.title
     }
 
-    private fun getMaxOccurences(list: List<String>): String {
-        val map = Stream.of(list)
-            .collect(toMap({ w -> w }, { w -> 1 }) { a: Int, b: Int -> Integer.sum(a, b) })
 
-        val max: Int = map.values.stream()
-            .mapToInt { n -> n }
-            .max().orElse(0)
-
-        return map.filter { e -> max == e.value }.keys.first().first()
+    private fun getMaxOccurences(list: List<String>): String? {
+        val ocurrences = list.groupingBy { it }.eachCount()
+        return ocurrences.maxByOrNull { it.value }?.key
     }
 
-    private fun getTopGenre(): String {
-        val list: ArrayList<String> = ArrayList()
-        for (anime: Anime in myList) {
-            anime.genres.toCollection(list)
-        }
+    private fun getTopGenre(): String? {
+        val list: List<String> = myList.flatMap { it.genres }
         return getMaxOccurences(list)
     }
 }
