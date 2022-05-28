@@ -52,6 +52,7 @@ class MainUserStatsController {
             topTypeCount.text = emptyMessage
             topRatedAnime.text = emptyMessage
             botRatedAnime.text = emptyMessage
+            return
         }
 
         animeCount.text = myList.count().toString()

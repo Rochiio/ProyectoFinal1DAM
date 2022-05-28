@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import org.controlsfx.control.CheckComboBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.anime.AnimeAddController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -34,7 +35,7 @@
                   <DatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="332.0" />
                   <ChoiceBox fx:id="statusCB" prefHeight="25.0" prefWidth="329.0" />
                   <ChoiceBox fx:id="typeCB" prefHeight="25.0" prefWidth="329.0" />
-                  <ChoiceBox fx:id="GenreCB" prefWidth="326.0" />
+                  <CheckComboBox fx:id="GenreCB" prefWidth="326.0" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="430.0" prefWidth="190.0" spacing="30.0">
