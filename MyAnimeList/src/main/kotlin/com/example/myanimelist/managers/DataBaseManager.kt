@@ -1,4 +1,4 @@
-package com.example.myanimelist.manager
+package com.example.myanimelist.managers
 
 import org.apache.ibatis.jdbc.ScriptRunner
 import java.io.*

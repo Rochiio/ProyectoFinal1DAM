@@ -1,7 +1,7 @@
 package com.example.myanimelist.repositories.animes
 
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Anime
 import org.apache.logging.log4j.Logger
 import java.util.*
