@@ -33,7 +33,6 @@ class LoginController : InicioController() {
     private fun changeSceneToMain() {
         DependenciesManager.globalUser =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
-        DependenciesManager.globalUser.myList.addAll(animesUserList.findByUserId(DependenciesManager.globalUser))
 
         val stage = txtUsername.scene.window as Stage
 

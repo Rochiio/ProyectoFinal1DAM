@@ -8,10 +8,8 @@ import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.service.txt.TxtBackup
 import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
-import com.example.myanimelist.views.models.Presentation
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.MenuButton
 import javafx.scene.control.TableColumn
@@ -34,7 +32,7 @@ class MainUserMyListController {
     private lateinit var myListRankingCol: TableColumn<AnimeView, Int>
 
     @FXML
-    private lateinit var myListTitleCol: TableColumn<AnimeView, Presentation>
+    private lateinit var myListTitleCol: TableColumn<AnimeView, String>
 
     /*@FXML
     private lateinit var myListScoreCol: TableColumn<ReviewView, Int>*/
@@ -61,19 +59,18 @@ class MainUserMyListController {
 
     private fun loadData() {
         logger.info("cargando datos a memoria")
-        animeList.addAll(user.myList.map { AnimeView(it) }.toList())
+        animeList.setAll(user.myList.map { AnimeView(it) }.toList())
 
     }
 
     private fun initCells() {
-        myListTable = TableView(animeList)
         myListTable.items = animeList
 
-        myListRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
-        myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-       // myListScoreCol.setCellValueFactory { cellData -> cellData.value.scoreProperty().asObject() }
-        myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
-        myListStatusCol.setCellValueFactory { cellData -> cellData.value.statusProperty() }
+        myListRankingCol.setCellValueFactory { it.value.rankingProperty().asObject() }
+        myListTitleCol.setCellValueFactory { it.value.presentationProperty().get().title }
+        // myListScoreCol.setCellValueFactory { cellData -> cellData.value.scoreProperty().asObject() }
+        myListTypeCol.setCellValueFactory { it.value.typesProperty() }
+        myListStatusCol.setCellValueFactory { it.value.statusProperty() }
     }
 
     fun openAcercaDe() = SceneManager.openStageAbout()
@@ -149,6 +146,7 @@ class MainUserMyListController {
     }
 
     fun refreshTable() {
+        loadData()
         myListTable.refresh()
     }
 }
