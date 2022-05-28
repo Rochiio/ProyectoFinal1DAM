@@ -25,10 +25,9 @@ class AnimeView {
         date: LocalDate,
         rating: String?,
         genres: String?,
-        img: String?,
         id: UUID
     ) {
-        presentation = SimpleObjectProperty(Presentation(title, titleEnglish, img))
+        presentation = SimpleObjectProperty(Presentation(title, titleEnglish, "$id.jpg"))
         this.types = SimpleStringProperty(types)
         this.episodes = SimpleIntegerProperty(episodes)
         this.status = SimpleStringProperty(status)
@@ -39,7 +38,7 @@ class AnimeView {
     }
 
     constructor(anime: Anime) {
-        presentation = SimpleObjectProperty(Presentation(anime.title, anime.titleEnglish, anime.img))
+        presentation = SimpleObjectProperty(Presentation(anime.title, anime.titleEnglish, "${anime.id}.jpg"))
         types = SimpleStringProperty(anime.types)
         episodes = SimpleIntegerProperty(anime.episodes)
         status = SimpleStringProperty(anime.status)
