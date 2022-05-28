@@ -6,15 +6,14 @@ import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.*
+import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.views.models.AnimeView
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
+import javafx.collections.transformation.FilteredList
 import javafx.fxml.FXML
 import javafx.geometry.Pos
-import javafx.scene.control.Button
-import javafx.scene.control.Label
-import javafx.scene.control.ListCell
-import javafx.scene.control.ListView
+import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
@@ -23,9 +22,9 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
+import java.util.*
 
 class MainUserAnimeController {
-
 
     //Generics
     val logger: Logger = DependenciesManager.getLogger<MainUserAnimeController>()
@@ -34,15 +33,24 @@ class MainUserAnimeController {
 
     //FXML
     @FXML
+    lateinit var addAnimeBtn: Button
+
+    @FXML
     private lateinit var animeListView: ListView<AnimeView>
+
+    @FXML
+    private lateinit var searchName: TextField
 
 
     //Specific
     private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
+    private lateinit var animefl: FilteredList<AnimeView>
 
     @FXML
-    fun initialize() {
+    fun initialize(){
+
+        if(!user.admin) addAnimeBtn.isVisible = false
 
         loadData()
 
@@ -57,6 +65,7 @@ class MainUserAnimeController {
     }
 
     private fun loadData() {
+        animefl = FilteredList(animeList)
         logger.info("cargando datos a memoria")
         animeList.setAll(animeRepository.findAll().map { AnimeView(it) }.toList())
         animeList.sorted { o1, o2 -> o1.presentation.get().getTitle().compareTo(o2.presentation.get().getTitle()) }
@@ -148,4 +157,23 @@ class MainUserAnimeController {
             icons.add(Image(ResourcesManager.getIconOf("icono.png")))
         }.show()
     }
+
+    fun filterByName() {
+        if(searchName.text.isEmpty() || searchName.text.isBlank()) return
+
+        animefl.setPredicate { it.presentation.get().title.get().uppercase(Locale.getDefault()).contains(searchName.text.uppercase(
+            Locale.getDefault()
+        )) }
+        animeListView.items = animefl
+    }
+
+    fun changeViewToAnimeAddView() {
+        val stage = addAnimeBtn.scene.window as Stage
+        stage.loadScene(ADD_ANIME, WIDTH, HEIGHT) {
+            title = "Añadir Anime"
+            isResizable = false
+            icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+        }.show()
+    }
+
 }
