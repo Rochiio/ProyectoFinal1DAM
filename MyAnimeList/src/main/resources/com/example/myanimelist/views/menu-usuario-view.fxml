@@ -13,7 +13,7 @@
    <children>
       <HBox layoutX="110.0" layoutY="120.0" prefHeight="161.0" prefWidth="362.0" spacing="100.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Button fx:id="userMyListButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changeStageToMyList" prefHeight="150.0" prefWidth="178.0">
                      <padding>
@@ -22,14 +22,14 @@
                      <graphic>
                         <ImageView fitHeight="140.0" fitWidth="134.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/estanteria.png" />
+                              <Image url="@../icons/menu.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label styleClass="acercaDeTexto" text="Mi lista">
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="48.0" styleClass="acercaDeTexto" text="Mi lista" textAlignment="CENTER">
                      <VBox.margin>
-                        <Insets left="20.0" />
+                        <Insets />
                      </VBox.margin>
                   </Label>
                </children>
@@ -43,7 +43,7 @@
                      <graphic>
                         <ImageView fitHeight="136.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/folleto.png" />
+                              <Image url="@../icons/catalogo.png" />
                            </image>
                         </ImageView>
                      </graphic>
