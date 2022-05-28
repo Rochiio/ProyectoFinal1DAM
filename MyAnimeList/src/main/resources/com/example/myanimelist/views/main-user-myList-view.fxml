@@ -68,11 +68,10 @@
                 <Button fx:id="addAnimeButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeSceneToAddAnime" text="Añadir" GridPane.columnIndex="2" />
             </children>
         </GridPane>
-        <TableView layoutY="56.0" onMouseClicked="#changeSceneToAnimeView" prefHeight="344.0" prefWidth="600.0" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+        <TableView fx:id="myListTable" layoutY="56.0" onMouseClicked="#changeSceneToAnimeView" prefHeight="344.0" prefWidth="600.0" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
             <columns>
                 <TableColumn fx:id="myListRankingCol" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" resizable="false" text="Ranking" />
                 <TableColumn fx:id="myListTitleCol" prefWidth="281.0" text="Anime" />
-                <TableColumn fx:id="myListScoreCol" maxWidth="80.0" minWidth="80.0" resizable="false" text="Score" />
                 <TableColumn fx:id="myListTypeCol" maxWidth="80.0" minWidth="80.0" resizable="false" text="Tipo" />
                 <TableColumn fx:id="myListStatusCol" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" resizable="false" text="Estado" />
             </columns>

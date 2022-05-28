@@ -68,10 +68,8 @@ class MainUserAnimeController {
         animefl = FilteredList(animeList)
         logger.info("cargando datos a memoria")
         animeList.setAll(animeRepository.findAll().map { AnimeView(it) }.toList())
-        animeList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }
-            .forEach { it.ranking = animeList.indexOf(it) }
-
-
+        animeList.sorted { o1, o2 -> o1.presentation.get().getTitle().compareTo(o2.presentation.get().getTitle()) }
+            .forEach { it.ranking.set(animeList.indexOf(it)) }
     }
 
     private fun initCells() {
@@ -92,7 +90,7 @@ class MainUserAnimeController {
                     //Iniciamos los componentes
 
                     //Ranking
-                    val ranking = Label(item!!.ranking.toString())
+                    val ranking = Label(item!!.ranking.get().toString())
 
                     //Presentacion (Imagen + titulos)
                     val presentationRoot = HBox()
@@ -100,16 +98,16 @@ class MainUserAnimeController {
                     presentationRoot.alignment = Pos.CENTER_LEFT
                     val vBox = VBox()
                     vBox.spacing = 5.0
-                    vBox.children.add(Label(item.presentation.title))
-                    vBox.children.add(Label(item.presentation.titleEnglish))
+                    vBox.children.add(Label(item.presentation.get().getTitle()))
+                    vBox.children.add(Label(item.presentation.get().getTitleEnglish()))
                     val imageview = ImageView()
                     imageview.fitHeight = 20.0
                     imageview.fitWidth = 20.0
-                    imageview.image = imgStorage.loadImg(item.presentation)
+                    imageview.image = imgStorage.loadImg(item.presentation.get())
                     presentationRoot.children.addAll(imageview, vBox)
 
                     //Rating
-                    val rating = Label(item.rating)
+                    val rating = Label(item.rating.get())
 
                     //Boton De Añadir
                     val but = Button()
@@ -145,7 +143,7 @@ class MainUserAnimeController {
 
         if (DependenciesManager.globalUser.admin) {
             Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
-                title = anime.presentation.title
+                title = anime.presentation.get().getTitle()
                 isResizable = false
                 icons.add(Image(ResourcesManager.getIconOf("icono.png")))
                 setOnCloseRequest { initialize() }
@@ -154,7 +152,7 @@ class MainUserAnimeController {
         }
 
         Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
-            title = anime.presentation.title
+            title = anime.presentation.get().getTitle()
             isResizable = false
             icons.add(Image(ResourcesManager.getIconOf("icono.png")))
         }.show()

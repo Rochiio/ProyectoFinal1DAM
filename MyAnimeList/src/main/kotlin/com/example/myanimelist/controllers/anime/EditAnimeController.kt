@@ -1,11 +1,11 @@
 package com.example.myanimelist.controllers.anime
 
-import com.example.myanimelist.animeRepository
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
+import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.views.models.AnimeView
@@ -44,17 +44,18 @@ class EditAnimeController {
     private val imgStorage: IImgStorage = DependenciesManager.getImgStorage()
     private var anime: AnimeView = DependenciesManager.animeSelection
     private var editFilters: EditFilters = DependenciesManager.getEditFilter()
+    private val animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
 
     @FXML
     fun initialize() {
-        fieldTitle.text = anime.presentation.title
-        fieldEpisodes.text = anime.episodes.toString()
+        fieldTitle.text = anime.presentation.get().getTitle()
+        fieldEpisodes.text = anime.episodes.get().toString()
         fieldStatus.items = Status.sample
-        fieldStatus.value = anime.status
-        fieldDate.value = anime.date
-        imgViewAnime.image = imgStorage.loadImg(anime.presentation)
-        fieldGenres.items.addAll(Genre.sample)
-        val genres = anime.genres.split(",")
+        fieldStatus.value = anime.status.get()
+        fieldDate.value = anime.getDate()
+        imgViewAnime.image = imgStorage.loadImg(anime.presentation.get())
+        fieldGenres.items.addAll(Genre.observableValues)
+        val genres = anime.genres.get().split(",")
         val genresSelected = fieldGenres.items.filter { genres.any { genre -> it.equals(genre.trim()) } }
         for (genre in genresSelected)
             fieldGenres.checkModel.check(genre)
@@ -89,13 +90,13 @@ class EditAnimeController {
      */
     private fun getAnimeView(): AnimeView {
         return AnimeView(
-            if (fieldTitle.text.equals(" ")) anime.presentation.title else fieldTitle.text,
-            anime.presentation.titleEnglish,
-            anime.types,
-            if (fieldEpisodes.text.equals(" ")) anime.episodes else fieldEpisodes.text.toInt(),
+            if (fieldTitle.text.equals(" ")) anime.presentation.get().getTitle() else fieldTitle.text,
+            anime.presentation.get().getTitleEnglish(),
+            anime.getTypes(),
+            if (fieldEpisodes.text.equals(" ")) anime.episodes.get() else fieldEpisodes.text.toInt(),
             fieldStatus.selectionModel.selectedItem,
-            if (fieldDate.value == null) anime.date else fieldDate.value,
-            anime.rating,
+            if (fieldDate.value == null) anime.date.get() else fieldDate.value,
+            anime.rating.get(),
             fieldGenres.checkModel.checkedItems.joinToString(","),
             anime.id
         )
@@ -137,7 +138,8 @@ class EditAnimeController {
 
         if (file != null) {
             imgViewAnime.image = Image(file.toURI().toString())
-            anime.presentation.img = file.name
+            anime.presentation.get().setImg(file.name)
+            animeRepository.update(anime.toPOJO())
             imgStorage.cpFile(file, Properties.COVERS_DIR)
         }
     }
