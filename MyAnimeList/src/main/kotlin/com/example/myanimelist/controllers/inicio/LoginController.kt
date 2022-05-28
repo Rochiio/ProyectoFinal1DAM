@@ -66,14 +66,9 @@ class LoginController : InicioController() {
 
 
     private fun validateFields(errorMessage: StringBuilder): Boolean {
-        if (!loginFilters.checkUserCorrect(txtUsername.text)) {
+        if (!loginFilters.checkUserCorrect(txtUsername.text, txtPassword.text)) {
             errorMessage.appendLine("Usuario ${txtUsername.text} incorrecto")
-            return false
         }
-        if (!loginFilters.checkPasswordCorrect(txtUsername.text, txtPassword.text)) {
-            errorMessage.appendLine("Contraseña incorrecta")
-            return false
-        }
-        return true
+        return errorMessage.isEmpty()
     }
 }

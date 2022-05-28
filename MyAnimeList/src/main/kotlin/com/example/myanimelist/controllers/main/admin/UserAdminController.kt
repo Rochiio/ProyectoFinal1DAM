@@ -1,25 +1,15 @@
 package com.example.myanimelist.controllers.main.admin
 
-import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.managers.DependenciesManager
-import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.repositories.users.IUsersRepository
-import com.example.myanimelist.utils.HEIGHT
-import com.example.myanimelist.utils.PERFIL_VIEW_ADMIN
-import com.example.myanimelist.utils.WIDTH
 import com.example.myanimelist.views.models.UserView
-import javafx.beans.value.ChangeListener
 import javafx.beans.value.ObservableValue
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.*
-import javafx.scene.image.Image
-import javafx.scene.input.MouseButton
-import javafx.scene.input.MouseEvent
-import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
 
 class UserAdminController {
@@ -61,9 +51,9 @@ class UserAdminController {
     }
 
     private fun setUser(user: UserView) {
-        txtName.text = user.name
-        txtEmail.text = user.email
-        txtBirthDay.text = user.birthDate.toString()
+        txtName.text = user.getName()
+        txtEmail.text = user.getEmail()
+        txtBirthDay.text = user.getBirthDate().toString()
     }
 
 
@@ -90,8 +80,8 @@ class UserAdminController {
 
     private fun initCells() {
         tabla.items = listUser
-        columnName.setCellValueFactory { cellData -> cellData.value.nameProperty() }
-        columnEmail.setCellValueFactory { cellData -> cellData.value.emailProperty() }
+        columnName.setCellValueFactory { it.value.nameProperty() }
+        columnEmail.setCellValueFactory { it.value.emailProperty() }
     }
 
 
@@ -111,15 +101,15 @@ class UserAdminController {
 
     fun deleteUser(actionEvent: ActionEvent) {
         val item = tabla.selectionModel.selectedItem
-            val alert = Alert(Alert.AlertType.CONFIRMATION)
-            alert.headerText="Eliminar"
-            alert.contentText="Desea eliminar al usuario ${item.name}"
-            val result = alert.showAndWait()
-                if (result.get() == ButtonType.OK){
-                    usersRepository.delete(item.id)
-                    listUser.remove(item)
-                    Alert(Alert.AlertType.INFORMATION).show("Eliminar","Usuario eliminado correctamente")
-                }
+        val alert = Alert(Alert.AlertType.CONFIRMATION)
+        alert.headerText = "Eliminar"
+        alert.contentText = "Desea eliminar al usuario ${item.getName()}"
+        val result = alert.showAndWait()
+        if (result.get() == ButtonType.OK) {
+            usersRepository.delete(item.id)
+            listUser.remove(item)
+            Alert(Alert.AlertType.INFORMATION).show("Eliminar", "Usuario eliminado correctamente")
+        }
     }
 
 

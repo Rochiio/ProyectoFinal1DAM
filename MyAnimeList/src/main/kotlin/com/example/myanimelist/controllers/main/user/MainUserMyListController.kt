@@ -9,7 +9,6 @@ import com.example.myanimelist.service.txt.TxtBackup
 import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.Presentation
-import com.example.myanimelist.views.models.ReviewView
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.fxml.FXML
@@ -74,7 +73,6 @@ class MainUserMyListController {
        // myListScoreCol.setCellValueFactory { cellData -> cellData.value.scoreProperty().asObject() }
         myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
         myListStatusCol.setCellValueFactory { cellData -> cellData.value.statusProperty() }
-
     }
 
     fun openAcercaDe() = SceneManager.openStageAbout()

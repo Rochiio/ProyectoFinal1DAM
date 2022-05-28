@@ -70,7 +70,10 @@ class AnimeController {
             val animeAux = anime.toPOJO()
             animeListRepository.add(animeAux, user)
             user.myList.add(animeAux)
-            Alert(Alert.AlertType.INFORMATION).show("Anime Añadido", "${anime.presentation.title} añadido a tu lista")
+            Alert(Alert.AlertType.INFORMATION).show(
+                "Anime Añadido",
+                "${anime.presentation.get().getTitle()} añadido a tu lista"
+            )
             logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
             stage.close()
         } else {
@@ -86,12 +89,12 @@ class AnimeController {
      */
     private fun showAnime() {
         logger.info("Cargando los datos")
-        txtTittle.text = anime.presentation.title
-        txtEpisodes.text = anime.episodes.toString()
-        txtStatus.text = anime.status
-        txtDate.text = anime.date.toString()
-        txtGenre.text = anime.genres
-        imageAnime.image = imgStorage.loadImg(anime.presentation)
+        txtTittle.text = anime.presentation.get().getTitle()
+        txtEpisodes.text = anime.episodes.get().toString()
+        txtStatus.text = anime.status.get()
+        txtDate.text = anime.date.get().toString()
+        txtGenre.text = anime.genres.get()
+        imageAnime.image = imgStorage.loadImg(anime.presentation.get())
     }
 
 
