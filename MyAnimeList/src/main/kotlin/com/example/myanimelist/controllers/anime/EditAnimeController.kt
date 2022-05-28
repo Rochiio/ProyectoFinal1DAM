@@ -54,7 +54,7 @@ class EditAnimeController {
         fieldStatus.value = anime.status.get()
         fieldDate.value = anime.getDate()
         imgViewAnime.image = imgStorage.loadImg(anime.presentation.get())
-        fieldGenres.items.addAll(Genre.observableValues)
+        fieldGenres.items.addAll(Genre.sample)
         val genres = anime.genres.get().split(",")
         val genresSelected = fieldGenres.items.filter { genres.any { genre -> it.equals(genre.trim()) } }
         for (genre in genresSelected)
