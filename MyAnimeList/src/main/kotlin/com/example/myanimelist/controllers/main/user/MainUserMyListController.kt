@@ -36,8 +36,8 @@ class MainUserMyListController {
     @FXML
     private lateinit var myListTitleCol: TableColumn<AnimeView, Presentation>
 
-    @FXML
-    private lateinit var myListScoreCol: TableColumn<ReviewView, Int>
+    /*@FXML
+    private lateinit var myListScoreCol: TableColumn<ReviewView, Int>*/
 
     @FXML
     private lateinit var myListTypeCol: TableColumn<AnimeView, String>
@@ -63,18 +63,18 @@ class MainUserMyListController {
         logger.info("cargando datos a memoria")
         animeList.addAll(user.myList.map { AnimeView(it) }.toList())
 
-        animeList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }
-            .forEach { it.ranking = animeList.indexOf(it) }
     }
 
     private fun initCells() {
         myListTable = TableView(animeList)
         myListTable.items = animeList
+
         myListRankingCol.setCellValueFactory { cellData -> cellData.value.rankingProperty().asObject() }
         myListTitleCol.setCellValueFactory { cellData -> cellData.value.presentationProperty() }
-        myListScoreCol.setCellValueFactory { cellData -> cellData.value.scoreProperty().asObject() }
+       // myListScoreCol.setCellValueFactory { cellData -> cellData.value.scoreProperty().asObject() }
         myListTypeCol.setCellValueFactory { cellData -> cellData.value.typesProperty() }
         myListStatusCol.setCellValueFactory { cellData -> cellData.value.statusProperty() }
+
     }
 
     fun openAcercaDe() = SceneManager.openStageAbout()
