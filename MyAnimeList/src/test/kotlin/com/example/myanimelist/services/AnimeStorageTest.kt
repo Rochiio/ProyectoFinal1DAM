@@ -29,7 +29,7 @@ class AnimeStorageTest {
     @Test
     @Order(1)
     fun load() {
-        val animeList: List<AnimeDTO>? = storage.load().orElse(null)
+        val animeList: List<AnimeDTO>? = storage.load()
 
 
         assert(animeList?.isNotEmpty() ?: false)
