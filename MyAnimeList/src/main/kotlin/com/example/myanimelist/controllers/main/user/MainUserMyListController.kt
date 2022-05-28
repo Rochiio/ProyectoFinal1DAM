@@ -63,8 +63,8 @@ class MainUserMyListController {
         logger.info("cargando datos a memoria")
         animeList.addAll(user.myList.map { AnimeView(it) }.toList())
 
-        animeList.sorted { o1, o2 -> o1.presentation.title.compareTo(o2.presentation.title) }
-            .forEach { it.ranking = animeList.indexOf(it) }
+        animeList.sorted { o1, o2 -> o1.presentation.get().getTitle().compareTo(o2.presentation.get().getTitle()) }
+            .forEach { it.ranking.set(animeList.indexOf(it)) }
     }
 
     private fun initCells() {

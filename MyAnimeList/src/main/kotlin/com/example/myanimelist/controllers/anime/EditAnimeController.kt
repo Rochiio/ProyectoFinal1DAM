@@ -47,14 +47,14 @@ class EditAnimeController {
 
     @FXML
     fun initialize() {
-        fieldTitle.text = anime.presentation.title
-        fieldEpisodes.text = anime.episodes.toString()
+        fieldTitle.text = anime.presentation.get().getTitle()
+        fieldEpisodes.text = anime.episodes.get().toString()
         fieldStatus.items = Status.sample
-        fieldStatus.value = anime.status
-        fieldDate.value = anime.date
-        imgViewAnime.image = imgStorage.loadImg(anime.presentation)
+        fieldStatus.value = anime.status.get()
+        fieldDate.value = anime.getDate()
+        imgViewAnime.image = imgStorage.loadImg(anime.presentation.get())
         fieldGenres.items.addAll(Genre.observableValues)
-        val genres = anime.genres.split(",")
+        val genres = anime.genres.get().split(",")
         val genresSelected = fieldGenres.items.filter { genres.any { genre -> it.equals(genre.trim()) } }
         for (genre in genresSelected)
             fieldGenres.checkModel.check(genre)
@@ -89,14 +89,15 @@ class EditAnimeController {
      */
     private fun getAnimeView(): AnimeView {
         return AnimeView(
-            if (fieldTitle.text.equals(" ")) anime.presentation.title else fieldTitle.text,
-            anime.presentation.titleEnglish,
-            anime.types,
-            if (fieldEpisodes.text.equals(" ")) anime.episodes else fieldEpisodes.text.toInt(),
+            if (fieldTitle.text.equals(" ")) anime.presentation.get().getTitle() else fieldTitle.text,
+            anime.presentation.get().getTitleEnglish(),
+            anime.getTypes(),
+            if (fieldEpisodes.text.equals(" ")) anime.episodes.get() else fieldEpisodes.text.toInt(),
             fieldStatus.selectionModel.selectedItem,
-            if (fieldDate.value == null) anime.date else fieldDate.value,
-            anime.rating,
+            if (fieldDate.value == null) anime.date.get() else fieldDate.value,
+            anime.rating.get(),
             fieldGenres.checkModel.checkedItems.joinToString(","),
+            "${anime.id}.jpg",
             anime.id
         )
     }
@@ -137,7 +138,7 @@ class EditAnimeController {
 
         if (file != null) {
             imgViewAnime.image = Image(file.toURI().toString())
-            anime.presentation.img = file.name
+            anime.presentation.get().setImg(file.name)
             imgStorage.cpFile(file, Properties.COVERS_DIR)
         }
     }

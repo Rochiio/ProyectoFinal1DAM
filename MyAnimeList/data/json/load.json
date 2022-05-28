@@ -1,4 +1,4 @@
 {
-  "loaded": true,
-  "nightMode": true
+  "isLoaded": true,
+  "isNightMode": false
 }
