@@ -28,8 +28,8 @@ object ThemesManager {
     }
 
     fun setTheme(node: Node) {
-        val sc = node.scene
-        val r = sc.root
+        //val sc = node.scene
+        //val r = sc.root
         node.scene.root.stylesheets.clear()
         val theme: String = MyAnimeListApplication::class.java.getResource(currentTheme.value)!!.toString()
         node.scene.root.stylesheets.add(theme)
