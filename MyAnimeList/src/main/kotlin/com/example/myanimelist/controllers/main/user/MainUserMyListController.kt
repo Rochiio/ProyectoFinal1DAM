@@ -59,7 +59,7 @@ class MainUserMyListController {
 
     private fun loadData() {
         logger.info("cargando datos a memoria")
-        animeList.setAll(user.myList.map { AnimeView(it) }.toList())
+        animeList.setAll(animeListRepository.findByUserId(user).map { AnimeView(it) })
 
     }
 
@@ -105,21 +105,23 @@ class MainUserMyListController {
     }
 
     fun changeSceneToAnimeView(mouseEvent: MouseEvent) {
-        if (mouseEvent.button == MouseButton.PRIMARY && mouseEvent.clickCount == 2) {
-            DependenciesManager.animeSelection = myListTable.selectionModel.selectedItem
-            if (DependenciesManager.globalUser.admin) {
-                Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
-                    title = "Anime-Data-Admin"
-                    isResizable = false
-                    icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                }.show()
-            } else {
-                Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
-                    title = "Anime-Data"
-                    isResizable = false
-                    icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                }.show()
-            }
+        val hasClicked =
+            mouseEvent.button == MouseButton.PRIMARY && mouseEvent.clickCount == 2 && myListTable.selectionModel.selectedItem != null
+        if (!hasClicked) return
+
+        DependenciesManager.animeSelection = myListTable.selectionModel.selectedItem
+        if (DependenciesManager.globalUser.admin) {
+            Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
+                title = "Anime-Data-Admin"
+                isResizable = false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+            }.show()
+        } else {
+            Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
+                title = "Anime-Data"
+                isResizable = false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
+            }.show()
         }
     }
 
@@ -151,21 +153,23 @@ class MainUserMyListController {
     }
 
     fun deleteAnimeMyList() {
-        val animeSelect =myListTable.selectionModel.selectedItem
+        val animeSelect = myListTable.selectionModel.selectedItem
         val alert = Alert(Alert.AlertType.CONFIRMATION)
-        alert.title="Confirmación"
-        alert.headerText="Desea eliminar el anime ${animeSelect.presentation.get().getTitle()} de su lista"
+        alert.title = "Confirmación"
+        alert.headerText = "Desea eliminar el anime ${animeSelect.presentation.get().getTitle()} de su lista"
         val result = alert.showAndWait()
 
-        if (result.get()== ButtonType.OK){
-            animeListRepository.delete(animeSelect.toPOJO(),user)
+        if (result.get() == ButtonType.OK) {
+            animeListRepository.delete(animeSelect.toPOJO(), user)
             animeList.remove(animeSelect)
 
-            val information =Alert(Alert.AlertType.INFORMATION)
-            information.title="Anime eliminado"
-            information.headerText="Anime eliminado de su lista correctamente"
+            val information = Alert(Alert.AlertType.INFORMATION)
+            information.title = "Anime eliminado"
+            information.headerText = "Anime eliminado de su lista correctamente"
             information.show()
         }
+
+        refreshTable()
 
     }
 }
