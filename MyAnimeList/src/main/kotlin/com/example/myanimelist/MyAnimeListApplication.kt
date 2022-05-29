@@ -46,7 +46,7 @@ fun initAnimes() {
         animeRepository.add(item.fromDTO())
     }
     TxtBackup().save(
-        LoadDTO(true, false)
+        LoadDTO(isLoaded = true, isNightMode = false)
     )
     return
 }
