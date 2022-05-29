@@ -15,11 +15,10 @@ fun Stage.loadScene(
 ): Stage {
     val fxmlLoader = FXMLLoader(MyAnimeListApplication::class.java.getResource(scene))
 
-    if(isMainScene){
+    if (isMainScene)
         onCloseRequest = javafx.event.EventHandler {
-            fxmlLoader.getController<MyAnimeListApplication?>().onExit()
+            MyAnimeListApplication.onExit()
         }
-    }
 
     if (controller != null)
         fxmlLoader.setController(controller)
