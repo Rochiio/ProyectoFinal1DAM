@@ -5,15 +5,14 @@ import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.managers.SceneManager
+import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.service.txt.TxtBackup
 import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.fxml.FXML
-import javafx.scene.control.MenuButton
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableView
+import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
@@ -26,6 +25,7 @@ class MainUserMyListController {
     val logger: Logger = getLogger<MainUserMyListController>()
     val user = DependenciesManager.globalUser
 
+    private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
 
     @FXML
@@ -112,13 +112,13 @@ class MainUserMyListController {
                     title = "Anime-Data-Admin"
                     isResizable = false
                     icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                }
+                }.show()
             } else {
                 Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
                     title = "Anime-Data"
                     isResizable = false
                     icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                }
+                }.show()
             }
         }
     }
@@ -148,5 +148,24 @@ class MainUserMyListController {
     fun refreshTable() {
         loadData()
         myListTable.refresh()
+    }
+
+    fun deleteAnimeMyList() {
+        val animeSelect =myListTable.selectionModel.selectedItem
+        val alert = Alert(Alert.AlertType.CONFIRMATION)
+        alert.title="Confirmación"
+        alert.headerText="Desea eliminar el anime ${animeSelect.presentation.get().getTitle()} de su lista"
+        val result = alert.showAndWait()
+
+        if (result.get()== ButtonType.OK){
+            animeListRepository.delete(animeSelect.toPOJO(),user)
+            animeList.remove(animeSelect)
+
+            val information =Alert(Alert.AlertType.INFORMATION)
+            information.title="Anime eliminado"
+            information.headerText="Anime eliminado de su lista correctamente"
+            information.show()
+        }
+
     }
 }
