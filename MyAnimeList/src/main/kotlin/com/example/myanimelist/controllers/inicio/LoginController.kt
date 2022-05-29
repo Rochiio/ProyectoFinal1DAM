@@ -38,13 +38,13 @@ class LoginController : InicioController() {
 
 
         if (!DependenciesManager.globalUser.admin) {
-            stage.loadScene(MAIN_USER_MENU, WIDTH, HEIGHT) {
+            stage.loadScene(MAIN_USER_MENU, WIDTH, HEIGHT, isMainScene = true) {
                 title = "Animes"
                 isResizable = false
                 icons.add(Image(ResourcesManager.getIconOf("icono.png")))
             }.show()
         } else {
-            stage.loadScene(MAIN_ADMIN, WIDTH, HEIGHT) {
+            stage.loadScene(MAIN_ADMIN, WIDTH, HEIGHT,isMainScene = true) {
                 title = "Animes"
                 isResizable = false
                 icons.add(Image(ResourcesManager.getIconOf("icono.png")))
