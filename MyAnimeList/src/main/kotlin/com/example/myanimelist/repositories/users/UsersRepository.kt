@@ -2,6 +2,7 @@ package com.example.myanimelist.repositories.users
 
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.modelsDB.UserDB
@@ -11,8 +12,10 @@ import java.util.*
 
 class UsersRepository(
     private val databaseManager: DataBaseManager,
-    val logger: Logger
 ) : IUsersRepository {
+
+    val logger: Logger = DependenciesManager.getLogger(UsersRepository::class.java)
+
     override fun findByName(name: String): List<User> {
         val list = mutableListOf<UserDB>()
         databaseManager.execute(logger) {

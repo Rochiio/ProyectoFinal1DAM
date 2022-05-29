@@ -1,8 +1,10 @@
 package com.example.myanimelist.service.img
 
+import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.ResourcesManager.getCoverOf
 import com.example.myanimelist.managers.ResourcesManager.getUserImageOf
 import com.example.myanimelist.models.User
+import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.service.utils.Utils
 import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.views.models.Presentation
@@ -15,7 +17,10 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.*
 
-class ImgStorage(private val logger: Logger) : IImgStorage {
+class ImgStorage() : IImgStorage {
+    val logger: Logger = DependenciesManager.getLogger(ImgStorage::class.java)
+
+
     init {
         mkdir()
     }

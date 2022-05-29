@@ -3,7 +3,9 @@ package com.example.myanimelist.repositories.reviews
 import com.example.myanimelist.exceptions.RepositoryException
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.Review
+import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.modelsDB.ReviewDB
 import com.example.myanimelist.repositories.users.IUsersRepository
@@ -15,8 +17,9 @@ class ReviewsRepository constructor(
     private val databaseManager: DataBaseManager,
     private val animeRepository: IAnimeRepository,
     private val usersRepository: IUsersRepository,
-    val logger: Logger
 ) : IRepositoryReview {
+
+    val logger: Logger = DependenciesManager.getLogger(ReviewsRepository::class.java)
 
     override fun add(review: Review): Review? {
         databaseManager.execute(logger) {

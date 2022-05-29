@@ -28,6 +28,7 @@ module com.example.myanimelist {
     requires dagger;
 
 
+    exports com.example.myanimelist.managers;
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;
     exports com.example.myanimelist.controllers.inicio;
