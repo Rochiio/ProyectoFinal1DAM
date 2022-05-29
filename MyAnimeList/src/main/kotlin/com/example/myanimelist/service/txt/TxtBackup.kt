@@ -44,7 +44,7 @@ class TxtBackup : ITxtStorage {
 
                 )
             }
-        } catch (e: Exception) {
+        } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
         return null

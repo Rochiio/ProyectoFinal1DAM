@@ -20,6 +20,15 @@ class MyAnimeListApplication : Application() {
         sceneManager.initSplash(stage)
     }
 
+    fun onExit() {
+        TxtBackup().save(
+            LoadDTO(
+                isLoaded = true,
+                isNightMode = ThemesManager.currentTheme == Themes.OSCURO
+            )
+        )
+    }
+
 }
 
 var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
