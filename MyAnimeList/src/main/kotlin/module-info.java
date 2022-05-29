@@ -28,6 +28,7 @@ module com.example.myanimelist {
     requires dagger;
 
 
+    exports com.example.myanimelist.managers;
     exports com.example.myanimelist;
     exports com.example.myanimelist.controllers;
     exports com.example.myanimelist.controllers.inicio;
@@ -36,7 +37,6 @@ module com.example.myanimelist {
     exports com.example.myanimelist.controllers.anime;
     exports com.example.myanimelist.controllers.main.user;
     exports com.example.myanimelist.repositories;
-    exports com.example.myanimelist.manager;
     exports com.example.myanimelist.filters.login;
     exports com.example.myanimelist.filters.edition;
     exports com.example.myanimelist.controllers.profiles;

@@ -1,6 +1,6 @@
 package com.example.myanimelist.extensions
 
-import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.managers.DataBaseManager
 import org.apache.logging.log4j.Logger
 
 //TODO add logger to log all db errors

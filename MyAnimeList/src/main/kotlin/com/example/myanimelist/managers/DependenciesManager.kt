@@ -5,7 +5,6 @@ import com.example.myanimelist.controllers.anime.AnimeController
 import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.filters.login.LoginFilters
 import com.example.myanimelist.filters.login.RegisterFilters
-import com.example.myanimelist.manager.DataBaseManager
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.animeList.AnimeListRepository
 import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
@@ -45,15 +44,14 @@ object DependenciesManager {
     lateinit var animeSelection: AnimeView
     private val gson: Gson =
         GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
-    private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager(), getLogger<UsersRepository>())
-    private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager(), getLogger<AnimeRepository>())
-    private val imgStorage: IImgStorage = ImgStorage(getLogger<ImgStorage>())
+    private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager())
+    private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager())
+    private val imgStorage: IImgStorage = ImgStorage()
     private val animeListRepository: IRepositoryAnimeList =
-        AnimeListRepository(getDatabaseManager(), getLogger<AnimeListRepository>(), getUsersRepo())
+        AnimeListRepository(getDatabaseManager(), getUsersRepo())
     private val reviewsRepository: IRepositoryReview = ReviewsRepository(
         getDatabaseManager(), getAnimesRepo(),
         getUsersRepo(),
-        getLogger<ReviewsRepository>()
     )
 
     //Factories
@@ -92,7 +90,7 @@ object DependenciesManager {
     fun getBackupStorage(): IBackupStorage = BackupStorage(getGson())
 
     @JvmStatic
-    fun getImgStorage(): IImgStorage = ImgStorage(getLogger<ImgStorage>())
+    fun getImgStorage(): IImgStorage = ImgStorage()
 
     @JvmStatic
     fun getGson(): Gson = gson

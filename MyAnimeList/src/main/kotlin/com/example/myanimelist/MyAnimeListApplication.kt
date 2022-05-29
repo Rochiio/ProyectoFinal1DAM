@@ -51,7 +51,7 @@ fun initAnimes() {
     return
 }
 
-//checkDataBase(get(_root_ide_package_.com.example.myanimelist.manager.DataBaseManager::class.java))
+//checkDataBase(get(_root_ide_package_.com.example.myanimelist.managers.DataBaseManager::class.java))
 
 //}
 

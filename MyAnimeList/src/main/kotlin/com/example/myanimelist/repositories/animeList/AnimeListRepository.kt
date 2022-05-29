@@ -1,7 +1,8 @@
 package com.example.myanimelist.repositories.animeList
 
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.users.IUsersRepository
@@ -9,9 +10,10 @@ import org.apache.logging.log4j.Logger
 
 class AnimeListRepository(
     private var dataBaseManager: DataBaseManager,
-    private val logger: Logger,
     private val usersRepository: IUsersRepository
 ) : IRepositoryAnimeList {
+
+    private val logger: Logger = DependenciesManager.getLogger(AnimeListRepository::class.java)
 
 
     /**
