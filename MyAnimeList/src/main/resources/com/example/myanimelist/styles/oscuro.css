@@ -3,6 +3,29 @@
     -fx-text-fill: white;
 }
 
+.rating > .container .button {
+    -fx-background-size: cover;
+    -fx-padding: 0;
+}
+.rating > .container .button {
+    -fx-pref-width: 20 ;
+    -fx-pref-height: 20 ;
+    -fx-background-size: cover;
+    -fx-padding: 0;
+}
+
+.rating {
+    button-width: 32;
+    button-height: 32;
+}
+
+.rating > .container .button {
+    -fx-pref-width: button-width;
+    -fx-pref-height: button-height;
+    -fx-background-size: cover;
+    -fx-padding: 0;
+}
+
 .acercaDeTexto {
     -fx-background-color: #88D4AB;
     -fx-border-radius: 6px;

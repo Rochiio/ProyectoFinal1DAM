@@ -1,6 +1,5 @@
 package com.example.myanimelist.repositories.reviews
 
-import com.example.myanimelist.exceptions.RepositoryException
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.managers.DependenciesManager
@@ -30,8 +29,7 @@ class ReviewsRepository constructor(
         }
         return null
     }
-
-    @kotlin.jvm.Throws(RepositoryException::class)
+    
     override fun findByAnimeId(animeId: UUID): List<Review> {
         val list: MutableList<ReviewDB> = mutableListOf()
 

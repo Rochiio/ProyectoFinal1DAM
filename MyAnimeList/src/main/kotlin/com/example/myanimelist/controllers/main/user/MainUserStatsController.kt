@@ -41,7 +41,8 @@ class MainUserStatsController {
     fun initialize() {
 
         myList = userRepository.getAnimeLists(user.id)
-        myReviews = reviewRepository.findAll().filter { it.user.id == user.id }.toList()
+        //Review del usuario y que este en su lista
+        myReviews = reviewRepository.findAll().filter { it.user.id == user.id && myList.contains(it.anime) }.toList()
 
         if (myList.isEmpty() || myReviews.isEmpty()) {
             val emptyMessage = "No hay animes y/o calificaciones suficientes..."

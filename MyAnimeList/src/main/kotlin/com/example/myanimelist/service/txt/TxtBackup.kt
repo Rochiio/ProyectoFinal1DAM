@@ -37,11 +37,12 @@ class TxtBackup : ITxtStorage {
 
     override fun load(): LoadDTO? {
         try {
-            FileReader(Properties.LOAD_FILE).use { reader ->
+            FileReader(Properties.LOAD_FILE).use {
                 return gson.fromJson(
-                        reader,
-                        LoadDTO::class.java
-                    )
+                    it,
+                    LoadDTO::class.java
+
+                )
             }
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
