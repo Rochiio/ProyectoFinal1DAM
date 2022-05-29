@@ -23,6 +23,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="137.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="97.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="87.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
@@ -36,7 +37,7 @@
                 </TextField>
                 <Button fx:id="searchMyListButton1" mnemonicParsing="false" onAction="#filterMyListByText" text="Buscar" GridPane.columnIndex="1" />
 
-                <MenuButton fx:id="menuButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+                <MenuButton fx:id="menuButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" GridPane.columnIndex="5" GridPane.halignment="RIGHT">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#openAcercaDe" text="Acerca de">
 
@@ -69,6 +70,7 @@
                 <Button fx:id="addAnimeButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeSceneToAddAnime" text="Añadir" GridPane.columnIndex="3" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#refreshTable" text="Refrescar" GridPane.columnIndex="2" />
+            <Button mnemonicParsing="false" onAction="#deleteAnimeMyList" text="Eliminar" GridPane.columnIndex="4" />
             </children>
         </GridPane>
         <TableView fx:id="myListTable" layoutY="56.0" onMouseClicked="#changeSceneToAnimeView" prefHeight="344.0" prefWidth="600.0" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">

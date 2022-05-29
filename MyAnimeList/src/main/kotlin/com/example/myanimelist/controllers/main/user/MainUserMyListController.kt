@@ -112,13 +112,13 @@ class MainUserMyListController {
                     title = "Anime-Data-Admin"
                     isResizable = false
                     icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                }
+                }.show()
             } else {
                 Stage().loadScene(ANIME_DATA, WIDTH, HEIGHT) {
                     title = "Anime-Data"
                     isResizable = false
                     icons.add(Image(ResourcesManager.getIconOf("icono.png")))
-                }
+                }.show()
             }
         }
     }
@@ -148,5 +148,11 @@ class MainUserMyListController {
     fun refreshTable() {
         loadData()
         myListTable.refresh()
+    }
+
+    fun deleteAnimeMyList() {
+        var animeSelect =myListTable.selectionModel.selectedItem
+        
+
     }
 }

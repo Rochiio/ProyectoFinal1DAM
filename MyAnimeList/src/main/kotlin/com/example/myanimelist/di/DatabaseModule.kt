@@ -1,6 +1,6 @@
 package com.example.myanimelist.di
 
-import com.example.myanimelist.manager.DataBaseManager
+import com.example.myanimelist.managers.DataBaseManager
 import dagger.*
 import javax.inject.Singleton
 
