@@ -30,18 +30,25 @@ class AnimeAddController {
     //FXML
     @FXML
     lateinit var txtTitleEnglish: TextField
+
     @FXML
     lateinit var txtTitle: TextField
+
     @FXML
     lateinit var txtEpisodes: TextField
+
     @FXML
     lateinit var datePicker: DatePicker
+
     @FXML
     lateinit var statusCB: ChoiceBox<String>
+
     @FXML
     lateinit var typeCB: ChoiceBox<String>
+
     @FXML
     lateinit var genreCB: CheckComboBox<String>
+
     @FXML
     lateinit var imageAnime: ImageView
 
@@ -51,7 +58,7 @@ class AnimeAddController {
     private var editFilters: EditFilters = DependenciesManager.getEditFilter()
 
     @FXML
-    fun initialize(){
+    fun initialize() {
         txtTitleEnglish
         txtTitle
         txtEpisodes
@@ -68,7 +75,7 @@ class AnimeAddController {
             FileChooser.ExtensionFilter("Imagenes jpg", "*.jpg")
         )
         imgFile = fc.showOpenDialog(imageAnime.scene.window)
-        if(imgFile != null) imageAnime.image = Image(imgFile!!.toURI().toString())
+        if (imgFile != null) imageAnime.image = Image(imgFile?.toURI().toString())
     }
 
     fun onSave() {
@@ -101,7 +108,7 @@ class AnimeAddController {
             genreCB.checkModel.checkedItems.joinToString(","),
             UUID.randomUUID()
         )
-        if(imgFile != null) {
+        if (imgFile != null) {
             imgStorage.cpFile(imgFile!!, Properties.COVERS_DIR)
             anime.presentation.get().img = SimpleStringProperty(imgFile!!.name)
         }

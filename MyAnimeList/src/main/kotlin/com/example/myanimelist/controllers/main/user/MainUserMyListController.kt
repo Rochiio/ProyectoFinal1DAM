@@ -153,6 +153,8 @@ class MainUserMyListController {
     }
 
     fun deleteAnimeMyList() {
+        if (myListTable.selectionModel.selectedItem == null) return
+        
         val animeSelect = myListTable.selectionModel.selectedItem
         val alert = Alert(Alert.AlertType.CONFIRMATION)
         alert.title = "Confirmación"
