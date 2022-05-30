@@ -20,6 +20,9 @@ import com.example.myanimelist.service.backup.BackupStorage
 import com.example.myanimelist.service.backup.IBackupStorage
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.service.img.ImgStorage
+import com.example.myanimelist.utils.html.GeneratorHtml
+import com.example.myanimelist.utils.html.GeneratorHtmlStats
+import com.example.myanimelist.utils.html.HTMLGenerator
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.UserView
 import com.google.gson.Gson
@@ -94,6 +97,9 @@ object DependenciesManager {
 
     @JvmStatic
     fun getGson(): Gson = gson
+
+    @JvmStatic
+    fun getHtmlGenerator():GeneratorHtml = GeneratorHtmlStats()
 
     inline fun <reified T> getLogger(): Logger =
         LogManager.getLogger(T::class.java)

@@ -38,7 +38,7 @@ class LoginController : InicioController() {
 
 
         if (!DependenciesManager.globalUser.admin) {
-            stage.loadScene(MAIN_USER_MENU, WIDTH, HEIGHT, isMainScene = true) {
+            stage.loadScene(MAIN_USER_MYLIST, WIDTH, HEIGHT, isMainScene = true) {
                 title = "Animes"
                 isResizable = false
                 icons.add(Image(ResourcesManager.getIconOf("icono.png")))

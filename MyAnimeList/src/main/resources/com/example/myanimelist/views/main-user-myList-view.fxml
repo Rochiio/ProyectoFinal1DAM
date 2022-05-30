@@ -30,7 +30,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <TextField prefHeight="24.0" prefWidth="205.0" styleClass="text-input">
+                <TextField fx:id="searchName" prefHeight="24.0" prefWidth="205.0" styleClass="text-input">
                     <GridPane.margin>
                         <Insets left="5.0" />
                     </GridPane.margin>
@@ -68,7 +68,7 @@
                 </MenuButton>
 
                 <Button fx:id="addAnimeButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeSceneToAddAnime" text="Añadir" GridPane.columnIndex="3" />
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" onAction="#filterMyListByText" text="Button" GridPane.columnIndex="1" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#refreshTable" text="Refrescar" GridPane.columnIndex="2" />
             <Button mnemonicParsing="false" onAction="#deleteAnimeMyList" text="Eliminar" GridPane.columnIndex="4" />
             </children>
