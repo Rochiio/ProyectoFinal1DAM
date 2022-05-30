@@ -1,8 +1,10 @@
 package com.example.myanimelist.controllers.main.admin
 
 import com.example.myanimelist.extensions.show
+import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.repositories.users.IUsersRepository
+import com.example.myanimelist.repositories.users.UsersRepository
 import com.example.myanimelist.views.models.UserView
 import javafx.beans.value.ObservableValue
 import javafx.collections.FXCollections
@@ -11,10 +13,15 @@ import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import org.apache.logging.log4j.Logger
+import org.koin.core.component.KoinComponent
 
-class UserAdminController {
+import org.koin.core.component.get;
+import org.koin.core.component.inject;
+import org.koin.java.KoinJavaComponent.inject
+
+class UserAdminController : KoinComponent{
     private var logger: Logger = DependenciesManager.getLogger(UserAdminController::class.java)
-    private var usersRepository: IUsersRepository = DependenciesManager.getUsersRepo()
+    private var usersRepository : IUsersRepository = get<UsersRepository>()
     private var listUser: ObservableList<UserView> = FXCollections.observableArrayList()
 
     @FXML

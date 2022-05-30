@@ -5,6 +5,7 @@ import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.managers.SceneManager
+import com.example.myanimelist.repositories.animeList.AnimeListRepository
 import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.service.txt.TxtBackup
 import com.example.myanimelist.utils.*
@@ -19,15 +20,17 @@ import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import java.util.*
 
 
-class MainUserMyListController {
+class MainUserMyListController : KoinComponent {
 
     val logger: Logger = getLogger<MainUserMyListController>()
     val user = DependenciesManager.globalUser
 
-    private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
+    private var animeListRepository: IRepositoryAnimeList = get<AnimeListRepository>()
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private lateinit var animeListfl: FilteredList<AnimeView>
 

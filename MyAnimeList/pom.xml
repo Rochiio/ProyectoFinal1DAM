@@ -77,12 +77,25 @@
             <version>2.17.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.google.dagger/dagger -->
         <dependency>
-            <groupId>com.google.dagger</groupId>
-            <artifactId>dagger</artifactId>
-            <version>2.41</version>
+            <groupId>io.insert-koin</groupId>
+            <artifactId>koin-core-jvm</artifactId>
+            <version>${koin.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.insert-koin/koin-core -->
+        <dependency>
+            <groupId>io.insert-koin</groupId>
+            <artifactId>koin-test-junit5</artifactId>
+            <version>${koin.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.insert-koin</groupId>
+            <artifactId>koin-test-jvm</artifactId>
+            <version>${koin.version}</version>
+        </dependency>
+
+
         <!-- Gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>

@@ -1,5 +1,6 @@
 package com.example.myanimelist
 
+import com.example.myanimelist.di.*
 import com.example.myanimelist.dto.LoadDTO
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.SceneManager
@@ -11,9 +12,12 @@ import com.example.myanimelist.utils.ThemesManager
 import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.stage.Stage
+import org.koin.core.component.KoinComponent
+import org.koin.core.context.startKoin
 
 
-class MyAnimeListApplication : Application() {
+
+class MyAnimeListApplication : Application() , KoinComponent{
     override fun start(stage: Stage) {
         val sceneManager = SceneManager
         sceneManager.setAppClass<MyAnimeListApplication>()
@@ -34,6 +38,14 @@ var animeStorage: IAnimeStorage = DependenciesManager.getAnimeStorage()
 
 
 fun main() {
+    startKoin { modules(dataBaseManagerModule,
+        usersRepositoryModule,
+        animeRepositoryModule,
+        animeListRepositoryModule,
+        reviewsRepositoryModule,
+        imgStorageModule,
+        htmlGeneratorModule)
+    }
     initAnimes()
     launch(MyAnimeListApplication::class.java)
 }

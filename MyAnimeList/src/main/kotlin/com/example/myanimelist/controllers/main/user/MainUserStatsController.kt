@@ -3,17 +3,22 @@ package com.example.myanimelist.controllers.main.user
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
+import com.example.myanimelist.repositories.animeList.AnimeListRepository
 import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.repositories.reviews.IRepositoryReview
+import com.example.myanimelist.repositories.reviews.ReviewsRepository
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.utils.html.GeneratorHtml
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Label
 import org.apache.logging.log4j.Logger
+import org.koin.core.Koin
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
 
-class MainUserStatsController {
+class MainUserStatsController : KoinComponent {
 
     //Generics
     val logger: Logger = DependenciesManager.getLogger<MainUserAnimeController>()
@@ -35,8 +40,8 @@ class MainUserStatsController {
     @FXML
     private lateinit var topRatedAnime: Label
 
-    private var animeListsRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
-    private var reviewRepository: IRepositoryReview = DependenciesManager.getReviewsRepo()
+    private var animeListsRepository: IRepositoryAnimeList = get<AnimeListRepository>()
+    private var reviewRepository: IRepositoryReview = get<ReviewsRepository>()
     private var htmlGenerator: GeneratorHtml = DependenciesManager.getHtmlGenerator()
     private var myList: List<Anime> = emptyList()
     private var myReviews: List<Review> = emptyList()
