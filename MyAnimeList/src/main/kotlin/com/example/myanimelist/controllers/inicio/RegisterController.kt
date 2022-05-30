@@ -24,6 +24,9 @@ class RegisterController : InicioController() {
     @FXML
     private lateinit var txtConfirmPassword: PasswordField
 
+    /**
+     * Cambiar la escena al login
+     */
     fun changeSceneToLogin() {
         val stage = btnLogin.scene.window as Stage
         stage.loadScene(LOGIN, WIDTH, HEIGHT) {
@@ -32,6 +35,10 @@ class RegisterController : InicioController() {
         }.show()
     }
 
+
+    /**
+     * Realizar el registro
+     */
     fun register() {
         val message = StringBuilder()
 
@@ -49,6 +56,12 @@ class RegisterController : InicioController() {
         changeSceneToLogin()
     }
 
+
+    /**
+     * Validación del Registro
+     * @param errorMessage por si no pasase los filtros, mostrar el error
+     * @return boolean dependiendo de si pasa los filtros correctamente o no
+     */
     private fun validateFields(errorMessage: StringBuilder): Boolean {
         if (txtUsername.text.isNullOrBlank())
             errorMessage.appendLine("Username vacio")
@@ -68,6 +81,10 @@ class RegisterController : InicioController() {
         return errorMessage.isEmpty()
     }
 
+
+    /**
+     * Crear el usuario que se acaba de registrar
+     */
     private fun createUser() = userRepository.add(
         User(
             txtUsername.text, txtEmail.text, txtPassword.text, LocalDate.now(), LocalDate.now(), null

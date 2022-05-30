@@ -21,6 +21,11 @@ class ProfileAdminController {
     private val user = DependenciesManager.globalUser
     private val registerFilter = getRegisterFilter()
     var imgStorage = getImgStorage()
+
+
+    /**
+     * Guardar cambios perfil administrador
+     */
     fun onSave() {
         val errorLog = StringBuilder()
         if (!validate(errorLog)) {
@@ -32,6 +37,12 @@ class ProfileAdminController {
         user.password = passLabel!!.text
     }
 
+
+    /**
+     * Filtrado de datos
+     * @param error mensaje de error que va a mostrar si hay campos incorrectos
+     * @return boolean dependiendo de si pasa el filtrado correctamente o no
+     */
     private fun validate(error: StringBuilder): Boolean {
         if (nameLabel!!.text.isBlank()) error.append("El nombre no puede estar vacío.").append("\n")
         if (registerFilter.checkUserCorrect(nameLabel!!.text)) error.append("El nombre ya existe.").append("\n")

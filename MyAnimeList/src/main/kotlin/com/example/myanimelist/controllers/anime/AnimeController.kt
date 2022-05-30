@@ -120,8 +120,8 @@ class AnimeController {
      * @return boolean dependiendo de si pasa los filtros correctamente o no
      */
     private fun validateReviewFields(error: StringBuilder): Boolean {
-        if (reviewField.text.isNullOrBlank())
-            error.appendLine("El comentario no puede estar vacio")
+        if (reviewField.text.isNullOrBlank() || !reviewField.text.matches(Regex("[a-zA-Z |\\s]{1,500}")))
+            error.appendLine("El comentario no puede estar vacio, debe tener entre 0-500 caracteres")
         if (rating.rating == 0.0)
             error.appendLine("El numero de estrellas no puede estar vacio")
         return error.isEmpty()

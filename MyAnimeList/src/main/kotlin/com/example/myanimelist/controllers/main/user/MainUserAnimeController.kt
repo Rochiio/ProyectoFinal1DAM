@@ -132,12 +132,17 @@ class MainUserAnimeController {
         }
     }
 
+
     fun changeSceneToAnimeDataView(mouseEvent: MouseEvent) {
         if (mouseEvent.button !== MouseButton.PRIMARY || mouseEvent.clickCount != 2) return
 
         changeToAnime(animeListView.selectionModel.selectedItem)
     }
 
+
+    /**
+     * Cambiar escena al anime seleccionado
+     */
     private fun changeToAnime(anime: AnimeView) {
         DependenciesManager.animeSelection = anime
 
@@ -158,6 +163,10 @@ class MainUserAnimeController {
         }.show()
     }
 
+
+    /**
+     * Filtrar lista por texto del buscador
+     */
     fun filterByName() {
         if(searchName.text.isEmpty() || searchName.text.isBlank()) return
 
@@ -167,6 +176,10 @@ class MainUserAnimeController {
         animeListView.items = animefl
     }
 
+
+    /**
+     * Cambiar escena a añadir anime
+     */
     fun changeViewToAnimeAddView() {
         val stage = addAnimeBtn.scene.window as Stage
         stage.loadScene(ADD_ANIME, WIDTH, HEIGHT) {

@@ -27,6 +27,11 @@ class AdminController {
         TxtBackup().save(loadDTO)
 
     }
+
+
+    /**
+     * Cambiar escena a la lista de todos los animes
+     */
     fun changeStageToAnimes() {
         Stage().loadScene(MAIN_USER_ANIME, WIDTH, HEIGHT) {
             title = "Animes"
@@ -35,6 +40,10 @@ class AdminController {
         }.show()
     }
 
+
+    /**
+     * Cambiar la escena a la lista de usuarios
+     */
     fun changeStageToUsers() {
         Stage().loadScene(ADMIN_USERS_LIST, WIDTH, HEIGHT) {
             title = "Users"

@@ -17,9 +17,15 @@ class LoginController : InicioController() {
     private var loginFilters: LoginFilters = getLoginFilter()
 
 
+    /**
+     * Abrir la escena del Acerca De
+     */
     fun openStageAbout() = SceneManager.openStageAbout()
 
 
+    /**
+     * Cambiar la escena al registro
+     */
     fun changeSceneToRegister() {
         val stage = btnRegister.scene.window as Stage
         stage.loadScene(REGISTER, WIDTH, HEIGHT) {
@@ -30,6 +36,9 @@ class LoginController : InicioController() {
     }
 
 
+    /**
+     * Cambiar la escena al main, dependiendo del usuario se abre un tipo de escena u otra
+     */
     private fun changeSceneToMain() {
         DependenciesManager.globalUser =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
@@ -53,6 +62,9 @@ class LoginController : InicioController() {
     }
 
 
+    /**
+     * Realizar el login
+     */
     fun login() {
         val message = StringBuilder()
         if (!validateFields(message)) {
@@ -64,6 +76,11 @@ class LoginController : InicioController() {
     }
 
 
+    /**
+     * Validación del Login
+     * @param errorMessage por si no pasase los filtros, mostrar el error
+     * @return boolean dependiendo de si pasa los filtros correctamente o no
+     */
     private fun validateFields(errorMessage: StringBuilder): Boolean {
         if (!loginFilters.checkUserCorrect(txtUsername.text, txtPassword.text)) {
             errorMessage.appendLine("Usuario ${txtUsername.text} incorrecto")

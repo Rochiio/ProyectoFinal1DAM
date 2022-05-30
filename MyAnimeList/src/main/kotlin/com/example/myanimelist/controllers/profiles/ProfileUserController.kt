@@ -77,6 +77,10 @@ class ProfileUserController {
         stage.close()
     }
 
+
+    /**
+     * Actualizar datos del usuario
+     */
     private fun creationUpdateUser() {
         val userUpdate = User(
             txtName!!.text, txtEmail!!.text, txtPassword!!.text, user.createDate,
@@ -86,6 +90,11 @@ class ProfileUserController {
         DependenciesManager.globalUser = userUpdate
     }
 
+    /**
+     * Filtrado de datos
+     * @param error mensaje de error que va a mostrar si hay campos incorrectos
+     * @return boolean dependiendo de si pasa el filtrado correctamente
+     */
     private fun validate(error: StringBuilder): Boolean {
         if (txtPassword!!.text != txtPasswordConfirm!!.text) error.append("Las contraseñas no coinciden")
         if (!editionFilters.checkDateCorrect(txtBirthday!!.value)) error.append("Fecha de nacimiento incorrecta")
@@ -93,6 +102,10 @@ class ProfileUserController {
         return error.isEmpty()
     }
 
+
+    /**
+     * Cambiar la imagen de perfil del usuario
+     */
     fun changeUserImg() {
         val fc = FileChooser()
         fc.title = "Selecciona una nueva imagen"
