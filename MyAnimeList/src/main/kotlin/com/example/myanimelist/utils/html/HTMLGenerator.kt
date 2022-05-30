@@ -1,7 +1,7 @@
-package com.example.myanimelist.utils
+package com.example.myanimelist.utils.html
 
 class HTMLGenerator {
-    private val HEAD = """
+     val HEAD = """
             <!DOCTYPE html>
 <html lang="es">
 
@@ -14,12 +14,12 @@ class HTMLGenerator {
     """
 
 
-    private val BODY = """
+    val BODY = """
       <body>
        <h1>Gráficos y Estadísticas</h1>
    """
 
-    private val BODY_CLOSE = """</body>
+    val BODY_CLOSE = """</body>
        </html>
    """
 }
