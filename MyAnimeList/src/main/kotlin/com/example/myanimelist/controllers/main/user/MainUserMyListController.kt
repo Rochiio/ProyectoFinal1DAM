@@ -18,6 +18,7 @@ import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
+import java.util.*
 
 
 class MainUserMyListController {
@@ -76,7 +77,7 @@ class MainUserMyListController {
     fun openAcercaDe() = SceneManager.openStageAbout()
 
     fun filterMyListByText() {
-
+        
     }
 
     fun changeSceneToAddAnime() {
@@ -131,11 +132,13 @@ class MainUserMyListController {
             Stage().loadScene(PERFIL_VIEW) {
                 title = "Perfil usuario"
                 isResizable = false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
             }.show()
         } else {
             Stage().loadScene(PERFIL_VIEW_ADMIN) {
                 title = "Perfil usuario admin"
                 isResizable = false
+                icons.add(Image(ResourcesManager.getIconOf("icono.png")))
             }.show()
         }
     }
@@ -144,6 +147,7 @@ class MainUserMyListController {
         Stage().loadScene(MAIN_USER_STATS) {
             title = "Estadisticas"
             isResizable = false
+            icons.add(Image(ResourcesManager.getIconOf("icono.png")))
         }.show()
     }
 
