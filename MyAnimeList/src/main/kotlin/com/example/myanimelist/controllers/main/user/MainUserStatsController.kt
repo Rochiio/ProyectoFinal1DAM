@@ -68,7 +68,7 @@ class MainUserStatsController {
     }
 
     private fun estadisticas() {
-        if(animeCount.text.equals("")){
+        if(animeCount.text.equals("No hay animes y/o calificaciones suficientes...")){
             val error = Alert(Alert.AlertType.ERROR)
             error.title="Error"
             error.headerText="Error al crear html"
