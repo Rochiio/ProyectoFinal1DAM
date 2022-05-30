@@ -8,15 +8,15 @@ class HTMLGenerator {
 <head>
     <meta charset="UTF-8">
     <meta name="autor" content="My Anime List">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Gráficos y Estadísticas</title>
+    <title>Estadísticas My Anime List</title>
 </head>
     """
 
 
     val BODY = """
-      <body>
-       <h1>Gráficos y Estadísticas</h1>
+    <body bgcolor="#99E2B4">
+      <img src="../src/main/resources/com/example/myanimelist/images/logo/Login.png" alt="Logo" style="width:500px;height:300px;">
+        <h1>Estadísticas</h1>
    """
 
     val BODY_CLOSE = """</body>
