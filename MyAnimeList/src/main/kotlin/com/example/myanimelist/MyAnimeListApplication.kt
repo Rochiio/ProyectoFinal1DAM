@@ -20,13 +20,11 @@ class MyAnimeListApplication : Application() {
         sceneManager.initSplash(stage)
     }
 
-    fun onExit() {
-        TxtBackup().save(
-            LoadDTO(
-                isLoaded = true,
-                isNightMode = ThemesManager.currentTheme == Themes.OSCURO
-            )
-        )
+    companion object {
+        fun onExit() {
+            val loadDTO = LoadDTO(isLoaded = true, isNightMode = ThemesManager.currentTheme == Themes.OSCURO)
+            TxtBackup().save(loadDTO)
+        }
     }
 
 }

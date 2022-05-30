@@ -62,7 +62,8 @@ class AnimeController {
     @FXML
     fun initialize() {
         showAnime()
-        loadReview()
+        if (!user.admin)
+            loadReview()
     }
 
     private fun loadReview() {
