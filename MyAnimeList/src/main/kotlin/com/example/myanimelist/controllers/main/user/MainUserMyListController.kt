@@ -11,6 +11,7 @@ import com.example.myanimelist.utils.*
 import com.example.myanimelist.views.models.AnimeView
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
+import javafx.collections.transformation.FilteredList
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.image.Image
@@ -28,6 +29,7 @@ class MainUserMyListController {
 
     private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
+    private lateinit var animeListfl: FilteredList<AnimeView>
 
     @FXML
     private lateinit var myListRankingCol: TableColumn<AnimeView, Int>
@@ -48,6 +50,9 @@ class MainUserMyListController {
     private lateinit var myListTable: TableView<AnimeView>
 
     @FXML
+    private lateinit var searchName: TextField
+
+    @FXML
     private lateinit var menuButton: MenuButton
 
 
@@ -60,8 +65,8 @@ class MainUserMyListController {
 
     private fun loadData() {
         logger.info("cargando datos a memoria")
+        animeListfl = FilteredList(animeList)
         animeList.setAll(animeListRepository.findByUserId(user).map { AnimeView(it) })
-
     }
 
     private fun initCells() {
@@ -77,7 +82,13 @@ class MainUserMyListController {
     fun openAcercaDe() = SceneManager.openStageAbout()
 
     fun filterMyListByText() {
-        
+        if(searchName.text.isEmpty() || searchName.text.isBlank()) return
+
+        animeListfl.setPredicate { it.presentation.get().title.get().uppercase(Locale.getDefault()).contains(searchName.text.uppercase(
+            Locale.getDefault()
+        )) }
+
+        myListTable.items = animeListfl
     }
 
     fun changeSceneToAddAnime() {
