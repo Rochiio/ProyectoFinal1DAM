@@ -6,6 +6,9 @@ import com.google.gson.stream.JsonWriter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+/**
+ * Adaptador LocalDate para los Json
+ */
 class LocalDateTypeAdapter : TypeAdapter<LocalDate>() {
 
     override fun write(out: JsonWriter, value: LocalDate) {

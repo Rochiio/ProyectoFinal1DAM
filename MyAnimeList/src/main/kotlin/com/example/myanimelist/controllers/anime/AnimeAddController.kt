@@ -67,6 +67,10 @@ class AnimeAddController {
         statusCB.items.addAll(Status.sample)
     }
 
+
+    /**
+     * Para cambiar la imagen del anime mostrado
+     */
     fun changeAnimeImg() {
         val fc = FileChooser()
         fc.title = "Selecciona una nueva imagen"
@@ -78,6 +82,8 @@ class AnimeAddController {
         if (imgFile != null) imageAnime.image = Image(imgFile?.toURI().toString())
     }
 
+
+
     fun onSave() {
         val message = StringBuilder()
         if (!editionFilters(message)) {
@@ -87,6 +93,10 @@ class AnimeAddController {
         saveThis()
     }
 
+
+    /**
+     * Para guardar el anime que acabamos de crear
+     */
     private fun saveThis() {
         val anime = getAnimeView()
         animeRepository.add(anime.toPOJO())
@@ -96,6 +106,11 @@ class AnimeAddController {
         stage.close()
     }
 
+
+    /**
+     * Creación del nuevo anime
+     * @return anime creado
+     */
     private fun getAnimeView(): AnimeView {
         val anime = AnimeView(
             txtTitle.text,
@@ -116,6 +131,12 @@ class AnimeAddController {
         return anime
     }
 
+
+    /**
+     * Filtros para validar el nuevo anime que queremos añadir
+     * @param errorMessage Mensaje de error si el anime no pasa los filtros
+     * @return boolean dependiendo de si pasa los filtros correctamente o no
+     */
     private fun editionFilters(errorMessage: StringBuilder): Boolean {
         if (!editFilters.checkTitleCorrect(txtTitle.text)) {
             errorMessage.appendLine("wrong title field")

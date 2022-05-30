@@ -14,11 +14,10 @@ import java.io.IOException
 import java.net.URI
 import java.net.URISyntaxException
 
+
 class AcercaDeController {
     private val desktop = Desktop.getDesktop()
-    private val logger = getLogger(
-        AcercaDeController::class.java
-    )
+    private val logger = getLogger(AcercaDeController::class.java)
 
     @FXML
     var root: Pane? = null
@@ -28,12 +27,18 @@ class AcercaDeController {
         root!!.stylesheets.add(MyAnimeListApplication::class.java.getResource(getCurretnTheme().value).toString())
     }
 
+
     @FXML
     private fun linkGitHub(event: ActionEvent) {
         val node = event.source as Node
         openPage(node.userData.toString())
     }
 
+
+    /**
+     * Para abrir la página web que queremos
+     * @param page Página que queremos abrir
+     */
     private fun openPage(page: String) {
         try {
             desktop.browse(URI(page))
