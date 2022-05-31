@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.CheckComboBox?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.myanimelist.controllers.anime.EditAnimeController">
+    <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox alignment="CENTER" prefHeight="400.0" prefWidth="122.0" spacing="30.0">
+            <Label prefHeight="17.0" prefWidth="405.0" styleClass="animeDataText" text="Titulo">
+                <VBox.margin>
+                    <Insets left="10.0" right="10.0"/>
+                </VBox.margin>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="388.0" styleClass="animeDataText" text="Episodios">
+                <VBox.margin>
+                    <Insets left="10.0" right="10.0"/>
+                </VBox.margin>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="363.0" styleClass="animeDataText" text="Estado">
+                <VBox.margin>
+                    <Insets left="10.0" right="10.0"/>
+                </VBox.margin>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="352.0" styleClass="animeDataText" text="Fecha">
+                <VBox.margin>
+                    <Insets left="10.0" right="10.0"/>
+                </VBox.margin>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="388.0" styleClass="animeDataText" text="Generos">
+                <VBox.margin>
+                    <Insets left="10.0" right="10.0"/>
+                </VBox.margin>
+            </Label>
+        </VBox>
+        <VBox alignment="CENTER" prefHeight="345.0" prefWidth="273.0" spacing="30.0">
+            <HBox.margin>
+                <Insets top="55.0"/>
+            </HBox.margin>
+            <TextField fx:id="fieldTitle" styleClass="text-input">
+                <VBox.margin>
+                    <Insets left="10.0" right="10.0"/>
+                </VBox.margin>
+            </TextField>
+            <TextField fx:id="fieldEpisodes" styleClass="text-input">
+                <VBox.margin>
+                    <Insets left="10.0" right="10.0"/>
+                </VBox.margin>
+            </TextField>
+            <ChoiceBox fx:id="fieldStatus" prefHeight="25.0" prefWidth="258.0"/>
+            <DatePicker fx:id="fieldDate" prefWidth="258.0"/>
+            <CheckComboBox fx:id="fieldGenres" prefHeight="25.0" prefWidth="261.0" showCheckedCount="true"/>
+            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveChanges" text="Guardar"/>
+        </VBox>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <ImageView fx:id="imgViewAnime" fitHeight="294.0" fitWidth="200.0" pickOnBounds="true"
+                       preserveRatio="true"/>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#changeAnimeImg" text="Cambiar imagen"/>
+        </VBox>
+    </HBox>
+</AnchorPane>

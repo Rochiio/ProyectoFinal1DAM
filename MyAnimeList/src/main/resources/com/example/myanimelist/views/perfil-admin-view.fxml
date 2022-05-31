@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0"
+            styleClass="acercaDeTexto" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18">
+    <children>
+        <VBox layoutX="38.0" layoutY="33.0" prefHeight="148.0" prefWidth="149.0">
+            <children>
+                <TextField promptText="Email"/>
+                <TextField layoutY="15.0" promptText="Username">
+                    <VBox.margin>
+                        <Insets top="15.0"/>
+                    </VBox.margin>
+                </TextField>
+                <TextField layoutY="15.0" promptText="Password">
+                    <VBox.margin>
+                        <Insets top="15.0"/>
+                    </VBox.margin>
+                </TextField>
+                <TextField promptText="Confirm Password">
+                    <VBox.margin>
+                        <Insets top="15.0"/>
+                    </VBox.margin>
+                </TextField>
+            </children>
+        </VBox>
+        <Button layoutX="242.0" layoutY="254.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="177.0"
+                stylesheets="@../styles/claro.css" text="Save"/>
+        <Button layoutX="48.0" layoutY="254.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="177.0"
+                stylesheets="@../styles/claro.css" text="Delete"/>
+        <ImageView fitHeight="125.0" fitWidth="125.0" layoutX="271.0" layoutY="33.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../images/user/default.png"/>
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

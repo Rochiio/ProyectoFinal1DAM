@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.main.admin.UserAdminController">
+    <children>
+        <TableView fx:id="tabla"  prefHeight="400.0" prefWidth="299.0" styleClass="fondo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="301.0" AnchorPane.topAnchor="0.0">
+            <columns>
+                <TableColumn fx:id="columnName" prefWidth="150.0" resizable="false" text="Nombre" />
+                <TableColumn fx:id="columnEmail" prefWidth="150.0" text="Email" />
+            </columns>
+        </TableView>
+      <HBox layoutX="301.0" prefHeight="318.0" prefWidth="299.0" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="301.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="400.0" prefWidth="185.0" spacing="40.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="173.0" styleClass="animeDataText" text="Name:" />
+                  <Label prefHeight="25.0" prefWidth="160.0" styleClass="animeDataText" text="Email:" />
+                  <Label prefHeight="25.0" prefWidth="153.0" styleClass="animeDataText" text="BirthDay:" />
+               </children>
+               <padding>
+                  <Insets top="30.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="202.0" spacing="45.0">
+               <children>
+                  <Label fx:id="txtName" styleClass="textoNormal" text="Label" />
+                  <Label fx:id="txtEmail" styleClass="textoNormal" text="Label" />
+                  <Label fx:id="txtBirthDay" styleClass="textoNormal" text="Label" />
+               </children>
+               <padding>
+                  <Insets left="5.0" top="30.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="10.0" top="50.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="301.0" layoutY="318.0" prefHeight="82.0" prefWidth="299.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="301.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="318.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#deleteUser" text="Eliminar" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </HBox>
+    </children>
+</AnchorPane>

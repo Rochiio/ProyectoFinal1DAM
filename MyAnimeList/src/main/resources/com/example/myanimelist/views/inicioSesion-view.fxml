@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="577.0"
+            styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18"
+            fx:controller="com.example.myanimelist.controllers.inicio.LoginController">
+    <children>
+        <ImageView fitHeight="151.0" fitWidth="316.0" layoutX="154.0" layoutY="14.0" nodeOrientation="INHERIT"
+                   pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="185.0"
+                   AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="154.5555419921875" AnchorPane.topAnchor="14.0">
+            <image>
+                <Image url="@../images/logo/Login.png"/>
+            </image>
+        </ImageView>
+        <VBox layoutX="150.0" layoutY="161.0" spacing="10.0" AnchorPane.bottomAnchor="109.0"
+              AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="161.0">
+            <children>
+                <TextField fx:id="txtUsername" prefHeight="25.0" prefWidth="273.0" promptText="Username"
+                           styleClass="text-input">
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </TextField>
+                <PasswordField fx:id="txtPassword" promptText="Password" styleClass="text-input"/>
+            </children>
+        </VBox>
+        <VBox alignment="CENTER" layoutX="150.0" layoutY="255.0" prefHeight="68.0" prefWidth="401.0" spacing="10.0"
+              AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="151.0"
+              AnchorPane.topAnchor="255.0">
+            <children>
+                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login"
+                        prefHeight="25.0" prefWidth="85.0" text="Log In" textAlignment="CENTER"/>
+                <Hyperlink fx:id="btnRegister" alignment="CENTER" contentDisplay="CENTER"
+                           onAction="#changeSceneToRegister" prefHeight="35.0" prefWidth="116.0" styleClass="linkBasic"
+                           text="Register" underline="true"/>
+            </children>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+        </VBox>
+        <Hyperlink layoutX="522.0" layoutY="14.0" onAction="#openStageAbout">
+            <graphic>
+                <ImageView fitHeight="41.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/acercaDe.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Hyperlink>
+    </children>
+</AnchorPane>

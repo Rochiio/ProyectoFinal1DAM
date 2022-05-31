@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="330.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/17"
+            fx:controller="com.example.myanimelist.controllers.SplashController">
+    <children>
+        <ImageView fx:id="fondo" fitHeight="330.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true"
+                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.66668701171875"
+                   AnchorPane.topAnchor="0.0"/>
+    </children>
+</AnchorPane>

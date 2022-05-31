@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.main.user.MainUserAnimeController">
+    <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox prefHeight="37.0" prefWidth="309.0" spacing="5.0">
+                     <children>
+                        <TextField fx:id="searchName" prefHeight="25.0" prefWidth="205.0" />
+                        <Button mnemonicParsing="false" onAction="#filterByName" text="Buscar">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="37.0" prefWidth="285.0">
+                     <children>
+                        <Button fx:id="addAnimeBtn" mnemonicParsing="false" onAction="#changeViewToAnimeAddView" text="Añadir Anime">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+              <ListView fx:id="animeListView" onMouseClicked="#changeSceneToAnimeDataView" prefHeight="451.0" prefWidth="600.0" styleClass="fondo" stylesheets="@../styles/claro.css" />
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>

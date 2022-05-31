@@ -1,0 +1,94 @@
+.fondo {
+    -fx-background-color: #469D89;
+    -fx-text-fill: white;
+}
+
+.rating > .container .button {
+    -fx-background-size: cover;
+    -fx-padding: 0;
+}
+.rating > .container .button {
+    -fx-pref-width: 20 ;
+    -fx-pref-height: 20 ;
+    -fx-background-size: cover;
+    -fx-padding: 0;
+}
+
+.rating {
+    button-width: 32;
+    button-height: 32;
+}
+
+.rating > .container .button {
+    -fx-pref-width: button-width;
+    -fx-pref-height: button-height;
+    -fx-background-size: cover;
+    -fx-padding: 0;
+}
+
+.acercaDeTexto {
+    -fx-background-color: #88D4AB;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}
+
+.textoNormal{
+    -fx-text-fill: white;
+    -fx-font-weight: normal;
+    -fx-font-size: 15px;
+}
+
+.button {
+    -fx-border-radius: 10;
+    -fx-padding: 5;
+    -fx-background-color: #88D4AB;
+    -fx-text-fill: white;
+}
+
+.linkBasic {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.tittle {
+    -fx-text-fill: white;
+    -fx-font-weight: normal;
+    -fx-font-size: 40px;
+    -fx-font-family: Arial;
+    -fx-text-transform: uppercase;
+}
+
+
+.text-input:focused {
+    -fx-border-color: #99E2B4;
+}
+
+.animeDataText {
+    -fx-text-fill: white;
+    -fx-background-color: #67B99A;
+    -fx-font-weight: normal;
+    -fx-font-size: 20px;
+    -fx-font-family: Arial;
+    -fx-border-color: #78C6A3;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+}
+
+
+
+/*tamaño, bordes y color de fondo de los titulos*/
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: #248277;
+    -fx-text-fill: white;
+    -fx-size: 45;
+    -fx-border-insets: 0;
+}
+
+.table-row-cell:empty, .table-cell:empty:hover {
+    -fx-background-color: #67B99A;
+}
+
+/*color de una fila que esta seleccionada*/
+.table-view:row-selection .table-row-cell:filled:selected {
+    -fx-background-color: #469D89;
+}

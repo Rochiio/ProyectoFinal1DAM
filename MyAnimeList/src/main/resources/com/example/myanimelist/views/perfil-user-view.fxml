@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="root" minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="454.0" styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myanimelist.controllers.profiles.ProfileUserController">
+      <Button fx:id="btnSave" layoutX="139.0" layoutY="273.0" mnemonicParsing="false" onAction="#onSave" prefHeight="25.0" prefWidth="177.0" text="Save" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="139.0" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="273.0" />
+   <HBox layoutX="15.0" layoutY="13.0" prefHeight="225.0" prefWidth="269.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <children>
+         <VBox prefHeight="225.0" prefWidth="146.0" spacing="20.0">
+            <children>
+               <Label prefHeight="17.0" prefWidth="405.0" styleClass="animeDataText" text="Email" />
+               <Label prefHeight="17.0" prefWidth="405.0" styleClass="animeDataText" text="Username" />
+               <Label prefHeight="17.0" prefWidth="405.0" styleClass="animeDataText" text="Cumpleaños" />
+               <Label prefHeight="17.0" prefWidth="405.0" styleClass="animeDataText" text="Contraseña" />
+               <Label prefHeight="17.0" prefWidth="405.0" styleClass="animeDataText" text="Confirmar" />
+            </children>
+         </VBox>
+         <VBox prefHeight="206.0" prefWidth="149.0" spacing="20.0" stylesheets="@../styles/claro.css">
+            <TextField fx:id="txtEmail" promptText="Email" styleClass="text-input" />
+            <TextField fx:id="txtName" layoutY="15.0" promptText="Username" styleClass="text-input">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextField>
+            <DatePicker fx:id="txtBirthday" />
+            <PasswordField fx:id="txtPassword" promptText="Password" styleClass="text-input" />
+            <PasswordField fx:id="txtPasswordConfirm" promptText="Confirm Password" styleClass="text-input" />
+         </VBox>
+      </children>
+   </HBox>
+   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <children>
+      
+         <ImageView fx:id="img" fitHeight="125.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/user/default.png" />
+            </image>
+         </ImageView>
+         <Button mnemonicParsing="false" onAction="#changeUserImg" text="Cambiar Imagen" />
+      </children>
+   </VBox>
+</AnchorPane>
