@@ -19,7 +19,7 @@ class MyAnimeListApplication : Application(), KoinComponent {
     private val animeRepository: IAnimeRepository by inject()
     private val animeStorage: IAnimeStorage by inject()
     override fun start(stage: Stage) {
-
+        startAllModules()
         initAnimes(animeRepository, animeStorage)
         val sceneManager = SceneManager
         sceneManager.setAppClass<MyAnimeListApplication>()
@@ -37,7 +37,6 @@ class MyAnimeListApplication : Application(), KoinComponent {
 
 
 fun main() {
-    startAllModules()
     launch(MyAnimeListApplication::class.java)
 }
 
