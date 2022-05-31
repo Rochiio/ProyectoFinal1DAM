@@ -14,6 +14,7 @@
         <junit.version>5.8.2</junit.version>
         <kotlin.version>1.6.21</kotlin.version>
         <koin.version>3.2.0</koin.version>
+        <dokka.version>1.6.21</dokka.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
@@ -127,6 +128,19 @@
             <artifactId>mybatis</artifactId>
             <version>3.5.9</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jetbrains.dokka/dokka-gradle-plugin -->
+        <dependency>
+            <groupId>org.jetbrains.dokka</groupId>
+            <artifactId>dokka-gradle-plugin</artifactId>
+            <version>1.6.21</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jetbrains.dokka/dokka-cli -->
+        <dependency>
+            <groupId>org.jetbrains.dokka</groupId>
+            <artifactId>dokka-cli</artifactId>
+            <version>1.6.21</version>
+        </dependency>
 
     </dependencies>
 
@@ -200,7 +214,6 @@
                 <version>3.0.0-M6</version>
 
             </plugin>
-
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -222,7 +235,30 @@
 
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>dokka-maven-plugin</artifactId>
+                <version>${dokka.version}</version>
+                <executions>
+                    <execution>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>dokka</goal>
+                            <goal>javadoc</goal>
+                            <goal>javadocJar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceLinks>
+                        <link>
+                            <path>${project.basedir}</path>
+                            <url>https://github.com/JetBrains/kotlin-examples/blob/master/maven/dokka-maven-example</url>
+                            <lineSuffix>#L</lineSuffix>
+                        </link>
+                    </sourceLinks>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

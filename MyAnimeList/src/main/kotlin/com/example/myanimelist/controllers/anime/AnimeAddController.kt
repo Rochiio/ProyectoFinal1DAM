@@ -71,7 +71,7 @@ class AnimeAddController : KoinComponent {
 
 
     /**
-     * Para cambiar la imagen del anime mostrado
+     *
      */
     fun changeAnimeImg() {
         val fc = FileChooser()
