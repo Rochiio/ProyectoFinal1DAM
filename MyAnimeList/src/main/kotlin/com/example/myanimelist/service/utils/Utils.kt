@@ -1,6 +1,6 @@
 package com.example.myanimelist.service.utils
 
-import com.example.myanimelist.managers.DependenciesManager.getLogger
+import com.example.myanimelist.extensions.getLogger
 import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
@@ -10,7 +10,7 @@ import java.time.LocalDate
 import java.util.*
 
 object Utils {
-    var logger = getLogger(Utils::class.java)
+    var logger = getLogger<Utils>()
     fun getFileExtension(filename: String): Optional<String> {
         return Optional.ofNullable(filename)
             .filter { f: String -> f.contains(".") }

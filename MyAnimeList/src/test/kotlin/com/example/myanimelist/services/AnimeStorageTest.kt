@@ -1,16 +1,29 @@
 package com.example.myanimelist.services
 
+import com.example.myanimelist.di.servicesModule
 import com.example.myanimelist.dto.AnimeDTO
-import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.utilities.getTestingAnime
 import com.example.myanimelist.utils.Properties
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
+import org.koin.core.context.startKoin
+import org.koin.test.inject
+import org.koin.test.junit5.ClosingKoinTest
 import java.io.FileReader
 
-class AnimeStorageTest {
-    private val storage: IAnimeStorage = DependenciesManager.getAnimeStorage()
+class AnimeStorageTest : ClosingKoinTest {
+    private val storage: IAnimeStorage by inject()
+
+
+    init {
+        startKoin {
+            modules(
+                servicesModule
+            )
+        }
+    }
+
 
     @Test
     @Order(0)

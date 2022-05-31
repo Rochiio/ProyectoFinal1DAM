@@ -1,18 +1,19 @@
 package com.example.myanimelist.repositories.animes
 
 import com.example.myanimelist.extensions.execute
+import com.example.myanimelist.extensions.getLogger
 import com.example.myanimelist.managers.DataBaseManager
-import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.Anime
 import org.apache.logging.log4j.Logger
+import org.koin.core.component.KoinComponent
 import java.util.*
 
 
 class AnimeRepository(
     private var databaseManager: DataBaseManager,
-) : IAnimeRepository {
+) : IAnimeRepository, KoinComponent {
 
-    val logger: Logger = DependenciesManager.getLogger(AnimeRepository::class.java)
+    val logger: Logger = getLogger<AnimeRepository>()
 
     override fun findById(id: UUID): Anime? {
         val query = "SELECT * FROM animes WHERE id = ?"

@@ -1,6 +1,8 @@
 package com.example.myanimelist.controllers
 
+import com.example.myanimelist.extensions.getLogger
 import com.example.myanimelist.managers.SceneManager
+import com.example.myanimelist.utils.Properties.RESOURCES_IMAGES_DIR
 import javafx.animation.FadeTransition
 import javafx.event.EventHandler
 import javafx.fxml.FXML
@@ -9,7 +11,6 @@ import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
 import javafx.util.Duration
-import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.io.FileInputStream
 import java.io.IOException
@@ -18,7 +19,7 @@ import java.util.*
 
 class SplashController : Initializable {
 
-    private val logger: Logger = LogManager.getLogger(SplashController::class.java)
+    private val logger: Logger = getLogger<SplashController>()
 
     @FXML
     lateinit var fondo: ImageView
@@ -52,6 +53,6 @@ class SplashController : Initializable {
      */
     private fun randomImg(): String {
         val rNum = (1..6).random()
-        return "src/main/resources/com/example/myanimelist/images/splash$rNum.png"
+        return RESOURCES_IMAGES_DIR + "/splash$rNum.png"
     }
 }
