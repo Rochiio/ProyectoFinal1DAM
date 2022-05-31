@@ -37,7 +37,6 @@ class MyAnimeListApplication : Application(), KoinComponent {
 
 
 fun main() {
-    //startAllModules()
     launch(MyAnimeListApplication::class.java)
 }
 
