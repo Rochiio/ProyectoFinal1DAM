@@ -14,5 +14,10 @@ interface ICRUDReviews<T, in ID> {
      * @return lista con todas las reviews de ese anime
      */
     fun findByAnimeId(animeId: ID): Iterable<T>
+
+    /**
+     * Devolver todas las reviews que existen en el repositorio
+     * @return lista con todas las reviews que existen
+     */
     fun findAll(): Iterable<T>
 }

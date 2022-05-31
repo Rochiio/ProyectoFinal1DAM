@@ -99,6 +99,9 @@ class UserAdminController {
 //    }
 
 
+    /**
+     * Eliminar al usuario seleccionado
+     */
     fun deleteUser(actionEvent: ActionEvent) {
         val item = tabla.selectionModel.selectedItem
         val alert = Alert(Alert.AlertType.CONFIRMATION)

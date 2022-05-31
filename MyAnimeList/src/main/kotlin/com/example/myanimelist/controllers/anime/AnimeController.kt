@@ -66,6 +66,10 @@ class AnimeController {
             loadReview()
     }
 
+
+    /**
+     * Cargar la review
+     */
     private fun loadReview() {
         val review = reviewRepository.findByAnimeId(anime.id).firstOrNull { it.user.id == user.id } ?: return
         reviewField.text = review.comment
@@ -73,6 +77,10 @@ class AnimeController {
         disableReviewFields()
     }
 
+
+    /**
+     * Para guardar una review hecha a un anime
+     */
     @FXML
     fun saveReview() {
         val wantsToSave = {
@@ -95,15 +103,25 @@ class AnimeController {
         disableReviewFields()
     }
 
+
+    /**
+     * Deshabilitar que el usuario pueda hacer más reviews sobre ese anime
+     */
     private fun disableReviewFields() {
         reviewField.isDisable = true
         rating.isDisable = true
         saveReviewButton.isDisable = true
     }
 
+
+    /**
+     * Validación de que la review está hecha correctamente
+     * @param error por si no pasa los filtros, saber el error
+     * @return boolean dependiendo de si pasa los filtros correctamente o no
+     */
     private fun validateReviewFields(error: StringBuilder): Boolean {
-        if (reviewField.text.isNullOrBlank())
-            error.appendLine("El comentario no puede estar vacio")
+        if (reviewField.text.isNullOrBlank() || !reviewField.text.matches(Regex("[a-zA-Z |\\s]{1,500}")))
+            error.appendLine("El comentario no puede estar vacio, debe tener entre 0-500 caracteres")
         if (rating.rating == 0.0)
             error.appendLine("El numero de estrellas no puede estar vacio")
         return error.isEmpty()

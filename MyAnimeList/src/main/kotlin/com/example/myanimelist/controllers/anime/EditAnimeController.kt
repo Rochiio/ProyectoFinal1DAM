@@ -127,6 +127,10 @@ class EditAnimeController {
         return errorMessage.isEmpty()
     }
 
+
+    /**
+     * Cambiar la imagen del anime
+     */
     fun changeAnimeImg() {
         val fc = FileChooser()
         fc.title = "Selecciona una nueva imagen"

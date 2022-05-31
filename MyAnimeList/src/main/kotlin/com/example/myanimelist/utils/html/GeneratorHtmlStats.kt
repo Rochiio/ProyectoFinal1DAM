@@ -26,6 +26,8 @@ class GeneratorHtmlStats: GeneratorHtml{
         }
     }
 
+
+
     override fun makeHtml(animeCount: String, topGenreCount: String, topTypeCount: String, topRatedAnime: String, botRatedAnime: String) {
         val pw = PrintWriter(FileWriter(fileHtml))
         pw.println(html.HEAD)
