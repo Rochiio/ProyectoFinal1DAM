@@ -87,7 +87,7 @@ class MainUserMyListController : KoinComponent {
      * Filtrar lista por texto del buscador
      */
     fun filterMyListByText() {
-        if (searchName.text.isEmpty() || searchName.text.isBlank()) return
+        if (searchName.text == null) return
 
         animeListfl.setPredicate {
             it.presentation.get().title.get().uppercase(Locale.getDefault()).contains(
