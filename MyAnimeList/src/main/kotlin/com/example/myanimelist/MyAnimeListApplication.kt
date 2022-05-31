@@ -4,7 +4,9 @@ import com.example.myanimelist.di.*
 import com.example.myanimelist.dto.LoadDTO
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.SceneManager
+import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.repositories.animes.IAnimeRepository
+import com.example.myanimelist.service.anime.AnimeStorage
 import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.service.txt.TxtBackup
 import com.example.myanimelist.utils.Themes
@@ -13,12 +15,18 @@ import javafx.application.Application
 import javafx.application.Application.launch
 import javafx.stage.Stage
 import org.koin.core.component.KoinComponent
-import org.koin.core.context.startKoin
+import org.koin.core.component.get
+import org.koin.core.context.GlobalContext.get
+import org.koin.core.context.GlobalContext.startKoin
+import org.koin.java.KoinJavaComponent.inject
 
 
-
-class MyAnimeListApplication : Application() , KoinComponent{
+class MyAnimeListApplication : Application(), KoinComponent {
+    val animeRepository = get<AnimeRepository>()
+    val animeStorage = get<IAnimeStorage>()
     override fun start(stage: Stage) {
+
+        initAnimes(animeRepository, animeStorage)
         val sceneManager = SceneManager
         sceneManager.setAppClass<MyAnimeListApplication>()
         sceneManager.initSplash(stage)
@@ -33,24 +41,26 @@ class MyAnimeListApplication : Application() , KoinComponent{
 
 }
 
-var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
-var animeStorage: IAnimeStorage = DependenciesManager.getAnimeStorage()
+
 
 
 fun main() {
-    startKoin { modules(dataBaseManagerModule,
-        usersRepositoryModule,
-        animeRepositoryModule,
-        animeListRepositoryModule,
-        reviewsRepositoryModule,
-        imgStorageModule,
-        htmlGeneratorModule)
+    startKoin {
+        modules(
+            dataBaseManagerModule,
+            usersRepositoryModule,
+            animeRepositoryModule,
+            animeListRepositoryModule,
+            reviewsRepositoryModule,
+            imgStorageModule,
+            htmlGeneratorModule,
+            animeStorageModule
+        )
     }
-    initAnimes()
     launch(MyAnimeListApplication::class.java)
 }
 
-fun initAnimes() {
+fun initAnimes(animeRepository : IAnimeRepository, animeStorage: IAnimeStorage) {
     val loadData = TxtBackup().load()
     if (loadData?.isLoaded == true) {
         ThemesManager.currentTheme = if (loadData.isNightMode)

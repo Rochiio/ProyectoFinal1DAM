@@ -1,19 +1,47 @@
 package com.example.myanimelist.repositories.reviews
 
-import com.example.myanimelist.managers.DependenciesManager.getReviewsRepo
+import com.example.myanimelist.di.*
+import com.example.myanimelist.extensions.execute
+import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.utilities.getNewTestingReview
 import com.example.myanimelist.utilities.getTestingReview
 import com.example.myanimelist.utilities.resetDb
+import com.example.myanimelist.utils.Properties
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.koin.core.context.startKoin
+import org.koin.test.KoinTest
+import org.koin.test.get
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+internal class ReviewsRepositoryTest :KoinTest{
+    private lateinit var  reviewsRepository : IRepositoryReview
 
-internal class ReviewsRepositoryTest {
-    private val reviewsRepository = getReviewsRepo()
+    @BeforeAll
+    fun start() {
+        startKoin {
+            modules(
+                dataBaseManagerModuleDev,
+                reviewsRepositoryModuleDev,
+                usersRepositoryModule,
+                animeRepositoryModule
+            )
+        }
+        reviewsRepository = get()
+
+    }
 
     @BeforeEach
-    fun setUp() = resetDb()
+    fun setUp() {
+
+        val db: DataBaseManager = get<DataBaseManager>()
+        db.execute {
+            initData(Properties.SCRIPT_FILE_DATABASE, false)
+        }
+    }
 
     @Test
     fun addReview() {

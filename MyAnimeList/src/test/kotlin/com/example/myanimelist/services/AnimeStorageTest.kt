@@ -5,12 +5,16 @@ import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.service.anime.IAnimeStorage
 import com.example.myanimelist.utilities.getTestingAnime
 import com.example.myanimelist.utils.Properties
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import java.io.FileReader
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AnimeStorageTest {
     private val storage: IAnimeStorage = DependenciesManager.getAnimeStorage()
+
+    @BeforeAll
 
     @Test
     @Order(0)

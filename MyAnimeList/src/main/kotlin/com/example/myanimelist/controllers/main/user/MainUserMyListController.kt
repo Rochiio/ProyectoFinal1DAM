@@ -30,7 +30,7 @@ class MainUserMyListController : KoinComponent {
     val logger: Logger = getLogger<MainUserMyListController>()
     val user = DependenciesManager.globalUser
 
-    private var animeListRepository: IRepositoryAnimeList = get<AnimeListRepository>()
+    private var animeListRepository = get<IRepositoryAnimeList>()
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private lateinit var animeListfl: FilteredList<AnimeView>
 

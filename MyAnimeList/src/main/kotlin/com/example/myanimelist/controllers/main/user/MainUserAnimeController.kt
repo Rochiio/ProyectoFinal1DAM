@@ -33,7 +33,7 @@ class MainUserAnimeController : KoinComponent{
     //Generics
     val logger: Logger = DependenciesManager.getLogger<MainUserAnimeController>()
     val user = DependenciesManager.globalUser
-    val imgStorage: IImgStorage = get<ImgStorage>()
+    val imgStorage = get<ImgStorage>()
 
     //FXML
     @FXML
@@ -47,7 +47,7 @@ class MainUserAnimeController : KoinComponent{
 
 
     //Specific
-    private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
+    private var animeRepository: IAnimeRepository = get()
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private lateinit var animefl: FilteredList<AnimeView>
 

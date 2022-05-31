@@ -5,9 +5,9 @@ import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.isValidEmail
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.DependenciesManager.getEditFilter
-import com.example.myanimelist.managers.DependenciesManager.getImgStorage
-import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
 import com.example.myanimelist.models.User
+import com.example.myanimelist.repositories.users.IUsersRepository
+import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.utils.ThemesManager.getCurretnTheme
 import javafx.fxml.FXML
@@ -18,9 +18,11 @@ import javafx.scene.layout.AnchorPane
 import javafx.stage.FileChooser
 import javafx.stage.Stage
 import org.apache.logging.log4j.LogManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import java.util.*
 
-class ProfileUserController {
+class ProfileUserController : KoinComponent{
     @FXML
     var txtEmail: TextField? = null
 
@@ -44,9 +46,9 @@ class ProfileUserController {
 
     @FXML
     var root: AnchorPane? = null
-    private val userRepository = getUsersRepo()
+    private val userRepository = get<IUsersRepository>()
     private val user = DependenciesManager.globalUser
-    private val imgStorage = getImgStorage()
+    private val imgStorage = get<IImgStorage>()
     private val editionFilters = getEditFilter()
     private val logger = LogManager.getLogger(
         ProfileUserController::class.java

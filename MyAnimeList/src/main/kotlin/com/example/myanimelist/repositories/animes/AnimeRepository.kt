@@ -5,12 +5,13 @@ import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.Anime
 import org.apache.logging.log4j.Logger
+import org.koin.core.component.KoinComponent
 import java.util.*
 
 
 class AnimeRepository(
     private var databaseManager: DataBaseManager,
-) : IAnimeRepository {
+) : IAnimeRepository, KoinComponent {
 
     val logger: Logger = DependenciesManager.getLogger(AnimeRepository::class.java)
 
