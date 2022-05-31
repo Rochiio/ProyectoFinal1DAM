@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" prefHeight="260.0" prefWidth="480.0" stylesheets="@../styles/claro.css"
+      xmlns="http://javafx.com/javafx/18" fx:controller="com.example.myanimelist.controllers.AcercaDeController">
+    <children>
+        <HBox prefHeight="260.0" prefWidth="480.0">
+            <children>
+                <ImageView fitHeight="170.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/logo/logoTrans.png"/>
+                    </image>
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                </ImageView>
+                <VBox alignment="CENTER_LEFT" prefHeight="260.0" prefWidth="323.0">
+                    <children>
+                        <Label alignment="TOP_CENTER" prefHeight="47.0" prefWidth="308.0" styleClass="tittle"
+                               text="Acerca de" textAlignment="CENTER">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                        </Label>
+                        <Hyperlink onAction="#linkGitHub" prefHeight="30.0" prefWidth="313.0" text="Rocío Palao"
+                                   userData="https://github.com/Rochiio">
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icons/github.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <VBox.margin>
+                                <Insets bottom="5.0" right="160.0" top="5.0"/>
+                            </VBox.margin>
+                            <styleClass>
+                                <String fx:value="acercaDeTexto"/>
+                                <String fx:value="linkBasic"/>
+                            </styleClass>
+                        </Hyperlink>
+                        <Hyperlink onAction="#linkGitHub" prefHeight="26.0" prefWidth="302.0" text="Mohamed Asidah"
+                                   userData="https://github.com/loopedmoha">
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icons/github.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="acercaDeTexto"/>
+                                <String fx:value="linkBasic"/>
+                            </styleClass>
+                            <VBox.margin>
+                                <Insets bottom="5.0" right="160.0" top="5.0"/>
+                            </VBox.margin>
+                        </Hyperlink>
+                        <Hyperlink onAction="#linkGitHub" prefHeight="26.0" prefWidth="315.0" text="Joaquín Ayllon"
+                                   userData="https://github.com/JoaquinAyG">
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icons/github.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="acercaDeTexto"/>
+                                <String fx:value="linkBasic"/>
+                            </styleClass>
+                            <VBox.margin>
+                                <Insets bottom="5.0" right="160.0" top="5.0"/>
+                            </VBox.margin>
+                        </Hyperlink>
+                        <Hyperlink onAction="#linkGitHub" prefHeight="26.0" prefWidth="331.0" text="Roberto Blázquez"
+                                   userData="https://github.com/xBaank">
+                            <graphic>
+                                <ImageView fitHeight="63.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icons/github.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="linkBasic"/>
+                                <String fx:value="acercaDeTexto"/>
+                            </styleClass>
+                            <VBox.margin>
+                                <Insets bottom="5.0" right="160.0" top="5.0"/>
+                            </VBox.margin>
+                        </Hyperlink>
+                        <Hyperlink onAction="#linkGitHub" prefHeight="26.0" prefWidth="322.0" text="Fran Toribio"
+                                   userData="https://github.com/frantoribio">
+                            <graphic>
+                                <ImageView fitHeight="63.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icons/github.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <styleClass>
+                                <String fx:value="acercaDeTexto"/>
+                                <String fx:value="linkBasic"/>
+                            </styleClass>
+                            <VBox.margin>
+                                <Insets bottom="5.0" right="160.0" top="5.0"/>
+                            </VBox.margin>
+                        </Hyperlink>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+    <styleClass>
+        <String fx:value="fondo"/>
+        <String fx:value="acercaDe"/>
+    </styleClass>
+</Pane>

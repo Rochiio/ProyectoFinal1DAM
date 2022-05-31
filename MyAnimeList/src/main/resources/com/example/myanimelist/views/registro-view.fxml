@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0"
+            styleClass="fondo" stylesheets="@../styles/claro.css" xmlns="http://javafx.com/javafx/18"
+            fx:controller="com.example.myanimelist.controllers.inicio.RegisterController">
+    <children>
+        <VBox layoutX="19.0" layoutY="63.0" prefHeight="146.0" prefWidth="369.0" spacing="15.0"
+              AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="212.0"
+              AnchorPane.topAnchor="63.0">
+            <children>
+                <TextField fx:id="txtEmail" promptText="Email" styleClass="text-input"/>
+                <TextField fx:id="txtUsername" promptText="Username" styleClass="text-input"/>
+                <PasswordField fx:id="txtPassword" promptText="Password" styleClass="text-input"/>
+                <PasswordField fx:id="txtConfirmPassword" promptText="Confirm Password" styleClass="text-input"/>
+            </children>
+        </VBox>
+        <VBox layoutX="213.0" layoutY="264.0" prefHeight="80.0" prefWidth="175.0" spacing="10.0"
+              AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="213.0" AnchorPane.rightAnchor="212.0"
+              AnchorPane.topAnchor="264.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="177.0"
+                        text="Register"/>
+                <Hyperlink fx:id="btnLogin" alignment="CENTER" contentDisplay="CENTER" onAction="#changeSceneToLogin"
+                           prefHeight="24.0" prefWidth="181.0" styleClass="linkBasic" text="Login"
+                           textAlignment="JUSTIFY" underline="true"/>
+            </children>
+        </VBox>
+        <ImageView fitHeight="123.0" fitWidth="121.0" layoutX="465.0" layoutY="14.0" pickOnBounds="true"
+                   preserveRatio="true" AnchorPane.bottomAnchor="265.0" AnchorPane.leftAnchor="465.0"
+                   AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <image>
+                <Image url="@../images/user/default.png"/>
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

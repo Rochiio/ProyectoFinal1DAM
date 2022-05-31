@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" styleClass="fondo" stylesheets="@../styles/claro.css"
+            xmlns="http://javafx.com/javafx/18">
+    <children>
+        <Pane styleClass="fondo" stylesheets="@../styles/claro.css">
+            <children>
+                <ScrollPane styleClass="fondo" stylesheets="@../styles/claro.css">
+                    <content>
+                        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                                 prefHeight="400.0" prefWidth="610.0" styleClass="fondo"
+                                 stylesheets="@../styles/claro.css" tabClosingPolicy="UNAVAILABLE">
+                            <tabs>
+                                <Tab styleClass="fondo" text="Usuarios">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                                                    styleClass="fondo" stylesheets="@../styles/claro.css"/>
+                                    </content>
+                                </Tab>
+                                <Tab styleClass="fondo" text="Animes">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0"/>
+                                    </content>
+                                </Tab>
+                                <Tab styleClass="fondo" text="Gráficos y estadísticas">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                                                    styleClass="fondo" stylesheets="@../styles/claro.css"/>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                    </content>
+                </ScrollPane>
+                <MenuBar layoutX="506.0" layoutY="4.0" prefHeight="25.0" prefWidth="81.0" styleClass="fondo"
+                         stylesheets="@../styles/claro.css">
+                    <menus>
+                        <Menu mnemonicParsing="false" styleClass="fondo" text="Opciones">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Editar Perfil">
+                                    <graphic>
+                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
+                                                   preserveRatio="true"/>
+                                    </graphic>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="false" text="Añadir Anime">
+                                    <graphic>
+                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
+                                                   preserveRatio="true"/>
+                                    </graphic>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="false" text="Añadir Usuario">
+                                    <graphic>
+                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
+                                                   preserveRatio="true"/>
+                                    </graphic>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="false" text="Theme">
+                                    <graphic>
+                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
+                                                   preserveRatio="true"/>
+                                    </graphic>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="false" text="About">
+                                    <graphic>
+                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
+                                                   preserveRatio="true"/>
+                                    </graphic>
+                                </MenuItem>
+                                <MenuItem mnemonicParsing="false" text="Log Out">
+                                    <graphic>
+                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true"
+                                                   preserveRatio="true"/>
+                                    </graphic>
+                                </MenuItem>
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
