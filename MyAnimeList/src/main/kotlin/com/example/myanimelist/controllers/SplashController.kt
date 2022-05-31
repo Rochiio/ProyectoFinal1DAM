@@ -2,6 +2,7 @@ package com.example.myanimelist.controllers
 
 import com.example.myanimelist.extensions.getLogger
 import com.example.myanimelist.managers.SceneManager
+import com.example.myanimelist.utils.Properties.RESOURCES_IMAGES_DIR
 import javafx.animation.FadeTransition
 import javafx.event.EventHandler
 import javafx.fxml.FXML
@@ -52,6 +53,6 @@ class SplashController : Initializable {
      */
     private fun randomImg(): String {
         val rNum = (1..6).random()
-        return "src/main/resources/com/example/myanimelist/images/splash$rNum.png"
+        return RESOURCES_IMAGES_DIR + "/splash$rNum.png"
     }
 }
