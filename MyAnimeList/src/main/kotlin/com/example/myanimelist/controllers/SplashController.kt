@@ -1,5 +1,6 @@
 package com.example.myanimelist.controllers
 
+import com.example.myanimelist.MyAnimeListApplication
 import com.example.myanimelist.extensions.getLogger
 import com.example.myanimelist.managers.SceneManager
 import javafx.animation.FadeTransition
@@ -11,8 +12,8 @@ import javafx.scene.image.ImageView
 import javafx.stage.Stage
 import javafx.util.Duration
 import org.apache.logging.log4j.Logger
-import java.io.FileInputStream
 import java.io.IOException
+import java.io.InputStream
 import java.net.URL
 import java.util.*
 
@@ -23,7 +24,7 @@ class SplashController : Initializable {
     @FXML
     lateinit var fondo: ImageView
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        fondo.image = Image(FileInputStream(randomImg()))
+        fondo.image = Image(randomImg())
         // Una animación de fondo
         val transition = FadeTransition(Duration.millis(5000.0), fondo)
         transition.fromValue = 1.0
@@ -50,8 +51,10 @@ class SplashController : Initializable {
      * Elegir imagen de splash aleatoria
      * @return imagen aleatoria
      */
-    private fun randomImg(): String {
+    private fun randomImg(): InputStream {
         val rNum = (1..6).random()
-        return "src/main/resources/com/example/myanimelist/images/splash$rNum.png"
+        return MyAnimeListApplication::class.java.getResource("images/splash$rNum.png")?.openStream()
+            ?: throw Exception("Random Images null")
+
     }
 }

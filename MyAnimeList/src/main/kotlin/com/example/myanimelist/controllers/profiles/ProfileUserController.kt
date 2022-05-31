@@ -19,7 +19,6 @@ import javafx.scene.layout.AnchorPane
 import javafx.stage.FileChooser
 import javafx.stage.Stage
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
 import org.koin.core.component.inject
 import java.util.*
 
@@ -50,7 +49,7 @@ class ProfileUserController : KoinComponent {
 
     private val userRepository: IUsersRepository by inject()
     private val user: CurrentUser by inject()
-    private val imgStorage = get<IImgStorage>()
+    private val imgStorage: IImgStorage by inject()
     private val editionFilters: EditFilters by inject()
     private val logger = getLogger<ProfileUserController>()
 
