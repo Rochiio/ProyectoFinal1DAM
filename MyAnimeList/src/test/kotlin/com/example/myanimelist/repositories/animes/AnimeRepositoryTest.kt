@@ -1,36 +1,30 @@
 package com.example.myanimelist.repositories.animes
 
-import com.example.myanimelist.di.animeRepositoryModule
-import com.example.myanimelist.di.dataBaseManagerModuleDev
-import com.example.myanimelist.di.reviewsRepositoryModuleDev
-import com.example.myanimelist.di.usersRepositoryModule
+import com.example.myanimelist.di.repositoriesModule
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
-import com.example.myanimelist.utilities.*
+import com.example.myanimelist.utilities.getNewTestingAnime
+import com.example.myanimelist.utilities.getTestingAnime
+import com.example.myanimelist.utilities.getTestingAnimeDelete
+import com.example.myanimelist.utilities.getTestingAnimeUpdate
 import com.example.myanimelist.utils.Properties
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
 import org.koin.core.context.startKoin
-import org.koin.test.KoinTest
 import org.koin.test.get
+import org.koin.test.inject
+import org.koin.test.junit5.ClosingKoinTest
 import java.util.*
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class AnimeRepositoryTest :KoinTest{
-    private lateinit var repo: IAnimeRepository
 
-    @BeforeAll
-    fun start() {
+internal class AnimeRepositoryTest : ClosingKoinTest {
+    private val repo: IAnimeRepository by inject()
+
+
+    init {
         startKoin {
-            modules(
-                dataBaseManagerModuleDev,
-                animeRepositoryModule
-            )
+            modules(repositoriesModule)
         }
-        repo = get()
-
     }
 
     @BeforeEach

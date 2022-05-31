@@ -1,11 +1,10 @@
 package com.example.myanimelist.controllers.main.user
 
+import com.example.myanimelist.extensions.getLogger
 import com.example.myanimelist.extensions.loadScene
-import com.example.myanimelist.managers.DependenciesManager
-import com.example.myanimelist.managers.DependenciesManager.getLogger
+import com.example.myanimelist.managers.CurrentUser
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.managers.SceneManager
-import com.example.myanimelist.repositories.animeList.AnimeListRepository
 import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.service.txt.TxtBackup
 import com.example.myanimelist.utils.*
@@ -21,16 +20,15 @@ import javafx.scene.input.MouseEvent
 import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
+import org.koin.core.component.inject
 import java.util.*
 
 
 class MainUserMyListController : KoinComponent {
 
-    val logger: Logger = getLogger<MainUserMyListController>()
-    val user = DependenciesManager.globalUser
-
-    private var animeListRepository = get<IRepositoryAnimeList>()
+    private val logger: Logger = getLogger<MainUserMyListController>()
+    private val user: CurrentUser by inject()
+    private val animeListRepository: IRepositoryAnimeList by inject()
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private lateinit var animeListfl: FilteredList<AnimeView>
 
@@ -67,7 +65,7 @@ class MainUserMyListController : KoinComponent {
     private fun loadData() {
         logger.info("cargando datos a memoria")
         animeListfl = FilteredList(animeList)
-        animeList.setAll(animeListRepository.findByUserId(user).map { AnimeView(it) })
+        animeList.setAll(animeListRepository.findByUserId(user.value).map { AnimeView(it) })
     }
 
     private fun initCells() {
@@ -89,11 +87,15 @@ class MainUserMyListController : KoinComponent {
      * Filtrar lista por texto del buscador
      */
     fun filterMyListByText() {
-        if(searchName.text.isEmpty() || searchName.text.isBlank()) return
+        if (searchName.text.isEmpty() || searchName.text.isBlank()) return
 
-        animeListfl.setPredicate { it.presentation.get().title.get().uppercase(Locale.getDefault()).contains(searchName.text.uppercase(
-            Locale.getDefault()
-        )) }
+        animeListfl.setPredicate {
+            it.presentation.get().title.get().uppercase(Locale.getDefault()).contains(
+                searchName.text.uppercase(
+                    Locale.getDefault()
+                )
+            )
+        }
 
         myListTable.items = animeListfl
     }
@@ -144,8 +146,8 @@ class MainUserMyListController : KoinComponent {
             mouseEvent.button == MouseButton.PRIMARY && mouseEvent.clickCount == 2 && myListTable.selectionModel.selectedItem != null
         if (!hasClicked) return
 
-        DependenciesManager.animeSelection = myListTable.selectionModel.selectedItem
-        if (DependenciesManager.globalUser.admin) {
+        user.animeSelected = myListTable.selectionModel.selectedItem
+        if (user.isAdmin) {
             Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
                 title = "Anime-Data-Admin"
                 isResizable = false
@@ -166,7 +168,7 @@ class MainUserMyListController : KoinComponent {
      */
     fun changeSceneToProfileUser() {
 
-        if (!user.admin) {
+        if (!user.isAdmin) {
             Stage().loadScene(PERFIL_VIEW) {
                 title = "Perfil usuario"
                 isResizable = false
@@ -208,7 +210,7 @@ class MainUserMyListController : KoinComponent {
      */
     fun deleteAnimeMyList() {
         if (myListTable.selectionModel.selectedItem == null) return
-        
+
         val animeSelect = myListTable.selectionModel.selectedItem
         val alert = Alert(Alert.AlertType.CONFIRMATION)
         alert.title = "Confirmación"
@@ -216,7 +218,7 @@ class MainUserMyListController : KoinComponent {
         val result = alert.showAndWait()
 
         if (result.get() == ButtonType.OK) {
-            animeListRepository.delete(animeSelect.toPOJO(), user)
+            animeListRepository.delete(animeSelect.toPOJO(), user.value)
             animeList.remove(animeSelect)
 
             val information = Alert(Alert.AlertType.INFORMATION)

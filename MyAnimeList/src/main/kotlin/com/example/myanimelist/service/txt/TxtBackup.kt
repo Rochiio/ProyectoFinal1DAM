@@ -1,17 +1,19 @@
 package com.example.myanimelist.service.txt
 
 import com.example.myanimelist.dto.LoadDTO
-import com.example.myanimelist.managers.DependenciesManager.getGson
 import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.utils.Themes
+import com.google.gson.Gson
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.io.FileReader
 import java.io.FileWriter
 import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 
-class TxtBackup : ITxtStorage {
-    private val gson = getGson()
+class TxtBackup : ITxtStorage, KoinComponent {
+    private val gson: Gson by inject()
 
     init {
         mkdir()

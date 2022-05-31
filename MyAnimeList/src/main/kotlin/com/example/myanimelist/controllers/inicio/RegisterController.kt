@@ -3,7 +3,7 @@ package com.example.myanimelist.controllers.inicio
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.login.RegisterFilters
-import com.example.myanimelist.managers.DependenciesManager.getRegisterFilter
+import com.example.myanimelist.managers.CurrentUser
 import com.example.myanimelist.models.User
 import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.LOGIN
@@ -13,10 +13,12 @@ import javafx.scene.control.Alert
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.stage.Stage
+import org.koin.core.component.inject
 import java.time.LocalDate
 
 class RegisterController : InicioController() {
-    private var registerFilters: RegisterFilters = getRegisterFilter()
+    private val registerFilters: RegisterFilters by inject()
+    private val user: CurrentUser by inject()
 
     @FXML
     private lateinit var txtEmail: TextField
