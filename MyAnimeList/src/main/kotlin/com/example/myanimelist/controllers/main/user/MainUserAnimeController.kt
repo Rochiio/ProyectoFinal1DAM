@@ -1,7 +1,8 @@
 package com.example.myanimelist.controllers.main.user
 
+import com.example.myanimelist.extensions.getLogger
 import com.example.myanimelist.extensions.loadScene
-import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.managers.CurrentUser
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.service.img.IImgStorage
@@ -22,14 +23,17 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
+import org.koin.core.component.inject
 import java.util.*
 
-class MainUserAnimeController {
+class MainUserAnimeController : KoinComponent {
 
     //Generics
-    val logger: Logger = DependenciesManager.getLogger<MainUserAnimeController>()
-    val user = DependenciesManager.globalUser
-    val imgStorage: IImgStorage = DependenciesManager.getImgStorage()
+    val logger: Logger = getLogger<MainUserAnimeController>()
+    val user: CurrentUser by inject()
+    val imgStorage: IImgStorage by inject()
 
     //FXML
     @FXML
@@ -43,14 +47,14 @@ class MainUserAnimeController {
 
 
     //Specific
-    private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
+    private var animeRepository: IAnimeRepository = get()
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private lateinit var animefl: FilteredList<AnimeView>
 
     @FXML
-    fun initialize(){
+    fun initialize() {
 
-        if(!user.admin) addAnimeBtn.isVisible = false
+        if (!user.isAdmin) addAnimeBtn.isVisible = false
 
         loadData()
 
@@ -115,7 +119,7 @@ class MainUserAnimeController {
                     but.maxHeight(10.0)
                     but.maxWidth(10.0)
                     val img = ImageView()
-                    if (user.admin) img.image = Image(ResourcesManager.getIconOf(Properties.ADD_ICON))
+                    if (user.isAdmin) img.image = Image(ResourcesManager.getIconOf(Properties.ADD_ICON))
                     else img.image = Image(ResourcesManager.getIconOf(Properties.EDIT_ICON))
                     img.fitHeight = 20.0
                     img.fitWidth = 20.0
@@ -144,9 +148,9 @@ class MainUserAnimeController {
      * Cambiar escena al anime seleccionado
      */
     private fun changeToAnime(anime: AnimeView) {
-        DependenciesManager.animeSelection = anime
+        user.animeSelected = anime
 
-        if (DependenciesManager.globalUser.admin) {
+        if (user.isAdmin) {
             Stage().loadScene(ANIME_DATA_ADMIN, WIDTH, HEIGHT) {
                 title = anime.presentation.get().getTitle()
                 isResizable = false
@@ -168,11 +172,15 @@ class MainUserAnimeController {
      * Filtrar lista por texto del buscador
      */
     fun filterByName() {
-        if(searchName.text.isEmpty() || searchName.text.isBlank()) return
+        if (searchName.text.isEmpty() || searchName.text.isBlank()) return
 
-        animefl.setPredicate { it.presentation.get().title.get().uppercase(Locale.getDefault()).contains(searchName.text.uppercase(
-            Locale.getDefault()
-        )) }
+        animefl.setPredicate {
+            it.presentation.get().title.get().uppercase(Locale.getDefault()).contains(
+                searchName.text.uppercase(
+                    Locale.getDefault()
+                )
+            )
+        }
         animeListView.items = animefl
     }
 

@@ -3,18 +3,19 @@ package com.example.myanimelist.controllers.inicio
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.login.LoginFilters
-import com.example.myanimelist.managers.DependenciesManager
-import com.example.myanimelist.managers.DependenciesManager.getLoginFilter
+import com.example.myanimelist.managers.CurrentUser
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.managers.SceneManager
 import com.example.myanimelist.utils.*
 import javafx.scene.control.Alert
 import javafx.scene.image.Image
 import javafx.stage.Stage
+import org.koin.core.component.inject
 
 
 class LoginController : InicioController() {
-    private var loginFilters: LoginFilters = getLoginFilter()
+    private val loginFilters: LoginFilters by inject()
+    private val user: CurrentUser by inject()
 
 
     /**
@@ -40,20 +41,20 @@ class LoginController : InicioController() {
      * Cambiar la escena al main, dependiendo del usuario se abre un tipo de escena u otra
      */
     private fun changeSceneToMain() {
-        DependenciesManager.globalUser =
+        user.value =
             userRepository.findByName(txtUsername.text).first { it.name == txtUsername.text }
 
         val stage = txtUsername.scene.window as Stage
 
 
-        if (!DependenciesManager.globalUser.admin) {
+        if (!user.isAdmin) {
             stage.loadScene(MAIN_USER_MYLIST, WIDTH, HEIGHT, isMainScene = true) {
                 title = "Animes"
                 isResizable = false
                 icons.add(Image(ResourcesManager.getIconOf("icono.png")))
             }.show()
         } else {
-            stage.loadScene(MAIN_ADMIN, WIDTH, HEIGHT,isMainScene = true) {
+            stage.loadScene(MAIN_ADMIN, WIDTH, HEIGHT, isMainScene = true) {
                 title = "Animes"
                 isResizable = false
                 icons.add(Image(ResourcesManager.getIconOf("icono.png")))

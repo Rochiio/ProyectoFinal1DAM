@@ -1,25 +1,28 @@
 package com.example.myanimelist.controllers.anime
 
+import com.example.myanimelist.extensions.getLogger
 import com.example.myanimelist.extensions.loadScene
 import com.example.myanimelist.extensions.show
-import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.managers.CurrentUser
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.repositories.animeList.IRepositoryAnimeList
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.repositories.reviews.IRepositoryReview
+import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.ANIME_DATA_EDIT
 import com.example.myanimelist.utils.HEIGHT
 import com.example.myanimelist.utils.WIDTH
-import com.example.myanimelist.views.models.AnimeView
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
 import javafx.stage.WindowEvent
 import org.controlsfx.control.Rating
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 
-class AnimeController {
+class AnimeController : KoinComponent {
     @FXML
     lateinit var saveReviewButton: Button
 
@@ -51,18 +54,19 @@ class AnimeController {
     lateinit var btnAdd: Button
 
 
-    private var logger = DependenciesManager.getLogger(AnimeController::class.java)
-    private val imgStorage = DependenciesManager.getImgStorage()
-    private var user = DependenciesManager.globalUser
-    private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
-    private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
-    private var reviewRepository: IRepositoryReview = DependenciesManager.getReviewsRepo()
-    private var anime: AnimeView = DependenciesManager.animeSelection
+    private var logger = getLogger<AnimeController>()
+    private val imgStorage: IImgStorage by inject()
+    private val user: CurrentUser by inject()
+    private val animeListRepository: IRepositoryAnimeList by inject()
+    private val animeRepository: IAnimeRepository by inject()
+    private val reviewRepository: IRepositoryReview by inject()
+
+    val anime = user.animeSelected
 
     @FXML
     fun initialize() {
         showAnime()
-        if (!user.admin)
+        if (!user.isAdmin)
             loadReview()
     }
 
@@ -71,7 +75,8 @@ class AnimeController {
      * Cargar la review
      */
     private fun loadReview() {
-        val review = reviewRepository.findByAnimeId(anime.id).firstOrNull { it.user.id == user.id } ?: return
+        val review =
+            reviewRepository.findByAnimeId(user.animeSelected.id).firstOrNull { it.user == user.value } ?: return
         reviewField.text = review.comment
         rating.rating = review.score.toDouble()
         disableReviewFields()
@@ -98,7 +103,7 @@ class AnimeController {
 
         if (!wantsToSave()) return
 
-        val review = Review(anime.toPOJO(), user, rating.rating.toInt(), reviewField.text)
+        val review = Review(user.animeSelected.toPOJO(), user.value, rating.rating.toInt(), reviewField.text)
         reviewRepository.add(review)
         disableReviewFields()
     }
@@ -144,7 +149,7 @@ class AnimeController {
             ) == ButtonType.OK
         }
 
-        if (animeListRepository.findByUserId(user).contains(animeAux)) {
+        if (animeListRepository.findByUserId(user.value).contains(animeAux)) {
             Alert(Alert.AlertType.INFORMATION).show(
                 "Anime ya añadido",
                 "${animeAux.title} ya esta en tu lista"
@@ -159,13 +164,13 @@ class AnimeController {
         }
 
 
-        animeListRepository.add(animeAux, user)
+        animeListRepository.add(animeAux, user.value)
 
         Alert(Alert.AlertType.INFORMATION).show(
             "Anime Añadido",
             "${anime.presentation.get().getTitle()} añadido a tu lista"
         )
-        logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.name}")
+        logger.info("Añadiendo ${animeAux.title} a la lista del usuario ${user.value.name}")
 
         stage.close()
 

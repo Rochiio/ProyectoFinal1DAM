@@ -1,7 +1,8 @@
 package com.example.myanimelist.utilities
 
+import com.example.myanimelist.di.isTesting
 import com.example.myanimelist.extensions.execute
-import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.Review
 import com.example.myanimelist.models.User
@@ -132,9 +133,10 @@ fun getTestingReview() =
 fun getNewTestingReview() =
     Review(getTestingAnimeUpdate(), getTestingUserUpdate(), 10, "ta guapo", UUID.randomUUID())
 
-fun resetDb() {
-    DependenciesManager.isTesting = true
-    DependenciesManager.getDatabaseManager().execute {
+
+fun resetDb(db: DataBaseManager) {
+    isTesting = true
+    db.execute {
         initData(Properties.SCRIPT_FILE_DATABASE, false)
     }
 }

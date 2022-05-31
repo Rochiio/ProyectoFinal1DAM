@@ -1,12 +1,21 @@
 package com.example.myanimelist.filters.edition
 
-import com.example.myanimelist.managers.DependenciesManager
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.koin.test.KoinTest
 import java.time.LocalDate
 
-internal class EditFiltersTest {
-    private var editFilters: EditFilters = DependenciesManager.getEditFilter()
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+internal class EditFiltersTest : KoinTest {
+    private var editFilters = EditFilters()
+
+    @BeforeAll
+    fun start() {
+
+        //editFilters = get()
+    }
 
     @Test
     fun checkEpisodesCorrect() {
