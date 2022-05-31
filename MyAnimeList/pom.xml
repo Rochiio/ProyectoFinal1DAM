@@ -198,6 +198,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
+                                    <!--suppress UnresolvedMavenProperty -->
                                     <mainClass>${main.class}</mainClass>
                                 </manifest>
                             </archive>
