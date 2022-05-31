@@ -22,89 +22,47 @@ import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.service.img.ImgStorage
 import com.example.myanimelist.utils.html.GeneratorHtml
 import com.example.myanimelist.utils.html.GeneratorHtmlStats
-import com.example.myanimelist.utils.html.HTMLGenerator
 import com.example.myanimelist.views.models.AnimeView
 import com.example.myanimelist.views.models.UserView
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import java.time.LocalDate
 
-object DependenciesManager {
+object DependenciesManager : KoinComponent {
     //If its testing put to true
     var isTesting: Boolean = false
 
     //Singleton instances
     lateinit var globalUser: User
-    private val dataBaseManager: DataBaseManager by lazy {
-        if (isTesting)
-            DataBaseManager("animeDev.db")
-        else
-            DataBaseManager("anime.db")
-    }
-    lateinit var userSelectionAdmin: UserView
     lateinit var animeSelection: AnimeView
+
     private val gson: Gson =
         GsonBuilder().setPrettyPrinting().registerTypeAdapter(LocalDate::class.java, LocalDateTypeAdapter()).create()
-    private val usersRepository: IUsersRepository = UsersRepository(getDatabaseManager())
-    private val animesRepository: IAnimeRepository = AnimeRepository(getDatabaseManager())
-    private val imgStorage: IImgStorage = ImgStorage()
-    private val animeListRepository: IRepositoryAnimeList =
-        AnimeListRepository(getDatabaseManager(), getUsersRepo())
-    private val reviewsRepository: IRepositoryReview = ReviewsRepository(
-        getDatabaseManager(), getAnimesRepo(),
-        getUsersRepo(),
-    )
+    fun getLoginFilter(): LoginFilters = LoginFilters(get())
 
-    //Factories
-    @JvmStatic
-    fun getDatabaseManager(): DataBaseManager = dataBaseManager
+    fun getAnimeStorage(): IAnimeStorage = get()
 
-
-    @JvmStatic
-    fun getUsersRepo(): IUsersRepository = usersRepository
-
-    @JvmStatic
-    fun getAnimesRepo(): IAnimeRepository = animesRepository
-
-    @JvmStatic
-    fun getReviewsRepo(): IRepositoryReview = reviewsRepository
-
-    @JvmStatic
-    fun getAnimeListRepo(): IRepositoryAnimeList = animeListRepository
-
-    @JvmStatic
-    fun getLoginFilter(): LoginFilters = LoginFilters(getUsersRepo())
-
-    @JvmStatic
-    fun getAnimeStorage(): IAnimeStorage = AnimeStorage()
-
-    @JvmStatic
     fun getEditFilter(): EditFilters = EditFilters()
 
-    @JvmStatic
     fun getAnimeController(): AnimeController = AnimeController()
 
-    @JvmStatic
-    fun getRegisterFilter(): RegisterFilters = RegisterFilters(getUsersRepo())
+    fun getRegisterFilter(): RegisterFilters = RegisterFilters(get())
 
-    @JvmStatic
     fun getBackupStorage(): IBackupStorage = BackupStorage(getGson())
 
-    @JvmStatic
-    fun getImgStorage(): IImgStorage = ImgStorage()
+    fun getImgStorage(): IImgStorage = get()
 
-    @JvmStatic
     fun getGson(): Gson = gson
 
-    @JvmStatic
-    fun getHtmlGenerator():GeneratorHtml = GeneratorHtmlStats()
+    fun getHtmlGenerator():GeneratorHtml = get()
 
     inline fun <reified T> getLogger(): Logger =
         LogManager.getLogger(T::class.java)
 
-    @JvmStatic
     fun <T> getLogger(clazz: Class<T>): Logger = LogManager.getLogger(clazz)
 
 }

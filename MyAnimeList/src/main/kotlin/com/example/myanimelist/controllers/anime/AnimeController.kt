@@ -17,9 +17,11 @@ import javafx.scene.image.ImageView
 import javafx.stage.Stage
 import javafx.stage.WindowEvent
 import org.controlsfx.control.Rating
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
 
-class AnimeController {
+class AnimeController : KoinComponent{
     @FXML
     lateinit var saveReviewButton: Button
 
@@ -54,9 +56,9 @@ class AnimeController {
     private var logger = DependenciesManager.getLogger(AnimeController::class.java)
     private val imgStorage = DependenciesManager.getImgStorage()
     private var user = DependenciesManager.globalUser
-    private var animeListRepository: IRepositoryAnimeList = DependenciesManager.getAnimeListRepo()
-    private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
-    private var reviewRepository: IRepositoryReview = DependenciesManager.getReviewsRepo()
+    private var animeListRepository: IRepositoryAnimeList = get()
+    private var animeRepository: IAnimeRepository = get()
+    var reviewRepository: IRepositoryReview = get()
     private var anime: AnimeView = DependenciesManager.animeSelection
 
     @FXML

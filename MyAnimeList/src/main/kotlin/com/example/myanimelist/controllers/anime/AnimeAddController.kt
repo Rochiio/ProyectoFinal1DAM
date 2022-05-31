@@ -1,12 +1,13 @@
 package com.example.myanimelist.controllers.anime
 
-import com.example.myanimelist.animeRepository
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
+import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
+import com.example.myanimelist.repositories.animes.AnimeRepository
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.views.models.AnimeView
@@ -22,10 +23,14 @@ import javafx.stage.FileChooser
 import javafx.stage.Stage
 import javafx.stage.WindowEvent
 import org.controlsfx.control.CheckComboBox
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.java.KoinJavaComponent.get
+import org.koin.java.KoinJavaComponent.inject
 import java.io.File
 import java.util.*
 
-class AnimeAddController {
+class AnimeAddController : KoinComponent{
 
     //FXML
     @FXML
@@ -53,6 +58,7 @@ class AnimeAddController {
     lateinit var imageAnime: ImageView
 
     //Specific
+    private val animeRepository : AnimeRepository by inject()
     private val imgStorage: IImgStorage = DependenciesManager.getImgStorage()
     private var imgFile: File? = null
     private var editFilters: EditFilters = DependenciesManager.getEditFilter()
