@@ -31,8 +31,6 @@ class MainUserMyListController {
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private lateinit var animeListfl: FilteredList<AnimeView>
 
-    @FXML
-    private lateinit var myListRankingCol: TableColumn<AnimeView, Int>
 
     @FXML
     private lateinit var myListTitleCol: TableColumn<AnimeView, String>
@@ -72,7 +70,6 @@ class MainUserMyListController {
     private fun initCells() {
         myListTable.items = animeList
 
-        myListRankingCol.setCellValueFactory { it.value.rankingProperty().asObject() }
         myListTitleCol.setCellValueFactory { it.value.presentationProperty().get().title }
         // myListScoreCol.setCellValueFactory { cellData -> cellData.value.scoreProperty().asObject() }
         myListTypeCol.setCellValueFactory { it.value.typesProperty() }
@@ -160,6 +157,10 @@ class MainUserMyListController {
         }
     }
 
+
+    /**
+     * Cambiar la escena al perfil del usuario
+     */
     fun changeSceneToProfileUser() {
 
         if (!user.admin) {
@@ -177,6 +178,10 @@ class MainUserMyListController {
         }
     }
 
+
+    /**
+     * Cambiar la escena a estadísticas
+     */
     fun changeSceneToStatsUser() {
         Stage().loadScene(MAIN_USER_STATS) {
             title = "Estadisticas"
@@ -185,11 +190,19 @@ class MainUserMyListController {
         }.show()
     }
 
+
+    /**
+     * Para obligar a que se refresque la tabla
+     */
     fun refreshTable() {
         loadData()
         myListTable.refresh()
     }
 
+
+    /**
+     * Eliminar un anime de mi lista
+     */
     fun deleteAnimeMyList() {
         if (myListTable.selectionModel.selectedItem == null) return
         
