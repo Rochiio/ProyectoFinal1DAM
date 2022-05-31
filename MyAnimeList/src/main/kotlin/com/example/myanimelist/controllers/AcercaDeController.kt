@@ -1,8 +1,8 @@
 package com.example.myanimelist.controllers
 
 import com.example.myanimelist.MyAnimeListApplication
+import com.example.myanimelist.extensions.getLogger
 import com.example.myanimelist.extensions.show
-import com.example.myanimelist.managers.DependenciesManager.getLogger
 import com.example.myanimelist.utils.ThemesManager.getCurretnTheme
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
@@ -17,14 +17,17 @@ import java.net.URISyntaxException
 
 class AcercaDeController {
     private val desktop = Desktop.getDesktop()
-    private val logger = getLogger(AcercaDeController::class.java)
+    private val logger = getLogger<AcercaDeController>()
 
     @FXML
     var root: Pane? = null
+
     @FXML
     fun initialize() {
-        root!!.stylesheets.clear()
-        root!!.stylesheets.add(MyAnimeListApplication::class.java.getResource(getCurretnTheme().value).toString())
+        root?.stylesheets?.clear()
+        root?.stylesheets?.add(
+            MyAnimeListApplication::class.java.getResource(getCurretnTheme().value)?.toString() ?: return
+        )
     }
 
 

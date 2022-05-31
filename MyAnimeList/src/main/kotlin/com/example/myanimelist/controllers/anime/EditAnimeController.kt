@@ -2,7 +2,7 @@ package com.example.myanimelist.controllers.anime
 
 import com.example.myanimelist.extensions.show
 import com.example.myanimelist.filters.edition.EditFilters
-import com.example.myanimelist.managers.DependenciesManager
+import com.example.myanimelist.managers.CurrentUser
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.repositories.animes.IAnimeRepository
@@ -17,8 +17,10 @@ import javafx.stage.FileChooser
 import javafx.stage.Stage
 import javafx.stage.WindowEvent
 import org.controlsfx.control.CheckComboBox
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class EditAnimeController {
+class EditAnimeController : KoinComponent {
 
     @FXML
     lateinit var fieldGenres: CheckComboBox<String>
@@ -41,10 +43,12 @@ class EditAnimeController {
     @FXML
     lateinit var btnSave: Button
 
-    private val imgStorage: IImgStorage = DependenciesManager.getImgStorage()
-    private var anime: AnimeView = DependenciesManager.animeSelection
-    private var editFilters: EditFilters = DependenciesManager.getEditFilter()
-    private val animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
+    private val imgStorage: IImgStorage by inject()
+    private val editFilters: EditFilters by inject()
+    private val animeRepository: IAnimeRepository by inject()
+    private val currentUser: CurrentUser by inject()
+
+    val anime = currentUser.animeSelected
 
     @FXML
     fun initialize() {

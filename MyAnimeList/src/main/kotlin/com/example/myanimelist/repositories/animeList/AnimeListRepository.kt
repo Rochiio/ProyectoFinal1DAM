@@ -1,8 +1,8 @@
 package com.example.myanimelist.repositories.animeList
 
 import com.example.myanimelist.extensions.execute
+import com.example.myanimelist.extensions.getLogger
 import com.example.myanimelist.managers.DataBaseManager
-import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.models.Anime
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.users.IUsersRepository
@@ -13,7 +13,7 @@ class AnimeListRepository(
     private val usersRepository: IUsersRepository
 ) : IRepositoryAnimeList {
 
-    private val logger: Logger = DependenciesManager.getLogger(AnimeListRepository::class.java)
+    private val logger: Logger = getLogger<AnimeListRepository>()
 
 
     /**

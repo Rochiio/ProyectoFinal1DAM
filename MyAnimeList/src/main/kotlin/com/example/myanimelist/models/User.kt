@@ -42,30 +42,13 @@ data class User(
 
         other as User
 
-        if (name != other.name) return false
-        if (email != other.email) return false
-        if (password != other.password) return false
-        if (createDate != other.createDate) return false
-        if (birthDate != other.birthDate) return false
-        if (img != other.img) return false
-        if (myList != other.myList) return false
         if (id != other.id) return false
-        if (admin != other.admin) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = name.hashCode()
-        result = 31 * result + email.hashCode()
-        result = 31 * result + password.hashCode()
-        result = 31 * result + createDate.hashCode()
-        result = 31 * result + birthDate.hashCode()
-        result = 31 * result + (img?.hashCode() ?: 0)
-        result = 31 * result + myList.hashCode()
-        result = 31 * result + id.hashCode()
-        result = 31 * result + admin.hashCode()
-        return result
+        return id.hashCode()
     }
 
 
