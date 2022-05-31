@@ -1,8 +1,7 @@
 package com.example.myanimelist.services
 
+import com.example.myanimelist.di.servicesModule
 import com.example.myanimelist.dto.BackupDTO
-import com.example.myanimelist.managers.DependenciesManager.getBackupStorage
-import com.example.myanimelist.managers.DependenciesManager.getGson
 import com.example.myanimelist.service.backup.IBackupStorage
 import com.example.myanimelist.utilities.getTestingAnime
 import com.example.myanimelist.utilities.getTestingReview
@@ -12,14 +11,24 @@ import com.google.gson.Gson
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import org.koin.core.context.startKoin
+import org.koin.test.inject
+import org.koin.test.junit5.ClosingKoinTest
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 
-class BackupStorageTest {
-    private val storage: IBackupStorage = getBackupStorage()
-    private val gson: Gson = getGson()
+class BackupStorageTest : ClosingKoinTest {
+    private val storage: IBackupStorage by inject()
+    private val gson: Gson by inject()
 
+
+    init {
+        startKoin {
+            modules(servicesModule)
+        }
+
+    }
 
     @BeforeEach
     fun setup() {

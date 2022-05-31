@@ -1,48 +1,38 @@
 package com.example.myanimelist.repositories.users
 
-import com.example.myanimelist.di.dataBaseManagerModule
-import com.example.myanimelist.di.dataBaseManagerModuleDev
-import com.example.myanimelist.di.usersRepositoryModule
+import com.example.myanimelist.di.repositoriesModule
 import com.example.myanimelist.extensions.execute
 import com.example.myanimelist.managers.DataBaseManager
-import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.utilities.*
 import com.example.myanimelist.utils.Properties
-import org.junit.Rule
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
 import org.koin.core.context.startKoin
-import org.koin.test.KoinTest
 import org.koin.test.get
+import org.koin.test.inject
+import org.koin.test.junit5.ClosingKoinTest
 import java.util.*
 
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class UsersRepositoryTest : KoinTest {
+class UsersRepositoryTest : ClosingKoinTest {
+    private val usersRepository: IUsersRepository by inject()
 
-    private lateinit var usersRepository: IUsersRepository
 
-    @BeforeAll
-
-    fun start(){
+    init {
         startKoin {
             modules(
-                dataBaseManagerModuleDev,
-                usersRepositoryModule
+                repositoriesModule
             )
         }
-        usersRepository = get()
 
     }
+
     @BeforeEach
     fun setUp() {
-
-        val db: DataBaseManager = get<DataBaseManager>()
+        val db: DataBaseManager = get()
         db.execute {
             initData(Properties.SCRIPT_FILE_DATABASE, false)
         }

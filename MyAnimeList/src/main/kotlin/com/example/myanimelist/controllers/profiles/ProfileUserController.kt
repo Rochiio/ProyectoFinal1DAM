@@ -1,10 +1,11 @@
 package com.example.myanimelist.controllers.profiles
 
 import com.example.myanimelist.MyAnimeListApplication
+import com.example.myanimelist.extensions.getLogger
 import com.example.myanimelist.extensions.show
+import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.filters.isValidEmail
-import com.example.myanimelist.managers.DependenciesManager
-import com.example.myanimelist.managers.DependenciesManager.getEditFilter
+import com.example.myanimelist.managers.CurrentUser
 import com.example.myanimelist.models.User
 import com.example.myanimelist.repositories.users.IUsersRepository
 import com.example.myanimelist.service.img.IImgStorage
@@ -17,52 +18,51 @@ import javafx.scene.image.ImageView
 import javafx.scene.layout.AnchorPane
 import javafx.stage.FileChooser
 import javafx.stage.Stage
-import org.apache.logging.log4j.LogManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
+import org.koin.core.component.inject
 import java.util.*
 
-class ProfileUserController : KoinComponent{
+class ProfileUserController : KoinComponent {
     @FXML
-    var txtEmail: TextField? = null
+    lateinit var txtEmail: TextField
 
     @FXML
-    var txtName: TextField? = null
+    lateinit var txtName: TextField
 
     @FXML
-    var txtPassword: PasswordField? = null
+    lateinit var txtPassword: PasswordField
 
     @FXML
-    var txtPasswordConfirm: PasswordField? = null
+    lateinit var txtPasswordConfirm: PasswordField
 
     @FXML
-    var txtBirthday: DatePicker? = null
+    lateinit var txtBirthday: DatePicker
 
     @FXML
-    var btnSave: Button? = null
+    lateinit var btnSave: Button
 
     @FXML
-    var img: ImageView? = null
+    lateinit var img: ImageView
 
     @FXML
-    var root: AnchorPane? = null
-    private val userRepository = get<IUsersRepository>()
-    private val user = DependenciesManager.globalUser
+    lateinit var root: AnchorPane
+
+    private val userRepository: IUsersRepository by inject()
+    private val user: CurrentUser by inject()
     private val imgStorage = get<IImgStorage>()
-    private val editionFilters = getEditFilter()
-    private val logger = LogManager.getLogger(
-        ProfileUserController::class.java
-    )
+    private val editionFilters: EditFilters by inject()
+    private val logger = getLogger<ProfileUserController>()
 
     @FXML
     fun initialize() {
-        txtEmail!!.text = user.email
-        txtName!!.text = user.name
-        txtPassword!!.text = user.password
-        txtBirthday!!.value = user.birthDate
-        img!!.image = imgStorage.loadImg(user)
-        root!!.stylesheets.clear()
-        root!!.stylesheets.add(
+        txtEmail.text = user.value.email
+        txtName.text = user.value.name
+        txtPassword.text = user.value.password
+        txtBirthday.value = user.value.birthDate
+        img.image = imgStorage.loadImg(user.value)
+        root.stylesheets.clear()
+        root.stylesheets.add(
             Objects.requireNonNull(MyAnimeListApplication::class.java.getResource(getCurretnTheme().value)).toString()
         )
     }
@@ -75,7 +75,7 @@ class ProfileUserController : KoinComponent{
         }
         creationUpdateUser()
         Alert(Alert.AlertType.INFORMATION).show("Actualización correcta", "Has actualizado tu perfil")
-        val stage = btnSave!!.scene.window as Stage
+        val stage = btnSave.scene.window as Stage
         stage.close()
     }
 
@@ -85,11 +85,13 @@ class ProfileUserController : KoinComponent{
      */
     private fun creationUpdateUser() {
         val userUpdate = User(
-            txtName!!.text, txtEmail!!.text, txtPassword!!.text, user.createDate,
-            txtBirthday!!.value, user.img, user.myList, user.id, user.admin
+            txtName.text, txtEmail.text, txtPassword.text, user.value.createDate,
+            txtBirthday.value, user.value.img, user.value.myList, user.value.id, user.value.admin
         )
-        userRepository.update(userUpdate)
-        DependenciesManager.globalUser = userUpdate
+
+        val updated = userRepository.update(userUpdate)
+        if (updated != null)
+            user.value = userUpdate
     }
 
     /**
@@ -98,9 +100,9 @@ class ProfileUserController : KoinComponent{
      * @return boolean dependiendo de si pasa el filtrado correctamente
      */
     private fun validate(error: StringBuilder): Boolean {
-        if (txtPassword!!.text != txtPasswordConfirm!!.text) error.append("Las contraseñas no coinciden")
-        if (!editionFilters.checkDateCorrect(txtBirthday!!.value)) error.append("Fecha de nacimiento incorrecta")
-        if (!isValidEmail(txtEmail!!.text)) error.append("Correo incorrecto")
+        if (txtPassword.text != txtPasswordConfirm.text) error.append("Las contraseñas no coinciden")
+        if (!editionFilters.checkDateCorrect(txtBirthday.value)) error.append("Fecha de nacimiento incorrecta")
+        if (!isValidEmail(txtEmail.text)) error.append("Correo incorrecto")
         return error.isEmpty()
     }
 
@@ -115,11 +117,11 @@ class ProfileUserController : KoinComponent{
             FileChooser.ExtensionFilter("Imagenes png", "*.png"),
             FileChooser.ExtensionFilter("Imagenes jpg", "*.jpg")
         )
-        val file = fc.showOpenDialog(img!!.scene.window)
+        val file = fc.showOpenDialog(img.scene.window)
         if (file != null) {
             logger.info(file.absolutePath)
-            img!!.image = Image(file.toURI().toString())
-            user.img = file.name
+            img.image = Image(file.toURI().toString())
+            user.value.img = file.name
             imgStorage.cpFile(file, Properties.USER_IMG_DIR)
         }
     }
