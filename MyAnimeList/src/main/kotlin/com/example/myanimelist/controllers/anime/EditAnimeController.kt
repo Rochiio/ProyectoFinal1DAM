@@ -17,8 +17,10 @@ import javafx.stage.FileChooser
 import javafx.stage.Stage
 import javafx.stage.WindowEvent
 import org.controlsfx.control.CheckComboBox
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
-class EditAnimeController {
+class EditAnimeController : KoinComponent{
 
     @FXML
     lateinit var fieldGenres: CheckComboBox<String>
@@ -41,10 +43,10 @@ class EditAnimeController {
     @FXML
     lateinit var btnSave: Button
 
-    private val imgStorage: IImgStorage = DependenciesManager.getImgStorage()
+    private val imgStorage: IImgStorage = get()
     private var anime: AnimeView = DependenciesManager.animeSelection
-    private var editFilters: EditFilters = DependenciesManager.getEditFilter()
-    private val animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
+    private var editFilters: EditFilters = get()
+    private val animeRepository: IAnimeRepository = get()
 
     @FXML
     fun initialize() {

@@ -11,7 +11,7 @@ import java.util.*
 
 
 class UsersRepository(
-    private val databaseManager: DataBaseManager,
+    private val databaseManager: DataBaseManager
 ) : IUsersRepository {
 
     val logger: Logger = DependenciesManager.getLogger(UsersRepository::class.java)

@@ -1,17 +1,46 @@
 package com.example.myanimelist.repositories.animes
 
-import com.example.myanimelist.managers.DependenciesManager.getAnimesRepo
+import com.example.myanimelist.di.animeRepositoryModule
+import com.example.myanimelist.di.dataBaseManagerModuleDev
+import com.example.myanimelist.di.reviewsRepositoryModuleDev
+import com.example.myanimelist.di.usersRepositoryModule
+import com.example.myanimelist.extensions.execute
+import com.example.myanimelist.managers.DataBaseManager
 import com.example.myanimelist.utilities.*
+import com.example.myanimelist.utils.Properties
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.koin.core.context.startKoin
+import org.koin.test.KoinTest
+import org.koin.test.get
 import java.util.*
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+internal class AnimeRepositoryTest :KoinTest{
+    private lateinit var repo: IAnimeRepository
 
-internal class AnimeRepositoryTest {
-    private val repo = getAnimesRepo()
+    @BeforeAll
+    fun start() {
+        startKoin {
+            modules(
+                dataBaseManagerModuleDev,
+                animeRepositoryModule
+            )
+        }
+        repo = get()
+
+    }
 
     @BeforeEach
-    fun setUp() = resetDb()
+    fun setUp() {
+
+        val db: DataBaseManager = get<DataBaseManager>()
+        db.execute {
+            initData(Properties.SCRIPT_FILE_DATABASE, false)
+        }
+    }
 
 
     @Test

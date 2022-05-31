@@ -1,20 +1,52 @@
 package com.example.myanimelist.repositories.users
 
-import com.example.myanimelist.managers.DependenciesManager.getUsersRepo
+import com.example.myanimelist.di.dataBaseManagerModule
+import com.example.myanimelist.di.dataBaseManagerModuleDev
+import com.example.myanimelist.di.usersRepositoryModule
+import com.example.myanimelist.extensions.execute
+import com.example.myanimelist.managers.DataBaseManager
+import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.utilities.*
+import com.example.myanimelist.utils.Properties
+import org.junit.Rule
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.koin.core.context.startKoin
+import org.koin.test.KoinTest
+import org.koin.test.get
 import java.util.*
 
 
-class UsersRepositoryTest {
-    private val usersRepository = getUsersRepo()
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class UsersRepositoryTest : KoinTest {
 
+    private lateinit var usersRepository: IUsersRepository
+
+    @BeforeAll
+
+    fun start(){
+        startKoin {
+            modules(
+                dataBaseManagerModuleDev,
+                usersRepositoryModule
+            )
+        }
+        usersRepository = get()
+
+    }
     @BeforeEach
-    fun setUp() = resetDb()
+    fun setUp() {
+
+        val db: DataBaseManager = get<DataBaseManager>()
+        db.execute {
+            initData(Properties.SCRIPT_FILE_DATABASE, false)
+        }
+    }
 
     @Test
     fun findById() {

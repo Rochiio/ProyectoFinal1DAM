@@ -5,6 +5,7 @@ import com.example.myanimelist.managers.DependenciesManager
 import com.example.myanimelist.managers.ResourcesManager
 import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.service.img.IImgStorage
+import com.example.myanimelist.service.img.ImgStorage
 import com.example.myanimelist.utils.*
 import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.views.models.AnimeView
@@ -22,14 +23,17 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import javafx.stage.Stage
 import org.apache.logging.log4j.Logger
+import org.koin.core.Koin
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import java.util.*
 
-class MainUserAnimeController {
+class MainUserAnimeController : KoinComponent{
 
     //Generics
     val logger: Logger = DependenciesManager.getLogger<MainUserAnimeController>()
     val user = DependenciesManager.globalUser
-    val imgStorage: IImgStorage = DependenciesManager.getImgStorage()
+    val imgStorage = get<ImgStorage>()
 
     //FXML
     @FXML
@@ -43,7 +47,7 @@ class MainUserAnimeController {
 
 
     //Specific
-    private var animeRepository: IAnimeRepository = DependenciesManager.getAnimesRepo()
+    private var animeRepository: IAnimeRepository = get()
     private var animeList: ObservableList<AnimeView> = FXCollections.observableArrayList()
     private lateinit var animefl: FilteredList<AnimeView>
 
