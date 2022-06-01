@@ -5,7 +5,7 @@ import com.example.myanimelist.filters.edition.EditFilters
 import com.example.myanimelist.models.enums.Genre
 import com.example.myanimelist.models.enums.Status
 import com.example.myanimelist.models.enums.Type
-import com.example.myanimelist.repositories.animes.AnimeRepository
+import com.example.myanimelist.repositories.animes.IAnimeRepository
 import com.example.myanimelist.service.img.IImgStorage
 import com.example.myanimelist.utils.Properties
 import com.example.myanimelist.views.models.AnimeView
@@ -54,7 +54,7 @@ class AnimeAddController : KoinComponent {
     lateinit var imageAnime: ImageView
 
     //Specific
-    private val animeRepository: AnimeRepository by inject()
+    private val animeRepository: IAnimeRepository by inject()
     private val imgStorage: IImgStorage by inject()
     private val editFilters: EditFilters by inject()
     private var imgFile: File? = null
