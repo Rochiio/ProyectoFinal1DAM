@@ -57,7 +57,6 @@ class MainUserMyListController : KoinComponent {
 
     @FXML
     fun initialize() {
-        //TODO("que se establezca el tema a ThemesManager.currentTheme")
         loadData()
         initCells()
     }
